@@ -1,0 +1,11 @@
+import {renderHouseCPU} from './house-cpu.js';
+import * as THREE from 'three';
+import {additionalPhotoHouse} from './additional-photo-houses.js';
+import {photoHouse} from './photo-houses.js';
+const canvas=document.getElementById('model'),ctx=canvas.getContext('2d'),select=document.getElementById('house');
+const [specs,batch,legacy]=await Promise.all(['residential','additional-photo-facades','photo-facades'].map(n=>fetch('data/'+n+'.json').then(r=>r.json())));
+const houses=specs.filter(s=>batch[s.id]||legacy[s.address.split(' ')[0]]);for(const s of houses){const o=document.createElement('option');o.value=s.id;o.textContent=s.address;select.append(o);}
+let group,texture,photoPixels,loadId=0;
+function render(){if(!group)return;const pixels=renderHouseCPU({group,texture,photoPixels,width:canvas.width,height:canvas.height,angleDegrees:Number(document.getElementById('angle').value),cameraHeight:Number(document.getElementById('height').value)});const frame=ctx.createImageData(canvas.width,canvas.height);frame.data.set(pixels);ctx.putImageData(frame,0,0);document.getElementById('status').textContent=select.selectedOptions[0].textContent+' · CPU inspection · same house geometry as driving';}
+async function load(){const request=++loadId;const s=houses.find(h=>h.id===select.value),r=batch[s.id],number=s.address.split(' ')[0],image=r?.image||'assets/houses/'+number+'.jpg';const nextTexture=await new THREE.TextureLoader().loadAsync(image);if(request!==loadId){nextTexture.dispose();return;}const source=document.getElementById('source');source.src=image;await source.decode();if(request!==loadId){nextTexture.dispose();return;}texture?.dispose();texture=nextTexture;const buffer=document.createElement('canvas');buffer.width=texture.image.width;buffer.height=texture.image.height;const context=buffer.getContext('2d');context.drawImage(texture.image,0,0);photoPixels=context.getImageData(0,0,buffer.width,buffer.height).data;document.getElementById('source').src=image;const local={...s,center:[0,0],front:[0,1]};group=r?additionalPhotoHouse(local,0,{id:s.id},r,texture):photoHouse(local,0,{id:s.id},legacy[number],texture);render();}
+select.onchange=load;document.getElementById('angle').oninput=render;document.getElementById('height').oninput=render;await load();

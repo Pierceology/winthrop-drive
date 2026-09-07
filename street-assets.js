@@ -1,0 +1,2 @@
+import * as THREE from 'three';
+export function streetAssets(data,heightAt){const group=new THREE.Group(),geometry=new THREE.SphereGeometry(.55,8,6),colors={pole:'#d8bb7e',hydrant:'#ff766b',stop:'#ef6371',sign:'#acdfff'};for(const a of data.assets){const m=new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color:colors[a.kind]}));m.position.set(a.x,heightAt(a.x,a.z)+1.1,a.z);m.userData.streetAsset=a;group.add(m);}group.visible=false;return group;}

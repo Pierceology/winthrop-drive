@@ -1,0 +1,14 @@
+const full=document.getElementById('fullscreen'),toggle=document.getElementById('hudToggle');
+const sync=()=>{const native=!!document.fullscreenElement,immersive=document.body.classList.contains('immersive');full.textContent=native?'Exit fullscreen':immersive?'Restore view':'Fullscreen';full.setAttribute('aria-pressed',String(native||immersive));};
+full.addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.body.classList.contains('immersive'))document.body.classList.remove('immersive');else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else document.body.classList.add('immersive');}catch{document.body.classList.add('immersive');}sync();});document.addEventListener('fullscreenchange',sync);
+toggle.addEventListener('click',()=>{const small=document.body.classList.toggle('minimal-hud');toggle.textContent=small?'Show all controls':'Minimal HUD';toggle.setAttribute('aria-pressed',String(small));});
+
+const garage=document.getElementById('audioPanel'),dock=document.querySelector('.driveactions');
+const openGarage=document.createElement('button');openGarage.id='garageToggle';openGarage.textContent='Garage';openGarage.setAttribute('aria-expanded','false');openGarage.setAttribute('aria-controls','audioPanel');dock.prepend(openGarage);
+openGarage.onclick=()=>{garage.open=!garage.open;};garage.addEventListener('toggle',()=>openGarage.setAttribute('aria-expanded',String(garage.open)));
+garage.querySelector('summary').textContent='Car, audio & controls';
+const extra=document.createElement('div');extra.className='garageExtras';extra.append(document.getElementById('hudToggle'),document.getElementById('resetCar'));garage.append(extra);
+const steering=document.createElement('button');steering.textContent='Show driving buttons';steering.setAttribute('aria-pressed','false');steering.onclick=()=>{const enabled=document.body.classList.toggle('touch-controls');steering.textContent=enabled?'Hide driving buttons':'Show driving buttons';steering.setAttribute('aria-pressed',String(enabled));};extra.append(steering);
+const exit=document.getElementById('exitDrive');exit.textContent='Explore';
+const tourQuick=document.createElement('button');tourQuick.id='tourQuick';tourQuick.textContent='Coastal flyover';extra.append(tourQuick);tourQuick.onclick=()=>{garage.open=false;document.getElementById('tour').click();};
+const closeSpot=()=>document.getElementById('spotActions').hidden=true;dock.addEventListener('click',closeSpot);document.querySelector('.pedals').addEventListener('pointerdown',closeSpot);addEventListener('keydown',e=>{if(/^(Key[WASD]|Arrow|Space)/.test(e.code)&&!/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))closeSpot();if(e.code==='Escape')garage.open=false;});

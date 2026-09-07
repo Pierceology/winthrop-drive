@@ -1,0 +1,5558 @@
+{
+  "243557_901173": {
+    "size": [
+      1824,
+      1368
+    ],
+    "source": "Winthrop assessor exterior photograph",
+    "surfaces": [
+      {
+        "name": "Enclosed upper porch",
+        "plane": "porch",
+        "bottom": 3.4,
+        "top": 6.05,
+        "anchors": [
+          [
+            365,
+            382
+          ],
+          [
+            1147,
+            259
+          ],
+          [
+            1154,
+            587
+          ],
+          [
+            353,
+            651
+          ]
+        ]
+      },
+      {
+        "name": "Upper porch side",
+        "plane": "porchRight",
+        "bottom": 3.4,
+        "top": 6.05,
+        "anchors": [
+          [
+            1161,
+            270
+          ],
+          [
+            1257,
+            315
+          ],
+          [
+            1266,
+            606
+          ],
+          [
+            1161,
+            584
+          ]
+        ]
+      },
+      {
+        "name": "Upper side wall",
+        "plane": "right",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            1305,
+            305
+          ],
+          [
+            1635,
+            480
+          ],
+          [
+            1640,
+            699
+          ],
+          [
+            1310,
+            623
+          ]
+        ]
+      }
+    ],
+    "modelFlags": {
+      "photoUpper": true,
+      "photoPorch": true,
+      "roofOverPorch": true
+    },
+    "image": "assets/houses/1010.jpg",
+    "address": "1010 SHIRLEY ST",
+    "building": "243557_901173"
+  },
+  "243450_901100": {
+    "size": [
+      885,
+      747
+    ],
+    "source": "Winthrop assessor exterior photograph",
+    "surfaces": [
+      {
+        "name": "Upper front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            213,
+            199
+          ],
+          [
+            696,
+            215
+          ],
+          [
+            681,
+            357
+          ],
+          [
+            202,
+            321
+          ]
+        ]
+      },
+      {
+        "name": "Dormer front",
+        "plane": "dormer",
+        "anchors": [
+          [
+            411,
+            94
+          ],
+          [
+            516,
+            99
+          ],
+          [
+            507,
+            166
+          ],
+          [
+            407,
+            162
+          ]
+        ]
+      }
+    ],
+    "modelFlags": {
+      "photoUpper": true,
+      "photoDormer": true
+    },
+    "image": "assets/houses/1058.jpg",
+    "address": "1058 SHIRLEY ST",
+    "building": "243450_901100"
+  },
+  "243436_901069": {
+    "spec": {
+      "pid": "14",
+      "address": "1068 SHIRLEY ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=14",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/1068%20shir_13367.jpg",
+      "fields": {
+        "Style:": "Cape Cod",
+        "Stories:": "1 3/4 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "id": "243436_901069",
+      "center": [
+        36.20499999999988,
+        81.40000000000002
+      ],
+      "width": 10.885848288885846,
+      "depth": 11.957374587732957,
+      "front": [
+        -0.8992261949919181,
+        -0.4374839999821214
+      ],
+      "stories": 1.75,
+      "color": "#dddeda",
+      "trim": "#eeeadd",
+      "roof": "gable",
+      "columns": 3,
+      "frontGable": false,
+      "roofRise": 1.3,
+      "wallFloors": 2,
+      "roofNote": "Large dark upper frontage follows photograph; unseen roof geometry estimated.",
+      "doorSide": -0.34,
+      "vestibule": true,
+      "upperFrontColor": "#38444d"
+    },
+    "size": [
+      1824,
+      1368
+    ],
+    "image": "assets/houses/parcel-14.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=14",
+    "modelFlags": {
+      "photoUpper": true,
+      "photoPorch": false
+    },
+    "surfaces": [
+      {
+        "name": "Upper frontage above entrance occlusion",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            218,
+            526
+          ],
+          [
+            1003,
+            223
+          ],
+          [
+            1033,
+            548
+          ],
+          [
+            216,
+            719
+          ]
+        ],
+        "outline": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0.18
+          ],
+          [
+            0,
+            0.18
+          ]
+        ]
+      },
+      {
+        "name": "Upper frontage beside entrance occlusion",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            218,
+            526
+          ],
+          [
+            1003,
+            223
+          ],
+          [
+            1033,
+            548
+          ],
+          [
+            216,
+            719
+          ]
+        ],
+        "outline": [
+          [
+            0.43,
+            0.18
+          ],
+          [
+            1,
+            0.18
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0.43,
+            1
+          ]
+        ]
+      },
+      {
+        "name": "Lower front windows, above planting",
+        "plane": "front",
+        "bottom": 1.3,
+        "top": 3.4,
+        "anchors": [
+          [
+            216,
+            719
+          ],
+          [
+            1033,
+            548
+          ],
+          [
+            1040,
+            979
+          ],
+          [
+            211,
+            1080
+          ]
+        ],
+        "outline": [
+          [
+            0.43,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0.43,
+            1
+          ]
+        ]
+      },
+      {
+        "name": "Visible right lower wall",
+        "plane": "right",
+        "bottom": 0.8,
+        "top": 3.4,
+        "anchors": [
+          [
+            1046,
+            590
+          ],
+          [
+            1466,
+            780
+          ],
+          [
+            1490,
+            1004
+          ],
+          [
+            1065,
+            1030
+          ]
+        ]
+      }
+    ],
+    "limitations": "Photograph-matched visible surfaces; hidden walls, heights and small structures remain estimated.",
+    "address": "1068 SHIRLEY ST",
+    "building": "243436_901069"
+  },
+  "243410_901086": {
+    "spec": {
+      "pid": "432",
+      "address": "1069 SHIRLEY ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=432",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/38/57.jpg",
+      "fields": {
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "id": "243410_901086",
+      "center": [
+        10.359557973772578,
+        63.3548555413308
+      ],
+      "width": 9.467505860564396,
+      "depth": 11.414666474444711,
+      "front": [
+        0.8970423395793293,
+        0.44194461304788324
+      ],
+      "stories": 2,
+      "color": "#c8d3cf",
+      "trim": "#eeeadd",
+      "roof": "gable",
+      "columns": 2,
+      "frontGable": true,
+      "porch": "stacked",
+      "roofOverPorch": true
+    },
+    "size": [
+      1824,
+      1368
+    ],
+    "image": "assets/houses/parcel-432.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=432",
+    "modelFlags": {
+      "photoUpper": true,
+      "photoPorch": true
+    },
+    "surfaces": [
+      {
+        "name": "Complete upper windows and visible siding",
+        "plane": "porch",
+        "bottom": 3.4,
+        "top": 6.05,
+        "anchors": [
+          [
+            84,
+            448
+          ],
+          [
+            452,
+            328
+          ],
+          [
+            452,
+            690
+          ],
+          [
+            85,
+            799
+          ]
+        ],
+        "outline": [
+          [
+            0.16,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            0.26
+          ]
+        ]
+      }
+    ],
+    "limitations": "Two complete upper front windows registered from the photograph. Mask follows the visible wall below the left roof slope. Tree-obscured sides, porch depth and roof dimensions remain estimated.",
+    "address": "1069 SHIRLEY ST",
+    "building": "243410_901086"
+  },
+  "243428_901058": {
+    "spec": {
+      "pid": "15",
+      "address": "1070 SHIRLEY ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=15",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/88/85.jpg",
+      "fields": {
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Aluminum Sidng",
+        "Roof Structure:": "Gambrel",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "id": "243428_901058",
+      "center": [
+        28.425000000000164,
+        92.11000000000006
+      ],
+      "width": 6.763867154935744,
+      "depth": 11.5926097627058,
+      "front": [
+        -0.896242627229446,
+        -0.44356414771356395
+      ],
+      "stories": 2,
+      "color": "#d5d5b8",
+      "trim": "#eeeadd",
+      "roof": "gambrel",
+      "columns": 2,
+      "frontGable": true,
+      "wallFloors": 1,
+      "roofRise": 3.8,
+      "roofBreak": 0.58,
+      "porch": "enclosed",
+      "doorSide": 0.35
+    },
+    "size": [
+      1824,
+      1368
+    ],
+    "image": "assets/houses/parcel-15.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=15",
+    "modelFlags": {
+      "photoUpper": true,
+      "photoPorch": true
+    },
+    "surfaces": [
+      {
+        "name": "Gambrel upper facade",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 5.603999999999999,
+        "offset": 0.27,
+        "anchors": [
+          [
+            552,
+            286
+          ],
+          [
+            1267,
+            304
+          ],
+          [
+            1267,
+            530
+          ],
+          [
+            556,
+            519
+          ]
+        ],
+        "outline": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0.9,
+            0
+          ],
+          [
+            0.5,
+            -0.7241379310344828
+          ],
+          [
+            0.1,
+            0
+          ]
+        ]
+      },
+      {
+        "name": "Enclosed lower porch",
+        "plane": "porch",
+        "bottom": 0.65,
+        "top": 3.13,
+        "anchors": [
+          [
+            579,
+            575
+          ],
+          [
+            1335,
+            571
+          ],
+          [
+            1344,
+            854
+          ],
+          [
+            578,
+            855
+          ]
+        ]
+      }
+    ],
+    "limitations": "Photograph-matched visible surfaces; hidden walls, heights and small structures remain estimated.",
+    "address": "1070 SHIRLEY ST",
+    "building": "243428_901058"
+  },
+  "243424_901047": {
+    "spec": {
+      "pid": "16",
+      "address": "1074 SHIRLEY ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=16",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/46/66.jpg",
+      "fields": {
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Roof Structure:": "Gambrel",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "id": "243424_901047",
+      "center": [
+        24.01999999999986,
+        102.80999999999995
+      ],
+      "width": 5.39370923852169,
+      "depth": 12.277552714213295,
+      "front": [
+        -0.8992610680197921,
+        -0.4374123129770157
+      ],
+      "stories": 2,
+      "color": "#8b513b",
+      "trim": "#eeeadd",
+      "roof": "gambrel",
+      "columns": 2,
+      "frontGable": true,
+      "wallFloors": 1,
+      "roofRise": 3.8,
+      "roofBreak": 0.69,
+      "doorSide": -0.2,
+      "wideWindow": true
+    },
+    "size": [
+      1824,
+      1368
+    ],
+    "image": "assets/houses/parcel-16.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=16",
+    "modelFlags": {
+      "photoUpper": true,
+      "photoPorch": false
+    },
+    "surfaces": [
+      {
+        "name": "Shingle gambrel facade",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.022,
+        "offset": 0.27,
+        "anchors": [
+          [
+            776,
+            352
+          ],
+          [
+            1510,
+            391
+          ],
+          [
+            1520,
+            712
+          ],
+          [
+            778,
+            700
+          ]
+        ],
+        "outline": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0.9,
+            0
+          ],
+          [
+            0.5,
+            -0.44927536231884063
+          ],
+          [
+            0.1,
+            0
+          ]
+        ]
+      },
+      {
+        "name": "Lower paired window above planting",
+        "plane": "front",
+        "bottom": 1.48,
+        "top": 3.4,
+        "anchors": [
+          [
+            805,
+            721
+          ],
+          [
+            1520,
+            736
+          ],
+          [
+            1533,
+            987
+          ],
+          [
+            812,
+            977
+          ]
+        ],
+        "outline": [
+          [
+            0.55,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0.55,
+            1
+          ]
+        ]
+      }
+    ],
+    "limitations": "Photograph-matched visible surfaces; hidden walls, heights and small structures remain estimated.",
+    "address": "1074 SHIRLEY ST",
+    "building": "243424_901047"
+  },
+  "243420_901038": {
+    "spec": {
+      "pid": "17",
+      "address": "1080 SHIRLEY ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=17",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0010/IMG_4323_10332.JPG",
+      "fields": {
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Aluminum Sidng",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "id": "243420_901038",
+      "center": [
+        19.812653199073015,
+        112.061149074051
+      ],
+      "width": 6.21215730486601,
+      "depth": 13.443740170705475,
+      "front": [
+        -0.9176370607325828,
+        -0.39741945695960373
+      ],
+      "stories": 2,
+      "color": "#e2e5df",
+      "trim": "#eeeadd",
+      "roof": "gable",
+      "columns": 2,
+      "frontGable": true,
+      "porch": "open",
+      "roofRise": 1.3,
+      "doorSide": 0.2
+    },
+    "size": [
+      1824,
+      1368
+    ],
+    "image": "assets/houses/parcel-17.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=17",
+    "modelFlags": {
+      "photoUpper": true,
+      "photoPorch": false
+    },
+    "surfaces": [
+      {
+        "name": "Upper front pair of windows",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            433,
+            520
+          ],
+          [
+            645,
+            463
+          ],
+          [
+            646,
+            694
+          ],
+          [
+            436,
+            744
+          ]
+        ]
+      },
+      {
+        "name": "Upper side facade",
+        "plane": "right",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            659,
+            451
+          ],
+          [
+            1590,
+            518
+          ],
+          [
+            1597,
+            750
+          ],
+          [
+            657,
+            694
+          ]
+        ]
+      }
+    ],
+    "limitations": "Photograph-matched visible surfaces; hidden walls, heights and small structures remain estimated.",
+    "address": "1080 SHIRLEY ST",
+    "building": "243420_901038"
+  },
+  "243424_901023": {
+    "spec": {
+      "pid": "18",
+      "address": "1088 SHIRLEY ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=18",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0010/1088%20SHIRLEY%20ST_10641.JPG",
+      "fields": {
+        "Style:": "Old Style",
+        "Stories:": "2",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "id": "243424_901023",
+      "center": [
+        24.426747850662213,
+        126.68448214031243
+      ],
+      "width": 12.286116640355102,
+      "depth": 10.574545795614116,
+      "front": [
+        -0.9308107153711295,
+        -0.36550158980541514
+      ],
+      "stories": 2,
+      "color": "#d9dedb",
+      "trim": "#eeeadd",
+      "roof": "gable",
+      "columns": 3,
+      "frontGable": false,
+      "porch": "open",
+      "roofRise": 3.1
+    },
+    "size": [
+      1125,
+      779
+    ],
+    "image": "assets/houses/parcel-18.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=18",
+    "modelFlags": {
+      "photoUpper": true
+    },
+    "surfaces": [
+      {
+        "name": "Upper frontage with original shutters",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            246,
+            199
+          ],
+          [
+            736,
+            248
+          ],
+          [
+            738,
+            370
+          ],
+          [
+            250,
+            348
+          ]
+        ]
+      }
+    ],
+    "limitations": "Upper frontage photographed. Main footprint includes additions; frontage width, rear volumes and heights remain estimated.",
+    "address": "1088 SHIRLEY ST",
+    "building": "243424_901023"
+  },
+  "243566_901189": {
+    "size": [
+      1824,
+      1368
+    ],
+    "image": "assets/houses/1008.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=396",
+    "surfaces": [
+      {
+        "name": "Visible second-floor windows and siding",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            872,
+            568
+          ],
+          [
+            1536,
+            461
+          ],
+          [
+            1540,
+            656
+          ],
+          [
+            879,
+            721
+          ]
+        ],
+        "outline": [
+          [
+            0.08,
+            0.05
+          ],
+          [
+            0.93,
+            0.05
+          ],
+          [
+            0.93,
+            0.7
+          ],
+          [
+            0.48,
+            0.83
+          ],
+          [
+            0.2,
+            0.83
+          ],
+          [
+            0.08,
+            0.62
+          ]
+        ]
+      }
+    ],
+    "modelFlags": {},
+    "limitations": "Construction-obscured lower front remains modeled. Mask excludes foreground pole and porch roof; footprint includes the broad porch, so main-wall width needs further measurement. Hidden elevations and metric heights remain estimated.",
+    "address": "1008 SHIRLEY ST",
+    "building": "243566_901189"
+  },
+  "243550_901162": {
+    "size": [
+      937,
+      583
+    ],
+    "image": "assets/houses/1016.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=398",
+    "surfaces": [
+      {
+        "name": "Upper front paired windows",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            125,
+            159
+          ],
+          [
+            531,
+            118
+          ],
+          [
+            535,
+            272
+          ],
+          [
+            130,
+            283
+          ]
+        ]
+      },
+      {
+        "name": "Ground floor window and entrance",
+        "plane": "front",
+        "bottom": 0.85,
+        "top": 3.4,
+        "anchors": [
+          [
+            132,
+            291
+          ],
+          [
+            535,
+            280
+          ],
+          [
+            537,
+            441
+          ],
+          [
+            135,
+            423
+          ]
+        ]
+      }
+    ],
+    "modelFlags": {
+      "photoUpper": true
+    },
+    "limitations": "Front wall only; projecting awning and stair dimensions are approximate. Hidden elevations and metric heights remain estimated.",
+    "address": "1016 SHIRLEY ST",
+    "building": "243550_901162"
+  },
+  "243548_901148": {
+    "size": [
+      817,
+      570
+    ],
+    "image": "assets/houses/1018.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=399",
+    "surfaces": [
+      {
+        "name": "Front wall above porch railing",
+        "plane": "front",
+        "bottom": 1.65,
+        "top": 3.4,
+        "anchors": [
+          [
+            214,
+            222
+          ],
+          [
+            576,
+            230
+          ],
+          [
+            573,
+            308
+          ],
+          [
+            214,
+            304
+          ]
+        ]
+      },
+      {
+        "name": "Dormer window and siding",
+        "plane": "dormer",
+        "anchors": [
+          [
+            327,
+            130
+          ],
+          [
+            431,
+            135
+          ],
+          [
+            430,
+            177
+          ],
+          [
+            330,
+            172
+          ]
+        ]
+      }
+    ],
+    "modelFlags": {
+      "photoDormer": true,
+      "dormerBaseRise": 0.82
+    },
+    "limitations": "Porch railing, shrubs, parked vehicle and lower hidden wall excluded from photographic coverage. Hidden elevations and metric heights remain estimated.",
+    "address": "1018 SHIRLEY ST",
+    "building": "243548_901148"
+  },
+  "243438_901134": {
+    "size": [
+      756,
+      1008
+    ],
+    "image": "assets/houses/1039.jpg",
+    "source": "Winthrop assessor exterior photograph; https://gis.vgsi.com/winthropma/Parcel.aspx?pid=294",
+    "surfaces": [
+      {
+        "name": "Lower brick wall and entrance",
+        "plane": "front",
+        "bottom": 0.9,
+        "top": 6.15,
+        "anchors": [
+          [
+            236,
+            293
+          ],
+          [
+            741,
+            252
+          ],
+          [
+            744,
+            541
+          ],
+          [
+            239,
+            537
+          ]
+        ],
+        "outline": [
+          [
+            0.02,
+            0.48
+          ],
+          [
+            0.62,
+            0.48
+          ],
+          [
+            0.62,
+            1
+          ],
+          [
+            0.02,
+            1
+          ]
+        ]
+      }
+    ],
+    "modelFlags": {},
+    "limitations": "Only unobstructed lower-left brickwork, window and doorway are projected. Tree-obscured upper facade and right side remain modeled. Hidden elevations and metric heights remain estimated.",
+    "address": "1039 SHIRLEY ST",
+    "building": "243438_901134"
+  },
+  "242731_902468": {
+    "address": "12 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#9aafa2",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            326.4,
+            380.8
+          ],
+          [
+            950.4,
+            217.6
+          ],
+          [
+            953.6,
+            492.8
+          ],
+          [
+            326.4,
+            582.4
+          ]
+        ]
+      },
+      {
+        "name": "Observed right wall",
+        "plane": "right",
+        "bottom": 0.8,
+        "top": 6.15,
+        "anchors": [
+          [
+            979.2,
+            230.4
+          ],
+          [
+            1222.4,
+            406.4
+          ],
+          [
+            1228.8,
+            793.6
+          ],
+          [
+            979.2,
+            873.6
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242731_902468",
+      "pid": "1569",
+      "address": "12 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=1569",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/12%20WINT_13488.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -669.1052146309569,
+        -1318.1354975194843
+      ],
+      "width": 9.450719549324933,
+      "depth": 9.009790159954488,
+      "front": [
+        0.9988657425215733,
+        0.047615422048177654
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#9aafa2",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "vestibule": true,
+      "comparisonReferences": [
+        {
+          "label": "Redfin photos and floor plans",
+          "url": "https://www.redfin.com/MA/Winthrop/12-Winthrop-St-02152/home/11513039",
+          "use": "Reference comparison; listing images are not included as game textures."
+        }
+      ]
+    },
+    "image": "assets/houses/assessor-1569.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=1569",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/12%20WINT_13488.jpg",
+    "sourceSha256": "805fb416e3df9874ecfe531cd026b9c981cd698dc869fa08421066958efa9ef6",
+    "building": "242731_902468"
+  },
+  "242757_902488": {
+    "address": "17 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#5c717d",
+      "porch": "open"
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            284.8,
+            374.4
+          ],
+          [
+            1094.4,
+            403.2
+          ],
+          [
+            1100.8,
+            585.6
+          ],
+          [
+            297.6,
+            579.2
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242757_902488",
+      "pid": "1565",
+      "address": "17 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=1565",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/96/05.jpg",
+      "fields": {
+        "Year Built:": "1911",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -642.4003638253638,
+        -1338.3287214137215
+      ],
+      "width": 10.416517269060346,
+      "depth": 14.544692554223444,
+      "front": [
+        -0.9994801143396999,
+        -0.0322412940109515
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#5c717d",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "open"
+    },
+    "image": "assets/houses/assessor-1565.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=1565",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/96/05.jpg",
+    "sourceSha256": "f8e0677998acff985e7bec6ca0078572ac4be87d4ab1026fada2f1fdd15ddd79",
+    "building": "242757_902488"
+  },
+  "242729_902506": {
+    "address": "24 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#577a92",
+      "porch": "open",
+      "dormer": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            457.6,
+            380.8
+          ],
+          [
+            1174.4,
+            464
+          ],
+          [
+            1180.8,
+            640
+          ],
+          [
+            457.6,
+            604.8
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242729_902506",
+      "pid": "1547",
+      "address": "24 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=1547",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/50/76.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -670.5006152225601,
+        -1355.9770032832787
+      ],
+      "width": 11.241394341075877,
+      "depth": 12.463854507638201,
+      "front": [
+        0.9995942616385681,
+        0.028483540848106337
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#577a92",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "open",
+      "dormer": true
+    },
+    "image": "assets/houses/assessor-1547.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=1547",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/50/76.jpg",
+    "sourceSha256": "87c8b5ebba2457d9149a402198839c69bbd064d6b3f61097cd5f70de37c8e885",
+    "building": "242729_902506"
+  },
+  "242760_902577": {
+    "address": "45 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#e0ded1",
+      "porch": "open",
+      "attic": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            158.83,
+            195.42
+          ],
+          [
+            443.62,
+            177.15
+          ],
+          [
+            449.1,
+            297.69
+          ],
+          [
+            158.83,
+            303.17
+          ]
+        ]
+      }
+    ],
+    "size": [
+      670,
+      694
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242760_902577",
+      "pid": "2534",
+      "address": "45 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=2534",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/97/69.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -637.9849385813434,
+        -1427.5266908509748
+      ],
+      "width": 9.611866176960929,
+      "depth": 19.356985939555805,
+      "front": [
+        -0.8747172287941543,
+        0.484633644777862
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#e0ded1",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "open",
+      "attic": true
+    },
+    "image": "assets/houses/assessor-2534.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=2534",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/97/69.jpg",
+    "sourceSha256": "e89f3e1c66eeff4880035e18dfc253d6ad268335b0c28433b3de20199834b39a",
+    "building": "242760_902577"
+  },
+  "242671_902746": {
+    "address": "107 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#cbc9b8",
+      "porch": "stacked",
+      "roofOverPorch": true,
+      "photoUpper": true,
+      "photoPorch": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed porch wall",
+        "plane": "porch",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            787.2,
+            380.8
+          ],
+          [
+            1107.2,
+            483.2
+          ],
+          [
+            1116.8,
+            736
+          ],
+          [
+            787.2,
+            656
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Enclosed upper porch face only; projecting lower bay and left side remain modeled.",
+    "spec": {
+      "id": "242671_902746",
+      "pid": "2487",
+      "address": "107 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=2487",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/05/53.jpg",
+      "fields": {
+        "Year Built:": "1923",
+        "Style:": "3 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -728.8462931544508,
+        -1595.4944784361628
+      ],
+      "width": 9.479643086721445,
+      "depth": 20.219072778210528,
+      "front": [
+        -0.803245905256694,
+        0.5956475599617228
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#cbc9b8",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "stacked",
+      "roofOverPorch": true,
+      "photoUpper": true,
+      "photoPorch": true
+    },
+    "image": "assets/houses/assessor-2487.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=2487",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/05/53.jpg",
+    "sourceSha256": "38bc304e9de066843325b651c785b70fa071f15344f8e5154ad77d7855c84773",
+    "building": "242671_902746"
+  },
+  "242637_902724": {
+    "address": "108 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "stories": 1,
+      "wallFloors": 1,
+      "color": "#b4cbd0",
+      "porch": "enclosed",
+      "photoPorch": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed porch wall",
+        "plane": "porch",
+        "bottom": 1.7,
+        "top": 3.15,
+        "anchors": [
+          [
+            90.88,
+            207.36
+          ],
+          [
+            298.24,
+            195.84
+          ],
+          [
+            299.52,
+            277.76
+          ],
+          [
+            89.6,
+            273.92
+          ]
+        ],
+        "uMin": 0.18,
+        "uMax": 0.95
+      }
+    ],
+    "size": [
+      640,
+      480
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Front porch photographed above the hedge line; shrubs and obscured lower walls are excluded.",
+    "spec": {
+      "id": "242637_902724",
+      "pid": "2431",
+      "address": "108 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=2431",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/59/33.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "Bungalow",
+        "Stories:": "1.75",
+        "Exterior Wall 1": "Aluminum Sidng",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -762.4016672574212,
+        -1573.964741249446
+      ],
+      "width": 12.051135014393362,
+      "depth": 17.515574709234475,
+      "front": [
+        0.8586653356329359,
+        -0.5125366732072716
+      ],
+      "stories": 1,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#b4cbd0",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "porch": "enclosed",
+      "photoPorch": true
+    },
+    "image": "assets/houses/assessor-2431.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=2431",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/59/33.jpg",
+    "sourceSha256": "4cf1b2b05e097787e4c323aef82bcaf3cfa353a56c1689437be3a62280255ef0",
+    "building": "242637_902724"
+  },
+  "242664_902758": {
+    "address": "115 WINTHROP ST 2",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#98877a",
+      "porch": "open",
+      "dormer": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            152.32,
+            148.48
+          ],
+          [
+            433.92,
+            129.28
+          ],
+          [
+            433.92,
+            222.72
+          ],
+          [
+            152.32,
+            224
+          ]
+        ]
+      }
+    ],
+    "size": [
+      640,
+      480
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242664_902758",
+      "pid": "112535",
+      "address": "115 WINTHROP ST 2",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=112535",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/60/32.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "Condo Conversion",
+        "Stories:": "2",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -735.9698723187722,
+        -1607.8200874305612
+      ],
+      "width": 11.172488168269531,
+      "depth": 15.189249816583166,
+      "front": [
+        -0.8250972304971441,
+        0.5649907611863602
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#98877a",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "open",
+      "dormer": true
+    },
+    "image": "assets/houses/assessor-112535.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=112535",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/60/32.jpg",
+    "sourceSha256": "f34cfa8623beb36580e5cb146aaa1c75cb1a8ade48c0a1fdccd3d205b7de6d06",
+    "building": "242664_902758"
+  },
+  "242648_902784": {
+    "address": "123 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#7e898b",
+      "porch": "open",
+      "dormer": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            336,
+            489.6
+          ],
+          [
+            1036.8,
+            483.2
+          ],
+          [
+            1046.4,
+            688
+          ],
+          [
+            332.8,
+            688
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242648_902784",
+      "pid": "3709",
+      "address": "123 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3709",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/75/71.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Aluminum Sidng",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -751.9333906141687,
+        -1634.183162276445
+      ],
+      "width": 10.40215584898965,
+      "depth": 13.48600404325784,
+      "front": [
+        -0.8601100332950061,
+        0.5101085478849219
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#7e898b",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "open",
+      "dormer": true
+    },
+    "image": "assets/houses/assessor-3709.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3709",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/75/71.jpg",
+    "sourceSha256": "5ba04d931017ce8f5084b77e515595dc82d3f9e42ee0c545428016c710177c7d",
+    "building": "242648_902784"
+  },
+  "242640_902809": {
+    "address": "131 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#8f4d46"
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.8,
+        "top": 6.15,
+        "anchors": [
+          [
+            204.8,
+            556.8
+          ],
+          [
+            697.6,
+            470.4
+          ],
+          [
+            700.8,
+            662.4
+          ],
+          [
+            204.8,
+            700.8
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Upper street-facing wall above vegetation; lower floor and side bay require a clearer photograph.",
+    "spec": {
+      "id": "242640_902809",
+      "pid": "3707",
+      "address": "131 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3707",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/35/44.jpg",
+      "fields": {
+        "Year Built:": "1850",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Clapboard",
+        "Exterior Wall 2": "Wood Shingle",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -759.7096445249781,
+        -1658.4915597452596
+      ],
+      "width": 10.523520593325795,
+      "depth": 24.066649686462778,
+      "front": [
+        -0.9306220795980271,
+        0.3659816183425654
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#8f4d46",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated."
+    },
+    "image": "assets/houses/assessor-3707.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3707",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/35/44.jpg",
+    "sourceSha256": "00aaf0562b805ef24ee8fb9c32174b47240247628766002e5640ff5b0ccb0684",
+    "building": "242640_902809"
+  },
+  "242605_902785": {
+    "address": "132 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "stories": 1,
+      "wallFloors": 1,
+      "material": "brick",
+      "color": "#73544a"
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 0.9,
+        "top": 3.4,
+        "anchors": [
+          [
+            371.2,
+            483.2
+          ],
+          [
+            1152,
+            480
+          ],
+          [
+            1155.2,
+            684.8
+          ],
+          [
+            374.4,
+            681.6
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242605_902785",
+      "pid": "3717",
+      "address": "132 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3717",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/83/50.jpg",
+      "fields": {
+        "Year Built:": "1952",
+        "Style:": "Ranch",
+        "Stories:": "1 Story",
+        "Exterior Wall 1": "Clapboard",
+        "Exterior Wall 2": "Brick Veneer",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -794.3213488566875,
+        -1635.4523003953636
+      ],
+      "width": 10.53740954884069,
+      "depth": 10.348805320183894,
+      "front": [
+        0.8626408566420524,
+        -0.5058169159408038
+      ],
+      "stories": 1,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#73544a",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "material": "brick"
+    },
+    "image": "assets/houses/assessor-3717.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3717",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/83/50.jpg",
+    "sourceSha256": "9ea633947b098eb7e46b5656da80f1fbae183c199a019860d27d736f81aa4d03",
+    "building": "242605_902785"
+  },
+  "242600_902878": {
+    "address": "159 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#e5e4df",
+      "vestibule": true,
+      "attic": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            276.77,
+            184.38
+          ],
+          [
+            550.35,
+            219.35
+          ],
+          [
+            550.35,
+            327.43
+          ],
+          [
+            276.77,
+            359.22
+          ]
+        ]
+      },
+      {
+        "name": "Observed left wall",
+        "plane": "left",
+        "bottom": 0.9,
+        "top": 6.15,
+        "anchors": [
+          [
+            60.44,
+            262.26
+          ],
+          [
+            264.04,
+            181.2
+          ],
+          [
+            267.22,
+            518.17
+          ],
+          [
+            60.44,
+            470.48
+          ]
+        ]
+      }
+    ],
+    "size": [
+      746,
+      604
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Front upper wall and left elevation are photographed; entrance, bay and attic dimensions remain approximate.",
+    "spec": {
+      "id": "242600_902878",
+      "pid": "3652",
+      "address": "159 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3652",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0012/159%20win_12968.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -799.8726963288159,
+        -1727.8153654605662
+      ],
+      "width": 8.845122547155324,
+      "depth": 19.575888500847363,
+      "front": [
+        -0.8809311670875056,
+        0.4732444176679165
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#e5e4df",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "vestibule": true,
+      "attic": true
+    },
+    "image": "assets/houses/assessor-3652.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3652",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0012/159%20win_12968.jpg",
+    "sourceSha256": "767cacb1fbd06866cff680367ffe63fe911f1ace647854c32bf7e53d9a2324e6",
+    "building": "242600_902878"
+  },
+  "242545_902889": {
+    "address": "170 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#e2e2d9",
+      "dormer": true,
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            307.2,
+            368
+          ],
+          [
+            1276.8,
+            368
+          ],
+          [
+            1280,
+            566.4
+          ],
+          [
+            307.2,
+            566.4
+          ]
+        ]
+      },
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 1.1,
+        "top": 3.4,
+        "anchors": [
+          [
+            310.4,
+            579.2
+          ],
+          [
+            1283.2,
+            579.2
+          ],
+          [
+            1296,
+            857.6
+          ],
+          [
+            307.2,
+            867.2
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Broad front elevation; central pediment and two roof dormers need more specific geometry.",
+    "spec": {
+      "id": "242545_902889",
+      "pid": "3620",
+      "address": "170 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3620",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/06/94.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Asbest Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Mansard",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -854.6114660546566,
+        -1739.0777000718858
+      ],
+      "width": 11.66132433619979,
+      "depth": 15.450996422707913,
+      "front": [
+        0.87881230333715,
+        -0.477167617827586
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#e2e2d9",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "dormer": true,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-3620.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3620",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/06/94.jpg",
+    "sourceSha256": "9b347af3c834b563612a1a1633731f1f355387ab4de0ca654561c60c88a20646",
+    "building": "242545_902889"
+  },
+  "242570_902934": {
+    "address": "179 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#d9dbd5",
+      "attic": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            342.4,
+            524.8
+          ],
+          [
+            873.6,
+            432
+          ],
+          [
+            873.6,
+            633.6
+          ],
+          [
+            342.4,
+            697.6
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Clear upper front plane only; lower projecting bay and side wing remain estimated.",
+    "spec": {
+      "id": "242570_902934",
+      "pid": "3647",
+      "address": "179 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3647",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/31/27.jpg",
+      "fields": {
+        "Year Built:": "1884",
+        "Style:": "2 Unit",
+        "Stories:": "2 1/2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -829.6251668486454,
+        -1782.754893508476
+      ],
+      "width": 10.452522398550888,
+      "depth": 19.791608921806038,
+      "front": [
+        -0.8876550505161247,
+        0.4605089698292708
+      ],
+      "stories": 2.5,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#d9dbd5",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "attic": true
+    },
+    "image": "assets/houses/assessor-3647.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3647",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/31/27.jpg",
+    "sourceSha256": "5458fbe0dda799406700ded91a804dd9c5436f2a2e7cd7e345096561e396e076",
+    "building": "242570_902934"
+  },
+  "242522_903006": {
+    "address": "207 - 209 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#cbcfca",
+      "attic": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 0.8,
+        "top": 6.15,
+        "anchors": [
+          [
+            665.6,
+            432
+          ],
+          [
+            1084.8,
+            579.2
+          ],
+          [
+            1094.4,
+            998.4
+          ],
+          [
+            662.4,
+            1024
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242522_903006",
+      "pid": "3635",
+      "address": "207 - 209 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3635",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0010/DSC00526_10375.JPG",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -876.9790508919825,
+        -1855.5677140900416
+      ],
+      "width": 9.494377878087032,
+      "depth": 14.881911893172393,
+      "front": [
+        -0.8810099904922617,
+        0.4730976607983018
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#cbcfca",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "attic": true
+    },
+    "image": "assets/houses/assessor-3635.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=3635",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0010/DSC00526_10375.JPG",
+    "sourceSha256": "e00266b803fe43c16ca32b3d856e766a5e4f4f4c4818432f2d906d8c8b112db2",
+    "building": "242522_903006"
+  },
+  "242523_903103": {
+    "address": "243 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#475f75",
+      "vestibule": true,
+      "attic": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            125.28,
+            255.74
+          ],
+          [
+            445.44,
+            193.11
+          ],
+          [
+            448.92,
+            354.9
+          ],
+          [
+            125.28,
+            367.08
+          ]
+        ]
+      }
+    ],
+    "size": [
+      870,
+      635
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Upper front siding and windows registered; foreground bushes exclude the lower facade.",
+    "spec": {
+      "id": "242523_903103",
+      "pid": "4262",
+      "address": "243 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4262",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/243%20win_13106.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -870.3538727441451,
+        -1950.553310459352
+      ],
+      "width": 8.329039211497872,
+      "depth": 24.517550179839056,
+      "front": [
+        -0.9329848965090383,
+        -0.3599155218742575
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#475f75",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "vestibule": true,
+      "attic": true
+    },
+    "image": "assets/houses/assessor-4262.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4262",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/243%20win_13106.jpg",
+    "sourceSha256": "c9e2e81aff2106c0c74610d11c0111f1a18b6b0d387a7ab9704afde78de73536",
+    "building": "242523_903103"
+  },
+  "242528_903119": {
+    "address": "247 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "stories": 1,
+      "wallFloors": 1,
+      "porch": "enclosed",
+      "photoPorch": true,
+      "color": "#6d7d7c"
+    },
+    "surfaces": [
+      {
+        "name": "Observed porch wall",
+        "plane": "porch",
+        "bottom": 1.3,
+        "top": 3.4,
+        "anchors": [
+          [
+            492.8,
+            489.6
+          ],
+          [
+            1212.8,
+            480
+          ],
+          [
+            1219.2,
+            780.8
+          ],
+          [
+            492.8,
+            784
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Front glazing above shrubs; right edge partially obscured by foliage.",
+    "spec": {
+      "id": "242528_903119",
+      "pid": "4260",
+      "address": "247 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4260",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/53/84.jpg",
+      "fields": {
+        "Year Built:": "1920",
+        "Style:": "Bungalow",
+        "Stories:": "1 Story",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -872.358337729417,
+        -1969.3903927895049
+      ],
+      "width": 8.652389566425285,
+      "depth": 12.548885688526086,
+      "front": [
+        -0.9499872683681956,
+        -0.3122886324193277
+      ],
+      "stories": 1,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#6d7d7c",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "porch": "enclosed",
+      "photoPorch": true
+    },
+    "image": "assets/houses/assessor-4260.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4260",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/53/84.jpg",
+    "sourceSha256": "d27fe3f7407ca18ebb4a018445e853b78437629c5ab7ccbac345c4e87dca8f9c",
+    "building": "242528_903119"
+  },
+  "242518_903197": {
+    "address": "274 WINTHROP ST",
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 3,
+      "wallFloors": 3,
+      "porch": "enclosed",
+      "photoPorch": true,
+      "color": "#a6a99b"
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 6.15,
+        "top": 8.9,
+        "anchors": [
+          [
+            505.6,
+            86.4
+          ],
+          [
+            1113.6,
+            259.2
+          ],
+          [
+            1129.6,
+            393.6
+          ],
+          [
+            505.6,
+            249.6
+          ]
+        ]
+      },
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            518.4,
+            304
+          ],
+          [
+            1206.4,
+            464
+          ],
+          [
+            1222.4,
+            620.8
+          ],
+          [
+            518.4,
+            528
+          ]
+        ]
+      },
+      {
+        "name": "Observed porch wall",
+        "plane": "porch",
+        "bottom": 1.1,
+        "top": 3.4,
+        "anchors": [
+          [
+            592,
+            668.8
+          ],
+          [
+            1334.4,
+            726.4
+          ],
+          [
+            1340.8,
+            992
+          ],
+          [
+            592,
+            1088
+          ]
+        ]
+      },
+      {
+        "name": "Observed left wall",
+        "plane": "left",
+        "bottom": 3.4,
+        "top": 8.9,
+        "anchors": [
+          [
+            224,
+            364.8
+          ],
+          [
+            441.6,
+            86.4
+          ],
+          [
+            441.6,
+            540.8
+          ],
+          [
+            224,
+            681.6
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242518_903197",
+      "pid": "4183",
+      "address": "274 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4183",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/34/13.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "2 Unit",
+        "Stories:": "3",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -882.5452353758416,
+        -2047.1183390195656
+      ],
+      "width": 8.50746132274528,
+      "depth": 17.103198531268763,
+      "front": [
+        0.9442678204590799,
+        0.32917819375751295
+      ],
+      "stories": 3,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#a6a99b",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 3,
+      "porch": "enclosed",
+      "photoPorch": true
+    },
+    "image": "assets/houses/assessor-4183.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4183",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/34/13.jpg",
+    "sourceSha256": "4b6ebe9320d3ac06f0beb1694bcd53fb75afef8bc934a282b5613dadaeb5ed45",
+    "building": "242518_903197"
+  },
+  "242525_903212": {
+    "address": "278 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#bcc5c9",
+      "vestibule": true,
+      "attic": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            327.94,
+            161.42
+          ],
+          [
+            562.69,
+            177.57
+          ],
+          [
+            562.69,
+            269.04
+          ],
+          [
+            327.94,
+            276.21
+          ]
+        ]
+      }
+    ],
+    "size": [
+      896,
+      504
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242525_903212",
+      "pid": "4185",
+      "address": "278 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4185",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/278%20win_13289.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -880.8854118210427,
+        -2065.4289177726087
+      ],
+      "width": 9.673303511610865,
+      "depth": 20.1453338156774,
+      "front": [
+        0.9346186967740293,
+        0.3556513624891869
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#bcc5c9",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "vestibule": true,
+      "attic": true
+    },
+    "image": "assets/houses/assessor-4185.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4185",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/278%20win_13289.jpg",
+    "sourceSha256": "45601633a090f896b4f78e91ea645b1eed212a438929b883f464bb1a7f3c30e3",
+    "building": "242525_903212"
+  },
+  "242531_903233": {
+    "address": "286 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#a7b2b8",
+      "porch": "open"
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            390.4,
+            454.4
+          ],
+          [
+            969.6,
+            435.2
+          ],
+          [
+            976,
+            636.8
+          ],
+          [
+            390.4,
+            627.2
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Upper front and unobscured porch wall; damaged bottom of the source photograph is excluded.",
+    "spec": {
+      "id": "242531_903233",
+      "pid": "4186",
+      "address": "286 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4186",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/53/87.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Aluminum Sidng",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -869.9997676538118,
+        -2083.932084508692
+      ],
+      "width": 8.242821037547543,
+      "depth": 18.128868195092497,
+      "front": [
+        0.9373040928963976,
+        0.3485126072894086
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#a7b2b8",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "open"
+    },
+    "image": "assets/houses/assessor-4186.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4186",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/53/87.jpg",
+    "sourceSha256": "736c93d06c9d222d229c18a281674d53c20bd342fb98fdfb60add2c0c43f224b",
+    "building": "242531_903233"
+  },
+  "242586_903266": {
+    "address": "301 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#4c6e84",
+      "porch": "enclosed",
+      "photoPorch": true,
+      "attic": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            720,
+            435.2
+          ],
+          [
+            1094.4,
+            448
+          ],
+          [
+            1100.8,
+            608
+          ],
+          [
+            723.2,
+            608
+          ]
+        ],
+        "uMin": 0.2
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242586_903266",
+      "pid": "4201",
+      "address": "301 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4201",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/35/42.jpg",
+      "fields": {
+        "Year Built:": "1920",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -814.1242471824464,
+        -2116.9271256543843
+      ],
+      "width": 8.15724720653765,
+      "depth": 17.847130308870888,
+      "front": [
+        -0.985531317705199,
+        -0.1694934270768455
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#4c6e84",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "enclosed",
+      "photoPorch": true,
+      "attic": true
+    },
+    "image": "assets/houses/assessor-4201.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4201",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/35/42.jpg",
+    "sourceSha256": "99fa4db8970e6708fb1d1e53c0358d3ef293adc286c68f2b7d5604c935f86382",
+    "building": "242586_903266"
+  },
+  "242586_903280": {
+    "address": "305 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#e1e0d9",
+      "porch": "enclosed",
+      "photoPorch": true,
+      "attic": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed porch wall",
+        "plane": "porch",
+        "bottom": 1.4,
+        "top": 3.4,
+        "anchors": [
+          [
+            287.2,
+            371.26
+          ],
+          [
+            686.62,
+            365.55
+          ],
+          [
+            686.62,
+            470.26
+          ],
+          [
+            287.2,
+            477.88
+          ]
+        ]
+      }
+    ],
+    "size": [
+      951,
+      634
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Main upper wall and enclosed porch above shrubs; left addition and hidden side walls remain estimated.",
+    "spec": {
+      "id": "242586_903280",
+      "pid": "4858",
+      "address": "305 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4858",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0010/305%20WINTHROP%20ST_10810.jpg",
+      "fields": {
+        "Year Built:": "1920",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Aluminum Sidng",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -814.7253728957161,
+        -2130.575633583693
+      ],
+      "width": 8.968551174880808,
+      "depth": 9.772478635701399,
+      "front": [
+        -0.9915941903145582,
+        -0.1293868684775069
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#e1e0d9",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "enclosed",
+      "photoPorch": true,
+      "attic": true
+    },
+    "image": "assets/houses/assessor-4858.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4858",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0010/305%20WINTHROP%20ST_10810.jpg",
+    "sourceSha256": "d14241c5c662f06525804b4eb9a794e35fddff02401032e46491272917d6616f",
+    "building": "242586_903280"
+  },
+  "242629_903393": {
+    "address": "345 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#839394",
+      "porch": "enclosed",
+      "photoPorch": true,
+      "dormer": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            652.8,
+            435.2
+          ],
+          [
+            1180.8,
+            435.2
+          ],
+          [
+            1187.2,
+            630.4
+          ],
+          [
+            652.8,
+            627.2
+          ]
+        ],
+        "uMin": 0.31
+      },
+      {
+        "name": "Observed porch wall",
+        "plane": "porch",
+        "bottom": 1,
+        "top": 3.4,
+        "anchors": [
+          [
+            406.4,
+            697.6
+          ],
+          [
+            1184,
+            700.8
+          ],
+          [
+            1187.2,
+            905.6
+          ],
+          [
+            406.4,
+            902.4
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Enclosed porch and main upper wall; offset side wing is simplified to the mapped footprint rectangle.",
+    "spec": {
+      "id": "242629_903393",
+      "pid": "4989",
+      "address": "345 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4989",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/92/70.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Asbest Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -770.8330960402798,
+        -2242.894857828575
+      ],
+      "width": 10.850276300655398,
+      "depth": 16.792472552628016,
+      "front": [
+        -0.9972236923770439,
+        -0.07446413473542088
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#839394",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "enclosed",
+      "photoPorch": true,
+      "dormer": true
+    },
+    "image": "assets/houses/assessor-4989.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4989",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/92/70.jpg",
+    "sourceSha256": "cb18ae60d4cb66bf3591a389c6d9781aff4daa7ab075eadfc0caf18a1b1ca3d6",
+    "building": "242629_903393"
+  },
+  "242630_903408": {
+    "address": "351 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#c2c3b9",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            142.79,
+            150.06
+          ],
+          [
+            713.94,
+            193.44
+          ],
+          [
+            713.94,
+            350.73
+          ],
+          [
+            142.79,
+            321.81
+          ]
+        ]
+      }
+    ],
+    "size": [
+      826,
+      687
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Upper front photograph only; vegetation obscures the lower right wall.",
+    "spec": {
+      "id": "242630_903408",
+      "pid": "4986",
+      "address": "351 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4986",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0012/351%20win_12892.jpg",
+      "fields": {
+        "Year Built:": "1960",
+        "Style:": "Colonial",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -769.095,
+        -2258.505
+      ],
+      "width": 14.106361402842422,
+      "depth": 12.347257508143588,
+      "front": [
+        -0.9978226537984487,
+        -0.06595416261784608
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#c2c3b9",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-4986.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4986",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0012/351%20win_12892.jpg",
+    "sourceSha256": "2a8e3def7818dfe80d03fd8692bac4541dcf301d03af55ea6aabf9fd1e4e089b",
+    "building": "242630_903408"
+  },
+  "242632_903423": {
+    "address": "355 WINTHROP ST",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#8e9590",
+      "porch": "enclosed",
+      "photoPorch": true,
+      "stories": 2,
+      "wallFloors": 2
+    },
+    "surfaces": [
+      {
+        "name": "Observed porch wall",
+        "plane": "porch",
+        "bottom": 1.4,
+        "top": 3.1,
+        "anchors": [
+          [
+            352,
+            745.6
+          ],
+          [
+            1248,
+            748.8
+          ],
+          [
+            1248,
+            892.8
+          ],
+          [
+            352,
+            876.8
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Clear second-floor and porch window bands only; tree-obscured dormers and far right side remain estimated.",
+    "spec": {
+      "id": "242632_903423",
+      "pid": "4985",
+      "address": "355 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4985",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/92/71.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "4-7 Unit",
+        "Stories:": "2.75",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -767.6545002730261,
+        -2272.9395288254523
+      ],
+      "width": 11.325234929250291,
+      "depth": 15.290823647852534,
+      "front": [
+        -0.9953462402546203,
+        -0.09636317767172113
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#8e9590",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "enclosed",
+      "photoPorch": true,
+      "wallFloors": 2
+    },
+    "image": "assets/houses/assessor-4985.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4985",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/92/71.jpg",
+    "sourceSha256": "e5eee3c7f5f4670da5f4aceb44c5c3542b0ef91753cc728551eaaf56734df473",
+    "building": "242632_903423"
+  },
+  "242596_903425": {
+    "address": "356 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "color": "#a2a39b",
+      "porch": "open",
+      "dormer": true
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            480,
+            393.6
+          ],
+          [
+            1152,
+            355.2
+          ],
+          [
+            1161.6,
+            518.4
+          ],
+          [
+            480,
+            534.4
+          ]
+        ]
+      },
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 1.5,
+        "top": 3.1,
+        "anchors": [
+          [
+            480,
+            579.2
+          ],
+          [
+            1168,
+            569.6
+          ],
+          [
+            1168,
+            716.8
+          ],
+          [
+            480,
+            716.8
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "Visible wall surfaces only. Unseen elevations, projecting details, roof dimensions and metric heights remain estimated.",
+    "spec": {
+      "id": "242596_903425",
+      "pid": "4882",
+      "address": "356 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4882",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/92/72.jpg",
+      "fields": {
+        "Year Built:": "1920",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -803.4022689252238,
+        -2275.1257662172334
+      ],
+      "width": 9.73256608018165,
+      "depth": 17.70271864206147,
+      "front": [
+        0.9998371723095926,
+        0.01804518960714883
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#a2a39b",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "porch": "open",
+      "dormer": true
+    },
+    "image": "assets/houses/assessor-4882.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4882",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/92/72.jpg",
+    "sourceSha256": "b264a51987a14c250a6e2a000e15bc82292f5bfc69c327c9ddb0aa633f5c1abf",
+    "building": "242596_903425"
+  },
+  "242639_903485": {
+    "address": "375 WINTHROP ST",
+    "modelFlags": {
+      "roof": "hip",
+      "stories": 1,
+      "wallFloors": 1,
+      "color": "#c9d1d5"
+    },
+    "surfaces": [
+      {
+        "name": "Observed front wall",
+        "plane": "front",
+        "bottom": 0.85,
+        "top": 3.4,
+        "anchors": [
+          [
+            387.2,
+            528
+          ],
+          [
+            1334.4,
+            528
+          ],
+          [
+            1337.6,
+            739.2
+          ],
+          [
+            387.2,
+            796.8
+          ]
+        ]
+      }
+    ],
+    "size": [
+      1600,
+      1200
+    ],
+    "review": "Source photograph visually inspected; visible wall corners traced. Footprint rectangle and metric heights remain approximate.",
+    "limitations": "One-story front windows and entry; porch roof and offset side mass are estimated.",
+    "spec": {
+      "id": "242639_903485",
+      "pid": "4916",
+      "address": "375 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4916",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/53/91.jpg",
+      "fields": {
+        "Year Built:": "1952",
+        "Style:": "2 Unit",
+        "Stories:": "1 Story",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -761.3243017604152,
+        -2334.5799229088507
+      ],
+      "width": 11.559973963035592,
+      "depth": 14.306407655312825,
+      "front": [
+        -0.9939602129762508,
+        -0.10974103617246458
+      ],
+      "stories": 1,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#c9d1d5",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1
+    },
+    "image": "assets/houses/assessor-4916.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=4916",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/53/91.jpg",
+    "sourceSha256": "76ab3e1e2ec3925212f65967cbc276aaf42d7e5896c364c7c30b82c1788415cc",
+    "building": "242639_903485"
+  },
+  "242639_903514": {
+    "address": "385 WINTHROP ST",
+    "size": [
+      832,
+      801
+    ],
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "stories": 2.5,
+      "wallFloors": 2,
+      "dormer": true,
+      "color": "#607979",
+      "porch": "enclosed",
+      "photoPorch": true
+    },
+    "surfaces": [
+      {
+        "name": "Upper front facade",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            176,
+            292
+          ],
+          [
+            405,
+            245
+          ],
+          [
+            414,
+            390
+          ],
+          [
+            175,
+            400
+          ]
+        ]
+      },
+      {
+        "name": "Enclosed porch glazing",
+        "plane": "porch",
+        "bottom": 1.7,
+        "top": 3.2,
+        "anchors": [
+          [
+            77,
+            444
+          ],
+          [
+            290,
+            448
+          ],
+          [
+            291,
+            554
+          ],
+          [
+            85,
+            538
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Front upper wall and enclosed-porch glazing are separate surfaces. The side gable, dormer dimensions, roof and unseen elevations remain approximate. Lower shrubbery is excluded.",
+    "spec": {
+      "id": "242639_903514",
+      "pid": "6542",
+      "address": "385 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=6542",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/06/42.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "2 Unit",
+        "Stories:": "2 1/2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -761.1644979548046,
+        -2364.0950943342955
+      ],
+      "width": 8.359335692427157,
+      "depth": 13.065472394263912,
+      "front": [
+        -0.9952641176208531,
+        -0.09720769607590016
+      ],
+      "stories": 2.5,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#607979",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "dormer": true,
+      "porch": "enclosed",
+      "photoPorch": true
+    },
+    "image": "assets/houses/assessor-6542.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=6542",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/06/42.jpg",
+    "sourceSha256": "af2f116f2ffefd89749b023a31295abcbfa5b8de772804da858aa736b55ffebc",
+    "building": "242639_903514"
+  },
+  "242613_903550": {
+    "address": "396 WINTHROP ST",
+    "size": [
+      918,
+      768
+    ],
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "stories": 1.75,
+      "wallFloors": 1,
+      "roofRise": 3.5,
+      "color": "#aaaba4",
+      "porch": "open"
+    },
+    "surfaces": [
+      {
+        "name": "Clear left wall above planting",
+        "plane": "left",
+        "bottom": 1.4,
+        "top": 3.4,
+        "anchors": [
+          [
+            251,
+            389
+          ],
+          [
+            417,
+            298
+          ],
+          [
+            420,
+            520
+          ],
+          [
+            250,
+            484
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Only the clear left elevation is projected. The gable windows and front porch need a separate measured registration; rear annex and full footprint depth remain estimated.",
+    "spec": {
+      "id": "242613_903550",
+      "pid": "6548",
+      "address": "396 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=6548",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0012/396%20WINTHROP%20ST_12352.jfif",
+      "fields": {
+        "Year Built:": "1920",
+        "Style:": "Old Style",
+        "Stories:": "1.75",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -787.45,
+        -2400.24
+      ],
+      "width": 6.607970799721123,
+      "depth": 14.262030777909402,
+      "front": [
+        0.9991657092200491,
+        0.04083975414710687
+      ],
+      "stories": 1.75,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#aaaba4",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "roofRise": 3.5,
+      "porch": "open"
+    },
+    "image": "assets/houses/assessor-6548.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=6548",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0012/396%20WINTHROP%20ST_12352.jfif",
+    "sourceSha256": "fd31f4d41d5c945eee8572ec4e7ce3055657b53e8179b310f77a6086da2c51b1",
+    "building": "242613_903550"
+  },
+  "242634_903631": {
+    "address": "423 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#c5c7bf",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Clear right elevation",
+        "plane": "right",
+        "bottom": 1.35,
+        "top": 6.15,
+        "anchors": [
+          [
+            992,
+            368
+          ],
+          [
+            1251.2,
+            566.4
+          ],
+          [
+            1260.8,
+            860.8
+          ],
+          [
+            995.2,
+            864
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Right elevation only. Cars and the tree-obscured front facade are excluded. The front bay and entry pediment need separate geometry.",
+    "spec": {
+      "id": "242634_903631",
+      "pid": "5569",
+      "address": "423 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5569",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/99/50.jpg",
+      "fields": {
+        "Year Built:": "1920",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rubber/Wood"
+      },
+      "center": [
+        -766.0676267250551,
+        -2481.410938692119
+      ],
+      "width": 7.081520105555765,
+      "depth": 18.11323565729213,
+      "front": [
+        -0.9763932178113515,
+        0.2160006578971343
+      ],
+      "stories": 2,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#c5c7bf",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-5569.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5569",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/99/50.jpg",
+    "sourceSha256": "9193fb6dfdb071e09501a1485d980af9f1d8589cc0a0b206dfcf22b1944e439c",
+    "building": "242634_903631"
+  },
+  "242602_903635": {
+    "address": "426 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#b4aaa0",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Left second-floor wall",
+        "plane": "left",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            292,
+            569
+          ],
+          [
+            459,
+            399
+          ],
+          [
+            459,
+            649
+          ],
+          [
+            282,
+            759
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Clear left second-floor wall only. Front projecting gables, multiple front planes, lower car occlusion and entrance geometry are held for a more specific model.",
+    "spec": {
+      "id": "242602_903635",
+      "pid": "5541",
+      "address": "426 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5541",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0011/DSC00053_11094.JPG",
+      "fields": {
+        "Year Built:": "1961",
+        "Style:": "Colonial",
+        "Stories:": "2",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -797.75,
+        -2485.175
+      ],
+      "width": 15.399386994416888,
+      "depth": 7.825482745248828,
+      "front": [
+        0.983165381426605,
+        -0.1827179048814816
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#b4aaa0",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-5541.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5541",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0011/DSC00053_11094.JPG",
+    "sourceSha256": "0afff851606695a98cc9c349fd0c3cd91b9a9ad120cfd0bc2b097ac6697edbb1",
+    "building": "242602_903635"
+  },
+  "242631_903651": {
+    "address": "427 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#cdcfcb",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Upper front facade",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            179.2,
+            153.6
+          ],
+          [
+            1161.6,
+            156.8
+          ],
+          [
+            1174.4,
+            572.8
+          ],
+          [
+            134.4,
+            582.4
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Upper facade only. The shallow projecting bay is represented in the photograph but its depth is not reconstructed. Visible overhead wires remain baked into the photograph; they are not surveyed wire geometry. Lower cars and utility pole excluded.",
+    "spec": {
+      "id": "242631_903651",
+      "pid": "5565",
+      "address": "427 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5565",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/69/33.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rubber/Wood"
+      },
+      "center": [
+        -769.7423408485545,
+        -2500.580250126341
+      ],
+      "width": 7.166019102616097,
+      "depth": 18.25634047793968,
+      "front": [
+        -0.9807226682856244,
+        0.19540483082750365
+      ],
+      "stories": 2,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#cdcfcb",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-5565.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5565",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/69/33.jpg",
+    "sourceSha256": "179605f5fb07cea4c18f5a758e40194e3fcdd5efbcbcc02f574328b594335b1e",
+    "building": "242631_903651"
+  },
+  "242625_903680": {
+    "address": "433 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#d7d8d1",
+      "awning": true
+    },
+    "surfaces": [
+      {
+        "name": "Upper front facade",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            434,
+            283
+          ],
+          [
+            1112,
+            243
+          ],
+          [
+            1130,
+            598
+          ],
+          [
+            418,
+            602
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Upper facade only. Shallow polygonal bay depth is flattened, not measured. Overhead wires remain photographic artifacts; lower entrance and parked cars are excluded.",
+    "spec": {
+      "id": "242625_903680",
+      "pid": "5558",
+      "address": "433 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5558",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/80/14.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rubber/Wood"
+      },
+      "center": [
+        -775.3121844187046,
+        -2529.4654875671504
+      ],
+      "width": 7.219370550181771,
+      "depth": 18.38888457010682,
+      "front": [
+        -0.9807633631442576,
+        0.19520047518888198
+      ],
+      "stories": 2,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#d7d8d1",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "awning": true
+    },
+    "image": "assets/houses/assessor-5558.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5558",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/80/14.jpg",
+    "sourceSha256": "8128a2707ba63220d8c72f9900d957c08227ab6db01947775c970318a783ad7d",
+    "building": "242625_903680"
+  },
+  "242623_903689": {
+    "address": "435 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#ded6b9",
+      "trim": "#775247",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Upper front facade",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            417,
+            217
+          ],
+          [
+            1125,
+            309
+          ],
+          [
+            1140,
+            538
+          ],
+          [
+            409,
+            542
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Upper front wall only. The projecting bay is a photographed approximation requiring its own planes; overhead wires remain baked in. Lower parked cars and planting are excluded.",
+    "spec": {
+      "id": "242623_903689",
+      "pid": "5556",
+      "address": "435 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5556",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/06/38.jpg",
+      "fields": {
+        "Year Built:": "1905",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rolled Roofing"
+      },
+      "center": [
+        -777.2758435886898,
+        -2539.076516468881
+      ],
+      "width": 7.3135446981157965,
+      "depth": 18.556660979295557,
+      "front": [
+        -0.9793721429879745,
+        0.20206485478465205
+      ],
+      "stories": 2,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#ded6b9",
+      "trim": "#775247",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-5556.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5556",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/06/38.jpg",
+    "sourceSha256": "5ce5d0a8aef3e43d84e5a1ceb2595d9474b493f56934fbd0fc6a6c19f0098ac6",
+    "building": "242623_903689"
+  },
+  "242621_903699": {
+    "address": "437 WINTHROP ST",
+    "size": [
+      640,
+      480
+    ],
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#c7cbb7",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Upper front facade",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            129,
+            79
+          ],
+          [
+            439,
+            53
+          ],
+          [
+            440,
+            206
+          ],
+          [
+            119,
+            212
+          ]
+        ]
+      },
+      {
+        "name": "Clear right wall",
+        "plane": "right",
+        "bottom": 1.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            467,
+            90
+          ],
+          [
+            540,
+            162
+          ],
+          [
+            549,
+            350
+          ],
+          [
+            468,
+            360
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Upper front and right elevation are projected. The shallow front bay and doorway canopy are not dimensionally reconstructed. Source is low resolution and wires/shadows remain photographic; bins and parked cars excluded.",
+    "spec": {
+      "id": "242621_903699",
+      "pid": "5554",
+      "address": "437 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5554",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/66/63.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rubber/Wood"
+      },
+      "center": [
+        -779.4701707336928,
+        -2548.451257899528
+      ],
+      "width": 7.313415266356492,
+      "depth": 18.56394617312938,
+      "front": [
+        -0.9792803782567082,
+        0.20250911278606304
+      ],
+      "stories": 2,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#c7cbb7",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-5554.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5554",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/66/63.jpg",
+    "sourceSha256": "e7d84cfb2c0ecdc319e088c747a00ffc5afc6baa4b66519c84b644362c458396",
+    "building": "242621_903699"
+  },
+  "242619_903708": {
+    "address": "439 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#afb4b4",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Clear right elevation",
+        "plane": "right",
+        "bottom": 1,
+        "top": 6.05,
+        "anchors": [
+          [
+            1134,
+            70
+          ],
+          [
+            1454,
+            148
+          ],
+          [
+            1491,
+            949
+          ],
+          [
+            1160,
+            972
+          ]
+        ],
+        "uMax": 0.2
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Right elevation only, stopping above the foreground fence and car. Satellite fixture and wire shadows remain photographic details. The projecting front bay and entrance are held for separate geometry. Only the near-front 20% of the modeled side depth is registered; this extent is a visual estimate, not a measurement.",
+    "spec": {
+      "id": "242619_903708",
+      "pid": "5553",
+      "address": "439 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5553",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/06/39.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rubber/Wood"
+      },
+      "center": [
+        -781.0907606595354,
+        -2558.2166369557813
+      ],
+      "width": 7.3135781020017525,
+      "depth": 18.567106255998592,
+      "front": [
+        -0.9793959674869364,
+        0.20194934728869005
+      ],
+      "stories": 2,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#afb4b4",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-5553.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5553",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/01/06/39.jpg",
+    "sourceSha256": "f241da2af8230365cd26c3c797d5ac44887bfad26e9984178f271cea4e66f846",
+    "building": "242619_903708"
+  },
+  "242594_903678": {
+    "address": "440 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#53667a",
+      "trim": "#e5e4d7"
+    },
+    "surfaces": [
+      {
+        "name": "Clear left ground-floor wall",
+        "plane": "left",
+        "bottom": 0.85,
+        "top": 3.4,
+        "anchors": [
+          [
+            376,
+            624
+          ],
+          [
+            645,
+            594
+          ],
+          [
+            644,
+            916
+          ],
+          [
+            360,
+            884
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Clear left ground-floor wall only. This cross-gable house needs a dedicated roof and front projection; the two front trees are excluded from facade textures.",
+    "spec": {
+      "id": "242594_903678",
+      "pid": "5544",
+      "address": "440 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5544",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0011/DSC00054_11095.JPG",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -806.0344706582403,
+        -2527.4870045001194
+      ],
+      "width": 7.420428131427434,
+      "depth": 10.235956157575353,
+      "front": [
+        0.9847427912723,
+        -0.17401619188236306
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#53667a",
+      "trim": "#e5e4d7",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2
+    },
+    "image": "assets/houses/assessor-5544.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5544",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0011/DSC00054_11095.JPG",
+    "sourceSha256": "d194860a800e5e7d0ac341bb3ea16c6a711fe0a1fac1472cbcb8d146fc64a4b2",
+    "building": "242594_903678"
+  },
+  "242618_903718": {
+    "address": "441 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#a5a3a8",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Upper front facade",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            322,
+            291
+          ],
+          [
+            1059,
+            253
+          ],
+          [
+            1069,
+            554
+          ],
+          [
+            309,
+            573
+          ]
+        ]
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Upper facade only. The right edge is conservatively cropped before the utility pole. Bay depth remains approximate, overhead wires remain in the source, and lower parked cars are excluded.",
+    "spec": {
+      "id": "242618_903718",
+      "pid": "5552",
+      "address": "441 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5552",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0011/441%20WINTHROP%20ST_11636.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -782.585421406127,
+        -2567.667713484588
+      ],
+      "width": 6.991558509198039,
+      "depth": 16.88096232163541,
+      "front": [
+        -0.9851672713458739,
+        0.17159675832872073
+      ],
+      "stories": 2,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#a5a3a8",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-5552.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5552",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0011/441%20WINTHROP%20ST_11636.jpg",
+    "sourceSha256": "05d30dc23aedac5e4279736ea08ce84ce724a117ca08e7ecdda9bac62c63f99c",
+    "building": "242618_903718"
+  },
+  "242615_903727": {
+    "address": "443 WINTHROP ST",
+    "size": [
+      640,
+      480
+    ],
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 2,
+      "wallFloors": 2,
+      "color": "#d4d8d6",
+      "vestibule": true
+    },
+    "surfaces": [
+      {
+        "name": "Upper right wall",
+        "plane": "right",
+        "bottom": 3.4,
+        "top": 6,
+        "anchors": [
+          [
+            433,
+            13
+          ],
+          [
+            551,
+            66
+          ],
+          [
+            561,
+            197
+          ],
+          [
+            434,
+            166
+          ]
+        ],
+        "uMax": 0.2
+      }
+    ],
+    "review": "Visible wall corners inspected in the assessor photograph. Footprint rectangle, wall heights and hidden sides are approximate; no exact replica claim.",
+    "limitations": "Only the clear upper right elevation is projected from a low-resolution photograph; roof edge is clipped in the source. Front bay, lower car obstruction and fence remain outside the registration. Only the near-front 20% of the modeled side depth is registered; this extent is a visual estimate, not a measurement.",
+    "spec": {
+      "id": "242615_903727",
+      "pid": "5551",
+      "address": "443 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5551",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/66/21.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "2 Unit",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rubber/Wood"
+      },
+      "center": [
+        -784.9058435886898,
+        -2577.366516468881
+      ],
+      "width": 7.3135446981157735,
+      "depth": 18.556660979295557,
+      "front": [
+        -0.9793721429879745,
+        0.20206485478465205
+      ],
+      "stories": 2,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#d4d8d6",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "vestibule": true
+    },
+    "image": "assets/houses/assessor-5551.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5551",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/66/21.jpg",
+    "sourceSha256": "c1cbb6f5a9e198710652a6de481cb4dc440fbe2204d90b3e491433e93fcf89b4",
+    "building": "242615_903727"
+  },
+  "242613_903741": {
+    "address": "457-459 WINTHROP ST",
+    "size": [
+      725,
+      692
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "stories": 1.75,
+      "wallFloors": 1,
+      "roofRise": 3.4,
+      "porch": "open",
+      "color": "#92aaa0"
+    },
+    "surfaces": [
+      {
+        "name": "Observed left siding and windows",
+        "plane": "left",
+        "bottom": 0.85,
+        "top": 3.4,
+        "anchors": [
+          [
+            68,
+            344
+          ],
+          [
+            172,
+            305
+          ],
+          [
+            173,
+            515
+          ],
+          [
+            79,
+            469
+          ]
+        ]
+      }
+    ],
+    "review": "Source photograph inspected individually. The left wall and the window-height front strip were traced separately; the roof and background wires are excluded.",
+    "limitations": "Porch posts partially occlude the front strip and remain in the photograph. Lower railing, rear dormers and hidden elevations are estimated. Metric wall height and roof rise are estimates.",
+    "spec": {
+      "id": "242613_903741",
+      "pid": "5550",
+      "address": "457-459 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5550",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/97/84.jpg",
+      "fields": {
+        "Year Built:": "1930",
+        "Style:": "2 Unit",
+        "Stories:": "1.75",
+        "Exterior Wall 1": "Asbest Shingle",
+        "Exterior Wall 2": "Vinyl Siding",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -787.05,
+        -2590.87
+      ],
+      "width": 10.866816437599818,
+      "depth": 13.283685501829362,
+      "front": [
+        -0.9809552912766744,
+        0.19423366473475914
+      ],
+      "stories": 1.75,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#92aaa0",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "roofRise": 3.4,
+      "porch": "open"
+    },
+    "image": "assets/houses/assessor-5550.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=5550",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/97/84.jpg",
+    "sourceSha256": "ea90a50a7325bc6ef62ade4604abe7970d4f775bd2f10b91038089d292a1ac9a",
+    "building": "242613_903741"
+  },
+  "242608_903753": {
+    "address": "463 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": false,
+      "stories": 2,
+      "wallFloors": 2,
+      "porch": "open",
+      "color": "#557c89"
+    },
+    "surfaces": [
+      {
+        "name": "Observed left wall siding and windows",
+        "plane": "left",
+        "bottom": 0.95,
+        "top": 6,
+        "anchors": [
+          [
+            295,
+            519
+          ],
+          [
+            554,
+            302
+          ],
+          [
+            545,
+            990
+          ],
+          [
+            244,
+            978
+          ]
+        ]
+      }
+    ],
+    "review": "Photograph inspected individually. The planar left elevation is registered; the multi-plane front bay is intentionally not flattened over the front wall.",
+    "limitations": "Front bay and open porch require more specific geometry. A short foreground cable fragment touches the upper edge of the registered side. Roof shape, depth and metric heights remain estimated.",
+    "spec": {
+      "id": "242608_903753",
+      "pid": "7070",
+      "address": "463 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7070",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/73/70.jpg",
+      "fields": {
+        "Year Built:": "1910",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -791.8755445473239,
+        -2602.727732820829
+      ],
+      "width": 8.289831120113472,
+      "depth": 11.490451207008203,
+      "front": [
+        -0.9807196168658336,
+        0.19542014505810884
+      ],
+      "stories": 2,
+      "roof": "gable",
+      "frontGable": false,
+      "color": "#557c89",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "porch": "open"
+    },
+    "image": "assets/houses/assessor-7070.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7070",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/73/70.jpg",
+    "sourceSha256": "b6ae34fede8172ef5e8a17bd11d85cd38459382167b4ce462b27d1c2ea9e28b0",
+    "building": "242608_903753"
+  },
+  "242605_903771": {
+    "address": "465 WINTHROP ST",
+    "size": [
+      320,
+      240
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "hip",
+      "stories": 2,
+      "wallFloors": 2,
+      "dormer": true,
+      "porch": "enclosed",
+      "color": "#e1decf"
+    },
+    "surfaces": [
+      {
+        "name": "Observed second-floor front windows and shingles",
+        "plane": "front",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            89,
+            82
+          ],
+          [
+            190,
+            61
+          ],
+          [
+            190,
+            100
+          ],
+          [
+            89,
+            117
+          ]
+        ]
+      }
+    ],
+    "review": "Source photograph inspected individually. The unobstructed upper front wall was traced above the enclosed porch.",
+    "limitations": "The source is only 320 by 240 pixels. Lower porch geometry and windows, rear elevations, dormer and metric dimensions are estimated; this is a partial photographic surface.",
+    "spec": {
+      "id": "242605_903771",
+      "pid": "7069",
+      "address": "465 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7069",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0012/465%20winthrop_12664.jpg",
+      "fields": {
+        "Year Built:": "1925",
+        "Style:": "Old Style",
+        "Stories:": "2 Stories",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Hip",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -794.5275944946516,
+        -2620.9826070967365
+      ],
+      "width": 7.918460993248005,
+      "depth": 12.946868895920703,
+      "front": [
+        -0.9887710405767853,
+        0.14943837966433235
+      ],
+      "stories": 2,
+      "roof": "hip",
+      "frontGable": false,
+      "color": "#e1decf",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 2,
+      "dormer": true,
+      "porch": "enclosed"
+    },
+    "image": "assets/houses/assessor-7069.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7069",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0012/465%20winthrop_12664.jpg",
+    "sourceSha256": "d9a6921cb388a578dc607ede0818e880174acad8418c66836a20d44d3b9b3802",
+    "building": "242605_903771"
+  },
+  "242572_903781": {
+    "address": "470 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "stories": 1.5,
+      "wallFloors": 1,
+      "roofRise": 3.4,
+      "porch": "enclosed",
+      "photoPorch": true,
+      "color": "#ada99d"
+    },
+    "surfaces": [
+      {
+        "name": "Observed enclosed porch front",
+        "plane": "porch",
+        "bottom": 1,
+        "top": 3.4,
+        "anchors": [
+          [
+            632,
+            496
+          ],
+          [
+            1151,
+            575
+          ],
+          [
+            1157,
+            828
+          ],
+          [
+            632,
+            824
+          ]
+        ]
+      },
+      {
+        "name": "Observed left main wall",
+        "plane": "left",
+        "bottom": 0.95,
+        "top": 3.4,
+        "anchors": [
+          [
+            314,
+            553
+          ],
+          [
+            503,
+            392
+          ],
+          [
+            492,
+            819
+          ],
+          [
+            332,
+            806
+          ]
+        ]
+      }
+    ],
+    "review": "Photograph inspected individually. Porch front and left main wall were traced as two distinct planes. Foreground car, fence, sky and most vegetation are excluded.",
+    "limitations": "Rear side vestibule, upper gable windows and porch roof profiles require additional geometry. Entry railings touch the bottom-right photograph edge. Hidden dimensions and metric heights are estimated.",
+    "spec": {
+      "id": "242572_903781",
+      "pid": "7034",
+      "address": "470 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7034",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/73/63.jpg",
+      "fields": {
+        "Year Built:": "1900",
+        "Style:": "Old Style",
+        "Stories:": "1 1/2 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -828.3954193650927,
+        -2631.649010451574
+      ],
+      "width": 9.892399520065798,
+      "depth": 15.331174199325497,
+      "front": [
+        0.9843670416018138,
+        -0.1761292917378959
+      ],
+      "stories": 1.5,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#ada99d",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "roofRise": 3.4,
+      "porch": "enclosed",
+      "photoPorch": true
+    },
+    "image": "assets/houses/assessor-7034.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7034",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/73/63.jpg",
+    "sourceSha256": "299fa50fe4e951b07f45b69853e6d57fec0e808dd4244e663fe82f80d377d09d",
+    "building": "242572_903781"
+  },
+  "242564_903828": {
+    "address": "478 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "stories": 1.5,
+      "wallFloors": 1,
+      "roofRise": 3,
+      "porch": "enclosed",
+      "photoPorch": true,
+      "color": "#d3d0c5"
+    },
+    "surfaces": [
+      {
+        "name": "Observed enclosed right portion of front porch",
+        "plane": "porch",
+        "uMin": 0.43,
+        "uMax": 1,
+        "bottom": 1.45,
+        "top": 3.4,
+        "anchors": [
+          [
+            550,
+            353
+          ],
+          [
+            1041,
+            290
+          ],
+          [
+            1045,
+            611
+          ],
+          [
+            550,
+            642
+          ]
+        ]
+      }
+    ],
+    "review": "Photograph inspected individually. Four front windows are registered only on the enclosed right section, rather than stretched across the open left entrance.",
+    "limitations": "The horizontal split is estimated from the photographed facade, not a measured survey. Lower bushes are largely excluded. The open left entrance, attic and right side still require specific geometry.",
+    "spec": {
+      "id": "242564_903828",
+      "pid": "7043",
+      "address": "478 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7043",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/478%20winth_13671.jpg",
+      "fields": {
+        "Year Built:": "1929",
+        "Style:": "Bungalow",
+        "Stories:": "1 Story",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -836.0150954580477,
+        -2677.505544383609
+      ],
+      "width": 10.132270229322224,
+      "depth": 13.380900521943055,
+      "front": [
+        0.9849717559959018,
+        -0.17271548827580513
+      ],
+      "stories": 1.5,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#d3d0c5",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "roofRise": 3,
+      "porch": "enclosed",
+      "photoPorch": true
+    },
+    "image": "assets/houses/assessor-7043.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7043",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///0013/478%20winth_13671.jpg",
+    "sourceSha256": "7f2a1d5217f9a8c446e0c6fd6571944ebda18a622a0eb47381ef3923997ecc3c",
+    "building": "242564_903828"
+  },
+  "242561_903839": {
+    "address": "480 WINTHROP ST",
+    "size": [
+      640,
+      480
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 3,
+      "wallFloors": 3,
+      "color": "#d4d2c4"
+    },
+    "surfaces": [
+      {
+        "name": "Observed flat front bay panel, lower two floors",
+        "plane": "front",
+        "uMin": 0.26,
+        "uMax": 0.6,
+        "bottom": 0.75,
+        "top": 6.15,
+        "anchors": [
+          [
+            273,
+            130
+          ],
+          [
+            382,
+            135
+          ],
+          [
+            387,
+            473
+          ],
+          [
+            266,
+            475
+          ]
+        ]
+      },
+      {
+        "name": "Observed recessed right second-floor panel",
+        "plane": "front",
+        "uMin": 0.7,
+        "uMax": 1,
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            412,
+            143
+          ],
+          [
+            530,
+            159
+          ],
+          [
+            535,
+            268
+          ],
+          [
+            414,
+            258
+          ]
+        ]
+      },
+      {
+        "name": "Observed stone entrance panel",
+        "plane": "front",
+        "uMin": 0.7,
+        "uMax": 1,
+        "bottom": 0.85,
+        "top": 3.4,
+        "anchors": [
+          [
+            414,
+            261
+          ],
+          [
+            534,
+            270
+          ],
+          [
+            546,
+            468
+          ],
+          [
+            419,
+            470
+          ]
+        ]
+      }
+    ],
+    "review": "Photograph inspected individually. Visible flat bay and entrance panels are registered separately, with gaps where the bay turns. Cropped third-floor roof corners are not inferred from the photograph.",
+    "limitations": "Panel width ratios are visually estimated. Bay projection and the setback of the entrance are not yet modeled, so these partial panels remain on an approximate facade depth. Entrance canopy is present in the photograph; upper roof and hidden elevations remain estimated.",
+    "spec": {
+      "id": "242561_903839",
+      "pid": "7044",
+      "address": "480 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7044",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/60/66.jpg",
+      "fields": {
+        "Year Built:": "1913",
+        "Style:": "3 Decker",
+        "Stories:": "3 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rubber/Wood"
+      },
+      "center": [
+        -838.895,
+        -2688.63
+      ],
+      "width": 6.630814186659791,
+      "depth": 17.550635407926894,
+      "front": [
+        0.9818312543765982,
+        -0.18975612751443832
+      ],
+      "stories": 3,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#d4d2c4",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 3
+    },
+    "image": "assets/houses/assessor-7044.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7044",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/60/66.jpg",
+    "sourceSha256": "050900c14b669ce7ef46c8e26f62ae619f8340f4749f7ebe087dd63116b99b04",
+    "building": "242561_903839"
+  },
+  "242559_903847": {
+    "address": "482 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "flat",
+      "stories": 3,
+      "wallFloors": 3,
+      "color": "#d2d3cc"
+    },
+    "surfaces": [
+      {
+        "name": "Observed flat left section of front bay",
+        "plane": "front",
+        "uMin": 0,
+        "uMax": 0.35,
+        "bottom": 0.85,
+        "top": 8.9,
+        "anchors": [
+          [
+            300,
+            104
+          ],
+          [
+            432,
+            64
+          ],
+          [
+            371,
+            1093
+          ],
+          [
+            184,
+            1077
+          ]
+        ]
+      },
+      {
+        "name": "Observed right wall, second floor",
+        "plane": "right",
+        "bottom": 3.4,
+        "top": 6.15,
+        "anchors": [
+          [
+            838,
+            394
+          ],
+          [
+            1170,
+            675
+          ],
+          [
+            1184,
+            850
+          ],
+          [
+            844,
+            770
+          ]
+        ]
+      },
+      {
+        "name": "Observed right wall, lower window band",
+        "plane": "right",
+        "bottom": 1.55,
+        "top": 3.4,
+        "anchors": [
+          [
+            844,
+            770
+          ],
+          [
+            1184,
+            850
+          ],
+          [
+            1196,
+            990
+          ],
+          [
+            849,
+            1005
+          ]
+        ]
+      }
+    ],
+    "review": "Photograph inspected individually. The left flat bay face and two bands of the right wall were traced independently. Cropped upper-right cornice and bins below the wall are excluded.",
+    "limitations": "The left bay width ratio is estimated. Angled bay returns, canopy depth and remaining front panels still need geometry. Side-floor band heights and metric dimensions are approximate.",
+    "spec": {
+      "id": "242559_903847",
+      "pid": "7048",
+      "address": "482 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7048",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/73/68.jpg",
+      "fields": {
+        "Year Built:": "1913",
+        "Style:": "3 Decker",
+        "Stories:": "3 Stories",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Flat",
+        "Roof Cover": "Rubber/Wood"
+      },
+      "center": [
+        -840.62,
+        -2697.41
+      ],
+      "width": 6.589643386888425,
+      "depth": 17.447045596135936,
+      "front": [
+        0.9818384429956893,
+        -0.1897189285648653
+      ],
+      "stories": 3,
+      "roof": "flat",
+      "frontGable": false,
+      "color": "#d2d3cc",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 3
+    },
+    "image": "assets/houses/assessor-7048.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7048",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/73/68.jpg",
+    "sourceSha256": "c87ff5753df7e284031bb483feb5e8304ccd19b1d403523546b39096cfbee6ac",
+    "building": "242559_903847"
+  },
+  "242554_903869": {
+    "address": "492 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "stories": 1,
+      "wallFloors": 1,
+      "roofRise": 1.55,
+      "carportUMax": 0.293,
+      "color": "#987e6c"
+    },
+    "surfaces": [
+      {
+        "name": "Observed brick front of main house",
+        "plane": "front",
+        "uMin": 0.293,
+        "uMax": 1,
+        "bottom": 0.85,
+        "top": 3.4,
+        "anchors": [
+          [
+            627,
+            383
+          ],
+          [
+            1341,
+            449
+          ],
+          [
+            1333,
+            711
+          ],
+          [
+            624,
+            715
+          ]
+        ],
+        "outline": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            0.28,
+            1
+          ],
+          [
+            0,
+            0.58
+          ]
+        ]
+      }
+    ],
+    "review": "Photograph inspected individually. Main-house width is restricted using the notch in the mapped L-shaped footprint; the left carport and foreground car are not stretched into the facade.",
+    "limitations": "The generic rectangular body still fills the carport opening and its roof has not been separated. The bow-window depth is flattened in this partial surface. A bin touches the lower-left edge. Roof dimensions and wall heights remain estimated. Left carport is open modeled space with an estimated canopy and posts; its support and height dimensions remain approximate.",
+    "spec": {
+      "id": "242554_903869",
+      "pid": "7050",
+      "address": "492 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7050",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/73/69.jpg",
+      "fields": {
+        "Year Built:": "1960",
+        "Style:": "Ranch",
+        "Stories:": "1 Story",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "Brick Veneer",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -846.2905508559319,
+        -2717.599652851563
+      ],
+      "width": 11.446577400618592,
+      "depth": 13.025011756866698,
+      "front": [
+        0.9846828731011212,
+        -0.17435492370828315
+      ],
+      "stories": 1,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#987e6c",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "roofRise": 1.55,
+      "carportUMax": 0.293
+    },
+    "image": "assets/houses/assessor-7050.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7050",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/73/69.jpg",
+    "sourceSha256": "8f18208a0b4600fe3712f83186bd15549f0ea75acda0bc6f4b706fecf51e1988",
+    "building": "242554_903869"
+  },
+  "242551_903884": {
+    "address": "496 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "stories": 1,
+      "wallFloors": 1,
+      "roofRise": 1.65,
+      "carportUMax": 0.299,
+      "color": "#697272"
+    },
+    "surfaces": [
+      {
+        "name": "Observed main-house front windows and door",
+        "plane": "front",
+        "uMin": 0.299,
+        "uMax": 1,
+        "bottom": 0.95,
+        "top": 3.4,
+        "anchors": [
+          [
+            568,
+            483
+          ],
+          [
+            1400,
+            508
+          ],
+          [
+            1411,
+            806
+          ],
+          [
+            566,
+            803
+          ]
+        ]
+      }
+    ],
+    "review": "Photograph inspected individually. Main-house panel width follows the mapped footprint notch. The left carport, bins and landscaping are excluded from the registered wall.",
+    "limitations": "Portico supports and shadows remain in the photograph. The rectangular body still fills the carport, and the front wall/portico depth difference is not modeled. Roof dimensions and wall heights are estimates. Left carport is open modeled space with an estimated canopy and posts; its support and height dimensions remain approximate.",
+    "spec": {
+      "id": "242551_903884",
+      "pid": "7051",
+      "address": "496 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7051",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/76/88.jpg",
+      "fields": {
+        "Year Built:": "1960",
+        "Style:": "Ranch",
+        "Stories:": "1 Story",
+        "Exterior Wall 1": "Vinyl Siding",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -848.7686577224373,
+        -2732.713497253701
+      ],
+      "width": 11.274914850988052,
+      "depth": 14.44727580502755,
+      "front": [
+        0.9862968190215645,
+        -0.16498055881813234
+      ],
+      "stories": 1,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#697272",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "roofRise": 1.65,
+      "carportUMax": 0.299
+    },
+    "image": "assets/houses/assessor-7051.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7051",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/76/88.jpg",
+    "sourceSha256": "7a228bc9c4659e22a27f8dc56469df6f64eab1a532b54b06174fc4e7d7db226d",
+    "building": "242551_903884"
+  },
+  "242547_903900": {
+    "address": "500 WINTHROP ST",
+    "size": [
+      1600,
+      1200
+    ],
+    "status": "aligned",
+    "modelFlags": {
+      "roof": "gable",
+      "frontGable": true,
+      "stories": 1,
+      "wallFloors": 1,
+      "roofRise": 1.75,
+      "carportUMax": 0.308,
+      "color": "#977d65"
+    },
+    "surfaces": [
+      {
+        "name": "Observed shingled front of main house",
+        "plane": "front",
+        "uMin": 0.308,
+        "uMax": 1,
+        "bottom": 0.95,
+        "top": 3.4,
+        "anchors": [
+          [
+            714,
+            497
+          ],
+          [
+            1358,
+            545
+          ],
+          [
+            1370,
+            794
+          ],
+          [
+            714,
+            832
+          ]
+        ]
+      }
+    ],
+    "review": "Photograph inspected individually. Main-house width is restricted to the mapped L-shaped footprint notch. The open left carport is excluded from the texture.",
+    "limitations": "Generic geometry still fills the open carport and does not reproduce its roof extension. The bow-window depth is estimated. Low shrubs touch the lower-right panel edge; hidden sides and metric heights remain estimated. Left carport is open modeled space with an estimated canopy and posts; its support and height dimensions remain approximate.",
+    "spec": {
+      "id": "242547_903900",
+      "pid": "7053",
+      "address": "500 WINTHROP ST",
+      "street": "WINTHROP ST",
+      "url": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7053",
+      "photo": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/54/08.jpg",
+      "fields": {
+        "Year Built:": "1960",
+        "Style:": "Ranch",
+        "Stories:": "1 Story",
+        "Exterior Wall 1": "Wood Shingle",
+        "Exterior Wall 2": "",
+        "Roof Structure:": "Gable",
+        "Roof Cover": "Asph/F Gls/Cmp"
+      },
+      "center": [
+        -852.69117181462,
+        -2748.225431804415
+      ],
+      "width": 11.577858178437598,
+      "depth": 13.570644723617585,
+      "front": [
+        0.934542454506112,
+        -0.3558516555050598
+      ],
+      "stories": 1,
+      "roof": "gable",
+      "frontGable": true,
+      "color": "#977d65",
+      "trim": "#eeece1",
+      "columns": 3,
+      "roofNote": "Assessor roof category; heights and hidden dimensions estimated.",
+      "wallFloors": 1,
+      "roofRise": 1.75,
+      "carportUMax": 0.308
+    },
+    "image": "assets/houses/assessor-7053.jpg",
+    "source": "https://gis.vgsi.com/winthropma/Parcel.aspx?pid=7053",
+    "sourcePhoto": "https://gis.vgsi.com/photos/WinthropMAPhotos///00/00/54/08.jpg",
+    "sourceSha256": "ed7ef74314edff3e5776166d961ec3845ec0240f9e786f04c1278a409b743ec4",
+    "building": "242547_903900"
+  }
+}

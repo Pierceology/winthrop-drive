@@ -1,0 +1,6525 @@
+{
+  "source": "OpenStreetMap contributors",
+  "date": "2026-09-05",
+  "complete": false,
+  "counts": {
+    "stop": 23,
+    "hydrant": 9,
+    "pole": 565
+  },
+  "assets": [
+    {
+      "id": 61338670,
+      "kind": "stop",
+      "x": 110.66,
+      "z": 5.47,
+      "tags": {
+        "direction": "backward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/61338670"
+    },
+    {
+      "id": 74269456,
+      "kind": "stop",
+      "x": 50.97,
+      "z": -1654.32,
+      "tags": {
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/74269456"
+    },
+    {
+      "id": 74275702,
+      "kind": "stop",
+      "x": 19.03,
+      "z": -2622.99,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/74275702"
+    },
+    {
+      "id": 4053544147,
+      "kind": "stop",
+      "x": 199.99,
+      "z": 83.64,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/4053544147"
+    },
+    {
+      "id": 4053546165,
+      "kind": "stop",
+      "x": 174.75,
+      "z": -60.91,
+      "tags": {
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/4053546165"
+    },
+    {
+      "id": 4053548089,
+      "kind": "stop",
+      "x": 148.48,
+      "z": -1449.44,
+      "tags": {
+        "direction": "backward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/4053548089"
+    },
+    {
+      "id": 4053548090,
+      "kind": "stop",
+      "x": 163.82,
+      "z": -1444.59,
+      "tags": {
+        "direction": "backward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/4053548090"
+    },
+    {
+      "id": 4053548091,
+      "kind": "stop",
+      "x": 152.56,
+      "z": -1462.47,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/4053548091"
+    },
+    {
+      "id": 4053586123,
+      "kind": "stop",
+      "x": 116.58,
+      "z": 26.3,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/4053586123"
+    },
+    {
+      "id": 4167820487,
+      "kind": "stop",
+      "x": -775.97,
+      "z": -2287.03,
+      "tags": {
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/4167820487"
+    },
+    {
+      "id": 4167820488,
+      "kind": "stop",
+      "x": -791.81,
+      "z": -2287.85,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/4167820488"
+    },
+    {
+      "id": 6167419495,
+      "kind": "stop",
+      "x": -314.47,
+      "z": -2886.6,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/6167419495"
+    },
+    {
+      "id": 6167419552,
+      "kind": "hydrant",
+      "x": -208.23,
+      "z": -2991.84,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6167419552"
+    },
+    {
+      "id": 6167419758,
+      "kind": "hydrant",
+      "x": -98.53,
+      "z": -2846.06,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6167419758"
+    },
+    {
+      "id": 6167419761,
+      "kind": "hydrant",
+      "x": -169.95,
+      "z": -2916.93,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6167419761"
+    },
+    {
+      "id": 6168696695,
+      "kind": "hydrant",
+      "x": -427.17,
+      "z": -2773.66,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6168696695"
+    },
+    {
+      "id": 6177472310,
+      "kind": "hydrant",
+      "x": 173.69,
+      "z": -942.7,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6177472310"
+    },
+    {
+      "id": 6177472312,
+      "kind": "stop",
+      "x": 133.1,
+      "z": -1017.61,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/6177472312"
+    },
+    {
+      "id": 6177472313,
+      "kind": "hydrant",
+      "x": 146.12,
+      "z": -1007.37,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6177472313"
+    },
+    {
+      "id": 6177472709,
+      "kind": "stop",
+      "x": 196.37,
+      "z": -850.45,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop",
+        "stop": "minor"
+      },
+      "url": "https://www.openstreetmap.org/node/6177472709"
+    },
+    {
+      "id": 6177472823,
+      "kind": "stop",
+      "x": 147.84,
+      "z": -1003.2,
+      "tags": {
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/6177472823"
+    },
+    {
+      "id": 6178590319,
+      "kind": "hydrant",
+      "x": 367.78,
+      "z": -1362.78,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6178590319"
+    },
+    {
+      "id": 6178590320,
+      "kind": "stop",
+      "x": 370.86,
+      "z": -1359.78,
+      "tags": {
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/6178590320"
+    },
+    {
+      "id": 6178590826,
+      "kind": "hydrant",
+      "x": 250.4,
+      "z": -1256.43,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6178590826"
+    },
+    {
+      "id": 6178590860,
+      "kind": "hydrant",
+      "x": 323.64,
+      "z": -1268.25,
+      "tags": {
+        "emergency": "fire_hydrant",
+        "fire_hydrant:type": "pillar"
+      },
+      "url": "https://www.openstreetmap.org/node/6178590860"
+    },
+    {
+      "id": 6178590862,
+      "kind": "stop",
+      "x": 249.86,
+      "z": -1249.89,
+      "tags": {
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/6178590862"
+    },
+    {
+      "id": 9694146738,
+      "kind": "stop",
+      "x": -1163.18,
+      "z": -2202.52,
+      "tags": {
+        "direction": "backward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/9694146738"
+    },
+    {
+      "id": 10761892598,
+      "kind": "stop",
+      "x": -1175.78,
+      "z": -2472.57,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/10761892598"
+    },
+    {
+      "id": 10761892599,
+      "kind": "stop",
+      "x": -1175.66,
+      "z": -2192.77,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/10761892599"
+    },
+    {
+      "id": 10761892600,
+      "kind": "stop",
+      "x": -1152.87,
+      "z": -2195.15,
+      "tags": {
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/10761892600"
+    },
+    {
+      "id": 10761892601,
+      "kind": "stop",
+      "x": -1163.89,
+      "z": -2184.57,
+      "tags": {
+        "direction": "forward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/10761892601"
+    },
+    {
+      "id": 10761892602,
+      "kind": "stop",
+      "x": -1115.44,
+      "z": -1828.35,
+      "tags": {
+        "direction": "backward",
+        "highway": "stop"
+      },
+      "url": "https://www.openstreetmap.org/node/10761892602"
+    },
+    {
+      "id": 13520377745,
+      "kind": "pole",
+      "x": -659.18,
+      "z": -3491.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377745"
+    },
+    {
+      "id": 13520377746,
+      "kind": "pole",
+      "x": -648.02,
+      "z": -3472.56,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377746"
+    },
+    {
+      "id": 13520377747,
+      "kind": "pole",
+      "x": -620.93,
+      "z": -3431.1,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377747"
+    },
+    {
+      "id": 13520377748,
+      "kind": "pole",
+      "x": -610.81,
+      "z": -3411.31,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377748"
+    },
+    {
+      "id": 13520377749,
+      "kind": "pole",
+      "x": -601.09,
+      "z": -3388.81,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377749"
+    },
+    {
+      "id": 13520377750,
+      "kind": "pole",
+      "x": -597.88,
+      "z": -3359.68,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377750"
+    },
+    {
+      "id": 13520377753,
+      "kind": "pole",
+      "x": -595.08,
+      "z": -3336.15,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377753"
+    },
+    {
+      "id": 13520377754,
+      "kind": "pole",
+      "x": -590.79,
+      "z": -3309.7,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377754"
+    },
+    {
+      "id": 13520377755,
+      "kind": "pole",
+      "x": -580.43,
+      "z": -3281.36,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377755"
+    },
+    {
+      "id": 13520377756,
+      "kind": "pole",
+      "x": -565.46,
+      "z": -3257.88,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377756"
+    },
+    {
+      "id": 13520377757,
+      "kind": "pole",
+      "x": -547.59,
+      "z": -3236.82,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377757"
+    },
+    {
+      "id": 13520377758,
+      "kind": "pole",
+      "x": -527.5,
+      "z": -3214.23,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377758"
+    },
+    {
+      "id": 13520377759,
+      "kind": "pole",
+      "x": -502.7,
+      "z": -3190.96,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377759"
+    },
+    {
+      "id": 13520377760,
+      "kind": "pole",
+      "x": -478.65,
+      "z": -3173.14,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377760"
+    },
+    {
+      "id": 13520377761,
+      "kind": "pole",
+      "x": -452.74,
+      "z": -3155.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377761"
+    },
+    {
+      "id": 13520377762,
+      "kind": "pole",
+      "x": -431.36,
+      "z": -3142.47,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377762"
+    },
+    {
+      "id": 13520377763,
+      "kind": "pole",
+      "x": -410.54,
+      "z": -3129.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377763"
+    },
+    {
+      "id": 13520377764,
+      "kind": "pole",
+      "x": -392.02,
+      "z": -3118.22,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377764"
+    },
+    {
+      "id": 13520377765,
+      "kind": "pole",
+      "x": -372.12,
+      "z": -3103.99,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377765"
+    },
+    {
+      "id": 13520377766,
+      "kind": "pole",
+      "x": -348.27,
+      "z": -3084.41,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377766"
+    },
+    {
+      "id": 13520377767,
+      "kind": "pole",
+      "x": -326.98,
+      "z": -3064.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377767"
+    },
+    {
+      "id": 13520377768,
+      "kind": "pole",
+      "x": -305.25,
+      "z": -3042.56,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377768"
+    },
+    {
+      "id": 13520377769,
+      "kind": "pole",
+      "x": -291.27,
+      "z": -3028.31,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377769"
+    },
+    {
+      "id": 13520377770,
+      "kind": "pole",
+      "x": -461.42,
+      "z": -3189.71,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377770"
+    },
+    {
+      "id": 13520377771,
+      "kind": "pole",
+      "x": -437.09,
+      "z": -3184.3,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377771"
+    },
+    {
+      "id": 13520377772,
+      "kind": "pole",
+      "x": -401.79,
+      "z": -3178.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377772"
+    },
+    {
+      "id": 13520377773,
+      "kind": "pole",
+      "x": -330.14,
+      "z": -3167.15,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377773"
+    },
+    {
+      "id": 13520377774,
+      "kind": "pole",
+      "x": -306.92,
+      "z": -3158.16,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377774"
+    },
+    {
+      "id": 13520377775,
+      "kind": "pole",
+      "x": -288.94,
+      "z": -3141.04,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377775"
+    },
+    {
+      "id": 13520377776,
+      "kind": "pole",
+      "x": -262.78,
+      "z": -3115.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377776"
+    },
+    {
+      "id": 13520377777,
+      "kind": "pole",
+      "x": -237.14,
+      "z": -3096.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377777"
+    },
+    {
+      "id": 13520377778,
+      "kind": "pole",
+      "x": -215.98,
+      "z": -3083.92,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377778"
+    },
+    {
+      "id": 13520377779,
+      "kind": "pole",
+      "x": -189.11,
+      "z": -3080.22,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377779"
+    },
+    {
+      "id": 13520377780,
+      "kind": "pole",
+      "x": -162.06,
+      "z": -3080.11,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377780"
+    },
+    {
+      "id": 13520377781,
+      "kind": "pole",
+      "x": -137.9,
+      "z": -3077.75,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377781"
+    },
+    {
+      "id": 13520377782,
+      "kind": "pole",
+      "x": -120.59,
+      "z": -3060.16,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377782"
+    },
+    {
+      "id": 13520377783,
+      "kind": "pole",
+      "x": -94.69,
+      "z": -3034.06,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377783"
+    },
+    {
+      "id": 13520377784,
+      "kind": "pole",
+      "x": -70.78,
+      "z": -3009.13,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377784"
+    },
+    {
+      "id": 13520377785,
+      "kind": "pole",
+      "x": -21.07,
+      "z": -3074.35,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377785"
+    },
+    {
+      "id": 13520377786,
+      "kind": "pole",
+      "x": -41.01,
+      "z": -3042.59,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377786"
+    },
+    {
+      "id": 13520377787,
+      "kind": "pole",
+      "x": -93.89,
+      "z": -2996.88,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377787"
+    },
+    {
+      "id": 13520377788,
+      "kind": "pole",
+      "x": -109.46,
+      "z": -2988.84,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377788"
+    },
+    {
+      "id": 13520377789,
+      "kind": "pole",
+      "x": -135.62,
+      "z": -2979.98,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377789"
+    },
+    {
+      "id": 13520377790,
+      "kind": "pole",
+      "x": -163.67,
+      "z": -2976.19,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377790"
+    },
+    {
+      "id": 13520377791,
+      "kind": "pole",
+      "x": -195.04,
+      "z": -2980.45,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520377791"
+    },
+    {
+      "id": 13520478861,
+      "kind": "pole",
+      "x": -398.23,
+      "z": -2986.05,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478861"
+    },
+    {
+      "id": 13520478862,
+      "kind": "pole",
+      "x": -371.17,
+      "z": -2975.84,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478862"
+    },
+    {
+      "id": 13520478863,
+      "kind": "pole",
+      "x": -341.14,
+      "z": -2964.97,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478863"
+    },
+    {
+      "id": 13520478864,
+      "kind": "pole",
+      "x": -329.43,
+      "z": -2960.11,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478864"
+    },
+    {
+      "id": 13520478865,
+      "kind": "pole",
+      "x": -312.36,
+      "z": -2954.09,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478865"
+    },
+    {
+      "id": 13520478867,
+      "kind": "pole",
+      "x": -215.87,
+      "z": -2950.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478867"
+    },
+    {
+      "id": 13520478868,
+      "kind": "pole",
+      "x": -194.48,
+      "z": -2929.84,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478868"
+    },
+    {
+      "id": 13520478869,
+      "kind": "pole",
+      "x": -172.38,
+      "z": -2907.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478869"
+    },
+    {
+      "id": 13520478870,
+      "kind": "pole",
+      "x": -147.09,
+      "z": -2882.34,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478870"
+    },
+    {
+      "id": 13520478871,
+      "kind": "pole",
+      "x": -117.94,
+      "z": -2852.92,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478871"
+    },
+    {
+      "id": 13520478872,
+      "kind": "pole",
+      "x": -89.13,
+      "z": -2823.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478872"
+    },
+    {
+      "id": 13520478873,
+      "kind": "pole",
+      "x": -62.85,
+      "z": -2797.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478873"
+    },
+    {
+      "id": 13520478874,
+      "kind": "pole",
+      "x": -48.75,
+      "z": -2783.72,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478874"
+    },
+    {
+      "id": 13520478875,
+      "kind": "pole",
+      "x": -111.34,
+      "z": -2831.33,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478875"
+    },
+    {
+      "id": 13520478876,
+      "kind": "pole",
+      "x": -131.53,
+      "z": -2837.9,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478876"
+    },
+    {
+      "id": 13520478877,
+      "kind": "pole",
+      "x": -160.05,
+      "z": -2847.36,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478877"
+    },
+    {
+      "id": 13520478878,
+      "kind": "pole",
+      "x": -201.38,
+      "z": -2861.18,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478878"
+    },
+    {
+      "id": 13520478879,
+      "kind": "pole",
+      "x": -230.17,
+      "z": -2870.1,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478879"
+    },
+    {
+      "id": 13520478880,
+      "kind": "pole",
+      "x": -259.23,
+      "z": -2879.65,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478880"
+    },
+    {
+      "id": 13520478887,
+      "kind": "pole",
+      "x": -498.2,
+      "z": -2636.79,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478887"
+    },
+    {
+      "id": 13520478888,
+      "kind": "pole",
+      "x": -446.17,
+      "z": -2617.57,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478888"
+    },
+    {
+      "id": 13520478889,
+      "kind": "pole",
+      "x": -416.66,
+      "z": -2607.08,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478889"
+    },
+    {
+      "id": 13520478890,
+      "kind": "pole",
+      "x": -386.96,
+      "z": -2596.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478890"
+    },
+    {
+      "id": 13520478891,
+      "kind": "pole",
+      "x": -356.2,
+      "z": -2584.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478891"
+    },
+    {
+      "id": 13520478892,
+      "kind": "pole",
+      "x": -326.87,
+      "z": -2574.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478892"
+    },
+    {
+      "id": 13520478893,
+      "kind": "pole",
+      "x": -301.38,
+      "z": -2564.77,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478893"
+    },
+    {
+      "id": 13520478894,
+      "kind": "pole",
+      "x": -268.9,
+      "z": -2553.68,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478894"
+    },
+    {
+      "id": 13520478895,
+      "kind": "pole",
+      "x": -473.19,
+      "z": -2627.55,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478895"
+    },
+    {
+      "id": 13520478896,
+      "kind": "pole",
+      "x": -234.79,
+      "z": -2540.55,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478896"
+    },
+    {
+      "id": 13520478897,
+      "kind": "pole",
+      "x": -214.98,
+      "z": -2533.47,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478897"
+    },
+    {
+      "id": 13520478898,
+      "kind": "pole",
+      "x": -192.64,
+      "z": -2525.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478898"
+    },
+    {
+      "id": 13520478899,
+      "kind": "pole",
+      "x": -159.27,
+      "z": -2513.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478899"
+    },
+    {
+      "id": 13520478900,
+      "kind": "pole",
+      "x": -125.86,
+      "z": -2500.85,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520478900"
+    },
+    {
+      "id": 13520527101,
+      "kind": "pole",
+      "x": -145.06,
+      "z": -2482.67,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527101"
+    },
+    {
+      "id": 13520527102,
+      "kind": "pole",
+      "x": -165.61,
+      "z": -2459.65,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527102"
+    },
+    {
+      "id": 13520527103,
+      "kind": "pole",
+      "x": -180.3,
+      "z": -2439.27,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527103"
+    },
+    {
+      "id": 13520527104,
+      "kind": "pole",
+      "x": -200.46,
+      "z": -2404.86,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527104"
+    },
+    {
+      "id": 13520527105,
+      "kind": "pole",
+      "x": -193.52,
+      "z": -2382.12,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527105"
+    },
+    {
+      "id": 13520527106,
+      "kind": "pole",
+      "x": -241.24,
+      "z": -2423.24,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527106"
+    },
+    {
+      "id": 13520527107,
+      "kind": "pole",
+      "x": -218.34,
+      "z": -2402.86,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527107"
+    },
+    {
+      "id": 13520527108,
+      "kind": "pole",
+      "x": -211.27,
+      "z": -2384.92,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527108"
+    },
+    {
+      "id": 13520527109,
+      "kind": "pole",
+      "x": -224.88,
+      "z": -2354.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527109"
+    },
+    {
+      "id": 13520527110,
+      "kind": "pole",
+      "x": -167.55,
+      "z": -2359.36,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527110"
+    },
+    {
+      "id": 13520527111,
+      "kind": "pole",
+      "x": -149.66,
+      "z": -2357.93,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527111"
+    },
+    {
+      "id": 13520527112,
+      "kind": "pole",
+      "x": -131.06,
+      "z": -2370.36,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527112"
+    },
+    {
+      "id": 13520527113,
+      "kind": "pole",
+      "x": -104.12,
+      "z": -2375.04,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527113"
+    },
+    {
+      "id": 13520527114,
+      "kind": "pole",
+      "x": -68.77,
+      "z": -2381.63,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527114"
+    },
+    {
+      "id": 13520527115,
+      "kind": "pole",
+      "x": -443.94,
+      "z": -2691.65,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527115"
+    },
+    {
+      "id": 13520527116,
+      "kind": "pole",
+      "x": -420.53,
+      "z": -2683.11,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527116"
+    },
+    {
+      "id": 13520527117,
+      "kind": "pole",
+      "x": -394.01,
+      "z": -2673.65,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527117"
+    },
+    {
+      "id": 13520527118,
+      "kind": "pole",
+      "x": -363.32,
+      "z": -2662.15,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527118"
+    },
+    {
+      "id": 13520527119,
+      "kind": "pole",
+      "x": -332.39,
+      "z": -2651.21,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527119"
+    },
+    {
+      "id": 13520527120,
+      "kind": "pole",
+      "x": -312.8,
+      "z": -2643.72,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527120"
+    },
+    {
+      "id": 13520527121,
+      "kind": "pole",
+      "x": -272.87,
+      "z": -2638.82,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527121"
+    },
+    {
+      "id": 13520527122,
+      "kind": "pole",
+      "x": -245.81,
+      "z": -2629.0,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527122"
+    },
+    {
+      "id": 13520527123,
+      "kind": "pole",
+      "x": -398.32,
+      "z": -2766.95,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527123"
+    },
+    {
+      "id": 13520527124,
+      "kind": "pole",
+      "x": -365.79,
+      "z": -2756.67,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527124"
+    },
+    {
+      "id": 13520527125,
+      "kind": "pole",
+      "x": -332.31,
+      "z": -2745.93,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527125"
+    },
+    {
+      "id": 13520527126,
+      "kind": "pole",
+      "x": -307.23,
+      "z": -2737.65,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527126"
+    },
+    {
+      "id": 13520527127,
+      "kind": "pole",
+      "x": -270.95,
+      "z": -2725.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527127"
+    },
+    {
+      "id": 13520527128,
+      "kind": "pole",
+      "x": -242.0,
+      "z": -2716.13,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527128"
+    },
+    {
+      "id": 13520527129,
+      "kind": "pole",
+      "x": -208.44,
+      "z": -2704.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527129"
+    },
+    {
+      "id": 13520527130,
+      "kind": "pole",
+      "x": -202.57,
+      "z": -2711.8,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527130"
+    },
+    {
+      "id": 13520527131,
+      "kind": "pole",
+      "x": -177.26,
+      "z": -2694.53,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527131"
+    },
+    {
+      "id": 13520527132,
+      "kind": "pole",
+      "x": -150.45,
+      "z": -2685.86,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527132"
+    },
+    {
+      "id": 13520527133,
+      "kind": "pole",
+      "x": -111.41,
+      "z": -2676.84,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527133"
+    },
+    {
+      "id": 13520527134,
+      "kind": "pole",
+      "x": -72.81,
+      "z": -2668.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527134"
+    },
+    {
+      "id": 13520527135,
+      "kind": "pole",
+      "x": -68.33,
+      "z": -2667.64,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527135"
+    },
+    {
+      "id": 13520527136,
+      "kind": "pole",
+      "x": -39.73,
+      "z": -2665.53,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527136"
+    },
+    {
+      "id": 13520527137,
+      "kind": "pole",
+      "x": -27.97,
+      "z": -2693.96,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527137"
+    },
+    {
+      "id": 13520527138,
+      "kind": "pole",
+      "x": -15.61,
+      "z": -2726.76,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527138"
+    },
+    {
+      "id": 13520527139,
+      "kind": "pole",
+      "x": -4.03,
+      "z": -2757.73,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527139"
+    },
+    {
+      "id": 13520527140,
+      "kind": "pole",
+      "x": 10.08,
+      "z": -2791.55,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527140"
+    },
+    {
+      "id": 13520527141,
+      "kind": "pole",
+      "x": 19.33,
+      "z": -2816.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527141"
+    },
+    {
+      "id": 13520527148,
+      "kind": "pole",
+      "x": -227.32,
+      "z": -2962.44,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527148"
+    },
+    {
+      "id": 13520527157,
+      "kind": "pole",
+      "x": -529.06,
+      "z": -2552.8,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527157"
+    },
+    {
+      "id": 13520527158,
+      "kind": "pole",
+      "x": -505.14,
+      "z": -2543.97,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527158"
+    },
+    {
+      "id": 13520527159,
+      "kind": "pole",
+      "x": -488.28,
+      "z": -2538.46,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527159"
+    },
+    {
+      "id": 13520527160,
+      "kind": "pole",
+      "x": -460.62,
+      "z": -2527.79,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527160"
+    },
+    {
+      "id": 13520527161,
+      "kind": "pole",
+      "x": -430.8,
+      "z": -2517.18,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527161"
+    },
+    {
+      "id": 13520527166,
+      "kind": "pole",
+      "x": -687.17,
+      "z": -2505.13,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527166"
+    },
+    {
+      "id": 13520527167,
+      "kind": "pole",
+      "x": -703.16,
+      "z": -2524.7,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527167"
+    },
+    {
+      "id": 13520527168,
+      "kind": "pole",
+      "x": -721.68,
+      "z": -2546.57,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527168"
+    },
+    {
+      "id": 13520527169,
+      "kind": "pole",
+      "x": -738.8,
+      "z": -2567.65,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527169"
+    },
+    {
+      "id": 13520527170,
+      "kind": "pole",
+      "x": -749.93,
+      "z": -2580.69,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527170"
+    },
+    {
+      "id": 13520527175,
+      "kind": "pole",
+      "x": -794.05,
+      "z": -2445.53,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527175"
+    },
+    {
+      "id": 13520527176,
+      "kind": "pole",
+      "x": -821.34,
+      "z": -2448.94,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527176"
+    },
+    {
+      "id": 13520527177,
+      "kind": "pole",
+      "x": -847.73,
+      "z": -2451.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527177"
+    },
+    {
+      "id": 13520527178,
+      "kind": "pole",
+      "x": -739.78,
+      "z": -2408.32,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527178"
+    },
+    {
+      "id": 13520527179,
+      "kind": "pole",
+      "x": -724.44,
+      "z": -2394.93,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527179"
+    },
+    {
+      "id": 13520527180,
+      "kind": "pole",
+      "x": -705.75,
+      "z": -2377.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13520527180"
+    },
+    {
+      "id": 13533495771,
+      "kind": "pole",
+      "x": -404.94,
+      "z": -2507.53,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495771"
+    },
+    {
+      "id": 13533495772,
+      "kind": "pole",
+      "x": -389.18,
+      "z": -2501.77,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495772"
+    },
+    {
+      "id": 13533495773,
+      "kind": "pole",
+      "x": -374.24,
+      "z": -2496.07,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495773"
+    },
+    {
+      "id": 13533495774,
+      "kind": "pole",
+      "x": -361.43,
+      "z": -2491.52,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495774"
+    },
+    {
+      "id": 13533495775,
+      "kind": "pole",
+      "x": -336.69,
+      "z": -2482.47,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495775"
+    },
+    {
+      "id": 13533495776,
+      "kind": "pole",
+      "x": -311.0,
+      "z": -2472.82,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495776"
+    },
+    {
+      "id": 13533495777,
+      "kind": "pole",
+      "x": -206.14,
+      "z": -2614.49,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495777"
+    },
+    {
+      "id": 13533495778,
+      "kind": "pole",
+      "x": -255.66,
+      "z": -2590.55,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495778"
+    },
+    {
+      "id": 13533495779,
+      "kind": "pole",
+      "x": -281.66,
+      "z": -2518.4,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495779"
+    },
+    {
+      "id": 13533495780,
+      "kind": "pole",
+      "x": -289.37,
+      "z": -2497.5,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495780"
+    },
+    {
+      "id": 13533495781,
+      "kind": "pole",
+      "x": -317.08,
+      "z": -2438.23,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495781"
+    },
+    {
+      "id": 13533495782,
+      "kind": "pole",
+      "x": -330.49,
+      "z": -2409.88,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495782"
+    },
+    {
+      "id": 13533495783,
+      "kind": "pole",
+      "x": -346.51,
+      "z": -2377.71,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495783"
+    },
+    {
+      "id": 13533495784,
+      "kind": "pole",
+      "x": -363.45,
+      "z": -2344.21,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495784"
+    },
+    {
+      "id": 13533495785,
+      "kind": "pole",
+      "x": -385.59,
+      "z": -2319.71,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495785"
+    },
+    {
+      "id": 13533495786,
+      "kind": "pole",
+      "x": -408.77,
+      "z": -2293.64,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495786"
+    },
+    {
+      "id": 13533495787,
+      "kind": "pole",
+      "x": -432.11,
+      "z": -2268.4,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495787"
+    },
+    {
+      "id": 13533495788,
+      "kind": "pole",
+      "x": -458.89,
+      "z": -2240.21,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495788"
+    },
+    {
+      "id": 13533495789,
+      "kind": "pole",
+      "x": -481.71,
+      "z": -2214.09,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495789"
+    },
+    {
+      "id": 13533495790,
+      "kind": "pole",
+      "x": -508.02,
+      "z": -2185.77,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495790"
+    },
+    {
+      "id": 13533495791,
+      "kind": "pole",
+      "x": -529.82,
+      "z": -2163.1,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495791"
+    },
+    {
+      "id": 13533495792,
+      "kind": "pole",
+      "x": -560.93,
+      "z": -2164.78,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495792"
+    },
+    {
+      "id": 13533495793,
+      "kind": "pole",
+      "x": -585.53,
+      "z": -2164.15,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495793"
+    },
+    {
+      "id": 13533495794,
+      "kind": "pole",
+      "x": -617.39,
+      "z": -2163.75,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495794"
+    },
+    {
+      "id": 13533495795,
+      "kind": "pole",
+      "x": -648.23,
+      "z": -2163.43,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495795"
+    },
+    {
+      "id": 13533495796,
+      "kind": "pole",
+      "x": -677.62,
+      "z": -2163.32,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495796"
+    },
+    {
+      "id": 13533495797,
+      "kind": "pole",
+      "x": -709.5,
+      "z": -2162.47,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495797"
+    },
+    {
+      "id": 13533495798,
+      "kind": "pole",
+      "x": -746.66,
+      "z": -2161.77,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495798"
+    },
+    {
+      "id": 13533495799,
+      "kind": "pole",
+      "x": -769.79,
+      "z": -2161.22,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495799"
+    },
+    {
+      "id": 13533495800,
+      "kind": "pole",
+      "x": -790.09,
+      "z": -2159.91,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533495800"
+    },
+    {
+      "id": 13533523951,
+      "kind": "pole",
+      "x": -837.35,
+      "z": -2043.49,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523951"
+    },
+    {
+      "id": 13533523952,
+      "kind": "pole",
+      "x": -799.19,
+      "z": -2041.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523952"
+    },
+    {
+      "id": 13533523953,
+      "kind": "pole",
+      "x": -769.62,
+      "z": -2039.43,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523953"
+    },
+    {
+      "id": 13533523954,
+      "kind": "pole",
+      "x": -744.28,
+      "z": -2037.78,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523954"
+    },
+    {
+      "id": 13533523955,
+      "kind": "pole",
+      "x": -722.01,
+      "z": -2035.84,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523955"
+    },
+    {
+      "id": 13533523956,
+      "kind": "pole",
+      "x": -707.23,
+      "z": -2013.42,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523956"
+    },
+    {
+      "id": 13533523957,
+      "kind": "pole",
+      "x": -713.96,
+      "z": -1971.93,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523957"
+    },
+    {
+      "id": 13533523958,
+      "kind": "pole",
+      "x": -705.72,
+      "z": -2049.23,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523958"
+    },
+    {
+      "id": 13533523959,
+      "kind": "pole",
+      "x": -703.65,
+      "z": -2077.4,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523959"
+    },
+    {
+      "id": 13533523960,
+      "kind": "pole",
+      "x": -701.68,
+      "z": -2099.1,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523960"
+    },
+    {
+      "id": 13533523961,
+      "kind": "pole",
+      "x": -701.08,
+      "z": -2129.51,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533523961"
+    },
+    {
+      "id": 13533524201,
+      "kind": "pole",
+      "x": -803.51,
+      "z": -2160.49,
+      "tags": {
+        "line_management": "transition",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524201"
+    },
+    {
+      "id": 13533524202,
+      "kind": "pole",
+      "x": -697.39,
+      "z": -2171.97,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524202"
+    },
+    {
+      "id": 13533524203,
+      "kind": "pole",
+      "x": -706.39,
+      "z": -2191.08,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524203"
+    },
+    {
+      "id": 13533524204,
+      "kind": "pole",
+      "x": -281.65,
+      "z": -2458.0,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524204"
+    },
+    {
+      "id": 13533524205,
+      "kind": "pole",
+      "x": -262.79,
+      "z": -2441.62,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524205"
+    },
+    {
+      "id": 13533524206,
+      "kind": "pole",
+      "x": -705.02,
+      "z": -2210.34,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524206"
+    },
+    {
+      "id": 13533524207,
+      "kind": "pole",
+      "x": -703.03,
+      "z": -2245.57,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524207"
+    },
+    {
+      "id": 13533524208,
+      "kind": "pole",
+      "x": -700.09,
+      "z": -2285.57,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524208"
+    },
+    {
+      "id": 13533524209,
+      "kind": "pole",
+      "x": -697.69,
+      "z": -2313.24,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524209"
+    },
+    {
+      "id": 13533524210,
+      "kind": "pole",
+      "x": -696.53,
+      "z": -2338.86,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524210"
+    },
+    {
+      "id": 13533524211,
+      "kind": "pole",
+      "x": -697.62,
+      "z": -2360.65,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524211"
+    },
+    {
+      "id": 13533524212,
+      "kind": "pole",
+      "x": -48.87,
+      "z": -2385.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524212"
+    },
+    {
+      "id": 13533524213,
+      "kind": "pole",
+      "x": -16.15,
+      "z": -2391.04,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524213"
+    },
+    {
+      "id": 13533524214,
+      "kind": "pole",
+      "x": -146.15,
+      "z": -2329.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524214"
+    },
+    {
+      "id": 13533524215,
+      "kind": "pole",
+      "x": -143.13,
+      "z": -2313.16,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524215"
+    },
+    {
+      "id": 13533524216,
+      "kind": "pole",
+      "x": -143.95,
+      "z": -2289.1,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524216"
+    },
+    {
+      "id": 13533524217,
+      "kind": "pole",
+      "x": -146.71,
+      "z": -2257.34,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524217"
+    },
+    {
+      "id": 13533524218,
+      "kind": "pole",
+      "x": -149.69,
+      "z": -2215.71,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524218"
+    },
+    {
+      "id": 13533524219,
+      "kind": "pole",
+      "x": -151.39,
+      "z": -2196.35,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524219"
+    },
+    {
+      "id": 13533524220,
+      "kind": "pole",
+      "x": -153.2,
+      "z": -2171.99,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524220"
+    },
+    {
+      "id": 13533524221,
+      "kind": "pole",
+      "x": -154.86,
+      "z": -2145.09,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524221"
+    },
+    {
+      "id": 13533524222,
+      "kind": "pole",
+      "x": -153.46,
+      "z": -2110.81,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524222"
+    },
+    {
+      "id": 13533524223,
+      "kind": "pole",
+      "x": -148.28,
+      "z": -2074.47,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524223"
+    },
+    {
+      "id": 13533524224,
+      "kind": "pole",
+      "x": -141.54,
+      "z": -2037.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524224"
+    },
+    {
+      "id": 13533524225,
+      "kind": "pole",
+      "x": -131.83,
+      "z": -2005.41,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524225"
+    },
+    {
+      "id": 13533524226,
+      "kind": "pole",
+      "x": -121.51,
+      "z": -1977.63,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524226"
+    },
+    {
+      "id": 13533524227,
+      "kind": "pole",
+      "x": -111.54,
+      "z": -1940.64,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524227"
+    },
+    {
+      "id": 13533524228,
+      "kind": "pole",
+      "x": -98.49,
+      "z": -1911.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524228"
+    },
+    {
+      "id": 13533524229,
+      "kind": "pole",
+      "x": -83.24,
+      "z": -1878.58,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524229"
+    },
+    {
+      "id": 13533524230,
+      "kind": "pole",
+      "x": -67.78,
+      "z": -1847.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524230"
+    },
+    {
+      "id": 13533524231,
+      "kind": "pole",
+      "x": -49.72,
+      "z": -1814.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524231"
+    },
+    {
+      "id": 13533524232,
+      "kind": "pole",
+      "x": -34.31,
+      "z": -1787.13,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524232"
+    },
+    {
+      "id": 13533524233,
+      "kind": "pole",
+      "x": -10.67,
+      "z": -1748.59,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524233"
+    },
+    {
+      "id": 13533524234,
+      "kind": "pole",
+      "x": 5.44,
+      "z": -1726.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524234"
+    },
+    {
+      "id": 13533524235,
+      "kind": "pole",
+      "x": 24.49,
+      "z": -1700.56,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524235"
+    },
+    {
+      "id": 13533524236,
+      "kind": "pole",
+      "x": 44.83,
+      "z": -1673.19,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524236"
+    },
+    {
+      "id": 13533524237,
+      "kind": "pole",
+      "x": 57.97,
+      "z": -1651.69,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524237"
+    },
+    {
+      "id": 13533524238,
+      "kind": "pole",
+      "x": 74.17,
+      "z": -1619.76,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524238"
+    },
+    {
+      "id": 13533524239,
+      "kind": "pole",
+      "x": 89.7,
+      "z": -1589.9,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524239"
+    },
+    {
+      "id": 13533524240,
+      "kind": "pole",
+      "x": 109.69,
+      "z": -1552.35,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524240"
+    },
+    {
+      "id": 13533524241,
+      "kind": "pole",
+      "x": 124.78,
+      "z": -1523.19,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524241"
+    },
+    {
+      "id": 13533524242,
+      "kind": "pole",
+      "x": 145.37,
+      "z": -1485.82,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524242"
+    },
+    {
+      "id": 13533524243,
+      "kind": "pole",
+      "x": 162.01,
+      "z": -1458.44,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524243"
+    },
+    {
+      "id": 13533524244,
+      "kind": "pole",
+      "x": 177.94,
+      "z": -1434.15,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524244"
+    },
+    {
+      "id": 13533524245,
+      "kind": "pole",
+      "x": 196.27,
+      "z": -1404.85,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524245"
+    },
+    {
+      "id": 13533524246,
+      "kind": "pole",
+      "x": 213.62,
+      "z": -1379.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524246"
+    },
+    {
+      "id": 13533524247,
+      "kind": "pole",
+      "x": 136.89,
+      "z": -1452.4,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524247"
+    },
+    {
+      "id": 13533524248,
+      "kind": "pole",
+      "x": 123.03,
+      "z": -1447.29,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524248"
+    },
+    {
+      "id": 13533524249,
+      "kind": "pole",
+      "x": 99.43,
+      "z": -1439.47,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524249"
+    },
+    {
+      "id": 13533524250,
+      "kind": "pole",
+      "x": 68.55,
+      "z": -1429.98,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524250"
+    },
+    {
+      "id": 13533524251,
+      "kind": "pole",
+      "x": 38.09,
+      "z": -1421.06,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524251"
+    },
+    {
+      "id": 13533524252,
+      "kind": "pole",
+      "x": 11.32,
+      "z": -1412.33,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524252"
+    },
+    {
+      "id": 13533524253,
+      "kind": "pole",
+      "x": -18.36,
+      "z": -1402.98,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524253"
+    },
+    {
+      "id": 13533524254,
+      "kind": "pole",
+      "x": -42.03,
+      "z": -1395.55,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524254"
+    },
+    {
+      "id": 13533524255,
+      "kind": "pole",
+      "x": -78.11,
+      "z": -1384.63,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524255"
+    },
+    {
+      "id": 13533524256,
+      "kind": "pole",
+      "x": -104.85,
+      "z": -1367.06,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524256"
+    },
+    {
+      "id": 13533524257,
+      "kind": "pole",
+      "x": -144.42,
+      "z": -1365.39,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524257"
+    },
+    {
+      "id": 13533524258,
+      "kind": "pole",
+      "x": -181.3,
+      "z": -1367.32,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524258"
+    },
+    {
+      "id": 13533524259,
+      "kind": "pole",
+      "x": 108.11,
+      "z": -1471.48,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524259"
+    },
+    {
+      "id": 13533524260,
+      "kind": "pole",
+      "x": 92.86,
+      "z": -1497.54,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524260"
+    },
+    {
+      "id": 13533524261,
+      "kind": "pole",
+      "x": 77.47,
+      "z": -1524.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524261"
+    },
+    {
+      "id": 13533524262,
+      "kind": "pole",
+      "x": 62.88,
+      "z": -1550.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524262"
+    },
+    {
+      "id": 13533524263,
+      "kind": "pole",
+      "x": 47.98,
+      "z": -1576.79,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524263"
+    },
+    {
+      "id": 13533524264,
+      "kind": "pole",
+      "x": 33.07,
+      "z": -1602.7,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524264"
+    },
+    {
+      "id": 13533524265,
+      "kind": "pole",
+      "x": 17.13,
+      "z": -1630.33,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524265"
+    },
+    {
+      "id": 13533524266,
+      "kind": "pole",
+      "x": 0.19,
+      "z": -1659.49,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524266"
+    },
+    {
+      "id": 13533524267,
+      "kind": "pole",
+      "x": -16.77,
+      "z": -1689.37,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524267"
+    },
+    {
+      "id": 13533524268,
+      "kind": "pole",
+      "x": -34.05,
+      "z": -1719.52,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524268"
+    },
+    {
+      "id": 13533524269,
+      "kind": "pole",
+      "x": -49.53,
+      "z": -1746.73,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524269"
+    },
+    {
+      "id": 13533524270,
+      "kind": "pole",
+      "x": -67.53,
+      "z": -1778.22,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524270"
+    },
+    {
+      "id": 13533524271,
+      "kind": "pole",
+      "x": -84.78,
+      "z": -1809.22,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524271"
+    },
+    {
+      "id": 13533524272,
+      "kind": "pole",
+      "x": -97.26,
+      "z": -1830.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524272"
+    },
+    {
+      "id": 13533524273,
+      "kind": "pole",
+      "x": -111.92,
+      "z": -1857.36,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524273"
+    },
+    {
+      "id": 13533524274,
+      "kind": "pole",
+      "x": -125.75,
+      "z": -1887.3,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524274"
+    },
+    {
+      "id": 13533524275,
+      "kind": "pole",
+      "x": -137.27,
+      "z": -1913.58,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524275"
+    },
+    {
+      "id": 13533524276,
+      "kind": "pole",
+      "x": -151.11,
+      "z": -1946.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524276"
+    },
+    {
+      "id": 13533524277,
+      "kind": "pole",
+      "x": -162.83,
+      "z": -1974.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524277"
+    },
+    {
+      "id": 13533524278,
+      "kind": "pole",
+      "x": -174.38,
+      "z": -2003.05,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524278"
+    },
+    {
+      "id": 13533524279,
+      "kind": "pole",
+      "x": -186.49,
+      "z": -2031.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524279"
+    },
+    {
+      "id": 13533524280,
+      "kind": "pole",
+      "x": -197.75,
+      "z": -2059.67,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524280"
+    },
+    {
+      "id": 13533524281,
+      "kind": "pole",
+      "x": -209.73,
+      "z": -2087.9,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524281"
+    },
+    {
+      "id": 13533524282,
+      "kind": "pole",
+      "x": -220.14,
+      "z": -2114.51,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524282"
+    },
+    {
+      "id": 13533524283,
+      "kind": "pole",
+      "x": -229.02,
+      "z": -2140.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524283"
+    },
+    {
+      "id": 13533524284,
+      "kind": "pole",
+      "x": -236.26,
+      "z": -2169.06,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524284"
+    },
+    {
+      "id": 13533524285,
+      "kind": "pole",
+      "x": -239.64,
+      "z": -2197.62,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524285"
+    },
+    {
+      "id": 13533524286,
+      "kind": "pole",
+      "x": -241.83,
+      "z": -2214.93,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524286"
+    },
+    {
+      "id": 13533524287,
+      "kind": "pole",
+      "x": -242.89,
+      "z": -2231.92,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524287"
+    },
+    {
+      "id": 13533524288,
+      "kind": "pole",
+      "x": -243.47,
+      "z": -2260.82,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524288"
+    },
+    {
+      "id": 13533524289,
+      "kind": "pole",
+      "x": -241.73,
+      "z": -2289.66,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524289"
+    },
+    {
+      "id": 13533524290,
+      "kind": "pole",
+      "x": -235.19,
+      "z": -2322.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13533524290"
+    },
+    {
+      "id": 13535392967,
+      "kind": "pole",
+      "x": -813.08,
+      "z": -2284.29,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535392967"
+    },
+    {
+      "id": 13535392968,
+      "kind": "pole",
+      "x": -841.28,
+      "z": -2284.37,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535392968"
+    },
+    {
+      "id": 13535392969,
+      "kind": "pole",
+      "x": -880.31,
+      "z": -2284.54,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535392969"
+    },
+    {
+      "id": 13535392970,
+      "kind": "pole",
+      "x": -920.17,
+      "z": -2284.85,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535392970"
+    },
+    {
+      "id": 13535392971,
+      "kind": "pole",
+      "x": -957.74,
+      "z": -2284.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535392971"
+    },
+    {
+      "id": 13535392972,
+      "kind": "pole",
+      "x": -992.45,
+      "z": -2285.38,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535392972"
+    },
+    {
+      "id": 13535392973,
+      "kind": "pole",
+      "x": -1035.16,
+      "z": -2285.68,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535392973"
+    },
+    {
+      "id": 13535393314,
+      "kind": "pole",
+      "x": -728.92,
+      "z": -1946.99,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393314"
+    },
+    {
+      "id": 13535393315,
+      "kind": "pole",
+      "x": -734.41,
+      "z": -1927.79,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393315"
+    },
+    {
+      "id": 13535393316,
+      "kind": "pole",
+      "x": -740.45,
+      "z": -1892.95,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393316"
+    },
+    {
+      "id": 13535393317,
+      "kind": "pole",
+      "x": -720.78,
+      "z": -1872.7,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393317"
+    },
+    {
+      "id": 13535393318,
+      "kind": "pole",
+      "x": -698.16,
+      "z": -1817.35,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393318"
+    },
+    {
+      "id": 13535393319,
+      "kind": "pole",
+      "x": -693.08,
+      "z": -1784.33,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393319"
+    },
+    {
+      "id": 13535393320,
+      "kind": "pole",
+      "x": -679.43,
+      "z": -1754.71,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393320"
+    },
+    {
+      "id": 13535393321,
+      "kind": "pole",
+      "x": -666.02,
+      "z": -1724.37,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393321"
+    },
+    {
+      "id": 13535393322,
+      "kind": "pole",
+      "x": -691.95,
+      "z": -1709.6,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393322"
+    },
+    {
+      "id": 13535393323,
+      "kind": "pole",
+      "x": -716.13,
+      "z": -1696.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393323"
+    },
+    {
+      "id": 13535393324,
+      "kind": "pole",
+      "x": -736.49,
+      "z": -1684.53,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393324"
+    },
+    {
+      "id": 13535393325,
+      "kind": "pole",
+      "x": -752.2,
+      "z": -1675.46,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393325"
+    },
+    {
+      "id": 13535393326,
+      "kind": "pole",
+      "x": -781.27,
+      "z": -1657.14,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393326"
+    },
+    {
+      "id": 13535393327,
+      "kind": "pole",
+      "x": -809.09,
+      "z": -1648.1,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393327"
+    },
+    {
+      "id": 13535393328,
+      "kind": "pole",
+      "x": -832.47,
+      "z": -1632.21,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393328"
+    },
+    {
+      "id": 13535393329,
+      "kind": "pole",
+      "x": -856.59,
+      "z": -1616.02,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393329"
+    },
+    {
+      "id": 13535393330,
+      "kind": "pole",
+      "x": -879.73,
+      "z": -1599.74,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393330"
+    },
+    {
+      "id": 13535393331,
+      "kind": "pole",
+      "x": -909.96,
+      "z": -1579.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393331"
+    },
+    {
+      "id": 13535393332,
+      "kind": "pole",
+      "x": -925.42,
+      "z": -1551.19,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393332"
+    },
+    {
+      "id": 13535393333,
+      "kind": "pole",
+      "x": -929.73,
+      "z": -1527.93,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393333"
+    },
+    {
+      "id": 13535393334,
+      "kind": "pole",
+      "x": -767.83,
+      "z": -1633.23,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393334"
+    },
+    {
+      "id": 13535393335,
+      "kind": "pole",
+      "x": -795.13,
+      "z": -1682.42,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393335"
+    },
+    {
+      "id": 13535393336,
+      "kind": "pole",
+      "x": -811.59,
+      "z": -1712.41,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393336"
+    },
+    {
+      "id": 13535393337,
+      "kind": "pole",
+      "x": -829.6,
+      "z": -1744.67,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393337"
+    },
+    {
+      "id": 13535393338,
+      "kind": "pole",
+      "x": -845.55,
+      "z": -1772.36,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393338"
+    },
+    {
+      "id": 13535393339,
+      "kind": "pole",
+      "x": -848.72,
+      "z": -1778.24,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393339"
+    },
+    {
+      "id": 13535393349,
+      "kind": "pole",
+      "x": -1000.76,
+      "z": -1884.49,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393349"
+    },
+    {
+      "id": 13535393350,
+      "kind": "pole",
+      "x": -1029.36,
+      "z": -1871.57,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393350"
+    },
+    {
+      "id": 13535393351,
+      "kind": "pole",
+      "x": -1053.92,
+      "z": -1860.14,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393351"
+    },
+    {
+      "id": 13535393352,
+      "kind": "pole",
+      "x": -1072.93,
+      "z": -1851.21,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393352"
+    },
+    {
+      "id": 13535393353,
+      "kind": "pole",
+      "x": -1094.02,
+      "z": -1841.44,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393353"
+    },
+    {
+      "id": 13535393354,
+      "kind": "pole",
+      "x": -1123.09,
+      "z": -1827.41,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393354"
+    },
+    {
+      "id": 13535393355,
+      "kind": "pole",
+      "x": -1157.84,
+      "z": -1811.69,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393355"
+    },
+    {
+      "id": 13535393356,
+      "kind": "pole",
+      "x": -1175.33,
+      "z": -1803.78,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393356"
+    },
+    {
+      "id": 13535393357,
+      "kind": "pole",
+      "x": -1212.16,
+      "z": -1786.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393357"
+    },
+    {
+      "id": 13535393358,
+      "kind": "pole",
+      "x": -1236.1,
+      "z": -1775.66,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393358"
+    },
+    {
+      "id": 13535393359,
+      "kind": "pole",
+      "x": -1258.79,
+      "z": -1764.99,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393359"
+    },
+    {
+      "id": 13535393360,
+      "kind": "pole",
+      "x": -1278.97,
+      "z": -1755.17,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393360"
+    },
+    {
+      "id": 13535393361,
+      "kind": "pole",
+      "x": -1009.11,
+      "z": -2012.71,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393361"
+    },
+    {
+      "id": 13535393362,
+      "kind": "pole",
+      "x": -1024.26,
+      "z": -2033.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393362"
+    },
+    {
+      "id": 13535393363,
+      "kind": "pole",
+      "x": -1041.19,
+      "z": -2055.13,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393363"
+    },
+    {
+      "id": 13535393364,
+      "kind": "pole",
+      "x": -1049.71,
+      "z": -2077.82,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393364"
+    },
+    {
+      "id": 13535393365,
+      "kind": "pole",
+      "x": -1051.37,
+      "z": -2101.87,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393365"
+    },
+    {
+      "id": 13535393366,
+      "kind": "pole",
+      "x": -1052.95,
+      "z": -2131.39,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393366"
+    },
+    {
+      "id": 13535393367,
+      "kind": "pole",
+      "x": -1054.91,
+      "z": -2166.41,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393367"
+    },
+    {
+      "id": 13535393368,
+      "kind": "pole",
+      "x": -1055.91,
+      "z": -2185.16,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393368"
+    },
+    {
+      "id": 13535393369,
+      "kind": "pole",
+      "x": -1057.1,
+      "z": -2198.7,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393369"
+    },
+    {
+      "id": 13535393370,
+      "kind": "pole",
+      "x": -1059.4,
+      "z": -2227.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393370"
+    },
+    {
+      "id": 13535393371,
+      "kind": "pole",
+      "x": -1084.88,
+      "z": -2197.66,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393371"
+    },
+    {
+      "id": 13535393372,
+      "kind": "pole",
+      "x": -1027.24,
+      "z": -2203.71,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393372"
+    },
+    {
+      "id": 13535393373,
+      "kind": "pole",
+      "x": -999.84,
+      "z": -2206.54,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393373"
+    },
+    {
+      "id": 13535393374,
+      "kind": "pole",
+      "x": -1062.22,
+      "z": -2256.77,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393374"
+    },
+    {
+      "id": 13535393375,
+      "kind": "pole",
+      "x": -1066.22,
+      "z": -2296.26,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393375"
+    },
+    {
+      "id": 13535393376,
+      "kind": "pole",
+      "x": -1067.87,
+      "z": -2316.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393376"
+    },
+    {
+      "id": 13535393377,
+      "kind": "pole",
+      "x": -1073.58,
+      "z": -2373.64,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393377"
+    },
+    {
+      "id": 13535393378,
+      "kind": "pole",
+      "x": -1077.1,
+      "z": -2404.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393378"
+    },
+    {
+      "id": 13535393379,
+      "kind": "pole",
+      "x": -1080.15,
+      "z": -2438.68,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393379"
+    },
+    {
+      "id": 13535393380,
+      "kind": "pole",
+      "x": -1083.91,
+      "z": -2461.25,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393380"
+    },
+    {
+      "id": 13535393381,
+      "kind": "pole",
+      "x": -1097.17,
+      "z": -2479.81,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393381"
+    },
+    {
+      "id": 13535393382,
+      "kind": "pole",
+      "x": -1071.48,
+      "z": -2477.05,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393382"
+    },
+    {
+      "id": 13535393383,
+      "kind": "pole",
+      "x": -1136.29,
+      "z": -2484.22,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393383"
+    },
+    {
+      "id": 13535393384,
+      "kind": "pole",
+      "x": -1169.29,
+      "z": -2488.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393384"
+    },
+    {
+      "id": 13535393385,
+      "kind": "pole",
+      "x": -1033.57,
+      "z": -2472.76,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393385"
+    },
+    {
+      "id": 13535393386,
+      "kind": "pole",
+      "x": -1006.61,
+      "z": -2470.07,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393386"
+    },
+    {
+      "id": 13535393387,
+      "kind": "pole",
+      "x": -973.08,
+      "z": -2466.13,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393387"
+    },
+    {
+      "id": 13535393388,
+      "kind": "pole",
+      "x": -944.07,
+      "z": -2462.71,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393388"
+    },
+    {
+      "id": 13535393389,
+      "kind": "pole",
+      "x": -916.9,
+      "z": -2459.48,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393389"
+    },
+    {
+      "id": 13535393390,
+      "kind": "pole",
+      "x": -901.58,
+      "z": -2457.75,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393390"
+    },
+    {
+      "id": 13535393391,
+      "kind": "pole",
+      "x": -879.86,
+      "z": -2455.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535393391"
+    },
+    {
+      "id": 13535429978,
+      "kind": "pole",
+      "x": 228.08,
+      "z": -1352.43,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429978"
+    },
+    {
+      "id": 13535429979,
+      "kind": "pole",
+      "x": 239.79,
+      "z": -1315.27,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429979"
+    },
+    {
+      "id": 13535429980,
+      "kind": "pole",
+      "x": 236.31,
+      "z": -1288.53,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429980"
+    },
+    {
+      "id": 13535429981,
+      "kind": "pole",
+      "x": 228.79,
+      "z": -1253.66,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429981"
+    },
+    {
+      "id": 13535429982,
+      "kind": "pole",
+      "x": 219.49,
+      "z": -1233.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429982"
+    },
+    {
+      "id": 13535429983,
+      "kind": "pole",
+      "x": 204.41,
+      "z": -1204.35,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429983"
+    },
+    {
+      "id": 13535429984,
+      "kind": "pole",
+      "x": 189.89,
+      "z": -1176.46,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429984"
+    },
+    {
+      "id": 13535429985,
+      "kind": "pole",
+      "x": 175.18,
+      "z": -1147.85,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429985"
+    },
+    {
+      "id": 13535429986,
+      "kind": "pole",
+      "x": 162.84,
+      "z": -1123.8,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429986"
+    },
+    {
+      "id": 13535429987,
+      "kind": "pole",
+      "x": 148.41,
+      "z": -1092.62,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429987"
+    },
+    {
+      "id": 13535429988,
+      "kind": "pole",
+      "x": 140.55,
+      "z": -1073.24,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429988"
+    },
+    {
+      "id": 13535429989,
+      "kind": "pole",
+      "x": 125.91,
+      "z": -1040.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429989"
+    },
+    {
+      "id": 13535429990,
+      "kind": "pole",
+      "x": 115.86,
+      "z": -1004.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429990"
+    },
+    {
+      "id": 13535429991,
+      "kind": "pole",
+      "x": 113.7,
+      "z": -964.72,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429991"
+    },
+    {
+      "id": 13535429992,
+      "kind": "pole",
+      "x": 121.85,
+      "z": -934.42,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429992"
+    },
+    {
+      "id": 13535429993,
+      "kind": "pole",
+      "x": 140.98,
+      "z": -912.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429993"
+    },
+    {
+      "id": 13535429994,
+      "kind": "pole",
+      "x": 163.82,
+      "z": -888.13,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429994"
+    },
+    {
+      "id": 13535429995,
+      "kind": "pole",
+      "x": 192.45,
+      "z": -858.28,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429995"
+    },
+    {
+      "id": 13535429996,
+      "kind": "pole",
+      "x": 222.19,
+      "z": -831.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429996"
+    },
+    {
+      "id": 13535429997,
+      "kind": "pole",
+      "x": 253.82,
+      "z": -810.43,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429997"
+    },
+    {
+      "id": 13535429998,
+      "kind": "pole",
+      "x": 279.98,
+      "z": -792.62,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429998"
+    },
+    {
+      "id": 13535429999,
+      "kind": "pole",
+      "x": 303.16,
+      "z": -777.76,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535429999"
+    },
+    {
+      "id": 13535430000,
+      "kind": "pole",
+      "x": 321.83,
+      "z": -751.84,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535430000"
+    },
+    {
+      "id": 13535475001,
+      "kind": "pole",
+      "x": 335.64,
+      "z": -722.55,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475001"
+    },
+    {
+      "id": 13535475002,
+      "kind": "pole",
+      "x": 338.13,
+      "z": -708.1,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475002"
+    },
+    {
+      "id": 13535475003,
+      "kind": "pole",
+      "x": 328.32,
+      "z": -674.9,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475003"
+    },
+    {
+      "id": 13535475004,
+      "kind": "pole",
+      "x": 318.93,
+      "z": -651.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475004"
+    },
+    {
+      "id": 13535475005,
+      "kind": "pole",
+      "x": 309.4,
+      "z": -624.31,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475005"
+    },
+    {
+      "id": 13535475006,
+      "kind": "pole",
+      "x": 300.73,
+      "z": -601.42,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475006"
+    },
+    {
+      "id": 13535475007,
+      "kind": "pole",
+      "x": 292.85,
+      "z": -580.21,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475007"
+    },
+    {
+      "id": 13535475008,
+      "kind": "pole",
+      "x": 275.96,
+      "z": -535.71,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475008"
+    },
+    {
+      "id": 13535475009,
+      "kind": "pole",
+      "x": 267.77,
+      "z": -512.17,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475009"
+    },
+    {
+      "id": 13535475010,
+      "kind": "pole",
+      "x": 259.19,
+      "z": -489.05,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475010"
+    },
+    {
+      "id": 13535475011,
+      "kind": "pole",
+      "x": 250.91,
+      "z": -465.51,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475011"
+    },
+    {
+      "id": 13535475012,
+      "kind": "pole",
+      "x": 242.17,
+      "z": -441.42,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475012"
+    },
+    {
+      "id": 13535475013,
+      "kind": "pole",
+      "x": 237.41,
+      "z": -419.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475013"
+    },
+    {
+      "id": 13535475014,
+      "kind": "pole",
+      "x": 232.99,
+      "z": -396.88,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475014"
+    },
+    {
+      "id": 13535475015,
+      "kind": "pole",
+      "x": 228.49,
+      "z": -372.34,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475015"
+    },
+    {
+      "id": 13535475016,
+      "kind": "pole",
+      "x": 223.3,
+      "z": -343.23,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475016"
+    },
+    {
+      "id": 13535475017,
+      "kind": "pole",
+      "x": 220.06,
+      "z": -322.3,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475017"
+    },
+    {
+      "id": 13535475018,
+      "kind": "pole",
+      "x": 215.63,
+      "z": -301.34,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475018"
+    },
+    {
+      "id": 13535475019,
+      "kind": "pole",
+      "x": 212.22,
+      "z": -280.47,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475019"
+    },
+    {
+      "id": 13535475020,
+      "kind": "pole",
+      "x": 207.25,
+      "z": -255.4,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475020"
+    },
+    {
+      "id": 13535475021,
+      "kind": "pole",
+      "x": 202.75,
+      "z": -230.72,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475021"
+    },
+    {
+      "id": 13535475022,
+      "kind": "pole",
+      "x": 198.48,
+      "z": -206.65,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475022"
+    },
+    {
+      "id": 13535475023,
+      "kind": "pole",
+      "x": 194.47,
+      "z": -183.31,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475023"
+    },
+    {
+      "id": 13535475024,
+      "kind": "pole",
+      "x": 190.22,
+      "z": -155.82,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475024"
+    },
+    {
+      "id": 13535475025,
+      "kind": "pole",
+      "x": 185.69,
+      "z": -135.04,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475025"
+    },
+    {
+      "id": 13535475026,
+      "kind": "pole",
+      "x": 176.53,
+      "z": -111.19,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475026"
+    },
+    {
+      "id": 13535475027,
+      "kind": "pole",
+      "x": 164.31,
+      "z": -86.33,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475027"
+    },
+    {
+      "id": 13535475028,
+      "kind": "pole",
+      "x": 153.31,
+      "z": -64.05,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475028"
+    },
+    {
+      "id": 13535475029,
+      "kind": "pole",
+      "x": 140.38,
+      "z": -35.53,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475029"
+    },
+    {
+      "id": 13535475030,
+      "kind": "pole",
+      "x": 128.15,
+      "z": -11.65,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475030"
+    },
+    {
+      "id": 13535475031,
+      "kind": "pole",
+      "x": 178.08,
+      "z": -65.82,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475031"
+    },
+    {
+      "id": 13535475032,
+      "kind": "pole",
+      "x": 184.79,
+      "z": -45.2,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475032"
+    },
+    {
+      "id": 13535475033,
+      "kind": "pole",
+      "x": 191.95,
+      "z": -22.35,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475033"
+    },
+    {
+      "id": 13535475034,
+      "kind": "pole",
+      "x": 202.16,
+      "z": 9.6,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475034"
+    },
+    {
+      "id": 13535475035,
+      "kind": "pole",
+      "x": 211.55,
+      "z": 35.97,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475035"
+    },
+    {
+      "id": 13535475036,
+      "kind": "pole",
+      "x": 222.7,
+      "z": 65.43,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475036"
+    },
+    {
+      "id": 13535475037,
+      "kind": "pole",
+      "x": 229.64,
+      "z": 91.62,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475037"
+    },
+    {
+      "id": 13535475038,
+      "kind": "pole",
+      "x": 238.28,
+      "z": 117.1,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475038"
+    },
+    {
+      "id": 13535475039,
+      "kind": "pole",
+      "x": 245.3,
+      "z": 137.5,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475039"
+    },
+    {
+      "id": 13535475040,
+      "kind": "pole",
+      "x": 248.78,
+      "z": 147.88,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475040"
+    },
+    {
+      "id": 13535475041,
+      "kind": "pole",
+      "x": 255.51,
+      "z": 167.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475041"
+    },
+    {
+      "id": 13535475042,
+      "kind": "pole",
+      "x": 265.78,
+      "z": 197.0,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475042"
+    },
+    {
+      "id": 13535475043,
+      "kind": "pole",
+      "x": 276.55,
+      "z": 227.44,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475043"
+    },
+    {
+      "id": 13535475044,
+      "kind": "pole",
+      "x": 286.9,
+      "z": 256.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475044"
+    },
+    {
+      "id": 13535475045,
+      "kind": "pole",
+      "x": 297.48,
+      "z": 287.38,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475045"
+    },
+    {
+      "id": 13535475046,
+      "kind": "pole",
+      "x": 309.39,
+      "z": 320.17,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475046"
+    },
+    {
+      "id": 13535475047,
+      "kind": "pole",
+      "x": 323.17,
+      "z": 351.63,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475047"
+    },
+    {
+      "id": 13535475048,
+      "kind": "pole",
+      "x": 337.85,
+      "z": 369.77,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535475048"
+    },
+    {
+      "id": 13535736448,
+      "kind": "pole",
+      "x": -517.37,
+      "z": -2683.52,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736448"
+    },
+    {
+      "id": 13535736449,
+      "kind": "pole",
+      "x": -533.27,
+      "z": -2701.06,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736449"
+    },
+    {
+      "id": 13535736450,
+      "kind": "pole",
+      "x": -565.87,
+      "z": -2734.06,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736450"
+    },
+    {
+      "id": 13535736451,
+      "kind": "pole",
+      "x": -593.27,
+      "z": -2762.96,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736451"
+    },
+    {
+      "id": 13535736452,
+      "kind": "pole",
+      "x": -631.13,
+      "z": -2801.94,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736452"
+    },
+    {
+      "id": 13535736453,
+      "kind": "pole",
+      "x": -662.35,
+      "z": -2833.84,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736453"
+    },
+    {
+      "id": 13535736454,
+      "kind": "pole",
+      "x": -675.3,
+      "z": -2847.9,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736454"
+    },
+    {
+      "id": 13535736455,
+      "kind": "pole",
+      "x": -704.36,
+      "z": -2878.64,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736455"
+    },
+    {
+      "id": 13535736456,
+      "kind": "pole",
+      "x": -731.54,
+      "z": -2908.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736456"
+    },
+    {
+      "id": 13535736457,
+      "kind": "pole",
+      "x": -755.88,
+      "z": -2888.9,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736457"
+    },
+    {
+      "id": 13535736458,
+      "kind": "pole",
+      "x": -778.47,
+      "z": -2870.1,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736458"
+    },
+    {
+      "id": 13535736459,
+      "kind": "pole",
+      "x": -797.54,
+      "z": -2834.31,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736459"
+    },
+    {
+      "id": 13535736460,
+      "kind": "pole",
+      "x": -831.58,
+      "z": -2811.64,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736460"
+    },
+    {
+      "id": 13535736461,
+      "kind": "pole",
+      "x": -857.88,
+      "z": -2798.0,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736461"
+    },
+    {
+      "id": 13535736462,
+      "kind": "pole",
+      "x": -888.67,
+      "z": -2765.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736462"
+    },
+    {
+      "id": 13535736463,
+      "kind": "pole",
+      "x": -901.14,
+      "z": -2745.73,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736463"
+    },
+    {
+      "id": 13535736464,
+      "kind": "pole",
+      "x": -913.32,
+      "z": -2724.58,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736464"
+    },
+    {
+      "id": 13535736465,
+      "kind": "pole",
+      "x": -945.94,
+      "z": -2711.63,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736465"
+    },
+    {
+      "id": 13535736466,
+      "kind": "pole",
+      "x": -982.41,
+      "z": -2692.36,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736466"
+    },
+    {
+      "id": 13535736467,
+      "kind": "pole",
+      "x": -1024.49,
+      "z": -2679.9,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736467"
+    },
+    {
+      "id": 13535736468,
+      "kind": "pole",
+      "x": -1047.79,
+      "z": -2678.52,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736468"
+    },
+    {
+      "id": 13535736469,
+      "kind": "pole",
+      "x": -1089.13,
+      "z": -2681.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736469"
+    },
+    {
+      "id": 13535736470,
+      "kind": "pole",
+      "x": -1126.91,
+      "z": -2684.41,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736470"
+    },
+    {
+      "id": 13535736471,
+      "kind": "pole",
+      "x": -1169.16,
+      "z": -2687.42,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736471"
+    },
+    {
+      "id": 13535736472,
+      "kind": "pole",
+      "x": -1204.12,
+      "z": -2689.08,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736472"
+    },
+    {
+      "id": 13535736473,
+      "kind": "pole",
+      "x": -1240.77,
+      "z": -2692.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736473"
+    },
+    {
+      "id": 13535736474,
+      "kind": "pole",
+      "x": -1278.52,
+      "z": -2694.02,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736474"
+    },
+    {
+      "id": 13535736475,
+      "kind": "pole",
+      "x": -1318.39,
+      "z": -2694.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736475"
+    },
+    {
+      "id": 13535736476,
+      "kind": "pole",
+      "x": -1357.58,
+      "z": -2696.93,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736476"
+    },
+    {
+      "id": 13535736477,
+      "kind": "pole",
+      "x": -1400.16,
+      "z": -2698.06,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736477"
+    },
+    {
+      "id": 13535736478,
+      "kind": "pole",
+      "x": -1429.21,
+      "z": -2698.31,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736478"
+    },
+    {
+      "id": 13535736479,
+      "kind": "pole",
+      "x": -1459.46,
+      "z": -2697.83,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736479"
+    },
+    {
+      "id": 13535736480,
+      "kind": "pole",
+      "x": -1503.79,
+      "z": -2698.55,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736480"
+    },
+    {
+      "id": 13535736481,
+      "kind": "pole",
+      "x": -1528.32,
+      "z": -2674.05,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736481"
+    },
+    {
+      "id": 13535736482,
+      "kind": "pole",
+      "x": -1530.37,
+      "z": -2649.97,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736482"
+    },
+    {
+      "id": 13535736483,
+      "kind": "pole",
+      "x": -1532.13,
+      "z": -2620.86,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736483"
+    },
+    {
+      "id": 13535736484,
+      "kind": "pole",
+      "x": -1534.26,
+      "z": -2594.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736484"
+    },
+    {
+      "id": 13535736485,
+      "kind": "pole",
+      "x": -1536.61,
+      "z": -2563.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736485"
+    },
+    {
+      "id": 13535736486,
+      "kind": "pole",
+      "x": -1538.28,
+      "z": -2533.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736486"
+    },
+    {
+      "id": 13535736487,
+      "kind": "pole",
+      "x": -1540.69,
+      "z": -2492.3,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736487"
+    },
+    {
+      "id": 13535736488,
+      "kind": "pole",
+      "x": -1543.21,
+      "z": -2456.13,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736488"
+    },
+    {
+      "id": 13535736489,
+      "kind": "pole",
+      "x": -1545.55,
+      "z": -2425.08,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736489"
+    },
+    {
+      "id": 13535736490,
+      "kind": "pole",
+      "x": -1547.39,
+      "z": -2391.01,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736490"
+    },
+    {
+      "id": 13535736491,
+      "kind": "pole",
+      "x": -1549.54,
+      "z": -2365.67,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736491"
+    },
+    {
+      "id": 13535736492,
+      "kind": "pole",
+      "x": -1551.92,
+      "z": -2333.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736492"
+    },
+    {
+      "id": 13535736493,
+      "kind": "pole",
+      "x": -1554.4,
+      "z": -2293.16,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736493"
+    },
+    {
+      "id": 13535736494,
+      "kind": "pole",
+      "x": -1547.77,
+      "z": -2265.68,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736494"
+    },
+    {
+      "id": 13535736495,
+      "kind": "pole",
+      "x": -1549.57,
+      "z": -2235.62,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736495"
+    },
+    {
+      "id": 13535736496,
+      "kind": "pole",
+      "x": -1551.71,
+      "z": -2203.73,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736496"
+    },
+    {
+      "id": 13535736497,
+      "kind": "pole",
+      "x": -1554.06,
+      "z": -2170.98,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736497"
+    },
+    {
+      "id": 13535736498,
+      "kind": "pole",
+      "x": -1543.35,
+      "z": -2205.47,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736498"
+    },
+    {
+      "id": 13535736499,
+      "kind": "pole",
+      "x": -1513.93,
+      "z": -2220.8,
+      "tags": {
+        "line_management": "transition",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736499"
+    },
+    {
+      "id": 13535736500,
+      "kind": "pole",
+      "x": -1555.55,
+      "z": -2149.42,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535736500"
+    },
+    {
+      "id": 13535752301,
+      "kind": "pole",
+      "x": -1558.89,
+      "z": -2106.5,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752301"
+    },
+    {
+      "id": 13535752302,
+      "kind": "pole",
+      "x": -1560.33,
+      "z": -2079.67,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752302"
+    },
+    {
+      "id": 13535752303,
+      "kind": "pole",
+      "x": -1562.3,
+      "z": -2047.99,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752303"
+    },
+    {
+      "id": 13535752304,
+      "kind": "pole",
+      "x": -1564.47,
+      "z": -2015.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752304"
+    },
+    {
+      "id": 13535752305,
+      "kind": "pole",
+      "x": -1567.04,
+      "z": -1980.38,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752305"
+    },
+    {
+      "id": 13535752306,
+      "kind": "pole",
+      "x": -1569.16,
+      "z": -1949.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752306"
+    },
+    {
+      "id": 13535752307,
+      "kind": "pole",
+      "x": -1570.96,
+      "z": -1912.5,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752307"
+    },
+    {
+      "id": 13535752308,
+      "kind": "pole",
+      "x": -1573.57,
+      "z": -1884.76,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752308"
+    },
+    {
+      "id": 13535752309,
+      "kind": "pole",
+      "x": -1575.35,
+      "z": -1857.3,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752309"
+    },
+    {
+      "id": 13535752310,
+      "kind": "pole",
+      "x": -1575.42,
+      "z": -1844.26,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752310"
+    },
+    {
+      "id": 13535752311,
+      "kind": "pole",
+      "x": -1567.98,
+      "z": -1819.54,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752311"
+    },
+    {
+      "id": 13535752312,
+      "kind": "pole",
+      "x": -1557.6,
+      "z": -1792.15,
+      "tags": {
+        "line_management": "branch",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752312"
+    },
+    {
+      "id": 13535752313,
+      "kind": "pole",
+      "x": -1535.48,
+      "z": -1799.35,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752313"
+    },
+    {
+      "id": 13535752314,
+      "kind": "pole",
+      "x": -1501.31,
+      "z": -1811.89,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752314"
+    },
+    {
+      "id": 13535752315,
+      "kind": "pole",
+      "x": -1466.31,
+      "z": -1823.96,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752315"
+    },
+    {
+      "id": 13535752316,
+      "kind": "pole",
+      "x": -1545.81,
+      "z": -1756.74,
+      "tags": {
+        "line_management": "termination",
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752316"
+    },
+    {
+      "id": 13535752317,
+      "kind": "pole",
+      "x": -1533.83,
+      "z": -1725.03,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752317"
+    },
+    {
+      "id": 13535752318,
+      "kind": "pole",
+      "x": -1523.32,
+      "z": -1695.08,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752318"
+    },
+    {
+      "id": 13535752320,
+      "kind": "pole",
+      "x": -1501.32,
+      "z": -1635.68,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752320"
+    },
+    {
+      "id": 13535752321,
+      "kind": "pole",
+      "x": -1490.74,
+      "z": -1604.21,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752321"
+    },
+    {
+      "id": 13535752322,
+      "kind": "pole",
+      "x": -1479.86,
+      "z": -1573.04,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752322"
+    },
+    {
+      "id": 13535752323,
+      "kind": "pole",
+      "x": -1467.04,
+      "z": -1539.72,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752323"
+    },
+    {
+      "id": 13535752324,
+      "kind": "pole",
+      "x": -1450.14,
+      "z": -1510.34,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752324"
+    },
+    {
+      "id": 13535752325,
+      "kind": "pole",
+      "x": -1419.5,
+      "z": -1507.26,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752325"
+    },
+    {
+      "id": 13535752326,
+      "kind": "pole",
+      "x": -1390.05,
+      "z": -1502.99,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752326"
+    },
+    {
+      "id": 13535752327,
+      "kind": "pole",
+      "x": -1362.3,
+      "z": -1498.94,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752327"
+    },
+    {
+      "id": 13535752328,
+      "kind": "pole",
+      "x": -1330.75,
+      "z": -1494.25,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752328"
+    },
+    {
+      "id": 13535752329,
+      "kind": "pole",
+      "x": -1304.75,
+      "z": -1490.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752329"
+    },
+    {
+      "id": 13535752330,
+      "kind": "pole",
+      "x": -1270.0,
+      "z": -1485.3,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752330"
+    },
+    {
+      "id": 13535752331,
+      "kind": "pole",
+      "x": -1238.19,
+      "z": -1480.49,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752331"
+    },
+    {
+      "id": 13535752332,
+      "kind": "pole",
+      "x": -1210.26,
+      "z": -1476.33,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752332"
+    },
+    {
+      "id": 13535752333,
+      "kind": "pole",
+      "x": -1173.15,
+      "z": -1470.41,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752333"
+    },
+    {
+      "id": 13535752334,
+      "kind": "pole",
+      "x": -1122.15,
+      "z": -1463.26,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752334"
+    },
+    {
+      "id": 13535752335,
+      "kind": "pole",
+      "x": -1094.76,
+      "z": -1467.84,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752335"
+    },
+    {
+      "id": 13535752336,
+      "kind": "pole",
+      "x": -1052.91,
+      "z": -1462.2,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752336"
+    },
+    {
+      "id": 13535752337,
+      "kind": "pole",
+      "x": -1022.15,
+      "z": -1457.33,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752337"
+    },
+    {
+      "id": 13535752338,
+      "kind": "pole",
+      "x": -992.11,
+      "z": -1452.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752338"
+    },
+    {
+      "id": 13535752339,
+      "kind": "pole",
+      "x": -966.88,
+      "z": -1448.75,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752339"
+    },
+    {
+      "id": 13535752340,
+      "kind": "pole",
+      "x": -951.48,
+      "z": -1436.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752340"
+    },
+    {
+      "id": 13535752341,
+      "kind": "pole",
+      "x": -915.09,
+      "z": -1432.42,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752341"
+    },
+    {
+      "id": 13535752342,
+      "kind": "pole",
+      "x": -876.22,
+      "z": -1426.4,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752342"
+    },
+    {
+      "id": 13535752343,
+      "kind": "pole",
+      "x": -846.3,
+      "z": -1422.18,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752343"
+    },
+    {
+      "id": 13535752345,
+      "kind": "pole",
+      "x": -774.48,
+      "z": -1411.37,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752345"
+    },
+    {
+      "id": 13535752346,
+      "kind": "pole",
+      "x": -739.23,
+      "z": -1405.98,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752346"
+    },
+    {
+      "id": 13535752347,
+      "kind": "pole",
+      "x": -710.34,
+      "z": -1401.53,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752347"
+    },
+    {
+      "id": 13535752348,
+      "kind": "pole",
+      "x": -678.11,
+      "z": -1396.97,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752348"
+    },
+    {
+      "id": 13535752349,
+      "kind": "pole",
+      "x": -656.53,
+      "z": -1393.91,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752349"
+    },
+    {
+      "id": 13535752350,
+      "kind": "pole",
+      "x": -635.63,
+      "z": -1404.39,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752350"
+    },
+    {
+      "id": 13535752351,
+      "kind": "pole",
+      "x": -606.88,
+      "z": -1402.07,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752351"
+    },
+    {
+      "id": 13535752352,
+      "kind": "pole",
+      "x": -575.78,
+      "z": -1402.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752352"
+    },
+    {
+      "id": 13535752353,
+      "kind": "pole",
+      "x": -543.23,
+      "z": -1402.73,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752353"
+    },
+    {
+      "id": 13535752354,
+      "kind": "pole",
+      "x": -507.12,
+      "z": -1402.95,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752354"
+    },
+    {
+      "id": 13535752355,
+      "kind": "pole",
+      "x": -468.16,
+      "z": -1402.85,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752355"
+    },
+    {
+      "id": 13535752356,
+      "kind": "pole",
+      "x": -434.75,
+      "z": -1401.73,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752356"
+    },
+    {
+      "id": 13535752357,
+      "kind": "pole",
+      "x": -396.68,
+      "z": -1398.77,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752357"
+    },
+    {
+      "id": 13535752358,
+      "kind": "pole",
+      "x": -359.64,
+      "z": -1393.95,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752358"
+    },
+    {
+      "id": 13535752359,
+      "kind": "pole",
+      "x": -325.1,
+      "z": -1389.44,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752359"
+    },
+    {
+      "id": 13535752360,
+      "kind": "pole",
+      "x": -254.9,
+      "z": -1378.85,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752360"
+    },
+    {
+      "id": 13535752361,
+      "kind": "pole",
+      "x": -210.33,
+      "z": -1372.12,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13535752361"
+    },
+    {
+      "id": 13539095427,
+      "kind": "pole",
+      "x": -1299.57,
+      "z": -1739.37,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095427"
+    },
+    {
+      "id": 13539095428,
+      "kind": "pole",
+      "x": -1321.4,
+      "z": -1764.32,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095428"
+    },
+    {
+      "id": 13539095429,
+      "kind": "pole",
+      "x": -1348.62,
+      "z": -1789.68,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095429"
+    },
+    {
+      "id": 13539095430,
+      "kind": "pole",
+      "x": -1358.77,
+      "z": -1818.47,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095430"
+    },
+    {
+      "id": 13539095431,
+      "kind": "pole",
+      "x": -1369.04,
+      "z": -1847.6,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095431"
+    },
+    {
+      "id": 13539095432,
+      "kind": "pole",
+      "x": -1374.83,
+      "z": -1857.96,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095432"
+    },
+    {
+      "id": 13539095433,
+      "kind": "pole",
+      "x": -1405.07,
+      "z": -1845.92,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095433"
+    },
+    {
+      "id": 13539095434,
+      "kind": "pole",
+      "x": -1435.06,
+      "z": -1835.35,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095434"
+    },
+    {
+      "id": 13539095435,
+      "kind": "pole",
+      "x": -1115.72,
+      "z": -2194.49,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095435"
+    },
+    {
+      "id": 13539095436,
+      "kind": "pole",
+      "x": -1138.96,
+      "z": -2192.08,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095436"
+    },
+    {
+      "id": 13539095437,
+      "kind": "pole",
+      "x": -1176.44,
+      "z": -2187.36,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095437"
+    },
+    {
+      "id": 13539095438,
+      "kind": "pole",
+      "x": -1198.51,
+      "z": -2185.92,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095438"
+    },
+    {
+      "id": 13539095439,
+      "kind": "pole",
+      "x": -1263.23,
+      "z": -2178.45,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095439"
+    },
+    {
+      "id": 13539095440,
+      "kind": "pole",
+      "x": -1283.93,
+      "z": -2176.78,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095440"
+    },
+    {
+      "id": 13539095441,
+      "kind": "pole",
+      "x": -1313.59,
+      "z": -2173.94,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095441"
+    },
+    {
+      "id": 13539095442,
+      "kind": "pole",
+      "x": -1343.92,
+      "z": -2168.49,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095442"
+    },
+    {
+      "id": 13539095443,
+      "kind": "pole",
+      "x": -1377.05,
+      "z": -2160.09,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095443"
+    },
+    {
+      "id": 13539095444,
+      "kind": "pole",
+      "x": -1407.0,
+      "z": -2152.29,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095444"
+    },
+    {
+      "id": 13539095446,
+      "kind": "pole",
+      "x": -1448.49,
+      "z": -2141.61,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095446"
+    },
+    {
+      "id": 13539095447,
+      "kind": "pole",
+      "x": -1475.39,
+      "z": -2134.42,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095447"
+    },
+    {
+      "id": 13539095448,
+      "kind": "pole",
+      "x": -1508.57,
+      "z": -2126.05,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095448"
+    },
+    {
+      "id": 13539095449,
+      "kind": "pole",
+      "x": -1536.15,
+      "z": -2119.0,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095449"
+    },
+    {
+      "id": 13539095450,
+      "kind": "pole",
+      "x": -1227.46,
+      "z": -2182.52,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539095450"
+    },
+    {
+      "id": 13539134252,
+      "kind": "pole",
+      "x": -1192.48,
+      "z": -2478.96,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134252"
+    },
+    {
+      "id": 13539134253,
+      "kind": "pole",
+      "x": -1227.35,
+      "z": -2483.26,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134253"
+    },
+    {
+      "id": 13539134254,
+      "kind": "pole",
+      "x": -1254.02,
+      "z": -2486.7,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134254"
+    },
+    {
+      "id": 13539134255,
+      "kind": "pole",
+      "x": -1288.96,
+      "z": -2490.59,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134255"
+    },
+    {
+      "id": 13539134256,
+      "kind": "pole",
+      "x": -1321.81,
+      "z": -2494.4,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134256"
+    },
+    {
+      "id": 13539134257,
+      "kind": "pole",
+      "x": -1347.57,
+      "z": -2497.23,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134257"
+    },
+    {
+      "id": 13539134258,
+      "kind": "pole",
+      "x": -1377.99,
+      "z": -2500.58,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134258"
+    },
+    {
+      "id": 13539134259,
+      "kind": "pole",
+      "x": -1408.07,
+      "z": -2515.79,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134259"
+    },
+    {
+      "id": 13539134260,
+      "kind": "pole",
+      "x": -1449.55,
+      "z": -2521.08,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134260"
+    },
+    {
+      "id": 13539134261,
+      "kind": "pole",
+      "x": -1482.62,
+      "z": -2524.77,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134261"
+    },
+    {
+      "id": 13539134262,
+      "kind": "pole",
+      "x": -1514.06,
+      "z": -2527.76,
+      "tags": {
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134262"
+    },
+    {
+      "id": 13539134263,
+      "kind": "pole",
+      "x": -981.48,
+      "z": -2208.31,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134263"
+    },
+    {
+      "id": 13539134264,
+      "kind": "pole",
+      "x": -951.84,
+      "z": -2211.57,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134264"
+    },
+    {
+      "id": 13539134265,
+      "kind": "pole",
+      "x": -921.65,
+      "z": -2214.31,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134265"
+    },
+    {
+      "id": 13539134266,
+      "kind": "pole",
+      "x": -889.13,
+      "z": -2217.86,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134266"
+    },
+    {
+      "id": 13539134267,
+      "kind": "pole",
+      "x": -854.22,
+      "z": -2220.87,
+      "tags": {
+        "material": "wood",
+        "power": "pole"
+      },
+      "url": "https://www.openstreetmap.org/node/13539134267"
+    }
+  ]
+}

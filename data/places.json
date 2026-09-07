@@ -1,0 +1,601 @@
+{
+  "source": "OpenStreetMap contributors",
+  "fetched": "2026-09-05",
+  "complete": false,
+  "places": [
+    {
+      "name": "Winthrop Police Department",
+      "kind": "police",
+      "business": false,
+      "x": -937.9,
+      "z": -1896.26,
+      "url": "https://www.openstreetmap.org/node/257493822",
+      "address": "3 Metcalf Square"
+    },
+    {
+      "name": "Winthrop Fire Department",
+      "kind": "fire_station",
+      "business": false,
+      "x": 99.43,
+      "z": -1608.49,
+      "url": "https://www.openstreetmap.org/node/257494501",
+      "address": "419 Shirley Street"
+    },
+    {
+      "name": "Winthrop Fire Department",
+      "kind": "fire_station",
+      "business": false,
+      "x": -1015.86,
+      "z": -1869.0,
+      "url": "https://www.openstreetmap.org/node/257495260",
+      "address": "40 Pauline Street"
+    },
+    {
+      "name": "Town of Winthrop Parks & Recreation Department.",
+      "kind": "government",
+      "business": false,
+      "x": -1245.42,
+      "z": -1804.89,
+      "url": "https://www.openstreetmap.org/node/257580249",
+      "address": "151 Pauline Street"
+    },
+    {
+      "name": "Saint Johns School",
+      "kind": "school",
+      "business": false,
+      "x": -868.29,
+      "z": -2181.56,
+      "url": "https://www.openstreetmap.org/node/358259042",
+      "address": ""
+    },
+    {
+      "name": "St. John the Evangelist Catholic Church",
+      "kind": "place_of_worship",
+      "business": false,
+      "x": -808.95,
+      "z": -2205.35,
+      "url": "https://www.openstreetmap.org/node/358278543",
+      "address": ""
+    },
+    {
+      "name": "Winthrop Public Library",
+      "kind": "library",
+      "business": false,
+      "x": -910.11,
+      "z": -1985.51,
+      "url": "https://www.openstreetmap.org/node/367779339",
+      "address": "2 Metcalf Square"
+    },
+    {
+      "name": "Winthrop Public Library Museum",
+      "kind": "museum",
+      "business": false,
+      "x": -914.4,
+      "z": -1990.65,
+      "url": "https://www.openstreetmap.org/node/367781133",
+      "address": "2 Metcalf Square"
+    },
+    {
+      "name": "Belle Isle Seafood",
+      "kind": "restaurant",
+      "business": true,
+      "x": -1692.56,
+      "z": -2502.22,
+      "url": "https://www.openstreetmap.org/node/847518258",
+      "address": "1 Main Street"
+    },
+    {
+      "name": "Curci Studio 20 Madison Avenue",
+      "kind": "artwork",
+      "business": false,
+      "x": -828.66,
+      "z": -1862.72,
+      "url": "https://www.openstreetmap.org/node/1666128942",
+      "address": ""
+    },
+    {
+      "name": "Winthrop Post Office",
+      "kind": "post_office",
+      "business": false,
+      "x": -1041.99,
+      "z": -1752.45,
+      "url": "https://www.openstreetmap.org/node/1934563880",
+      "address": "5 Michaels Mall"
+    },
+    {
+      "name": "Winthrop Leaf Dump",
+      "kind": "recycling",
+      "business": false,
+      "x": -981.97,
+      "z": -3031.9,
+      "url": "https://www.openstreetmap.org/node/1934569205",
+      "address": ""
+    },
+    {
+      "name": "Bridges Nepali Cuisine",
+      "kind": "restaurant",
+      "business": true,
+      "x": -178.11,
+      "z": -2907.65,
+      "url": "https://www.openstreetmap.org/node/4362040093",
+      "address": "35 Crest Avenue"
+    },
+    {
+      "name": "Silverclean",
+      "kind": "laundry",
+      "business": true,
+      "x": -161.4,
+      "z": -2886.6,
+      "url": "https://www.openstreetmap.org/node/4362104592",
+      "address": "41 Crest Avenue"
+    },
+    {
+      "name": "Governor's Garden",
+      "kind": "florist",
+      "business": true,
+      "x": -238.52,
+      "z": -2957.78,
+      "url": "https://www.openstreetmap.org/node/6167419509",
+      "address": "3 Crest Avenue"
+    },
+    {
+      "name": "Antique Table",
+      "kind": "restaurant",
+      "business": true,
+      "x": -214.25,
+      "z": -2942.24,
+      "url": "https://www.openstreetmap.org/node/6167419584",
+      "address": "19 Crest Avenue"
+    },
+    {
+      "name": "Elite Hair Design",
+      "kind": "hairdresser",
+      "business": true,
+      "x": -203.81,
+      "z": -2932.43,
+      "url": "https://www.openstreetmap.org/node/6167419686",
+      "address": "23 Crest Avenue"
+    },
+    {
+      "name": "Crest Avenue Wine & Spirits",
+      "kind": "alcohol",
+      "business": true,
+      "x": -195.94,
+      "z": -2924.11,
+      "url": "https://www.openstreetmap.org/node/6167419687",
+      "address": "29 Crest Avenue"
+    },
+    {
+      "name": "Precious Pets",
+      "kind": "pet_grooming",
+      "business": true,
+      "x": -183.89,
+      "z": -2913.43,
+      "url": "https://www.openstreetmap.org/node/6167419688",
+      "address": "31 Crest Avenue"
+    },
+    {
+      "name": "Highland Convenient Mart",
+      "kind": "convenience",
+      "business": true,
+      "x": -171.28,
+      "z": -2900.03,
+      "url": "https://www.openstreetmap.org/node/6167419702",
+      "address": "37A Crest Avenue"
+    },
+    {
+      "name": "ATS Alarm Systems",
+      "kind": "security",
+      "business": true,
+      "x": -167.6,
+      "z": -2896.45,
+      "url": "https://www.openstreetmap.org/node/6167419712",
+      "address": "37 Crest Avenue"
+    },
+    {
+      "name": "BB's Hair Design",
+      "kind": "hairdresser",
+      "business": true,
+      "x": -108.91,
+      "z": -2866.33,
+      "url": "https://www.openstreetmap.org/node/6167419749",
+      "address": ""
+    },
+    {
+      "name": "Honan Sign",
+      "kind": "sign",
+      "business": true,
+      "x": -104.7,
+      "z": -2860.79,
+      "url": "https://www.openstreetmap.org/node/6167419750",
+      "address": ""
+    },
+    {
+      "name": "Shirley Gut",
+      "kind": "information",
+      "business": false,
+      "x": 1227.68,
+      "z": 492.47,
+      "url": "https://www.openstreetmap.org/node/6767970692",
+      "address": ""
+    },
+    {
+      "name": "Out to Sea",
+      "kind": "information",
+      "business": false,
+      "x": 1437.21,
+      "z": 690.37,
+      "url": "https://www.openstreetmap.org/node/6767970696",
+      "address": ""
+    },
+    {
+      "name": "Digesters",
+      "kind": "information",
+      "business": false,
+      "x": 1616.75,
+      "z": 1121.49,
+      "url": "https://www.openstreetmap.org/node/6767970699",
+      "address": ""
+    },
+    {
+      "name": "Center Nails Spa",
+      "kind": "beauty",
+      "business": true,
+      "x": -1142.79,
+      "z": -1656.87,
+      "url": "https://www.openstreetmap.org/node/11418686259",
+      "address": "47 Woodside Avenue"
+    },
+    {
+      "name": "Inc.ubate Coworking",
+      "kind": "coworking",
+      "business": true,
+      "x": -1170.11,
+      "z": -1689.9,
+      "url": "https://www.openstreetmap.org/node/12493963623",
+      "address": "7 Somerset Avenue"
+    },
+    {
+      "name": "Winthrop Marketplace",
+      "kind": "marketplace",
+      "business": false,
+      "x": -671.04,
+      "z": -2470.44,
+      "url": "https://www.openstreetmap.org/node/12569258001",
+      "address": ""
+    },
+    {
+      "name": "The Winthrop Arms",
+      "kind": "hotel",
+      "business": true,
+      "x": 92.51,
+      "z": -3020.97,
+      "url": "https://www.openstreetmap.org/node/13051134701",
+      "address": "130 Grovers Avenue"
+    },
+    {
+      "name": "Harborside Dental of Winthrop",
+      "kind": "dentist",
+      "business": true,
+      "x": -781.05,
+      "z": -2425.77,
+      "url": "https://www.openstreetmap.org/node/13096638664",
+      "address": "313 Main Street"
+    },
+    {
+      "name": "Nick's Place",
+      "kind": "fast_food",
+      "business": true,
+      "x": -1083.6,
+      "z": -1830.35,
+      "url": "https://www.openstreetmap.org/node/13283378360",
+      "address": "70 Pauline Street"
+    },
+    {
+      "name": "Winthrop Book Depot & Cafe",
+      "kind": "books",
+      "business": true,
+      "x": -1175.24,
+      "z": -1690.54,
+      "url": "https://www.openstreetmap.org/node/13283437790",
+      "address": "9 Somerset Avenue"
+    },
+    {
+      "name": "Winthrop Center Caf\u00e9",
+      "kind": "cafe",
+      "business": true,
+      "x": -1138.68,
+      "z": -1700.34,
+      "url": "https://www.openstreetmap.org/node/13283455101",
+      "address": "36 Woodside Avenue"
+    },
+    {
+      "name": "Thai Taki",
+      "kind": "restaurant",
+      "business": true,
+      "x": -1028.68,
+      "z": -1732.89,
+      "url": "https://www.openstreetmap.org/node/13283507438",
+      "address": "7 Michaels Mall"
+    },
+    {
+      "name": "Bespoke Events",
+      "kind": "events_venue",
+      "business": false,
+      "x": -1024.1,
+      "z": -1725.99,
+      "url": "https://www.openstreetmap.org/node/13283531645",
+      "address": "8 Michaels Mall"
+    },
+    {
+      "name": "Riley\u2019s Ice Cream",
+      "kind": "ice_cream",
+      "business": false,
+      "x": -1092.85,
+      "z": -1701.89,
+      "url": "https://www.openstreetmap.org/node/13283578197",
+      "address": "196 Hagman Road"
+    },
+    {
+      "name": "Twist & Shake",
+      "kind": "ice_cream",
+      "business": false,
+      "x": 60.82,
+      "z": -1618.25,
+      "url": "https://www.openstreetmap.org/node/13362832383",
+      "address": "413A Shirley Street"
+    },
+    {
+      "name": "Wastewater Treatment",
+      "kind": "information",
+      "business": false,
+      "x": 1064.54,
+      "z": 533.79,
+      "url": "https://www.openstreetmap.org/node/13759387744",
+      "address": ""
+    },
+    {
+      "name": "Dunkin'",
+      "kind": "fast_food",
+      "business": true,
+      "x": -1699.46,
+      "z": -2559.85,
+      "url": "https://www.openstreetmap.org/way/29582003",
+      "address": "20 Main Street"
+    },
+    {
+      "name": "Winthrop Town Hall",
+      "kind": "townhall",
+      "business": false,
+      "x": -953.85,
+      "z": -1991.78,
+      "url": "https://www.openstreetmap.org/way/29710074",
+      "address": "1 Metcalf Square"
+    },
+    {
+      "name": "Letterie's Italian Market",
+      "kind": "deli",
+      "business": true,
+      "x": -1109.55,
+      "z": -1609.73,
+      "url": "https://www.openstreetmap.org/way/29772208",
+      "address": "67 Woodside Avenue"
+    },
+    {
+      "name": "First Church of Winthrop, United Methodist",
+      "kind": "place_of_worship",
+      "business": false,
+      "x": -873.37,
+      "z": -1889.56,
+      "url": "https://www.openstreetmap.org/way/29892160",
+      "address": "217 Winthrop Street"
+    },
+    {
+      "name": "Star Nails",
+      "kind": "beauty",
+      "business": true,
+      "x": -128.09,
+      "z": -2888.02,
+      "url": "https://www.openstreetmap.org/way/29958848",
+      "address": "50 Crest Avenue"
+    },
+    {
+      "name": "CVS Pharmacy",
+      "kind": "chemist",
+      "business": true,
+      "x": -1217.3,
+      "z": -1766.47,
+      "url": "https://www.openstreetmap.org/way/29959104",
+      "address": "3 Woodside Avenue"
+    },
+    {
+      "name": "Dunkin'",
+      "kind": "fast_food",
+      "business": true,
+      "x": -317.99,
+      "z": -2930.21,
+      "url": "https://www.openstreetmap.org/way/29971682",
+      "address": "230 Revere Street"
+    },
+    {
+      "name": "Mobil",
+      "kind": "fuel",
+      "business": true,
+      "x": -1668.5,
+      "z": -2556.26,
+      "url": "https://www.openstreetmap.org/way/29971808",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": -898.63,
+      "z": -2816.17,
+      "url": "https://www.openstreetmap.org/way/119804115",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": -658.46,
+      "z": -2902.61,
+      "url": "https://www.openstreetmap.org/way/119808550",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": 149.5,
+      "z": -1408.89,
+      "url": "https://www.openstreetmap.org/way/375463939",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": -833.24,
+      "z": -2058.36,
+      "url": "https://www.openstreetmap.org/way/375466804",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": -814.75,
+      "z": -1917.71,
+      "url": "https://www.openstreetmap.org/way/375466805",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": -1114.1,
+      "z": -1760.32,
+      "url": "https://www.openstreetmap.org/way/375466806",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": 181.74,
+      "z": -3246.66,
+      "url": "https://www.openstreetmap.org/way/376088664",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": -1058.37,
+      "z": -1626.54,
+      "url": "https://www.openstreetmap.org/way/376090020",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": -1202.84,
+      "z": -1830.9,
+      "url": "https://www.openstreetmap.org/way/376090770",
+      "address": ""
+    },
+    {
+      "name": "Municipal Parking Lot",
+      "kind": "parking",
+      "business": false,
+      "x": -958.52,
+      "z": -2024.01,
+      "url": "https://www.openstreetmap.org/way/376090771",
+      "address": ""
+    },
+    {
+      "name": "The Parc at Harbor View",
+      "kind": "social_facility",
+      "business": false,
+      "x": -1480.85,
+      "z": -2190.9,
+      "url": "https://www.openstreetmap.org/way/495907753",
+      "address": "46 Lincoln Street"
+    },
+    {
+      "name": "Arthur T. Cummings School",
+      "kind": "school",
+      "business": false,
+      "x": -1063.12,
+      "z": -1945.92,
+      "url": "https://www.openstreetmap.org/way/591083350",
+      "address": ""
+    },
+    {
+      "name": "William P. Gorman Fort Banks Elementary School",
+      "kind": "school",
+      "business": false,
+      "x": -634.72,
+      "z": -2898.07,
+      "url": "https://www.openstreetmap.org/way/591084294",
+      "address": ""
+    },
+    {
+      "name": "Mary Kelley Pavillion",
+      "kind": "shelter",
+      "business": false,
+      "x": -1187.25,
+      "z": -2736.31,
+      "url": "https://www.openstreetmap.org/way/610241343",
+      "address": "130 Morton Street"
+    },
+    {
+      "name": "Designer Optical II",
+      "kind": "optician",
+      "business": true,
+      "x": -132.92,
+      "z": -2892.85,
+      "url": "https://www.openstreetmap.org/way/658639799",
+      "address": "50 Crest Avenue"
+    },
+    {
+      "name": "Temple Tifereth Israel",
+      "kind": "place_of_worship",
+      "business": false,
+      "x": -191.74,
+      "z": -2100.75,
+      "url": "https://www.openstreetmap.org/way/981257968",
+      "address": "93 Veterans Road"
+    },
+    {
+      "name": "Citizens Bank",
+      "kind": "bank",
+      "business": true,
+      "x": -1096.86,
+      "z": -1729.57,
+      "url": "https://www.openstreetmap.org/way/1447762117",
+      "address": "35 Putnam Street"
+    },
+    {
+      "name": "For Kids Only Afterschool",
+      "kind": "school",
+      "business": false,
+      "x": -878.13,
+      "z": -1922.17,
+      "url": "https://www.openstreetmap.org/way/1533048047",
+      "address": ""
+    },
+    {
+      "name": "Winthrop Middle/High School",
+      "kind": "school",
+      "business": false,
+      "x": -424.78,
+      "z": -2301.44,
+      "url": "https://www.openstreetmap.org/relation/14073612",
+      "address": "400 Main Street"
+    }
+  ]
+}

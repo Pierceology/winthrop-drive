@@ -1,0 +1,17 @@
+import * as THREE from 'three';
+export function renderHouseCPU({group,texture,photoPixels,width=480,height=360,angleDegrees=0,cameraHeight=5}){const canvas={width,height},ctx={createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)})};const angle=angleDegrees*Math.PI/180,camera=new THREE.PerspectiveCamera(42,canvas.width/canvas.height,.1,200);camera.position.set(Math.sin(angle)*24,cameraHeight,Math.cos(angle)*24);camera.lookAt(0,3.1,0);camera.updateMatrixWorld();group.updateMatrixWorld(true);const triangles=[];
+ const project=p=>{const v=p.clone().project(camera);return[(v.x+1)*canvas.width/2,(1-v.y)*canvas.height/2];};
+ function emit(points,photos,color){const distances=points.map(p=>-p.clone().applyMatrix4(camera.matrixWorldInverse).z);if(distances.some(d=>d<.1))return;triangles.push({xy:points.map(project),photos,distances,color});}
+
+ group.traverse(o=>{if(!o.isMesh)return;const g=o.geometry,pos=g.attributes.position,pc=g.attributes.photoCoord,indices=g.index?.array||Array.from({length:pos.count},(_,i)=>i),m=o.material;if(Array.isArray(m))return;for(let i=0;i<indices.length;i+=3){const ids=[indices[i],indices[i+1],indices[i+2]],points=ids.map(j=>new THREE.Vector3().fromBufferAttribute(pos,j).applyMatrix4(o.matrixWorld));const normal=new THREE.Vector3().subVectors(points[1],points[0]).cross(new THREE.Vector3().subVectors(points[2],points[0])).normalize();if(m.side!==THREE.DoubleSide&&normal.dot(camera.position.clone().sub(points[0]))<=0)continue;const light=.72+.28*Math.abs(normal.dot(new THREE.Vector3(-.5,.8,.6).normalize())),color=m.color.clone().multiplyScalar(light).convertLinearToSRGB();emit(points,pc?ids.map(j=>new THREE.Vector3().fromBufferAttribute(pc,j)):null,color);}});
+ const frame=ctx.createImageData(width,height),pixels=frame.data,zbuffer=new Float32Array(width*height);zbuffer.fill(Infinity);
+ for(let y=0;y<height;y++)for(let x=0;x<width;x++){const i=(y*width+x)*4,ground=y>height*.78;pixels.set(ground?[126,133,128,255]:[166,187,197,255],i);}
+ for(const t of triangles){const [a,b,c]=t.xy,den=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);if(Math.abs(den)<.001)continue;
+ const xmin=Math.max(0,Math.floor(Math.min(a[0],b[0],c[0]))),xmax=Math.min(width-1,Math.ceil(Math.max(a[0],b[0],c[0]))),ymin=Math.max(0,Math.floor(Math.min(a[1],b[1],c[1]))),ymax=Math.min(height-1,Math.ceil(Math.max(a[1],b[1],c[1])));
+ for(let y=ymin;y<=ymax;y++)for(let x=xmin;x<=xmax;x++){const u=((b[1]-c[1])*(x+.5-c[0])+(c[0]-b[0])*(y+.5-c[1]))/den,v=((c[1]-a[1])*(x+.5-c[0])+(a[0]-c[0])*(y+.5-c[1]))/den,w=1-u-v;if(u<0||v<0||w<0)continue;
+ const weights=[u/t.distances[0],v/t.distances[1],w/t.distances[2]],d=1/(weights[0]+weights[1]+weights[2]),index=y*width+x;if(d>=zbuffer[index])continue;zbuffer[index]=d;const out=index*4;
+ if(t.photos){let px=0,py=0,pq=0;for(let j=0;j<3;j++){px+=t.photos[j].x*weights[j];py+=t.photos[j].y*weights[j];pq+=t.photos[j].z*weights[j];}const tw=texture.image.width,th=texture.image.height,fx=Math.max(0,Math.min(tw-1,px/pq*tw)),fy=Math.max(0,Math.min(th-1,(1-py/pq)*th)),ix=Math.floor(fx),iy=Math.floor(fy),dx=fx-ix,dy=fy-iy;for(let ch=0;ch<3;ch++){const at=(x,y)=>photoPixels[(y*tw+x)*4+ch];pixels[out+ch]=(at(ix,iy)*(1-dx)+at(Math.min(ix+1,tw-1),iy)*dx)*(1-dy)+(at(ix,Math.min(iy+1,th-1))*(1-dx)+at(Math.min(ix+1,tw-1),Math.min(iy+1,th-1))*dx)*dy;}}
+ else{pixels[out]=t.color.r*255;pixels[out+1]=t.color.g*255;pixels[out+2]=t.color.b*255;}pixels[out+3]=255;
+ }}return pixels;
+
+}

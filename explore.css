@@ -1,0 +1,20 @@
+/* One town, with production status visible where people explore. */
+body:not(.driving) .places{width:340px;top:90px;bottom:95px;padding:20px}
+body:not(.driving) .places h1{font-size:25px;margin:0 0 8px}
+.places .explore-help{font-size:13px;line-height:1.5;margin:0 0 18px}
+.coverage-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}.coverage-heading h2{font-size:16px;margin:0}.coverage-heading button{font-size:12px;padding:7px 10px;min-height:34px}
+.coverage-numbers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0 6px}.coverage-numbers b{font-size:29px;font-weight:550;display:block;letter-spacing:-.04em}.coverage-numbers div:first-child b{color:#efb568}.coverage-numbers span{font-size:12px;color:#bdc9cc}.places .coverage-note{font-size:12px;line-height:1.5;margin:8px 0;color:#b9c6cc}
+#coverageMap{display:block;width:100%;height:auto;aspect-ratio:600/430;background:#142631;border-radius:10px;margin-top:14px;cursor:crosshair;touch-action:manipulation}
+.coverage-legend{display:flex;gap:10px;font-size:11px;margin:8px 0 14px;color:#c4d1d5}.coverage-legend span:before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;background:#8c999c}.coverage-legend .photo-key:before{background:#efb568}.coverage-legend .view-key:before{background:#84e3eb}
+.photo-streets{display:grid;gap:7px}.photo-streets button{text-align:left;padding:11px 12px}.photo-streets strong{display:block;font-size:14px;font-weight:550}.photo-streets span{display:block;font-size:12px;color:#bdc9cc;margin-top:4px}.photo-streets button:hover{border-color:#efb568}
+#nextPhoto{width:100%;font-size:12px;padding:10px;margin:8px 0 4px}.coverage-switch{display:flex;align-items:center;gap:8px;font-size:13px;margin:12px 0}.coverage-switch input{accent-color:#edb567}
+.explore-section{border-top:1px solid #ffffff20;margin:16px 0;padding-top:12px}.explore-section summary{font-size:14px;cursor:pointer;min-height:34px;padding:7px 0}.explore-section .destinations{margin:8px 0}.places .roadsearch{margin-top:16px}.places #findroad,.places #tour,.places #goDrive{width:100%}
+body:not(.driving) #exploreTown{display:none}body:not(.driving) .modebar{display:none}.review-open .places{visibility:hidden}#houseChecklist .review-current p,#houseChecklist #reviewTotals{font-size:13px;line-height:1.5}.house-address[data-kind=photo]{border-color:#efb568}.house-address[data-kind=photo]:before{content:'Photo walls · ';color:#efb568}
+.review-row small{display:block;color:#b9c9cf;font-size:11px;margin-top:4px}#houseChecklist .review-head small{font-size:11px;letter-spacing:1px}#reviewToggle{font-size:14px}
+@media(max-width:900px){body:not(.driving) .places{width:300px;top:76px;bottom:85px;padding:17px}header,body.driving header{gap:6px}#exploreTown{font-size:12px;padding:9px}.brand{font-size:15px}#reviewToggle{font-size:12px;padding:9px}header>#info{display:none}}
+@media(max-width:600px){body:not(.driving) .places{width:calc(100vw - 24px);top:auto;bottom:78px;max-height:46dvh;padding:16px;border-radius:18px}.coverage-numbers{margin-top:12px}#coverageMap{max-height:180px}#coverage .coverage-note{font-size:12px}body:not(.driving) .camera{bottom:24px;right:12px;left:auto}body:not(.driving) #notice{display:none}header .brand{font-size:13px;letter-spacing:.1em}header #fullscreen{font-size:12px;padding:8px}body.driving #exploreTown{font-size:11px}#reviewToggle{font-size:11px}}
+
+body.driving #driveCurrent{display:none}body:not(.driving) #notice{display:none}#driveCurrent{font-size:14px;padding:11px 17px}
+body:not(.driving) .places{z-index:6}body:not(.driving) .camera{z-index:6}
+
+body:not(.driving) .explore-section .modebar{display:flex;gap:6px;margin:10px 0}.photo-streets button.selected span{color:#34383c}
