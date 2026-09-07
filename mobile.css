@@ -17,10 +17,7 @@
   header #driveCurrent, header #exploreTown { font-size: 12px; padding: 6px 10px; }
   header #fullscreen, header #info { display: none; }
   #reviewToggle { display: none; }
-  header .oldsite { margin-left: auto; font-size: 11px; letter-spacing: .04em; opacity: .85; text-decoration: none; color: inherit;
-    padding: 6px 9px; border: 1px solid #ffffff2e; border-radius: 8px; background: #182d3bd9; white-space: nowrap; }
-  header .oldsite b { color: #edb567; font-weight: 600; }
-  body.driving header .oldsite, body.driving header #driveCurrent { display: none; }
+  body.driving header #driveCurrent { display: none; }
 
   /* ---- explore mode: the panel becomes a bottom sheet, the map stays on top ---- */
   aside.places {

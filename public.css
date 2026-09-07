@@ -1,0 +1,12 @@
+/* Public build. The reconstruction bookkeeping (which houses have photo walls, review tools,
+   survey inspectors) is for the studio, not for visitors. Open the page with ?studio=1 to get it back. */
+body:not(.studio) #coverage,
+body:not(.studio) #reviewToggle,
+body:not(.studio) #houseChecklist,
+body:not(.studio) #notice,
+body:not(.studio) #treeSurvey,
+body:not(.studio) #treeSummary,
+body:not(.studio) label:has(#photoWire),
+body:not(.studio) label:has(#assets),
+body:not(.studio) label:has(#footprints),
+body:not(.studio) .reference-link { display: none !important; }

@@ -37,5 +37,3 @@
 
 .look-controls{position:fixed;bottom:138px;left:50%;transform:translateX(-50%);display:flex;gap:5px;padding:5px;border-radius:12px;background:#10252cdb;border:1px solid #a9dce42b;z-index:12}.look-controls button{font-size:14px;min-height:38px}.look-controls button[aria-pressed="true"]{background:#bcecf2;color:#0c242f}.review-open .look-controls{left:calc(50% + 130px)}@media(max-width:800px){.look-controls{bottom:105px}.review-open .look-controls{display:none}}
 
-/* the link back to the old site, in the header, right of everything */
-header .oldsite{margin-left:auto;font-size:12px;color:#c2d8e1;text-decoration:none;padding:9px 12px;border:1px solid #ffffff24;border-radius:5px;background:#182d3bd9;white-space:nowrap}header .oldsite b{color:#edb567;font-weight:600}body.driving header .oldsite{display:none}
