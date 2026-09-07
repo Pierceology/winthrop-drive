@@ -13,7 +13,8 @@
   }
   .brand { font-size: 13px; letter-spacing: .12em; }
   .brand span { display: none; }
-  header button { font-size: 12px; padding: 6px 9px; min-height: 32px; border-radius: 8px; }
+  header button { font-size: 12px; padding: 6px 9px; min-height: 32px; border-radius: 8px; white-space: nowrap; }
+  header #driveCurrent, header #exploreTown { font-size: 12px; padding: 6px 10px; }
   header #fullscreen, header #info { display: none; }
   #reviewToggle { display: none; }
   header .oldsite { margin-left: auto; font-size: 11px; letter-spacing: .04em; opacity: .85; text-decoration: none; color: inherit;
@@ -30,7 +31,7 @@
   aside.places h1 { font-size: 15px; margin: 0 0 4px; }
   .explore-help { display: none; }
   #coverageMap { width: 100%; height: auto; max-height: 150px; }
-  .camera { top: auto; bottom: calc(38dvh + 8px); right: 8px; left: auto; flex-direction: column; gap: 4px; }
+  .camera { top: auto !important; bottom: calc(38dvh + 10px) !important; right: 8px !important; left: auto !important; transform: none !important; flex-direction: row; gap: 4px; }
   .camera button { font-size: 11px; padding: 6px 8px; min-height: 30px; }
   #notice, footer, .help { display: none; }
   #spotActions { top: 54px; width: calc(100vw - 16px); }
@@ -68,7 +69,7 @@
   /* pedals: full-width, two rows, thumbs at the bottom of the screen */
   body.driving .pedals {
     display: flex; flex-direction: column; gap: 6px;
-    position: fixed; left: 100px; right: 8px; bottom: 66px; top: auto; width: auto; padding: 0; background: none; border: 0;
+    position: fixed; left: 100px; right: 8px; bottom: 76px; top: auto; width: auto; transform: none; padding: 0; background: none; border: 0;
     z-index: 14;
   }
   body.driving .pedals > div { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; }
@@ -87,7 +88,8 @@
     flex: 0 0 auto; min-height: 40px; font-size: 12px; padding: 6px 10px; border-radius: 9px; white-space: nowrap;
   }
   body.driving.minimal-hud .speedometer { top: 50px; bottom: auto; }
-  body.driving.minimal-hud .pedals { bottom: 66px; }
+  body.driving.minimal-hud .pedals { bottom: 76px; }
+  body.driving #minimap { bottom: 182px; }
 
   /* the flyover and checklist panels fit the screen */
   #houseChecklist { left: 8px; right: 8px; top: 54px; width: auto; max-height: calc(100dvh - 70px); padding: 12px; }
