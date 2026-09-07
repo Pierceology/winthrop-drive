@@ -9,4 +9,5 @@ body:not(.studio) #treeSummary,
 body:not(.studio) label:has(#photoWire),
 body:not(.studio) label:has(#assets),
 body:not(.studio) label:has(#footprints),
-body:not(.studio) .reference-link { display: none !important; }
+body:not(.studio) .reference-link,
+body:not(.studio) #houseAddressLabels { display: none !important; }
