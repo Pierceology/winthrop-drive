@@ -19,7 +19,9 @@ export class MapLabels{
   }
  }
  this.container=document.createElement('div');this.container.id='maplabels';document.body.append(this.container);
- for(const p of places){const b=document.createElement('button');b.className='maplabel'+(p.business?' business':'');b.textContent=p.name;b.title=p.kind.replaceAll('_',' ');b.onclick=()=>onPlace(p);this.container.append(b);this.labels.push({p,element:b,position:new THREE.Vector3(p.x,heightAt(p.x,p.z)+10,p.z)});}
+ const studio=document.body.classList.contains('studio');
+ for(const p of places){if(!studio&&/^\d+[A-Z]?\s+\S/.test(p.name))continue;/* visitors see places and businesses, never a house number */
+  const b=document.createElement('button');b.className='maplabel'+(p.business?' business':'');b.textContent=p.name;b.title=p.kind.replaceAll('_',' ');b.onclick=()=>onPlace(p);this.container.append(b);this.labels.push({p,element:b,position:new THREE.Vector3(p.x,heightAt(p.x,p.z)+10,p.z)});}
  }
  update(camera,focus,enabled=true){this.ground.visible=enabled;const max=camera.position.distanceTo(focus)>1000?3000:650;const boxes=[];
  for(const l of this.labels.sort((a,b)=>a.position.distanceToSquared(camera.position)-b.position.distanceToSquared(camera.position))){const p=l.position.clone().project(camera),x=(p.x*.5+.5)*innerWidth,y=(-p.y*.5+.5)*innerHeight,w=Math.min(240,l.p.name.length*7+22);const okay=enabled&&!this.occluded?.(camera.position,l.position,null)&&l.position.distanceTo(focus)<max&&p.z>-1&&p.z<1&&x>30&&x<innerWidth-30&&y>90&&y<innerHeight-120&&boxes.length<16&&!boxes.some(a=>Math.abs(a.x-x)<(a.w+w)/2&&Math.abs(a.y-y)<36);l.element.hidden=!okay;if(okay){l.element.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%)`;boxes.push({x,y,w});}}
