@@ -3,6 +3,7 @@ import {treeScenery} from './tree-scenery.js';
 let coverageMap,sceneryTrees;
 import {treeSurvey} from './tree-survey.js';
 import {PhotoTextures} from './photo-textures.js';
+import {PhotoFronts} from './photo-fronts.js';
 import {addressVisibility} from './address-visibility.js';
 import {HouseChecklist} from './house-checklist.js';
 let checklist,foundationData,groundWorld;
@@ -27,7 +28,7 @@ const PUBLIC=!new URLSearchParams(location.search).has('studio');if(!PUBLIC)docu
 const $=id=>document.getElementById(id);
 const get=async path=>{const r=await fetch(path);if(!r.ok)throw Error(`Unable to load ${path}`);return r.json()};
 let photoCatalog=[],photoStop=0;
-let additionalRegistration,photoRegistration,photoTextures={},photoWires=[],photoPool,canopyGroup,canopyData;
+let additionalRegistration,photoRegistration,photoTextures={},photoWires=[],photoPool,photoFronts,canopyGroup,canopyData;
 let evening,hemi,roadsideGroup,signData,signGroup;
 let assetData,assetGroup,neighborhoods;
 let water,labels,ambient,tour,poi,terrainMeshes=[],spot=null,spotMarker;
@@ -102,6 +103,7 @@ async function init(){
  driving=new Driving({scene,camera,controls,world,heightAt:surfaceAt,collisionMeshes:buildingMeshes,onEnter:()=>{checklist?.open(false);if(coverageMap)coverageMap.outlines.visible=false;tour?.stop();$('spotActions').hidden=true;flight=null;auto=false;buildings.visible=true;pavement.visible=true;roadGroup.visible=false;$('inspector').hidden=true;$('notice').textContent=`${photoCatalog.length} photographed homes · other exteriors estimated`;},onExit:()=>{if(coverageMap)coverageMap.outlines.visible=$('coverageLayer').checked;$('notice').textContent=`${photoCatalog.length} homes with photographic surfaces · other exteriors estimated`;}});
  labels=new MapLabels(scene,world.roads,poi.places,surfaceAt,p=>{chooseSpot(new THREE.Vector3(p.x,surfaceAt(p.x,p.z),p.z));detail(p.name,[['Type',p.kind.replaceAll('_',' ')],['Address',p.address||'Not recorded'],['Source','OpenStreetMap — listing may be incomplete or outdated']]);const a=document.createElement('a');a.textContent='View mapped listing';a.href=p.url;a.target='_blank';a.rel='noopener';$('selectionDetails').append(a);});
  signGroup=trafficSigns(signData,surfaceAt);scene.add(signGroup);
+ if(new URLSearchParams(location.search).get('fronts')!=='0')get('./data/assessor-photos.json').then(photos=>{photoFronts=new PhotoFronts({scene,world,neighborhoods,photos,network:driving.state.network,anisotropy:Math.min(renderer.capabilities.getMaxAnisotropy(),8)});photoFronts.update(camera.position.x,camera.position.z);window.__fronts=photoFronts;}).catch(e=>console.warn('Photo fronts unavailable',e));
  roadsideGroup=roadside(assetData,driving.state.network,surfaceAt);scene.add(roadsideGroup);evening=new EveningDrive(scene,surfaceAt);
  assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Street inventory · ${assetData.assets.length} points`;
  ambient=new AmbientLife(scene,driving.state.network,surfaceAt);tour=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';});
@@ -164,7 +166,7 @@ function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):.016;
  controls.target.x=THREE.MathUtils.clamp(controls.target.x,-3500,3500);controls.target.z=THREE.MathUtils.clamp(controls.target.z,-3900,3900);if(tour?.active)tour.update(dt);else if(driving?.active){ambient?.constrainPlayer(driving.state);driving.update(dt,time);}else controls.update(dt);
  ambient?.update(driving?.paused?0:dt,controls.target,driving,$('life').checked);water.material.uniforms.time.value=time/1000;water.material.uniforms.sunDirection.value.copy(sunOffset).normalize();if(frame%6===0)labels?.update(camera,controls.target,$('labels').checked&&!tour?.active);
  if(frame%6===0)checklist?.update(camera,buildings.visible&&!tour?.active);
- if(frame%24===0){photoPool?.update(camera.position.x,camera.position.z);coverageMap?.update(controls.target);}
+ if(frame%24===0){photoPool?.update(camera.position.x,camera.position.z);photoFronts?.update(camera.position.x,camera.position.z);coverageMap?.update(controls.target);}
  evening?.update(driving?.state,driving?.active);
  sun.target.position.copy(controls.target);sun.position.copy(controls.target).add(sunOffset);
  if(frame++%30===0)$('position').textContent=`View distance ${Math.round(camera.position.distanceTo(controls.target)).toLocaleString()} m`;
