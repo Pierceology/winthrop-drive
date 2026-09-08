@@ -25,9 +25,11 @@ export class PhotoFronts {
  }
  build(e,texture){
   const w=this.wall(e.b);if(!w)return null;const base=e.b.base+.15,eave=e.record?.wall||8,roof=e.record?.roof||[];let ridge=eave;for(let i=1;i<roof.length;i+=3)ridge=Math.max(ridge,roof[i]);
-  const natural=w.len*e.h/e.w,H=e.cut?Math.min(natural,ridge*1.6):Math.max(eave,Math.min(natural,ridge)),qa=w.len/H,pa=e.w/e.h;
-  let u0=0,u1=1,v0=0,v1=1;if(e.cut){if(qa>pa){const k=pa/qa;v0=0;v1=k;}else{const k=qa/pa;u0=.5-k/2;u1=.5+k/2;}}else if(qa>pa){const k=pa/qa;v0=.5-k/2;v1=.5+k/2;}else{const k=qa/pa;u0=.5-k/2;u1=.5+k/2;}
-  const ox=w.nx*.07,oz=w.nz*.07,ax=w.p[0]+ox,az=w.p[1]+oz,bx=w.q[0]+ox,bz=w.q[1]+oz;
+  let natural=w.len*e.h/e.w,H,W=w.len,u0=0,u1=1,v0=0,v1=1;
+  if(e.cut){// a cut-out keeps the photo's own proportions: never taller than the roof allows; a long wall keeps its siding either side
+   const cap=ridge*1.3;if(natural>cap){H=cap;W=cap*e.w/e.h;}else H=natural;}
+  else{H=Math.max(eave,Math.min(natural,ridge));const qa=w.len/H,pa=e.w/e.h;if(qa>pa){const k=pa/qa;v0=.5-k/2;v1=.5+k/2;}else{const k=qa/pa;u0=.5-k/2;u1=.5+k/2;}}
+  const inset=(w.len-W)/2,dx=(w.q[0]-w.p[0])/w.len,dz=(w.q[1]-w.p[1])/w.len,ox=w.nx*.07,oz=w.nz*.07,ax=w.p[0]+dx*inset+ox,az=w.p[1]+dz*inset+oz,bx=w.q[0]-dx*inset+ox,bz=w.q[1]-dz*inset+oz;
   const g=new THREE.BufferGeometry();
   g.setAttribute('position',new THREE.Float32BufferAttribute([ax,base,az,bx,base,bz,bx,base+H,bz,ax,base+H,az],3));
   g.setAttribute('normal',new THREE.Float32BufferAttribute([w.nx,0,w.nz,w.nx,0,w.nz,w.nx,0,w.nz,w.nx,0,w.nz],3));
