@@ -82,8 +82,8 @@
     background: #0b1a22ee; border-top: 1px solid #ffffff1c; border-radius: 0; z-index: 15;
   }
   body.driving .driveactions::-webkit-scrollbar { display: none; }
-  body.driving .driveactions button {
-    flex: 0 0 auto; min-height: 40px; font-size: 12px; padding: 6px 10px; border-radius: 9px; white-space: nowrap;
+  body.driving .driveactions button, body.driving .driveactions button.primary {
+    flex: 0 0 auto; width: auto !important; min-width: 0; min-height: 40px; font-size: 12px; padding: 6px 12px; border-radius: 9px; white-space: nowrap;
   }
   body.driving.minimal-hud .speedometer { top: 50px; bottom: auto; }
   body.driving.minimal-hud .pedals { bottom: 76px; }
