@@ -17,15 +17,16 @@ export function neighborhoodGeometry(shape,b,record){
  // Cross-referenced look (assessor record + the town's own photo): rgb = siding colour, a = 0 none / 1 siding / 2 brick or masonry / 3 stucco or shingle
  const paint=new Float32Array(count*4);{const c=record?.color?new THREE.Color(record.color):null;const mat=(record?.material||'').toLowerCase();const code=!c?0:/brick|stone|concrete|masonry/.test(mat)?2:/stucco|shingle/.test(mat)?3:1;for(let i=0;i<count;i++)paint.set([c?c.r:0,c?c.g:0,c?c.b:0,code],i*4);}
  g.setAttribute('paint',new THREE.Float32BufferAttribute(paint,4));
+ const fa=record?.facade||[2.8,0,0,0,0,0];const facade=new Float32Array(count*4),flags=new Float32Array(count);for(let i=0;i<count;i++){facade.set([fa[0],fa[1],fa[2],fa[3]],i*4);flags[i]=fa[4];}g.setAttribute('facade',new THREE.Float32BufferAttribute(facade,4));g.setAttribute('facadeFlags',new THREE.Float32BufferAttribute(flags,1));
  const localY=new Float32Array(count);for(let i=0;i<count;i++)localY[i]=g.attributes.position.getY(i);g.setAttribute('localY',new THREE.Float32BufferAttribute(localY,1));
  g.translate(0,b.base+.15,0);return g;
 }
 export function neighborhoodMaterial(texture){
  const m=new THREE.MeshStandardMaterial({map:texture,roughness:.93,side:THREE.DoubleSide});
  m.onBeforeCompile=s=>{s.uniforms.eveningWindows=neighborhoodLight;
- s.vertexShader='attribute float localY; varying float vLocalY; attribute vec4 house; varying vec4 vHouse; attribute vec4 paint; varying vec4 vPaint; varying vec3 vBuilding; varying vec3 vFace;\n'+s.vertexShader;
- s.vertexShader=s.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvLocalY=localY;vHouse=house;vPaint=paint;vBuilding=position;vFace=normal;');
- s.fragmentShader='uniform float eveningWindows; varying float vLocalY; varying vec4 vHouse; varying vec4 vPaint; varying vec3 vBuilding; varying vec3 vFace;\n'+s.fragmentShader;
+ s.vertexShader='attribute float localY; varying float vLocalY; attribute vec4 house; varying vec4 vHouse; attribute vec4 paint; varying vec4 vPaint; varying vec3 vBuilding; varying vec3 vFace; attribute vec4 facade; varying vec4 vFacade; attribute float facadeFlags; varying float vFlags;\n'+s.vertexShader;
+ s.vertexShader=s.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvLocalY=localY;vHouse=house;vPaint=paint;vBuilding=position;vFace=normal;vFacade=facade;vFlags=facadeFlags;');
+ s.fragmentShader='uniform float eveningWindows; varying float vLocalY; varying vec4 vHouse; varying vec4 vPaint; varying vec3 vBuilding; varying vec3 vFace; varying vec4 vFacade; varying float vFlags;\n'+s.fragmentShader;
  s.fragmentShader=s.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
  vec3 photo=texture2D(map,vMapUv).rgb;
  float roof=step(.3,abs(vFace.y));
@@ -40,16 +41,28 @@ export function neighborhoodMaterial(texture){
  float groove=1.0-smoothstep(.015,.04,mod(y,.16));
  if(vPaint.a>1.5)groove*=0.0;
  vec3 wall=paint*(1.0-groove*.15);
- vec2 bay=vec2(mod(u+vHouse.z*2.,2.8),mod(y,2.75));
- float trim=step(.69,bay.x)*step(bay.x,1.99)*step(.68,bay.y)*step(bay.y,2.12);
- float glass=step(.8,bay.x)*step(bay.x,1.88)*step(.79,bay.y)*step(bay.y,2.01);
+ // window bays: the real count across the street face when the town photo gave one, else the 2.8 m default
+ float hasData=step(3.5,vFlags);
+ float isFront=step(.7,dot(normalize(vFace.xz),vFacade.yz))*hasData;
+ float bayW=mix(2.8,vFacade.x,hasData);
+ float bx=mod(u+vHouse.z*2.,bayW);float wc=bayW*.5;
+ vec2 bay=vec2(bx,mod(y,2.75));
+ float trim=step(wc-.65,bx)*step(bx,wc+.65)*step(.68,bay.y)*step(bay.y,2.12);
+ float glass=step(wc-.54,bx)*step(bx,wc+.54)*step(.79,bay.y)*step(bay.y,2.01);
  wall=mix(wall,vec3(.87,.85,.79),trim);
  vec3 windowColor=mix(vec3(.09,.16,.20),vec3(.20,.29,.32),smoothstep(.8,2.0,bay.y));
  wall=mix(wall,windowColor,glass);
- float muntin=(1.-smoothstep(.025,.045,abs(bay.x-1.34)))+(1.-smoothstep(.025,.045,abs(bay.y-1.40)));
+ float muntin=(1.-smoothstep(.025,.045,abs(bx-wc)))+(1.-smoothstep(.025,.045,abs(bay.y-1.40)));
  wall=mix(wall,vec3(.81,.80,.74),clamp(muntin,0.,1.)*glass);
- float door=step(.5,mod(u+vHouse.z*8.,10.))*step(mod(u+vHouse.z*8.,10.),1.5)*step(y,2.05)*step(.3,y);
+ // the door: on the street face, centred, when we know the face; otherwise the old repeating door
+ float doorOld=step(.5,mod(u+vHouse.z*8.,10.))*step(mod(u+vHouse.z*8.,10.),1.5)*step(y,2.05)*step(.3,y);
+ float doorFront=step(abs(u-vFacade.w),.5)*isFront*step(y,2.05)*step(.3,y);
+ float door=mix(doorOld,doorFront,hasData);
  wall=mix(wall,vec3(.16,.22,.24),door);
+ // a porch across the street face where the photo shows one: posts, a rail and its own little roof line
+ float hasPorch=step(.5,mod(vFlags,2.0))*isFront;
+ if(hasPorch>.5){float pu=u-vFacade.w;float post=1.-smoothstep(.05,.09,abs(mod(pu+.7,1.4)-.7));float rail=step(.85,y)*step(y,.98)+step(.35,y)*step(y,.43);float slat=1.-smoothstep(.02,.04,abs(mod(pu,.16)-.08));float porchRoof=step(2.5,y)*step(y,2.72);
+  vec3 porchPaint=vec3(.86,.85,.80);float porchMask=clamp(post*step(y,2.72)+rail+slat*step(.43,y)*step(y,.85)+porchRoof,0.,1.);wall=mix(wall,porchPaint,porchMask*.9);}
  wall=mix(vec3(.39,.40,.38),wall,smoothstep(.28,.38,y));
  float eave=step(vHouse.y-.16,y);wall=mix(wall,vec3(.84,.83,.77),eave);
  if(vHouse.w>.5){wall=paint*(1.-groove*.15);float garage=step(.3,mod(u,4.5))*step(mod(u,4.5),3.9)*step(.1,y)*step(y,2.25);wall=mix(wall,vec3(.68,.69,.66)*(1.-groove*.2),garage);}
