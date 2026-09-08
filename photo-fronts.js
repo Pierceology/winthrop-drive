@@ -8,7 +8,7 @@ export class PhotoFronts {
  constructor({scene,world,neighborhoods,photos,network,anisotropy=4,radius=240,capacity=70,concurrency=3}){
   Object.assign(this,{scene,network,radius,capacity,concurrency,anisotropy});this.pending=0;this.queue=[];this.group=new THREE.Group();scene.add(this.group);
   const byId=new Map(world.buildings.map(b=>[b.id,b]));this.entries=[];
-  for(const [id,p] of Object.entries(photos)){const b=byId.get(id);if(!b||b.residence||!p.w||!p.h)continue;this.entries.push({id,pid:p.pid,w:p.cut?p.cw:p.w,h:p.cut?p.ch:p.h,cut:!!p.cut,b,record:neighborhoods.buildings[id],state:'idle',mesh:null,distance:Infinity});}
+  for(const [id,p] of Object.entries(photos)){const b=byId.get(id);if(!b||b.residence||!p.w||!p.h||p.hide)continue;this.entries.push({id,pid:p.pid,w:p.cut?p.cw:p.w,h:p.cut?p.ch:p.h,cut:!!p.cut,b,record:neighborhoods.buildings[id],state:'idle',mesh:null,distance:Infinity});}
  }
  // The street-facing wall: the footprint edge whose outward normal points most toward the nearest mapped road, long edges preferred.
  wall(b){
