@@ -40,3 +40,6 @@
 
 #touchReverse,#phoneHud,#sheetToggle,#roadWarning .closeWarn{display:none}
 @media(max-width:700px){#phoneHud,#sheetToggle,#roadWarning .closeWarn{display:inline-flex}}
+
+.review-redfin{display:inline-block;margin:6px 0 0;font-size:13px;color:#9fd8e6}
+.coverage-legend .photo-key::before{border:2px solid #3ddc84}

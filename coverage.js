@@ -22,7 +22,7 @@ export class CoverageMap{
   this.base=document.createElement('canvas');this.base.width=600;this.base.height=430;const c=this.base.getContext('2d');c.fillStyle='#142631';c.fillRect(0,0,600,430);c.strokeStyle='#4b636d';c.lineWidth=1;
   for(const road of world.roads){c.beginPath();road.points.forEach((p,i)=>{const[x,y]=this.map(p);i?c.lineTo(x,y):c.moveTo(x,y)});c.stroke();}
   c.fillStyle='#8c999c';for(const b of world.buildings){c.beginPath();b.rings[0].forEach((p,i)=>{const[x,y]=this.map(p);i?c.lineTo(x,y):c.moveTo(x,y)});c.fill();}
-  c.fillStyle='#efb568';for(const h of photos){const[x,y]=this.map(h.center);c.beginPath();c.arc(x,y,3,0,Math.PI*2);c.fill();}
+  c.fillStyle='#efb568';c.strokeStyle='#3ddc84';c.lineWidth=2;for(const h of photos){const[x,y]=this.map(h.center);c.beginPath();c.arc(x,y,3.5,0,Math.PI*2);c.fill();c.stroke();}/* green ring = photo walls done (Pierce, 2026-09-08) */
   c.font='18px system-ui';c.fillStyle='#c3d2d7';c.fillText('N ↑',553,30);c.font='16px system-ui';c.fillText('DEER ISLAND',365,413);
   this.canvas.onclick=e=>{const box=this.canvas.getBoundingClientRect(),p=[(e.clientX-box.left)*600/box.width,(e.clientY-box.top)*430/box.height];const close=photos.map(h=>({h,d:Math.hypot(...this.map(h.center).map((v,i)=>v-p[i]))})).sort((a,b)=>a.d-b.d)[0];if(close?.d<12)onVisit(close.h);else onCenter(this.unmap(p));};
   const vertices=[];const ids=new Set(photos.map(h=>h.id));for(const b of world.buildings.filter(b=>ids.has(b.id))){for(const ring of b.rings)for(let i=1;i<ring.length;i++)for(const p of [ring[i-1],ring[i]])vertices.push(p[0],heightAt(...p)+.3,p[1]);}
