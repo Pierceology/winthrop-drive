@@ -13,6 +13,7 @@ import {addOwnedFacades} from './owned-facades.js';
 import {photoHouse} from './photo-houses.js';
 import {trafficSigns} from './traffic-signs.js';
 import {roadside} from './roadside.js';
+import {streetFurniture} from './street-furniture.js';
 import {EveningDrive} from './evening.js';
 import {neighborhoodGeometry,neighborhoodMaterial,neighborhoodLight} from './neighborhoods.js';
 import {streetAssets} from './street-assets.js';
@@ -104,7 +105,8 @@ async function init(){
  labels=new MapLabels(scene,world.roads,poi.places,surfaceAt,p=>{chooseSpot(new THREE.Vector3(p.x,surfaceAt(p.x,p.z),p.z));detail(p.name,[['Type',p.kind.replaceAll('_',' ')],['Address',p.address||'Not recorded'],['Source','OpenStreetMap — listing may be incomplete or outdated']]);const a=document.createElement('a');a.textContent='View mapped listing';a.href=p.url;a.target='_blank';a.rel='noopener';$('selectionDetails').append(a);});
  signGroup=trafficSigns(signData,surfaceAt);scene.add(signGroup);
  if(new URLSearchParams(location.search).get('fronts')!=='0')get('./data/assessor-photos.json').then(photos=>{photoFronts=new PhotoFronts({scene,world,neighborhoods,photos,network:driving.state.network,anisotropy:Math.min(renderer.capabilities.getMaxAnisotropy(),8)});photoFronts.update(camera.position.x,camera.position.z);window.__fronts=photoFronts;}).catch(e=>console.warn('Photo fronts unavailable',e));
- roadsideGroup=roadside(assetData,driving.state.network,surfaceAt);scene.add(roadsideGroup);evening=new EveningDrive(scene,surfaceAt);
+ roadsideGroup=roadside(assetData,driving.state.network,surfaceAt);scene.add(roadsideGroup);
+ Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt);scene.add(g);window.__furniture=g;}).catch(e=>console.warn('Street furniture unavailable',e));evening=new EveningDrive(scene,surfaceAt);
  assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Street inventory · ${assetData.assets.length} points`;
  ambient=new AmbientLife(scene,driving.state.network,surfaceAt);tour=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';});
  canopyData=await get('./data/tree-survey.json');canopyGroup=treeSurvey(canopyData,surfaceAt);scene.add(canopyGroup);
