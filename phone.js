@@ -19,7 +19,10 @@ if (coarse) {
   const warn = document.getElementById('roadWarning');
   if (warn && !warn.querySelector('.closeWarn')) {
     const x = document.createElement('button'); x.className = 'closeWarn'; x.type = 'button'; x.textContent = '×'; x.setAttribute('aria-label', 'Dismiss');
-    x.onclick = () => { warn.hidden = true; }; warn.prepend(x);
+    // driving.js re-shows the warning every 100ms while the car is still wrong-way or off the road, so `hidden` alone
+    // undid the tap. The dismissal is a class; it clears when the warning goes away on its own, so the next one shows.
+    x.onclick = () => { warn.classList.add('dismissed'); }; warn.prepend(x);
+    new MutationObserver(() => { if (warn.hidden) warn.classList.remove('dismissed'); }).observe(warn, { attributes: true, attributeFilter: ['hidden'] });
   }
   const strip = document.querySelector('.driveactions');
   if (strip && !document.getElementById('phoneHud')) {
