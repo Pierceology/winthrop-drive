@@ -30,7 +30,7 @@ export async function treeScenery(data,heightAt,network,canopyAreas={placements:
  const material=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1});
  for(const p of canopyAreas.placements){
   if(network.contains(p.x,p.z,-1)||network.obstructed(p.x,p.z)||data.candidates.some(c=>c.review==='accepted'&&Math.hypot(p.x-c.x,p.z-c.z)<c.radius+3)){areaWithheld++;continue;}
-  const seed=Math.abs(Math.round(p.x*17+p.z*31)),m=models[seed%models.length],radius=p.radius||3.2,height=THREE.MathUtils.clamp(p.height||radius*2.8,6,16),scale=radius*2/Math.max(m.size.x,m.size.z);
+  const seed=Math.abs(Math.round(p.x*17+p.z*31)),m=models[seed%models.length],radius=p.radius||3.2,height=THREE.MathUtils.clamp(p.height||radius*2.8,p.height?3.5:6,p.height?26:16),scale=radius*2/Math.max(m.size.x,m.size.z);
   const g=m.geometry.clone();g.translate(-(m.box.min.x+m.box.max.x)/2,-m.box.min.y,-(m.box.min.z+m.box.max.z)/2);g.scale(scale,height/m.size.y,scale);
   dummy.position.set(p.x,heightAt(p.x,p.z),p.z);dummy.rotation.set(0,(seed%360)*Math.PI/180,0);dummy.updateMatrix();g.applyMatrix4(dummy.matrix);
   const key=Math.floor(p.x/220)+','+Math.floor(p.z/220);if(!cells.has(key))cells.set(key,[]);cells.get(key).push(g);areaCount++;

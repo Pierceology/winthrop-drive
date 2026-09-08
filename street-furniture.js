@@ -35,6 +35,22 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
  batch(new THREE.CylinderGeometry(.07,.11,7,8),post,lamps,3.5,'lampPosts');batch(new THREE.CylinderGeometry(.22,.3,.32,10),bulb,lamps,7.05,'lampHeads');
  const stops=furniture.busStops.filter(a=>!network.contains(a.x,a.z,-.5)).map(a=>{const s=network.nearest(a.x,a.z,true);return {...a,yaw:s?Math.atan2(s.dx,s.dz):0};});
  batch(new THREE.CylinderGeometry(.04,.04,2.6,6),post,stops,1.3,'busPosts');batch(new THREE.BoxGeometry(.05,.5,.4),plate,stops,2.3,'busPlates');
- group.userData.audit={crossings:crossings.crossings.length,spans:wire.length/6/4,lamps:lamps.length,busStops:stops.length};
+ // Traffic signals: one pole-mounted head per approach, on the driver's right 8 m before the mapped node.
+ const heads=[];
+ for(const sg of furniture.signals||[]){
+  for(const s of network.segments){
+   if(!(s.width>=3)||s.length<12)continue;const t=((sg.x-s.a[0])*s.dx+(sg.z-s.a[1])*s.dz)/(s.length*s.length),px=s.a[0]+s.dx*t,pz=s.a[1]+s.dz*t;
+   if(t<-.05||t>1.05||Math.hypot(px-sg.x,pz-sg.z)>7)continue;
+   const ends=[];if(t>.15)ends.push(s.a);if(t<.85)ends.push(s.b);
+   for(const [fx,fz] of ends){let dx=fx-sg.x,dz=fz-sg.z;const L=Math.hypot(dx,dz)||1;dx/=L;dz/=L;if(L<12)continue;const hx=-dx,hz=-dz,rx=-hz,rz=hx,W=Math.max(6,Math.min(16,s.width||9));
+    heads.push({x:sg.x+dx*8+rx*(W/2+.8),z:sg.z+dz*8+rz*(W/2+.8),yaw:Math.atan2(hx,hz)});}
+  }
+ }
+ if(heads.length){
+  batch(new THREE.CylinderGeometry(.06,.08,4.6,8),post,heads,2.3,'signalPoles');
+  const housing=new THREE.MeshStandardMaterial({color:'#2d3a2f',roughness:.8});batch(new THREE.BoxGeometry(.32,1.05,.3),housing,heads,4.25,'signalHeads');
+  for(const [dy,col] of [[.32,'#d23b2f'],[0,'#e0b52a'],[-.32,'#2f9e57']]){const lamp=new THREE.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:.5});const g=new THREE.SphereGeometry(.1,10,8);g.translate(0,0,.16);batch(g,lamp,heads,4.25+dy,'signalLamp'+dy);}
+ }
+ group.userData.audit={crossings:crossings.crossings.length,spans:wire.length/6/4,lamps:lamps.length,busStops:stops.length,signalHeads:heads.length};
  return group;
 }
