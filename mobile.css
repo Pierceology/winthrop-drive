@@ -66,7 +66,10 @@
 
   /* the touch layer is the steering wheel; the pedal buttons are gone on phones */
   body.driving .pedals { display: none !important; }
-  #touchDrive { display: none; position: fixed; inset: 0; z-index: 5; touch-action: none; -webkit-user-select: none; user-select: none; }
+  /* z-index 1 = same layer as the 3D view, appended after it: above the canvas, under every button */
+  #touchDrive { display: none; position: fixed; inset: 0; z-index: 1; touch-action: none; -webkit-user-select: none; user-select: none; }
+  body.driving #roadWarning { z-index: 20; }
+  body.driving header { z-index: 10; }
   body.driving #touchDrive { display: block; }
   #touchDrive .hint { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); padding: 8px 12px; border-radius: 999px; background: #0b1a22cc; border: 1px solid #ffffff2e; color: #dfe9ee; font-size: 12px; letter-spacing: .02em; white-space: nowrap; pointer-events: none; transition: opacity .4s; }
   body.touched #touchDrive .hint { opacity: 0; }
