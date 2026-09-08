@@ -4,7 +4,7 @@ import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 // Street furniture from OpenStreetMap, at OSM's positions: painted crossings across the through road,
 // power lines hung between consecutive pole nodes, street lamps and bus-stop posts. Nothing here is guessed
 // beyond road width (the mapped inventory width, else 9 m) and the standard shapes of the objects.
-export function streetFurniture({crossings,powerLines,furniture},network,heightAt){
+export function streetFurniture({crossings,powerLines,furniture},network,heightAt,lights=null){
  const group=new THREE.Group();group.name='streetFurniture';
  // Crossings: continental bars 0.4 m wide across the road, 2.4 m deep, at road grade.
  const bars=[];
@@ -40,16 +40,18 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
  for(const sg of furniture.signals||[]){
   for(const s of network.segments){
    if(!(s.width>=3)||s.length<12)continue;const t=((sg.x-s.a[0])*s.dx+(sg.z-s.a[1])*s.dz)/(s.length*s.length),px=s.a[0]+s.dx*t,pz=s.a[1]+s.dz*t;
-   if(t<-.05||t>1.05||Math.hypot(px-sg.x,pz-sg.z)>7)continue;
+   if(t<-.05||t>1.05||Math.hypot(px-sg.x,pz-sg.z)>12)continue;
    const ends=[];if(t>.15)ends.push(s.a);if(t<.85)ends.push(s.b);
    for(const [fx,fz] of ends){let dx=fx-sg.x,dz=fz-sg.z;const L=Math.hypot(dx,dz)||1;dx/=L;dz/=L;if(L<12)continue;const hx=-dx,hz=-dz,rx=-hz,rz=hx,W=Math.max(6,Math.min(16,s.width||9));
-    heads.push({x:sg.x+dx*8+rx*(W/2+.8),z:sg.z+dz*8+rz*(W/2+.8),yaw:Math.atan2(hx,hz)});}
+    const node=lights&&lights.near(sg.x,sg.z,1);heads.push({x:sg.x+dx*8+rx*(W/2+.8),z:sg.z+dz*8+rz*(W/2+.8),yaw:Math.atan2(hx,hz),node,axis:node?lights.axisFor(node,hx,hz):0});}
   }
  }
  if(heads.length){
   batch(new THREE.CylinderGeometry(.06,.08,4.6,8),post,heads,2.3,'signalPoles');
   const housing=new THREE.MeshStandardMaterial({color:'#2d3a2f',roughness:.8});batch(new THREE.BoxGeometry(.32,1.05,.3),housing,heads,4.25,'signalHeads');
-  for(const [dy,col] of [[.32,'#d23b2f'],[0,'#e0b52a'],[-.32,'#2f9e57']]){const lamp=new THREE.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:.5});const g=new THREE.SphereGeometry(.1,10,8);g.translate(0,0,.16);batch(g,lamp,heads,4.25+dy,'signalLamp'+dy);}
+  const lampMeshes=[];const OFF=new THREE.Color('#1b1d1f');
+  for(const [dy,col] of [[.32,'#e0392b'],[0,'#f2c230'],[-.32,'#37b061']]){const lamp=new THREE.MeshBasicMaterial({color:'#ffffff'});const g=new THREE.SphereGeometry(.1,10,8);g.translate(0,0,.16);const mesh=new THREE.InstancedMesh(g,lamp,heads.length),o=new THREE.Object3D();heads.forEach((p,i)=>{o.position.set(p.x,heightAt(p.x,p.z)+4.25+dy,p.z);o.rotation.set(0,p.yaw,0);o.updateMatrix();mesh.setMatrixAt(i,o.matrix);mesh.setColorAt(i,OFF);});mesh.name='signalLamps';group.add(mesh);lampMeshes.push({mesh,on:new THREE.Color(col),state:dy>0?'red':dy<0?'green':'yellow'});}
+  group.userData.lights={update(time){if(!lights)return;heads.forEach((h,i)=>{const st=h.node?lights.state(h.node,h.axis,time):'red';for(const l of lampMeshes)l.mesh.setColorAt(i,l.state===st?l.on:OFF);});for(const l of lampMeshes)l.mesh.instanceColor.needsUpdate=true;}};
  }
  group.userData.audit={crossings:crossings.crossings.length,spans:wire.length/6/4,lamps:lamps.length,busStops:stops.length,signalHeads:heads.length};
  return group;

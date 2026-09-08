@@ -4,7 +4,7 @@ import {lanePoint} from './lane-position.js';
 // an angry beep then a pass when the road is wide enough and nothing is coming. Stops when a mapped route ends.
 const MPH=.44704;
 export class AutoCruise{
- constructor(network){this.network=network;this.edges=[];this.nodes=new Map();this.active=false;this.reason='';this.note='';this.glance=0;this.honk=false;this.stops=[];this.signals=[];this.traffic=null;const key=p=>p.map(v=>Math.round(v/2)).join(',');this.key=key;
+ constructor(network){this.network=network;this.edges=[];this.nodes=new Map();this.active=false;this.reason='';this.note='';this.glance=0;this.honk=false;this.stops=[];this.signals=[];this.traffic=null;this.lights=null;const key=p=>p.map(v=>Math.round(v/2)).join(',');this.key=key;
  for(const s of network.segments){if(s.direction===null||s.direction===undefined)continue;for(const reverse of(s.direction===1?[false]:s.direction===-1?[true]:[false,true])){const e={...s,a:reverse?s.b:s.a,b:reverse?s.a:s.b,dx:reverse?-s.dx:s.dx,dz:reverse?-s.dz:s.dz};this.edges.push(e);const k=key(e.a);if(!this.nodes.has(k))this.nodes.set(k,[]);this.nodes.get(k).push(e);}}
  }
  start(state){let best=null;for(const e of this.edges){const t=Math.max(0,Math.min(1,((state.x-e.a[0])*e.dx+(state.z-e.a[1])*e.dz)/e.length**2)),d=Math.hypot(state.x-e.a[0]-t*e.dx,state.z-e.a[1]-t*e.dz);const alignment=-Math.sin(state.yaw)*e.dx-Math.cos(state.yaw)*e.dz,score=d+(alignment<0?3:0);if(!best||score<best.score)best={e,t,d,score};}if(!best||best.d>20){this.reason='No direction-mapped road nearby';return false;}this.edge=best.e;this.t=best.t;this.visits=new Map();if(this.t>.97){const n=this.nextEdges(best.e)[0];if(n){this.edge=n;this.t=.01;}else{this.reason='End of mapped route · take control';return false;}}this.transition=null;const lane=lanePoint(this.edge,this.t);if(!this.network.contains(lane.x,lane.z,.95)){this.reason='Lane obstructed';return false;}state.x=lane.x;state.z=lane.z;this.active=true;this.reason='';this.note='';this.visits=new Map();this.junction=null;this.pass=null;this.offset=0;this.held=0;this.honkAt=-99;this.clock=0;this.glance=0;state.speed=Math.max(0,state.speed);state.yaw=Math.atan2(-this.edge.dx,-this.edge.dz);return true;}
@@ -21,6 +21,11 @@ export class AutoCruise{
  const limit=this.limit(e),remaining=(1-this.t)*e.length,control=next?this.control(e,this.t):null,realTurn=turn>.35;
  // --- the junction ahead: decide once per edge whether it needs a stop or a slow-and-look
  if(next&&!this.junction&&(control||realTurn)&&remaining<Math.max(12,state.speed*state.speed/6+8)){this.junction={edge:e,kind:control||'turn',phase:'approach',timer:0,left,minSpeed:control?0:1.6};}
+ // a working light: green means go (a glance, no stop); yellow or red means stop at the line and wait for green
+ if(this.junction&&this.junction.kind==='signal'&&this.lights){const j=this.junction,l=this.lights.lightAhead(e.b[0],e.b[1],e.dx/e.length,e.dz/e.length,this.clock,10);j.light=l?l.state:'green';
+  if(j.phase==='approach'&&j.light==='green'){j.minSpeed=realTurn?1.6:Math.max(3,this.limit(e)*.7);if(!realTurn){j.phase='go';this.note='Green light';}}
+  if(j.phase==='approach'&&j.light==='yellow'&&remaining<state.speed*1.2){j.minSpeed=Math.max(3,this.limit(e)*.7);j.phase='go';this.note='Yellow · going through';}
+  if(j.phase!=='go'&&j.light!=='green')j.minSpeed=0;}
  // --- traffic ahead in our lane, and anything coming the other way
  const cars=this.cars(state);let leader=null,oncoming=null;for(const c of cars){if(c.ahead>1&&c.ahead<32&&Math.abs(c.side-this.offset)<2.2&&c.heading>.3&&(!leader||c.ahead<leader.ahead))leader=c;if(c.ahead>-4&&c.ahead<60&&c.heading<-.3&&Math.abs(c.side)<5.5&&(!oncoming||c.ahead<oncoming.ahead))oncoming=c;}
  let desired=limit;this.note='';
@@ -41,7 +46,8 @@ export class AutoCruise{
    else if(j.phase==='left2'){this.glance=Math.PI/2;if(j.timer>.45){j.phase='wait';j.timer=0;}}
    else if(j.phase==='wait'){// anyone about to cross the junction from the side? keep looking their way until they are through
     const cross=cars.find(c=>Math.abs(c.heading)<.7&&Math.hypot(c.a.model.position.x-e.b[0],c.a.model.position.z-e.b[1])<24);
-    if(cross&&j.timer<6){this.glance=cross.side<0?Math.PI/2:-Math.PI/2;this.note='Waiting for a gap';}else{j.phase='go';j.timer=0;this.glance=0;}}
+    const red=j.kind==='signal'&&j.light&&j.light!=='green';if(red){this.glance=Math.sin(j.timer*1.2)>0?Math.PI/2:-Math.PI/2;this.note='Red light';}
+    else if(cross&&j.timer<6){this.glance=cross.side<0?Math.PI/2:-Math.PI/2;this.note='Waiting for a gap';}else{j.phase='go';j.timer=0;this.glance=0;}}
    if(this.note==='')this.note=j.kind==='stop'?'Stop sign · looking both ways':j.kind==='signal'?'Signal · looking both ways':'Turn ahead · looking both ways';}
   if(j.phase==='go'){this.glance=0;if(this.edge!==j.edge&&this.t*this.edge.length>6)this.junction=null;}
  } else this.glance=0;

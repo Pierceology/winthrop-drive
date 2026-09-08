@@ -1,5 +1,6 @@
 import {houseStop,houseView} from './frontage.js';
-import {sedan} from './ambient.js';
+import {sedan} from './ambient.js'
+import {carKit} from './car-kit.js';
 import {AutoCruise} from './auto-cruise.js';
 import * as THREE from 'three';
 import {rigWheels,updateWheels} from './wheel-rig.js';
@@ -47,7 +48,7 @@ export class Driving {
  document.getElementById('exitDrive').onclick=()=>this.exit();document.getElementById('resetCar').onclick=()=>this.reset();document.getElementById('driveCamera').onclick=()=>this.toggleCamera();document.getElementById('pauseDrive').onclick=()=>this.pause(!this.paused);
  }
  setPaint(color){this.paintColor=color;if(!this.model)return;this.model.traverse(o=>{if(!o.isMesh)return;for(const m of(Array.isArray(o.material)?o.material:[o.material]))if(m.name==='Body_Color'||m===this.model.userData.paint)m.color.set(color);});}
- selectCar(type){if(!this.vehicle)return;this.carType=type;this.state.performance=type==='ferrari'?{top:325/3.6,launch:8.8,power:260}:{top:180/3.6,launch:4,power:100};if(!this.cars.has(type))this.cars.set(type,sedan(0,type));this.vehicle.remove(this.model);this.model=this.cars.get(type);this.model.position.y=0;this.model.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(this.model);this.model.position.y=-bounds.min.y;this.vehicle.add(this.model);this.wheels=rigWheels(this.model);this.setPaint(this.paintColor);this.model.visible=this.view==='chase';}
+ selectCar(type){if(!this.vehicle)return;this.carType=type;this.state.performance=type==='ferrari'?{top:325/3.6,launch:8.8,power:260}:{top:180/3.6,launch:4,power:100};if(!this.cars.has(type)){if(type.startsWith('kit:')){carKit.load(type.slice(4)).then(t=>{if(this.carType!==type)return;this.cars.set(type,carKit.instance(t));this.selectCar(type);}).catch(()=>{});return;}this.cars.set(type,sedan(0,type));}this.vehicle.remove(this.model);this.model=this.cars.get(type);this.model.position.y=0;this.model.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(this.model);this.model.position.y=-bounds.min.y;this.vehicle.add(this.model);this.wheels=rigWheels(this.model);this.setPaint(this.paintColor);this.model.visible=this.view==='chase';}
  reset(){this.cruise.stop();this.state.spawn(this.state.x,this.state.z);this.input={};this.update(0,performance.now(),true)}
  pause(value){this.paused=value;if(!value){this.lookTarget=null;this.setLook(0);}this.audio.update(this.active&&!value,this.state.speed,false);this.input={};document.getElementById('pauseDrive').textContent=value?'Resume':'Pause'}
  toggleCamera(){this.view=this.view==='chase'?'hood':'chase';/* interior view retired (Pierce, 2026-09-08) */document.getElementById('driveCamera').textContent={chase:'Hood camera',hood:'Chase camera',interior:'Chase camera'}[this.view];document.body.classList.toggle('cockpit-view',this.view==='interior');}
