@@ -8,11 +8,11 @@ export class PhotoFronts {
  constructor({scene,world,neighborhoods,photos,network,anisotropy=4,radius=240,capacity=70,concurrency=3}){
   Object.assign(this,{scene,network,radius,capacity,concurrency,anisotropy});this.pending=0;this.queue=[];this.group=new THREE.Group();scene.add(this.group);
   const byId=new Map(world.buildings.map(b=>[b.id,b]));this.entries=[];
-  for(const [id,p] of Object.entries(photos)){const b=byId.get(id);if(!b||b.residence||!p.w||!p.h||p.hide)continue;this.entries.push({id,pid:p.pid,w:p.cut?p.cw:p.w,h:p.cut?p.ch:p.h,cut:!!p.cut,b,record:neighborhoods.buildings[id],state:'idle',mesh:null,distance:Infinity});}
+  for(const [id,p] of Object.entries(photos)){const b=byId.get(id);if(!b||b.residence||!p.w||!p.h||p.hide)continue;this.entries.push({id,pid:p.pid,w:p.cut?p.cw:p.w,h:p.cut?p.ch:p.h,cut:!!p.cut,edge:p.edge,b,record:neighborhoods.buildings[id],state:'idle',mesh:null,distance:Infinity});}
  }
  // The street-facing wall: the footprint edge whose outward normal points most toward the nearest mapped road, long edges preferred.
- wall(b){
-  const ring=b.rings[0];let area=0;for(let i=1;i<ring.length;i++)area+=ring[i-1][0]*ring[i][1]-ring[i][0]*ring[i-1][1];const cw=area<0;
+ wall(b,edge){
+  const ring=b.rings[0];if(edge!==undefined&&ring[edge+1]){let area=0;for(let i=1;i<ring.length;i++)area+=ring[i-1][0]*ring[i][1]-ring[i][0]*ring[i-1][1];const p=ring[edge],q=ring[edge+1],dx=q[0]-p[0],dz=q[1]-p[1],len=Math.hypot(dx,dz);let nx=dz/len,nz=-dx/len;if(area<0){nx=-nx;nz=-nz;}return {p,q,nx,nz,len,score:1};}let area=0;for(let i=1;i<ring.length;i++)area+=ring[i-1][0]*ring[i][1]-ring[i][0]*ring[i-1][1];const cw=area<0;
   let best=null;
   for(let i=1;i<ring.length;i++){
    const p=ring[i-1],q=ring[i],dx=q[0]-p[0],dz=q[1]-p[1],len=Math.hypot(dx,dz);if(len<2.5)continue;
@@ -24,7 +24,7 @@ export class PhotoFronts {
   return best;
  }
  build(e,texture){
-  const w=this.wall(e.b);if(!w)return null;const base=e.b.base+.15,eave=e.record?.wall||8,roof=e.record?.roof||[];let ridge=eave;for(let i=1;i<roof.length;i+=3)ridge=Math.max(ridge,roof[i]);
+  const w=this.wall(e.b,e.edge);if(!w)return null;const base=e.b.base+.15,eave=e.record?.wall||8,roof=e.record?.roof||[];let ridge=eave;for(let i=1;i<roof.length;i+=3)ridge=Math.max(ridge,roof[i]);
   let natural=w.len*e.h/e.w,H,W=w.len,u0=0,u1=1,v0=0,v1=1;
   if(e.cut){// a cut-out keeps the photo's own proportions: never taller than the roof allows; a long wall keeps its siding either side
    const cap=ridge*1.3;if(natural>cap){H=cap;W=cap*e.w/e.h;}else H=natural;}
