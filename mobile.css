@@ -128,3 +128,13 @@
   body.driving #minimap { width: 64px; height: 64px; bottom: 60px; }
   body.driving .driveactions button { min-height: 34px; font-size: 11px; }
 }
+
+/* Touch screens: no blue tap flash, no text selection, no long-press callout. Holding R or the road is a control, not a selection. */
+@media (pointer: coarse) {
+  html, body, header, aside, button, label, summary, #touchDrive, #touchReverse, #drivehud, .driveactions, .pedals, #maplabels, #houseAddressLabels, canvas {
+    -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+  }
+  button, summary, label { touch-action: manipulation; }
+  input, textarea { -webkit-user-select: text; user-select: text; }
+  ::selection { background: transparent; }
+}

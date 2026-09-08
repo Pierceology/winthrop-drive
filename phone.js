@@ -4,6 +4,10 @@
 //  - "Hide panels" in the driving strip clears the road card, speed, minimap and hint (base minimal-hud mode)
 const coarse = matchMedia('(pointer:coarse)').matches || new URLSearchParams(location.search).has('touch');
 if (coarse) {
+  // holding a control must never open the copy/lookup menu or start a selection
+  for (const id of ['touchDrive', 'touchReverse']) { const e = document.getElementById(id); if (e) e.addEventListener('contextmenu', ev => ev.preventDefault()); }
+  document.addEventListener('contextmenu', ev => { if (ev.target.closest('button, #touchDrive, canvas')) ev.preventDefault(); });
+  document.addEventListener('selectstart', ev => { if (!ev.target.closest('input, textarea')) ev.preventDefault(); });
   const sheet = document.querySelector('aside.places');
   if (sheet && !document.getElementById('sheetToggle')) {
     const bar = document.createElement('button'); bar.id = 'sheetToggle'; bar.type = 'button';
