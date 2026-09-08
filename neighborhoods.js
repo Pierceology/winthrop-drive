@@ -14,25 +14,31 @@ export function neighborhoodGeometry(shape,b,record){
  const count=g.attributes.position.count,meta=new Float32Array(count*4);let seed=0;for(const c of String(b.id))seed=(seed*31+c.charCodeAt(0))>>>0;
  for(let i=0;i<count;i++)meta.set([record?1:0,h,(seed%1000)/1000,record?.accessory?1:0],i*4);
  g.setAttribute('house',new THREE.Float32BufferAttribute(meta,4));
+ // Cross-referenced look (assessor record + the town's own photo): rgb = siding colour, a = 0 none / 1 siding / 2 brick or masonry / 3 stucco or shingle
+ const paint=new Float32Array(count*4);{const c=record?.color?new THREE.Color(record.color):null;const mat=(record?.material||'').toLowerCase();const code=!c?0:/brick|stone|concrete|masonry/.test(mat)?2:/stucco|shingle/.test(mat)?3:1;for(let i=0;i<count;i++)paint.set([c?c.r:0,c?c.g:0,c?c.b:0,code],i*4);}
+ g.setAttribute('paint',new THREE.Float32BufferAttribute(paint,4));
  const localY=new Float32Array(count);for(let i=0;i<count;i++)localY[i]=g.attributes.position.getY(i);g.setAttribute('localY',new THREE.Float32BufferAttribute(localY,1));
  g.translate(0,b.base+.15,0);return g;
 }
 export function neighborhoodMaterial(texture){
  const m=new THREE.MeshStandardMaterial({map:texture,roughness:.93,side:THREE.DoubleSide});
  m.onBeforeCompile=s=>{s.uniforms.eveningWindows=neighborhoodLight;
- s.vertexShader='attribute float localY; varying float vLocalY; attribute vec4 house; varying vec4 vHouse; varying vec3 vBuilding; varying vec3 vFace;\n'+s.vertexShader;
- s.vertexShader=s.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvLocalY=localY;vHouse=house;vBuilding=position;vFace=normal;');
- s.fragmentShader='uniform float eveningWindows; varying float vLocalY; varying vec4 vHouse; varying vec3 vBuilding; varying vec3 vFace;\n'+s.fragmentShader;
+ s.vertexShader='attribute float localY; varying float vLocalY; attribute vec4 house; varying vec4 vHouse; attribute vec4 paint; varying vec4 vPaint; varying vec3 vBuilding; varying vec3 vFace;\n'+s.vertexShader;
+ s.vertexShader=s.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvLocalY=localY;vHouse=house;vPaint=paint;vBuilding=position;vFace=normal;');
+ s.fragmentShader='uniform float eveningWindows; varying float vLocalY; varying vec4 vHouse; varying vec4 vPaint; varying vec3 vBuilding; varying vec3 vFace;\n'+s.fragmentShader;
  s.fragmentShader=s.fragmentShader.replace('#include <map_fragment>',`#ifdef USE_MAP
  vec3 photo=texture2D(map,vMapUv).rgb;
  float roof=step(.3,abs(vFace.y));
  vec3 paint=mix(vec3(.59,.64,.62),vec3(.79,.76,.66),vHouse.z);
  if(vHouse.z<.22)paint=vec3(.32,.43,.49);
  if(vHouse.z>.82)paint=vec3(.79,.80,.76);
+ // the real colour, when the assessor photo gave one; brick and stucco lose the clapboard grooves
+ if(vPaint.a>.5)paint=vPaint.rgb;
  // Per-face horizontal coordinate, meter-scaled siding and repeated window bays.
  float u=vBuilding.x*abs(vFace.z)+vBuilding.z*abs(vFace.x);
  float y=vLocalY;
  float groove=1.0-smoothstep(.015,.04,mod(y,.16));
+ if(vPaint.a>1.5)groove*=0.0;
  vec3 wall=paint*(1.0-groove*.15);
  vec2 bay=vec2(mod(u+vHouse.z*2.,2.8),mod(y,2.75));
  float trim=step(.69,bay.x)*step(bay.x,1.99)*step(.68,bay.y)*step(bay.y,2.12);
