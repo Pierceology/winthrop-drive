@@ -32,9 +32,9 @@ function aerialMaterial(tiles,origin){
  material.customProgramCacheKey=()=> 'original-ground-aerial-'+tiles.length;
  return material;
 }
-export async function buildGroundWorld(data,tiles,origin,roadMaterial){
+export async function buildGroundWorld(data,tiles,origin,roadMaterial,groundMaterial=null){
  const arrays=await loadSurfaces(data,new URL('./',location.href)),field=contactField(data,arrays);
- const ground=mesh(arrays.ground,aerialMaterial(tiles,origin)),road=mesh(arrays.road,roadMaterial);
+ const ground=mesh(arrays.ground,groundMaterial||aerialMaterial(tiles,origin)),road=mesh(arrays.road,roadMaterial);
  const walk=mesh(arrays.walk,new THREE.MeshStandardMaterial({color:'#a3a49e',roughness:1,side:THREE.DoubleSide}));
  const curb=mesh(arrays.curb,new THREE.MeshStandardMaterial({color:'#b3b5b1',roughness:1,side:THREE.DoubleSide}));
  for(const m of[ground,road,walk,curb])m.userData.previewTile=true;ground.userData.aerialTiles=tiles;ground.userData.origin=origin;road.userData.previewColor=[.115,.125,.132];

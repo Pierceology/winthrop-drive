@@ -27,6 +27,7 @@ import {OrbitControls} from './vendor/OrbitControls.js';
 import {asphaltMaterial} from './road-mesh.js';
 import {makeResidence} from './residential.js';
 import {Driving} from './driving.js';
+import {OrthoGround} from './ortho-ground.js';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 const PUBLIC=!new URLSearchParams(location.search).has('studio');if(!PUBLIC)document.body.classList.add('studio');
 const $=id=>document.getElementById(id);
@@ -100,7 +101,9 @@ async function init(){
   for(const [id,[off,nv,nt,wall]] of Object.entries(idx.buildings)){const c=centers.get(id);if(!c)continue;const xs=new Int16Array(buf,off,nv),ys=new Uint16Array(buf,off+nv*2,nv),zs=new Int16Array(buf,off+nv*4,nv),tri=new Uint16Array(buf,off+nv*6,nt*3);const roof=new Float32Array(nt*9);for(let i=0;i<nt*3;i++){const v=tri[i];roof[i*3]=c[0]+xs[v]/100;roof[i*3+1]=ys[v]/100;roof[i*3+2]=c[1]+zs[v]/100;}
    const rec=neighborhoods.buildings[id]||(neighborhoods.buildings[id]={address:'',stories:0,accessory:false});rec.wall=wall;rec.roof=roof;rec.roofSource='lidar';applied++;}
   window.__lidarRoofs=applied;}catch(e){console.warn('LiDAR roofs unavailable',e);}
- groundWorld=await buildGroundWorld(foundationData,roofTiles,origin,asphaltMaterial());
+ // The ground's photograph streams in behind the first frame: a 2 m/px base of the whole town, then 25 cm tiles by distance from the car.
+ const ortho=new OrthoGround({origin,renderer,lowMemory});window.__ortho=ortho;
+ groundWorld=await buildGroundWorld(foundationData,roofTiles,origin,asphaltMaterial(),ortho.material);
  terrain=groundWorld.ground;pavement=groundWorld.road;terrainMeshes=[terrain,groundWorld.walk,groundWorld.curb];surfaceAt=groundWorld.field.height;heightAt=surfaceAt;scene.add(terrain,pavement,groundWorld.walk,groundWorld.curb);
  addGeometry();for(const b of world.buildings)if(b.neighborhood&&b.neighborhood.roofSource==='lidar')b.neighborhood.roof=null;
  const ownedFacades=await addOwnedFacades(buildings,world,surfaceAt);
@@ -121,7 +124,7 @@ async function init(){
  roadsideGroup=roadside(assetData,driving.state.network,surfaceAt);scene.add(roadsideGroup);
  Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem);scene.add(g);furnitureGroup=g;window.__furniture=g;}).catch(e=>console.warn('Street furniture unavailable',e));evening=new EveningDrive(scene,surfaceAt);weather=new Weather({scene,hemi,sun});weather.bind(['weather','weatherDrive']);
  assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Signs, poles and hydrants · ${assetData.assets.length}`;
-window.__drive=driving; ambient=new AmbientLife(scene,driving.state.network,surfaceAt);driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;
+window.__drive=driving;window.__controls=controls;window.__camera=camera; ambient=new AmbientLife(scene,driving.state.network,surfaceAt);driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;
  tour={get active(){return coastal.active||flight.active;},start(){flight.stop();coastal.start();},stop(){coastal.stop();flight.stop();},update(dt){coastal.update(dt);flight.update(dt);}};}
  canopyData=await get('./data/tree-survey.json');canopyGroup=treeSurvey(canopyData,surfaceAt);scene.add(canopyGroup);
  const canopyAreas=await get('./data/lidar-trees.json').catch(()=>get('./data/canopy-scenery.json'));sceneryTrees=await treeScenery(canopyData,surfaceAt,driving.state.network,canopyAreas);scene.add(sceneryTrees);$('treeSummary').textContent=sceneryTrees.userData.count.toLocaleString()+' trees, each one where it really stands.';
@@ -188,6 +191,7 @@ function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):.016;
  ambient?.update(driving?.paused?0:dt,controls.target,driving,$('life').checked);water.material.uniforms.time.value=time/1000;water.material.uniforms.sunDirection.value.copy(sunOffset).normalize();if(frame%6===0)labels?.update(camera,controls.target,$('labels').checked&&!tour?.active);
  if(frame%6===0)checklist?.update(camera,buildings.visible&&!tour?.active);
  signalSystem?.tick(dt);if(frame%6===0)furnitureGroup?.userData.lights?.update();weather?.update(dt,camera);
+ if(window.__ortho&&time-(window.__orthoAt||0)>250){window.__orthoAt=time;const o=window.__ortho,fx=driving?.active?driving.state.x:controls.target.x,fz=driving?.active?driving.state.z:controls.target.z,h=Math.max(0,camera.position.y-heightAt(fx,fz));o.update(fx,fz,h,driving?.active?1:Math.max(0,1-h/160));}
  if(frame%24===0){photoPool?.update(camera.position.x,camera.position.z);photoFronts?.update(camera.position.x,camera.position.z);coverageMap?.update(controls.target);}
  evening?.update(driving?.state,driving?.active);
  sun.target.position.copy(controls.target);sun.position.copy(controls.target).add(sunOffset);
