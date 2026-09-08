@@ -35,7 +35,7 @@ export class Driving {
    The layer sits over the 3D view and under the HUD, so the buttons still work. */
  if((matchMedia('(pointer:coarse)').matches||new URLSearchParams(location.search).has('touch'))&&!document.getElementById('touchDrive')){const layer=document.createElement('div');layer.id='touchDrive';layer.innerHTML='<span class="hint">Hold the road to drive · slide to steer</span>';document.body.append(layer);let x0=null,pid=null;
   const steer=x=>{this.input.steerAxis=Math.max(-1,Math.min(1,-(x-x0)/110));};
-  layer.addEventListener('pointerdown',e=>{if(!this.active)return;e.preventDefault();layer.setPointerCapture(e.pointerId);pid=e.pointerId;x0=e.clientX;this.cruise.stop();if(this.paused)this.pause(false);this.input.accel=true;this.input.steerAxis=0;layer.classList.add('held');document.body.classList.add('touched');},{passive:false});
+  layer.addEventListener('pointerdown',e=>{if(!this.active)return;e.preventDefault();try{layer.setPointerCapture(e.pointerId);}catch(_){}pid=e.pointerId;x0=e.clientX;this.cruise.stop();if(this.paused)this.pause(false);this.input.accel=true;this.input.steerAxis=0;layer.classList.add('held');document.body.classList.add('touched');},{passive:false});
   layer.addEventListener('pointermove',e=>{if(e.pointerId!==pid||x0===null)return;steer(e.clientX);});
   const release=e=>{if(e&&e.pointerId!==pid)return;pid=null;x0=null;this.input.accel=false;this.input.steerAxis=undefined;layer.classList.remove('held');};
   window.__drive=this;layer.addEventListener('pointerup',release);layer.addEventListener('pointercancel',release);layer.addEventListener('lostpointercapture',release);}
