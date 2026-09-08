@@ -35,23 +35,16 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
  batch(new THREE.CylinderGeometry(.07,.11,7,8),post,lamps,3.5,'lampPosts');batch(new THREE.CylinderGeometry(.22,.3,.32,10),bulb,lamps,7.05,'lampHeads');
  const stops=furniture.busStops.filter(a=>!network.contains(a.x,a.z,-.5)).map(a=>{const s=network.nearest(a.x,a.z,true);return {...a,yaw:s?Math.atan2(s.dx,s.dz):0};});
  batch(new THREE.CylinderGeometry(.04,.04,2.6,6),post,stops,1.3,'busPosts');batch(new THREE.BoxGeometry(.05,.5,.4),plate,stops,2.3,'busPlates');
- // Traffic signals: one pole-mounted head per approach, on the driver's right 8 m before the mapped node.
+ // Traffic signals: one pole-mounted head per inbound approach, facing that approach from the far side of the
+ // junction on the driver's right (the usual post-mounted head, in view from the stop line). Lamps follow SignalSystem.
  const heads=[];
- for(const sg of furniture.signals||[]){
-  for(const s of network.segments){
-   if(!(s.width>=3)||s.length<12)continue;const t=((sg.x-s.a[0])*s.dx+(sg.z-s.a[1])*s.dz)/(s.length*s.length),px=s.a[0]+s.dx*t,pz=s.a[1]+s.dz*t;
-   if(t<-.05||t>1.05||Math.hypot(px-sg.x,pz-sg.z)>12)continue;
-   const ends=[];if(t>.15)ends.push(s.a);if(t<.85)ends.push(s.b);
-   for(const [fx,fz] of ends){let dx=fx-sg.x,dz=fz-sg.z;const L=Math.hypot(dx,dz)||1;dx/=L;dz/=L;if(L<12)continue;const hx=-dx,hz=-dz,rx=-hz,rz=hx,W=Math.max(6,Math.min(16,s.width||9));
-    const node=lights&&lights.near(sg.x,sg.z,1);heads.push({x:sg.x+dx*8+rx*(W/2+.8),z:sg.z+dz*8+rz*(W/2+.8),yaw:Math.atan2(hx,hz),node,axis:node?lights.axisFor(node,hx,hz):0});}
-  }
- }
+ for(const node of(lights&&lights.nodes)||[])for(const a of node.approaches){const rx=-a.hz,rz=a.hx,W=Math.max(6,Math.min(16,a.width||9)),far=Math.max(4,Math.min(9,(a.cross||9)/2+1.2));heads.push({x:a.vx+a.hx*far+rx*(W/2+.8),z:a.vz+a.hz*far+rz*(W/2+.8),yaw:Math.atan2(a.hx,a.hz),node,axis:a.axis});}
  if(heads.length){
   batch(new THREE.CylinderGeometry(.06,.08,4.6,8),post,heads,2.3,'signalPoles');
   const housing=new THREE.MeshStandardMaterial({color:'#2d3a2f',roughness:.8});batch(new THREE.BoxGeometry(.32,1.05,.3),housing,heads,4.25,'signalHeads');
   const lampMeshes=[];const OFF=new THREE.Color('#1b1d1f');
   for(const [dy,col] of [[.32,'#e0392b'],[0,'#f2c230'],[-.32,'#37b061']]){const lamp=new THREE.MeshBasicMaterial({color:'#ffffff'});const g=new THREE.SphereGeometry(.1,10,8);g.translate(0,0,.16);const mesh=new THREE.InstancedMesh(g,lamp,heads.length),o=new THREE.Object3D();heads.forEach((p,i)=>{o.position.set(p.x,heightAt(p.x,p.z)+4.25+dy,p.z);o.rotation.set(0,p.yaw,0);o.updateMatrix();mesh.setMatrixAt(i,o.matrix);mesh.setColorAt(i,OFF);});mesh.name='signalLamps';group.add(mesh);lampMeshes.push({mesh,on:new THREE.Color(col),state:dy>0?'red':dy<0?'green':'yellow'});}
-  group.userData.lights={update(time){if(!lights)return;heads.forEach((h,i)=>{const st=h.node?lights.state(h.node,h.axis,time):'red';for(const l of lampMeshes)l.mesh.setColorAt(i,l.state===st?l.on:OFF);});for(const l of lampMeshes)l.mesh.instanceColor.needsUpdate=true;}};
+  group.userData.lights={heads,lamps:lampMeshes,update(){if(!lights)return;heads.forEach((h,i)=>{const st=lights.state(h.node,h.axis);for(const l of lampMeshes)l.mesh.setColorAt(i,l.state===st?l.on:OFF);});for(const l of lampMeshes)l.mesh.instanceColor.needsUpdate=true;}};
  }
  group.userData.audit={crossings:crossings.crossings.length,spans:wire.length/6/4,lamps:lamps.length,busStops:stops.length,signalHeads:heads.length};
  return group;

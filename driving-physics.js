@@ -18,7 +18,8 @@ export class DrivingState {
  const target=(typeof input.steerAxis==='number')?Math.max(-1,Math.min(1,input.steerAxis)):(input.left?1:0)-(input.right?1:0);this.steer+=(target*.56/(1+Math.abs(this.speed)/20)-this.steer)*Math.min(1,dt*9);
  const p=this.performance;this.speed+=((input.accel?Math.min(p.launch,p.power/Math.max(1,Math.abs(this.speed))):0)-(input.reverse?(this.speed>0?12:3):0))*dt;const drag=(.15+.000335*this.speed*this.speed+(input.brake?12:0))*dt;
  this.speed=Math.abs(this.speed)<=drag?0:this.speed-Math.sign(this.speed)*drag;this.speed=Math.max(-5,Math.min(this.performance.top,this.speed));
- const current=this.network.nearest(this.x,this.z);this.wrongWay=!!(current?.direction&&(-Math.sin(this.yaw)*current.dx-Math.cos(this.yaw)*current.dz)*current.direction<-.1);
+ const current=this.network.nearest(this.x,this.z);// wrong way only when every road the car is actually on is a one-way against it (not just the nearest one-way side street at a corner)
+ const fx=-Math.sin(this.yaw),fz=-Math.cos(this.yaw),here=(this.network.cells.get(Math.floor(this.x/60)+','+Math.floor(this.z/60))||[]).filter(s=>{const t=Math.max(0,Math.min(1,((this.x-s.a[0])*s.dx+(this.z-s.a[1])*s.dz)/s.length**2));return Math.hypot(this.x-s.a[0]-t*s.dx,this.z-s.a[1]-t*s.dz)<=s.width/2;});this.wrongWay=here.length>0&&here.every(s=>s.direction&&(fx*s.dx+fz*s.dz)*s.direction<-.1);
  let yaw=this.yaw+this.speed/2.65*Math.tan(this.steer)*dt,x=this.x-Math.sin(yaw)*this.speed*dt,z=this.z-Math.cos(yaw)*this.speed*dt;
  if(!this.fitsAt(x,z,yaw)){
   this.assisting=true;
