@@ -28,7 +28,8 @@ export async function treeScenery(data,heightAt,network,canopyAreas={placements:
  }
  const screened=group.children.length,cells=new Map(),dummy=new THREE.Object3D();let areaCount=0,areaWithheld=0;
  const material=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1});
- for(const p of canopyAreas.placements){
+ const lite=window.__lowMemory;let ti=0;
+ for(const p of canopyAreas.placements){if(lite&&(ti++%2))continue;
   if(heightAt(p.x,p.z)<.12||network.contains(p.x,p.z,-1)||network.obstructed(p.x,p.z)||data.candidates.some(c=>c.review==='accepted'&&Math.hypot(p.x-c.x,p.z-c.z)<c.radius+3)){areaWithheld++;continue;}
   const seed=Math.abs(Math.round(p.x*17+p.z*31)),m=models[seed%models.length],radius=p.radius||3.2,height=THREE.MathUtils.clamp(p.height||radius*2.8,p.height?3.5:6,p.height?26:16),scale=radius*2/Math.max(m.size.x,m.size.z);
   const g=m.geometry.clone();g.translate(-(m.box.min.x+m.box.max.x)/2,-m.box.min.y,-(m.box.min.z+m.box.max.z)/2);g.scale(scale,height/m.size.y,scale);

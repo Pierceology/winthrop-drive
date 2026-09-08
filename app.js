@@ -94,13 +94,14 @@ async function init(){
  roofTiles=[{bbox:focusExtent,texture:focusTexture},...tiles.map((t,i)=>({...t,texture:textures[i]}))];
  for(const t of roofTiles){t.texture.colorSpace=THREE.SRGBColorSpace;t.texture.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),16);}
  // Real roofs from the 2021 LiDAR: unpack the centimetre binary into the same roof-triangle format the estimates use.
- try{const [idx,buf]=await Promise.all([get('./data/roofs-index.json'),fetch('./data/roofs.bin').then(r=>r.arrayBuffer())]);const dv=new DataView(buf);let applied=0;const centers=new Map(world.buildings.map(b=>[b.id,b.center]));
-  for(const [id,[off,nv,nt,wall]] of Object.entries(idx.buildings)){const c=centers.get(id);if(!c)continue;const xs=new Int16Array(buf,off,nv),ys=new Uint16Array(buf,off+nv*2,nv),zs=new Int16Array(buf,off+nv*4,nv),tri=new Uint16Array(buf,off+nv*6,nt*3);const roof=new Array(nt*9);for(let i=0;i<nt*3;i++){const v=tri[i];roof[i*3]=c[0]+xs[v]/100;roof[i*3+1]=ys[v]/100;roof[i*3+2]=c[1]+zs[v]/100;}
+ const lowMemory=(navigator.deviceMemory&&navigator.deviceMemory<=4)||(matchMedia('(pointer:coarse)').matches&&Math.min(innerWidth,innerHeight)<800);window.__lowMemory=lowMemory;
+ if(!lowMemory)try{const [idx,buf]=await Promise.all([get('./data/roofs-index.json'),fetch('./data/roofs.bin').then(r=>r.arrayBuffer())]);const dv=new DataView(buf);let applied=0;const centers=new Map(world.buildings.map(b=>[b.id,b.center]));
+  for(const [id,[off,nv,nt,wall]] of Object.entries(idx.buildings)){const c=centers.get(id);if(!c)continue;const xs=new Int16Array(buf,off,nv),ys=new Uint16Array(buf,off+nv*2,nv),zs=new Int16Array(buf,off+nv*4,nv),tri=new Uint16Array(buf,off+nv*6,nt*3);const roof=new Float32Array(nt*9);for(let i=0;i<nt*3;i++){const v=tri[i];roof[i*3]=c[0]+xs[v]/100;roof[i*3+1]=ys[v]/100;roof[i*3+2]=c[1]+zs[v]/100;}
    const rec=neighborhoods.buildings[id]||(neighborhoods.buildings[id]={address:'',stories:0,accessory:false});rec.wall=wall;rec.roof=roof;rec.roofSource='lidar';applied++;}
   window.__lidarRoofs=applied;}catch(e){console.warn('LiDAR roofs unavailable',e);}
  groundWorld=await buildGroundWorld(foundationData,roofTiles,origin,asphaltMaterial());
  terrain=groundWorld.ground;pavement=groundWorld.road;terrainMeshes=[terrain,groundWorld.walk,groundWorld.curb];surfaceAt=groundWorld.field.height;heightAt=surfaceAt;scene.add(terrain,pavement,groundWorld.walk,groundWorld.curb);
- addGeometry();
+ addGeometry();for(const b of world.buildings)if(b.neighborhood&&b.neighborhood.roofSource==='lidar')b.neighborhood.roof=null;
  const ownedFacades=await addOwnedFacades(buildings,world,surfaceAt);
  places.homes={target:[110,0,0],offset:[90,65,100]};const photoHome=residential.find(r=>r.address.startsWith('1040 '));places.replicas={target:[photoHome.center[0],0,photoHome.center[1]],offset:[photoHome.front[0]*27,12,photoHome.front[1]*27]};
  photoCatalog=residential.filter(r=>additionalRegistration[r.id]||(/ SHIRLEY ST$/.test(r.address)&&photoRegistration[r.address.split(' ')[0]]));photoStop=photoCatalog.findIndex(r=>r.address.startsWith('1040 '));for(const [i,r]of photoCatalog.entries())places['photo'+i]={target:[r.center[0],0,r.center[1]],offset:[r.front[0]*30,11,r.front[1]*30]};

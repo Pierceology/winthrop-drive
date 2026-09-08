@@ -7,7 +7,7 @@ export function neighborhoodGeometry(shape,b,record){
   // Remove flat top, retaining footprint walls and bottom.
   const p=g.attributes.position,n=g.attributes.normal,keep=[];
   for(let i=0;i<p.count;i+=3)if(n.getY(i)<.5)for(let j=i;j<i+3;j++)keep.push(p.getX(j),p.getY(j),p.getZ(j));
-  keep.push(...record.roof);g.dispose();g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(keep,3));g.computeVertexNormals();
+  for(let i=0;i<record.roof.length;i++)keep.push(record.roof[i]);g.dispose();g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(keep,3));g.computeVertexNormals();
   const normal=g.attributes.normal;for(let i=0;i<normal.count;i++)if(normal.getY(i)<-.1&&g.attributes.position.getY(i)>h-.01)normal.setXYZ(i,-normal.getX(i),-normal.getY(i),-normal.getZ(i));
   g.setAttribute('uv',new THREE.Float32BufferAttribute(new Float32Array(g.attributes.position.count*2),2));
  }
