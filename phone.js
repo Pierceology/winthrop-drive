@@ -11,7 +11,7 @@ if (coarse) {
   const sheet = document.querySelector('aside.places');
   if (sheet && !document.getElementById('sheetToggle')) {
     const bar = document.createElement('button'); bar.id = 'sheetToggle'; bar.type = 'button';
-    bar.innerHTML = '<span>Explore Winthrop</span><b>▴</b>';
+    bar.innerHTML = '<i class="grab" aria-hidden="true"></i><span>Explore Winthrop</span><b>▴</b>';
     const h1 = sheet.querySelector('h1'); if (h1) h1.hidden = true;
     sheet.prepend(bar); sheet.classList.add('collapsed'); bar.setAttribute('aria-expanded', 'false');
     bar.onclick = () => { const c = sheet.classList.toggle('collapsed'); bar.setAttribute('aria-expanded', String(!c)); bar.querySelector('b').textContent = c ? '▴' : '▾'; if (!c) sheet.scrollTop = 0; };

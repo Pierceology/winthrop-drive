@@ -1,0 +1,457 @@
+/* Drive Winthrop — the experience layer.
+   Loaded after the older sheets; it owns how the visitor-facing surfaces look at every size.
+   One display face (Fraunces) for the town and the street you are on; the system face for controls.
+   Glass panels over the scene, one amber primary action per moment, controls that fade while you drive.
+   Studio-only tooling (coverage, checklist, inspectors) keeps its own rules in the older sheets. */
+
+:root{
+  --display:'Fraunces',Georgia,'Times New Roman',serif;
+  --ui:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;
+  --ink:#f6f3ec; --muted:#b4bec6; --dim:#8c979f;
+  --accent:#f0b860; --accent-hi:#f7cb84; --accent-ink:#1b1408;
+  --go:#3aa862;
+  --glass:rgba(11,16,21,.68); --glass-strong:rgba(9,13,18,.88); --glass-lite:rgba(255,255,255,.06);
+  --edge:rgba(255,255,255,.13); --edge-hi:rgba(255,255,255,.28);
+  --blur:blur(20px) saturate(1.3);
+  --r:18px; --r-sm:12px; --pill:999px;
+  --shadow:0 12px 40px rgba(0,0,0,.28), 0 1px 0 rgba(255,255,255,.06) inset;
+  --sat:env(safe-area-inset-top,0px); --sar:env(safe-area-inset-right,0px); --sab:env(safe-area-inset-bottom,0px); --sal:env(safe-area-inset-left,0px);
+  --gutter:24px;
+  --map-size:clamp(168px,13vw,240px);
+  font-family:var(--ui); color:var(--ink); background:#0c1218;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+body{background:#0c1218;}
+*{scrollbar-width:none}*::-webkit-scrollbar{display:none}
+p,h1,h2,h3,small,summary,label,.explore-help{text-wrap:pretty}
+b,strong,h1,h2,h3{text-wrap:balance}
+
+/* ---------- controls: pills of glass, one amber primary ---------- */
+button{font-family:var(--ui);font-weight:600;font-size:14px;line-height:1.25;border-radius:var(--pill);min-height:44px;padding:10px 18px;
+  background:var(--glass);border:1px solid var(--edge);color:var(--ink);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:0 4px 18px rgba(0,0,0,.18);transition:background .18s,border-color .18s,transform .12s,opacity .3s;}
+button:hover{background:rgba(255,255,255,.12);border-color:var(--edge-hi)}
+button:active{transform:translateY(1px)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+button.primary,button.selected,button.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700;box-shadow:0 6px 22px rgba(240,184,96,.28)}
+button.primary:hover,button.selected:hover,button.active:hover{background:var(--accent-hi);border-color:var(--accent-hi)}
+button:disabled{opacity:.5;cursor:default}
+select,input[type=search]{font-family:var(--ui);font-size:14px;color:var(--ink)}
+select{appearance:none;-webkit-appearance:none;width:100%;min-height:44px;padding:10px 40px 10px 14px;border-radius:var(--r-sm);border:1px solid var(--edge);background:var(--glass-lite) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%23f6f3ec' stroke-width='2'/%3E%3C/svg%3E") right 12px center/18px no-repeat;cursor:pointer}
+select:hover{border-color:var(--edge-hi)}
+select option{background:#151b21;color:#fff}
+input[type=range]{accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px}
+[hidden]{display:none!important}
+
+/* ---------- header: the town name, floating, and at most two actions ---------- */
+header,body.immersive header,body.driving header,body.immersive.driving header{position:fixed;inset:0 0 auto 0;height:auto;padding:calc(14px + var(--sat)) calc(var(--gutter) + var(--sar)) 0 calc(var(--gutter) + var(--sal));
+  display:flex;align-items:center;gap:10px;background:none;border:0;pointer-events:none;z-index:7}
+header>*{pointer-events:auto}
+.brand{margin-right:auto;display:flex;flex-direction:column;gap:2px;text-shadow:0 2px 14px rgba(0,0,0,.55),0 0 2px rgba(0,0,0,.6);user-select:none}
+.brand b{font-family:var(--display);font-weight:900;font-size:clamp(24px,2.1vw,36px);line-height:1;letter-spacing:.09em;text-transform:uppercase;font-variation-settings:'opsz' 144}
+.brand span{display:block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:#f1e3c4;margin:0;opacity:.9}
+body.immersive header .brand,body.immersive header #info,body.immersive.driving header .brand,body.immersive.driving header #info{visibility:visible}
+header>button,header>#fullscreen,header>#info{min-width:0;padding:10px 18px;font-size:14px}
+header>#driveCurrent{font-size:15px;padding:11px 22px}
+header>#exploreTown{display:none}
+body.driving header #exploreTown{display:inline-flex;align-items:center}
+body.driving header #driveCurrent{display:none}
+@media (min-width:701px) and (min-height:461px){body:not(.driving) header #driveCurrent{display:none}}   /* the sidebar carries the primary action here */
+header>#info{display:inline-flex;align-items:center}   /* About is for everyone; an older sheet hid it on tablets */
+#reviewToggle{border-radius:var(--pill)}
+
+/* ---------- explore: the sidebar is a glass panel with the ride up front ---------- */
+.places,body:not(.driving) .places{position:fixed;left:calc(var(--gutter) + var(--sal));top:calc(88px + var(--sat));bottom:calc(72px + var(--sab));width:352px;max-height:none;padding:22px 22px 0;
+  display:flex;flex-direction:column;gap:0;overflow:auto;overscroll-behavior:contain;
+  background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow);z-index:6}
+.places h1,body:not(.driving) .places h1{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.05;letter-spacing:-.01em;margin:0 0 6px;font-variation-settings:'opsz' 72}
+.places .explore-help{font-size:12px;line-height:1.5;color:var(--muted);margin:0 0 16px}
+.searchrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
+.places .roadsearch{display:block;margin:0;font-size:12px;color:var(--muted)}
+.places .roadsearch span{display:block;margin-bottom:6px;font-weight:600;letter-spacing:.02em}
+.places .roadsearch input,.places input[type=search]{width:100%;margin:0;min-height:44px;padding:10px 14px 10px 40px;border-radius:var(--r-sm);border:1px solid var(--edge);color:var(--ink);font-size:15px;
+  background:var(--glass-lite) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' fill='none' stroke='%23b4bec6' stroke-width='2'/%3E%3Cpath d='m16.5 16.5 4.5 4.5' stroke='%23b4bec6' stroke-width='2'/%3E%3C/svg%3E") 12px center/20px no-repeat}
+.places .roadsearch input::placeholder{color:var(--dim)}
+.places .roadsearch input:focus{border-color:var(--edge-hi);outline:0}
+.places #findroad{width:auto;margin:0;min-height:44px;padding:10px 16px;border-radius:var(--r-sm)}
+.places #searchstatus{font-size:13px;color:var(--accent);margin:8px 0 0;min-height:0}
+.places #searchstatus:empty{display:none}
+
+#tourMenu{margin:22px 0 0}
+#tourMenu .tourhead{margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#e8d5ae}
+#tourList{display:grid;gap:10px}
+#tourList .tourcard{display:grid;gap:10px;padding:14px 14px 12px;border:1px solid var(--edge);border-radius:var(--r-sm);background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.025));transition:border-color .18s,background .18s}
+@media (hover:hover){#tourList .tourcard:hover{border-color:rgba(240,184,96,.55)}}
+#tourList .tourmeta{display:grid;gap:3px}
+#tourList .tourmeta b{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.1;letter-spacing:-.005em;font-variation-settings:'opsz' 48}
+#tourList .tourmeta small{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+#tourList .tourmeta em{font-style:normal;font-size:12.5px;line-height:1.45;color:var(--muted)}
+#tourList .touracts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#tourList .touracts button{min-height:44px;padding:8px 10px;font-size:13px;text-align:center;border-radius:var(--pill);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass-lite)}
+#tourList .touracts button.primary{background:var(--accent)}
+#tourList .touracts button:hover{background:rgba(255,255,255,.14)}#tourList .touracts button.primary:hover{background:var(--accent-hi)}
+
+.explore-section,.places .explore-section{border-top:1px solid var(--edge);margin:18px 0 0;padding-top:6px}
+.explore-section summary{list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:8px 0;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;color:var(--ink)}
+.explore-section summary::-webkit-details-marker{display:none}
+.explore-section summary::after{content:'';width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s;margin-right:4px}
+.explore-section[open] summary::after{transform:rotate(-135deg);margin-top:5px}
+body:not(.driving) .destinations{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 8px}
+body:not(.driving) .destinations button,.places .destinations button{min-height:44px;font-size:13px;text-align:center;justify-content:center;padding:8px 10px;border-radius:var(--r-sm);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass-lite)}
+.coverage-switch,aside.places .coverage-switch{display:flex;align-items:center;gap:10px;min-height:40px;margin:4px 0;font-size:13px;color:var(--ink)}
+body:not(.driving) .explore-section .modebar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 12px}
+.modebar button{min-height:44px;font-size:13px;border-radius:var(--r-sm);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass-lite)}
+body:not(.driving) .layers,.layers{display:grid;gap:2px;border:0;margin:0;padding:0;font-size:13px}
+.layers label,aside.places .layers label{display:flex;align-items:center;gap:10px;min-height:40px;margin:0;color:var(--ink)}
+.layers input{margin:0;flex:none}
+
+/* weather and time of day: one sky */
+.sky{margin:18px 0 0;padding:14px 14px 10px;border:1px solid var(--edge);border-radius:var(--r-sm);background:linear-gradient(180deg,rgba(255,224,170,.09),rgba(255,255,255,.02))}
+.skyhead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.skyhead span{font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#e8d5ae}
+.skyhead output{font-family:var(--display);font-size:22px;font-weight:700;font-variant-numeric:tabular-nums lining-nums;letter-spacing:.02em;line-height:1}
+.skyweather{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px;font-size:12px;color:var(--muted)}
+.skyweather select{min-height:44px}
+.suncontrol,.places .suncontrol{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px;margin:10px 0 0;font-size:12px;color:var(--muted)}
+.suncontrol input{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:0;background:none;cursor:pointer}
+.suncontrol input::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#f2a25a 0%,#ffe9b8 30%,#ffffff 50%,#ffe0a5 75%,#e8894a 100%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.suncontrol input::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#f2a25a 0%,#ffe9b8 30%,#ffffff 50%,#ffe0a5 75%,#e8894a 100%)}
+.suncontrol input::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-8px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.suncontrol input::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--accent)}
+
+.explore-actions{position:sticky;bottom:0;margin:20px -22px 0;padding:14px 22px 18px;display:grid;gap:8px;background:#0c1116;border-top:1px solid var(--edge);border-radius:0 0 var(--r) var(--r);z-index:2}
+.explore-actions button{width:100%;margin:0}
+.explore-actions #drive{min-height:52px;font-size:16px}
+.explore-actions #goDrive{background:var(--glass-lite);box-shadow:none}
+.explore-actions #tour{border:0;background:none;box-shadow:none;color:var(--accent);min-height:40px;padding:6px}
+.explore-actions #tour:hover{background:var(--glass-lite)}
+
+/* explore chrome: view pills, the one credit, a whisper of help */
+.camera,body:not(.driving) .camera{position:fixed;right:calc(var(--gutter) + var(--sar));bottom:calc(20px + var(--sab));left:auto;display:flex;gap:4px;padding:4px;border-radius:var(--pill);background:var(--glass);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);z-index:6}
+.camera button{min-height:40px;padding:8px 14px;font-size:13px;border:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.camera button:hover{background:var(--glass-lite)}
+.camera button.active{background:var(--accent);color:var(--accent-ink)}
+footer,.driving footer,.immersive footer{position:fixed;inset:auto 0 0 0;height:auto;min-height:0;display:flex;align-items:center;justify-content:center;gap:16px;padding:0 calc(var(--gutter) + var(--sar)) calc(10px + var(--sab)) calc(var(--gutter) + var(--sal));
+  background:none;border:0;font-size:11px;color:#d9e1e6;text-shadow:0 1px 6px rgba(0,0,0,.8);pointer-events:none;z-index:5}
+footer>*{pointer-events:auto}
+footer .help{margin-right:auto;letter-spacing:.02em;opacity:.85}
+footer #position{display:none}
+footer a,.driving footer a{color:#e6ecf0;text-decoration:none;white-space:nowrap;font-size:11px;padding:6px 10px;border-radius:var(--pill);background:rgba(9,13,18,.5);border:1px solid rgba(255,255,255,.1)}
+footer a:hover{background:var(--glass)}
+body:not(.driving) footer{padding-right:calc(var(--gutter) + var(--sar) + 340px)}   /* keep clear of the view pills */
+body.driving .drivehelp{display:none}
+body.driving footer{justify-content:flex-end}
+@media (hover:hover) and (pointer:fine){body.driving .drivehelp{display:block;position:fixed;left:50%;right:auto;transform:translateX(-50%);bottom:calc(7px + var(--sab));margin:0;padding:0;background:none;font-size:11px;font-weight:500;letter-spacing:.02em;color:#c9d2d8;text-shadow:0 1px 6px rgba(0,0,0,.9);white-space:nowrap;z-index:6}}
+#maplabels .maplabel{font-family:var(--ui);font-size:11px;font-weight:600;padding:5px 10px;border-radius:var(--pill);background:rgba(9,13,18,.72);border:1px solid rgba(255,255,255,.14);color:#f2f5f7;box-shadow:0 2px 10px rgba(0,0,0,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#maplabels .maplabel.business{color:#ffe1ad;border-color:rgba(240,184,96,.4)}
+
+/* a place you tapped */
+#spotActions{top:calc(88px + var(--sat));bottom:auto;left:50%;transform:translateX(-50%);width:min(420px,calc(100vw - 32px));max-width:none;padding:18px 20px 16px;border-radius:var(--r);background:var(--glass);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow);z-index:8}
+#spotActions strong{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.15;padding-right:36px;margin-bottom:12px;font-variation-settings:'opsz' 48}
+#spotActions>div{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+#spotActions button{font-size:13px;padding:8px 10px;min-height:44px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass-lite)}
+#spotActions button.primary{background:var(--accent)}
+#spotActions #closeSpot{position:absolute;right:8px;top:8px;width:36px;height:36px;min-height:0;padding:0;border:0;background:none;font-size:22px;line-height:1}
+#inspector{top:calc(88px + var(--sat));right:calc(var(--gutter) + var(--sar));width:320px;padding:22px;border-radius:var(--r);background:var(--glass);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow)}
+#inspector h2{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.2;margin:4px 40px 14px 0}
+#closeabout,#closeinspect{width:44px;height:44px;min-height:0;padding:0;border:0;background:none;font-size:26px;line-height:1;right:8px;top:8px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* ---------- driving: the road is the screen; type, not boxes ---------- */
+#drivehud::before,#drivehud::after{content:'';position:fixed;left:0;right:0;pointer-events:none;z-index:0}
+#drivehud::before{top:0;height:min(34vh,300px);background:linear-gradient(180deg,rgba(6,10,14,.62),rgba(6,10,14,.28) 45%,rgba(6,10,14,0))}
+#drivehud::after{bottom:0;height:min(36vh,300px);background:linear-gradient(0deg,rgba(6,10,14,.72),rgba(6,10,14,.3) 50%,rgba(6,10,14,0))}
+body.driving .driveheading,.driving .driveheading{top:calc(84px + var(--sat));left:calc(var(--gutter) + var(--sal));right:auto;max-width:min(58vw,760px);padding:0;border:0;background:none;box-shadow:none;border-radius:0;text-shadow:0 2px 16px rgba(0,0,0,.7),0 0 3px rgba(0,0,0,.7)}
+body.driving .driveheading strong,.driving .driveheading strong{display:block;font-family:var(--display);font-weight:900;font-size:clamp(30px,3.4vw,54px);line-height:1;letter-spacing:.02em;text-transform:uppercase;font-variation-settings:'opsz' 144;color:#fff}
+#currentRoad.oneway::after{content:'One way';display:inline-block;vertical-align:middle;position:relative;top:-.35em;margin-left:14px;padding:5px 11px;border-radius:var(--pill);background:#fff;color:#151515;font-family:var(--ui);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-shadow:none;line-height:1.1}
+body.driving .driveheading span,.driving .driveheading span{display:block;font-family:var(--ui);font-size:14px;font-weight:600;color:#e9eef2;margin-top:8px;letter-spacing:.02em}
+body.driving .driveheading #autoBadge{display:none;margin:10px 0 0;padding:5px 12px;border-radius:var(--pill);background:var(--go);color:#fff;font-size:11px;font-weight:800;letter-spacing:.14em;text-shadow:none}
+body.auto-driving .driveheading #autoBadge{display:inline-block}
+body.driving .driveheading #tourLine{margin-top:8px;font-size:13px;color:#ffd9a0;font-weight:600}
+
+body.driving .speedometer,.driving .speedometer{top:auto;bottom:calc(48px + var(--sab));right:calc(var(--gutter) + var(--sar));left:auto;width:auto;min-width:0;padding:0;border:0;background:none;box-shadow:none;border-radius:0;text-align:right;text-shadow:0 2px 16px rgba(0,0,0,.7),0 0 3px rgba(0,0,0,.6)}
+body.driving .speedometer b,.driving .speedometer b{display:inline-block;font-family:var(--ui);font-weight:800;font-size:clamp(60px,5.6vw,96px);line-height:.9;letter-spacing:-.04em;color:#fff;font-variant-numeric:tabular-nums lining-nums}
+body.driving .speedometer>span,.driving .speedometer>span{display:inline-block;font-family:var(--ui);font-size:13px;font-weight:800;letter-spacing:.3em;margin-left:8px;color:var(--accent);vertical-align:baseline}
+body.driving .speedometer small,.driving .speedometer small{display:block;margin:8px 0 0;padding:0;border:0;font-family:var(--ui);font-size:13px;font-weight:600;color:#dfe6eb;letter-spacing:.04em}
+body.driving #gearValue,.speedometer #gearValue{font-size:15px;font-weight:800;color:var(--accent)}
+body.driving #assistValue,.speedometer #assistValue{display:block;margin:4px 0 0;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+body.driving #minimap,.driving #minimap{top:auto;right:auto;left:calc(var(--gutter) + var(--sal));bottom:calc(26px + var(--sab));width:var(--map-size);height:var(--map-size);border:2px solid var(--edge-hi);border-radius:20px;background:#0f1a22;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:.94}
+
+/* the dock: everything you can do, in one strip under the road */
+body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{position:fixed;top:auto;bottom:calc(26px + var(--sab));left:50%;right:auto;transform:translateX(-50%);width:auto;max-width:calc(100vw - 2*var(--map-size) - 2*var(--gutter) - 60px);
+  display:flex;align-items:stretch;gap:4px;padding:6px;border-radius:22px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow);z-index:6}
+body.driving .driveactions button,.driving .driveactions button{flex:1 1 0;min-width:78px;max-width:120px;min-height:64px;padding:9px 8px 8px;border:0;border-radius:16px;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;font-size:12px;font-weight:600;line-height:1.15;white-space:normal;color:var(--ink)}
+body.driving .driveactions button:hover{background:var(--glass-lite)}
+body.driving .driveactions button::before{content:'';display:block;width:22px;height:22px;margin:0 auto 6px;background:currentColor;mask:var(--icon) center/contain no-repeat;-webkit-mask:var(--icon) center/contain no-repeat}
+body.driving .driveactions #eveningDrive[aria-pressed="true"]{background:rgba(240,184,96,.18);color:var(--accent-hi)}
+body.driving .driveactions #driveMode,#driveMode{flex:0 0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0 4px;border:1px solid var(--edge);border-radius:16px;overflow:hidden;background:rgba(0,0,0,.28);padding:0!important}
+body.driving .driveactions #driveMode button,#driveMode button{min-width:96px;max-width:none;min-height:64px;padding:8px 12px!important;border-radius:0!important;font-size:13px!important;font-weight:700;background:transparent!important;color:var(--muted)!important}
+#driveMode button::before{display:none!important;content:none!important}
+#driveMode button[aria-pressed="true"]{color:#fff!important}
+#driveMode #autoDrive[aria-pressed="true"]{background:var(--go)!important;animation:none}
+#driveMode #manualDrive[aria-pressed="true"]{background:var(--accent)!important;color:var(--accent-ink)!important}
+#driveMode button[aria-pressed="false"]:hover{background:rgba(255,255,255,.1)!important;color:#fff!important}
+#phoneHud{--icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z' fill='none' stroke='black' stroke-width='1.8'/%3E%3Ccircle cx='12' cy='12' r='3' fill='none' stroke='black' stroke-width='1.8'/%3E%3C/svg%3E")}
+
+.look-controls{bottom:calc(112px + var(--sab));left:50%;transform:translateX(-50%);gap:2px;padding:3px;border-radius:var(--pill);background:rgba(9,13,18,.55);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);z-index:6}
+.look-controls button{min-height:40px;padding:6px 16px;font-size:12px;font-weight:600;border:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--muted)}
+.look-controls button:hover{background:var(--glass-lite);color:#fff}
+.look-controls button[aria-pressed="true"]{background:rgba(255,255,255,.16);color:#fff}
+
+/* the garage: one panel, sectioned */
+body.driving #audioPanel,.driving #audioPanel{top:calc(84px + var(--sat));bottom:calc(112px + var(--sab));left:auto;right:calc(var(--gutter) + var(--sar));width:340px;max-height:none;padding:0;overflow:auto;overscroll-behavior:contain;
+  background:var(--glass-strong);border:1px solid var(--edge);border-radius:var(--r);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow);font-size:14px;z-index:9}
+#audioPanel summary{list-style:none;position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:18px 22px 12px;font-family:var(--display);font-weight:700;font-size:24px;line-height:1;background:var(--glass-strong);cursor:pointer;z-index:1}
+#audioPanel summary::-webkit-details-marker{display:none}
+#audioPanel summary::after{content:'×';font-family:var(--ui);font-size:26px;font-weight:400;color:var(--muted);width:36px;height:36px;display:grid;place-items:center;border-radius:50%}
+#audioPanel summary:hover::after{background:var(--glass-lite);color:#fff}
+#audioPanel .g-section{padding:14px 22px 18px;border-top:1px solid var(--edge)}
+#audioPanel .g-section h4{margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#e8d5ae}
+#audioPanel select{margin:0;font-size:14px;padding:10px 40px 10px 14px;border-radius:var(--r-sm);background-color:var(--glass-lite)}
+#audioPanel label{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 0;font-size:13px;color:var(--muted)}
+#audioPanel label.paint{margin-top:10px}
+#paintColor{width:64px;height:36px;margin:0;padding:2px;border-radius:10px;border:1px solid var(--edge);background:var(--glass-lite)}
+#paintColor::-webkit-color-swatch-wrapper{padding:0}#paintColor::-webkit-color-swatch{border:0;border-radius:7px}
+.audiobuttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.audiobuttons button,#audioPanel .audiobuttons button{min-height:44px;font-size:13px;padding:8px 10px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass-lite);border-radius:var(--r-sm)}
+#audioPanel button[aria-pressed="true"]{background:rgba(58,168,98,.28);border-color:rgba(58,168,98,.6);color:#fff}
+#audioVolume{width:100%;height:44px;margin:0;accent-color:var(--accent)}
+#audioVolumeValue{float:none;font-variant-numeric:tabular-nums;color:var(--ink)}
+#radioStatus{font-size:12px;line-height:1.5;color:var(--dim);margin:10px 0 0}
+.garageExtras{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0;padding:14px 22px 22px;border-top:1px solid var(--edge)}
+.garageExtras button{min-height:44px;font-size:12px;padding:8px 8px;white-space:normal;line-height:1.15;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--glass-lite);border-radius:var(--r-sm)}
+.garageExtras #tourQuick{grid-column:1/-1;color:var(--accent)}
+
+/* pedals for tablets with a mouse; the warning; the stop card while auto-driving */
+body.driving .pedals{bottom:calc(112px + var(--sab));background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);padding:8px;gap:14px;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+body.driving .pedals button{border-radius:var(--r-sm);min-height:48px}
+.pedals button.held{background:var(--accent);color:var(--accent-ink)}
+#roadWarning{top:calc(84px + var(--sat))!important;width:min(420px,calc(100vw - 32px));padding:16px 18px;border-radius:var(--r);background:rgba(110,26,32,.9)!important;border:1px solid rgba(255,150,150,.6);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow)}
+#roadWarning strong{font-family:var(--display);font-size:20px;font-weight:900;letter-spacing:.04em}
+#roadWarning p{font-size:13px;color:#ffe3e3}
+#roadWarning button{background:#fff;color:#4a1a1f;min-height:44px}
+#driveCard{top:calc(84px + var(--sat));left:auto;right:calc(var(--gutter) + var(--sar));transform:none;width:300px;max-width:calc(100vw - 32px);padding:0;overflow:hidden;border-radius:var(--r);background:var(--glass-strong);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow);justify-items:start;text-align:left;gap:0;margin:0}
+#driveCard img{width:100%;max-width:none;height:150px;object-fit:cover;border-radius:0;box-shadow:none;display:block}
+#driveCard h3{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.15;margin:0;padding:14px 18px 0}
+#driveCard .line{font-size:13px;line-height:1.5;color:var(--muted);padding:6px 18px 0}
+#driveCard .addr{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);padding:8px 18px 16px}
+#driveCard .line:empty,#driveCard .addr:empty{display:none}
+body.driving:has(#audioPanel[open]) #driveCard{display:none}
+
+/* controls fade while you drive; anything brings them back */
+body.driving.idle .driveactions,body.driving.idle .look-controls,body.driving.idle .drivehelp,body.driving.idle header,body.driving.idle footer,body.driving.idle #touchReverse,body.driving.idle .pedals,body.driving.idle #touchDrive .hint{opacity:0!important;pointer-events:none!important;transition:opacity .9s ease .1s}
+body.driving.idle #minimap{opacity:.55;transition:opacity .9s}
+body.driving.idle #drivehud::after{opacity:.55;transition:opacity .9s}
+.driveactions,.look-controls,.drivehelp,header,footer,#touchReverse,.pedals{transition:opacity .35s}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (pointer:coarse){.look-controls button,.camera button,header>button,#tourOverlay .tourbar button,#tourOverlay select,.explore-actions #tour{min-height:44px}body.driving .pedals button{min-width:56px;min-height:48px}footer a{min-height:32px;display:inline-flex;align-items:center}}
+@media (min-width:701px) and (min-height:461px){#touchDrive{display:none!important}}   /* the hold-the-road layer is a phone control; tablets get pedals */
+
+/* minimal HUD (desktop "Minimal HUD" and the phone "Hide panels") keeps the road, the exit and the garage */
+body.driving.minimal-hud .driveactions{display:flex!important;background:var(--glass);border:1px solid var(--edge);padding:6px;top:auto}
+body.driving.minimal-hud .speedometer{bottom:calc(26px + var(--sab));opacity:.9}
+body.driving.minimal-hud .driveheading{opacity:.9}
+
+/* ---------- flyover ---------- */
+#tourOverlay,.touring #tourOverlay{left:0;right:0;top:auto;bottom:0;padding:120px calc(var(--gutter) + var(--sar)) calc(22px + var(--sab)) calc(var(--gutter) + var(--sal));text-align:center;
+  background:linear-gradient(0deg,rgba(6,10,14,.82),rgba(6,10,14,.45) 55%,rgba(6,10,14,0));text-shadow:0 2px 18px rgba(0,0,0,.8)}
+#tourOverlay span#tourKicker{display:block;font-size:11px;font-weight:800;letter-spacing:.34em;text-transform:uppercase;color:#f1e3c4}
+#tourOverlay h2{font-family:var(--display);font-weight:700;font-size:clamp(30px,4.4vw,64px);line-height:1.02;letter-spacing:-.01em;margin:10px auto 0;max-width:22ch;font-variation-settings:'opsz' 144;color:#fff}
+#tourOverlay .stopcard{margin:14px auto 0;max-width:min(520px,90vw);gap:6px}
+#tourOverlay .stopcard img{max-width:360px;max-height:200px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--edge)}
+#tourOverlay .stopcard .line{font-size:15px;line-height:1.5;color:#eef2f5;max-width:52ch}
+#tourOverlay .stopcard .addr{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#cfd7dd}
+#tourOverlay .tourbar{margin-top:18px;gap:8px}
+#tourOverlay .tourbar button,#tourOverlay select{margin:0;min-height:44px;font-size:14px;background:var(--glass);border:1px solid var(--edge);border-radius:var(--pill);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);color:var(--ink);pointer-events:auto}
+#tourOverlay .tourbar #tourPrev,#tourOverlay .tourbar #tourNext{width:44px;padding:0;font-size:24px;font-weight:400;line-height:1}
+#tourOverlay .tourbar #tourPrev span,#tourOverlay .tourbar #tourNext span{display:none}
+#tourOverlay .tourbar #tourDrive{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700;padding:10px 22px}
+#tourOverlay .tourbar #tourDrive:hover{background:var(--accent-hi)}
+#tourOverlay select{width:auto;max-width:220px;padding:10px 38px 10px 16px;font-weight:600;background-color:var(--glass)}
+#tourOverlay .tourbar #stopTour{background:none;border-color:transparent;color:var(--muted)}
+#tourOverlay .tourbar #stopTour:hover{color:#fff;background:var(--glass-lite)}
+
+/* ---------- about, loading ---------- */
+dialog{border-radius:var(--r);background:rgba(14,19,25,.94);border:1px solid var(--edge);padding:36px 40px;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+dialog::backdrop{background:rgba(4,8,12,.55);backdrop-filter:blur(8px)}
+dialog h2{font-family:var(--display);font-weight:900;font-size:clamp(30px,4vw,44px);letter-spacing:-.01em;line-height:1;margin:0 40px 18px 0;font-variation-settings:'opsz' 144}
+dialog p{font-size:16px;line-height:1.65;color:#dfe6ea}
+dialog dt{font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#e8d5ae;margin-top:22px}
+dialog dd{font-size:15px;color:#dfe6ea}
+#loading{background:radial-gradient(120% 90% at 50% 110%,#17313f 0%,#0c1218 60%);gap:0}
+#loading .loadbrand{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:34px;text-align:center}
+#loading .loadbrand b{font-family:var(--display);font-weight:900;font-size:clamp(46px,9vw,96px);line-height:1;letter-spacing:.08em;text-transform:uppercase;font-variation-settings:'opsz' 144;color:#fff}
+#loading .loadbrand span{font-size:11px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:#e8d5ae}
+#loading .spinner{width:120px;height:2px;border:0;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:sweep 1.4s ease-in-out infinite;margin-bottom:22px}
+@keyframes sweep{0%{transform:translateX(-60px);opacity:.3}50%{transform:translateX(0);opacity:1}100%{transform:translateX(60px);opacity:.3}}
+#loading h2{font-family:var(--display);font-weight:500;font-style:italic;font-size:clamp(18px,2.4vw,26px);margin:0 0 8px;color:#f6f3ec}
+#loading p{font-size:13px;color:var(--muted);letter-spacing:.02em}
+#touchDrive .hint{font-size:12px;font-weight:600;letter-spacing:.02em;padding:9px 14px;background:rgba(9,13,18,.62);border:1px solid var(--edge);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+
+/* ---------- tablets and narrow desktops ---------- */
+@media (max-width:1100px){
+  :root{--gutter:16px;--map-size:clamp(120px,15vw,160px)}
+  .places,body:not(.driving) .places{width:312px}
+  body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{max-width:calc(100vw - 2*var(--gutter));left:50%;bottom:calc(20px + var(--sab))}
+  body.driving .driveactions button,.driving .driveactions button{min-width:64px;min-height:58px;font-size:11px;padding:8px 6px}
+  body.driving .driveactions #driveMode button,#driveMode button{min-width:80px;min-height:58px;font-size:12px!important}
+  body.driving #minimap,.driving #minimap{bottom:calc(104px + var(--sab));border-radius:16px}
+  body.driving .speedometer,.driving .speedometer{bottom:calc(104px + var(--sab))}
+  body.driving .speedometer b,.driving .speedometer b{font-size:clamp(48px,7vw,72px)}
+  body.driving .driveheading strong,.driving .driveheading strong{font-size:clamp(24px,4.2vw,40px)}
+  .look-controls{bottom:calc(100px + var(--sab));left:50%}
+  body.driving .pedals{bottom:calc(100px + var(--sab));left:50%;right:auto;transform:translateX(-50%);width:max-content}
+  body.driving.touch-controls .look-controls{bottom:calc(176px + var(--sab))}
+  @media (pointer:coarse){.look-controls{bottom:calc(176px + var(--sab))}}
+  body.driving #audioPanel,.driving #audioPanel{bottom:calc(100px + var(--sab));width:min(340px,calc(100vw - 2*var(--gutter)))}
+  #driveCard{width:260px}
+  body.driving .driveheading{max-width:calc(100vw - 2*var(--gutter) - 200px)}
+}
+
+/* ---------- phones (portrait) — the sheet, the strip, the road untouched ---------- */
+@media (max-width:700px), (max-width:950px) and (max-height:460px){
+  :root{--gutter:12px;--strip:calc(108px + var(--sab));--map-size:84px}
+  button{min-height:44px}
+  header,body.immersive header,body.driving header,body.immersive.driving header{height:auto;padding:calc(10px + var(--sat)) calc(10px + var(--sar)) 0 calc(12px + var(--sal));gap:6px;background:none}
+  .brand b{font-size:20px;letter-spacing:.08em}
+  .brand span{font-size:8.5px;letter-spacing:.3em}
+  header button,header>button{min-height:44px;padding:8px 14px;font-size:13px;border-radius:var(--pill)}
+  header #driveCurrent,header #exploreTown{font-size:13px;padding:8px 16px}
+  header #info{padding:8px 14px}
+  /* the sheet */
+  aside.places,body:not(.driving) aside.places{top:auto!important;bottom:0!important;left:0!important;right:0!important;width:auto!important;max-height:min(44dvh,420px)!important;padding:0 14px calc(14px + var(--sab));
+    border-radius:22px 22px 0 0;border:1px solid var(--edge);border-bottom:0;background:var(--glass-strong);display:block;box-shadow:0 -12px 40px rgba(0,0,0,.35);z-index:20;font-size:13px}
+  #sheetToggle{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;width:100%;min-height:56px;margin:0;padding:12px 2px 6px;background:var(--glass-strong);border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:0;color:var(--ink);border-radius:0}
+  #sheetToggle .grab{position:absolute;left:50%;top:6px;width:44px;height:4px;margin-left:-22px;border-radius:2px;background:rgba(255,255,255,.28)}
+  #sheetToggle span{flex:1;text-align:left;margin-top:6px}
+  #sheetToggle b{font-size:14px;opacity:.7;margin-top:6px}
+  aside.places.collapsed,body:not(.driving) aside.places.collapsed{max-height:calc(62px + var(--sab))!important;padding-bottom:calc(6px + var(--sab))}
+  .places .explore-help{display:none}
+  .searchrow{margin-top:6px}
+  #tourMenu{margin-top:16px}
+  #tourList{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -14px;padding:2px 14px 6px;-webkit-overflow-scrolling:touch}
+  #tourList .tourcard{flex:0 0 78%;max-width:300px;scroll-snap-align:start}
+  #tourList .tourmeta em{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  aside.places,body:not(.driving) aside.places{display:flex;flex-direction:column}
+  aside.places>*{order:1}
+  aside.places>#sheetToggle{order:-3}aside.places>.searchrow,aside.places>#searchstatus{order:-2}aside.places>.explore-actions{order:-1}
+  .explore-actions{position:static;display:grid;grid-template-columns:1.7fr 1fr;gap:8px;margin:10px 0 0;padding:0;background:none;border:0;border-radius:0}
+  .explore-actions #drive{display:none}   /* the header carries Drive here on phones */
+  .explore-actions #goDrive{background:var(--glass-lite);font-size:12.5px;min-height:44px;padding:8px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .explore-actions #tour{background:var(--glass-lite);color:var(--accent);font-size:13px;min-height:44px;padding:8px 10px}
+  .camera,body:not(.driving) .camera{bottom:calc(min(44dvh,420px) + 10px)!important;right:10px!important;left:auto!important;padding:3px}
+  .camera button{min-height:44px;padding:6px 12px;font-size:12px}
+  body:has(aside.places.collapsed) .camera{bottom:calc(72px + var(--sab))!important}
+  footer,body.driving footer,body:not(.driving) footer{display:flex;justify-content:center;padding:0;bottom:calc(var(--strip) + 6px);z-index:5}
+  body:not(.driving) footer{bottom:auto;top:calc(58px + var(--sat));left:12px;right:auto;justify-content:flex-start}   /* explore: the OSM credit rides under the brand */
+  footer .help,footer #position{display:none}
+  footer a,body.driving footer a{font-size:9px;padding:3px 8px;opacity:.85}
+  #spotActions{top:calc(60px + var(--sat));left:12px;right:12px;width:auto;transform:none}
+  #spotActions>div{grid-template-columns:1fr 1fr 1fr}
+  #inspector{inset:auto 10px calc(min(44dvh,420px) + 10px) 10px;width:auto;max-height:40dvh;padding:16px}
+  /* driving */
+  body.driving .driveheading,.driving .driveheading{top:calc(62px + var(--sat));left:calc(12px + var(--sal));right:112px;max-width:none}
+  body.driving .driveheading strong,.driving .driveheading strong{font-size:clamp(20px,6vw,26px);letter-spacing:.02em}
+  body.driving .driveheading span,.driving .driveheading span{font-size:12px;margin-top:4px}
+  body.driving .driveheading #autoBadge{margin-top:6px;padding:3px 9px;font-size:10px}
+  body.driving .driveheading #tourLine{font-size:12px;margin-top:4px}
+  body.driving .speedometer,.driving .speedometer,body.driving.minimal-hud .speedometer{top:calc(60px + var(--sat));right:calc(12px + var(--sar));bottom:auto;left:auto;width:auto;padding:0;text-align:right}
+  body.driving .speedometer b,.driving .speedometer b{font-size:44px;line-height:.9}
+  body.driving .speedometer>span,.driving .speedometer>span{font-size:10px;letter-spacing:.22em;margin-left:4px}
+  body.driving .speedometer small,.driving .speedometer small{font-size:11px;margin-top:4px}
+  body.driving .speedometer #assistValue{display:none}
+  #drivehud::before{height:150px}#drivehud::after{height:min(30vh,240px)}
+  body.driving #minimap,.driving #minimap{top:auto;bottom:calc(var(--strip) + 10px);left:calc(12px + var(--sal));width:84px;height:84px;border-radius:14px;border-width:1.5px;opacity:.92}
+  body.driving .look-controls{display:none}
+  /* the strip */
+  body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{left:0;right:0;bottom:0;transform:none;width:auto;max-width:none;
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row dense;gap:6px;padding:8px calc(10px + var(--sar)) calc(8px + var(--sab)) calc(10px + var(--sal));
+    border-radius:22px 22px 0 0;border:1px solid var(--edge);border-bottom:0;background:var(--glass-strong);box-shadow:0 -12px 40px rgba(0,0,0,.35)}
+  body.driving .driveactions button,body.driving .driveactions button.primary,body.driving .driveactions #driveMode{display:block;width:auto!important;max-width:none!important;min-width:0!important;min-height:44px!important;font-size:12px!important;padding:6px 6px!important;border-radius:12px;white-space:nowrap;overflow:hidden!important;text-overflow:ellipsis}
+  body.driving .driveactions button{background:var(--glass-lite);border:1px solid rgba(255,255,255,.08)}
+  body.driving .driveactions button::before{display:none!important;content:none!important}
+  body.driving .driveactions #driveMode{grid-column:span 2;margin:0;padding:0!important;display:grid;grid-template-columns:1fr 1fr;background:rgba(0,0,0,.28);border:1px solid var(--edge)}
+  body.driving .driveactions #driveMode button{min-height:44px!important;font-size:12px!important;padding:6px 4px!important;border:0}
+  body.driving .driveactions #eveningDrive{grid-column:auto}
+  body.driving.minimal-hud .driveactions{grid-template-columns:1fr 1fr}
+  body.driving.minimal-hud .speedometer{opacity:1}
+  body.driving #touchReverse{bottom:calc(var(--strip) + 10px);right:calc(12px + var(--sar));width:54px;height:54px;background:var(--glass);border:1px solid var(--edge-hi);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+  body.driving #touchReverse.held{background:var(--accent);color:var(--accent-ink)}
+  body.driving.minimal-hud #touchReverse{bottom:calc(64px + var(--sab))}
+  body.driving #audioPanel,.driving #audioPanel{top:calc(60px + var(--sat));bottom:auto;left:10px;right:10px;width:auto;max-height:calc(100dvh - 70px - var(--strip) - var(--sat));z-index:30}
+  #audioPanel summary{padding:14px 18px 10px;font-size:20px}
+  #audioPanel .g-section,.garageExtras{padding-left:18px;padding-right:18px}
+  body.driving #roadWarning{top:calc(62px + var(--sat))!important;left:12px!important;right:12px!important;width:auto;transform:none}
+  #driveCard{top:calc(126px + var(--sat));left:12px;right:12px;width:auto;max-width:none}
+  #driveCard img{height:110px}
+  /* flyover */
+  #tourOverlay,.touring #tourOverlay{top:auto;bottom:0;padding:70px 12px calc(14px + var(--sab))}
+  #tourOverlay h2{font-size:clamp(24px,7vw,34px)}
+  #tourOverlay .stopcard img{max-height:120px;max-width:260px}
+  #tourOverlay .stopcard .line{font-size:13px}
+  #tourOverlay .tourbar{gap:6px}
+  #tourOverlay .tourbar button,#tourOverlay select{min-height:44px;font-size:13px}
+  #tourOverlay select{max-width:150px}
+  dialog{padding:26px 22px}
+  #loading .loadbrand b{font-size:44px}
+}
+
+/* landscape phones: one-row strip, the corners inside the notch insets */
+@media (max-width:950px) and (max-height:460px){
+  :root{--strip:calc(56px + var(--sab))}
+  header,body.immersive header,body.driving header{padding-top:calc(6px + var(--sat))}
+  .brand b{font-size:18px}
+  body.driving .driveheading,.driving .driveheading{top:calc(54px + var(--sat));right:auto;max-width:40vw}
+  body.driving .driveheading strong,.driving .driveheading strong{font-size:20px}
+  body.driving .speedometer,.driving .speedometer,body.driving.minimal-hud .speedometer{top:calc(52px + var(--sat))}
+  body.driving .speedometer b,.driving .speedometer b{font-size:36px}
+  body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{display:flex;flex-wrap:nowrap;gap:4px;padding:6px calc(10px + var(--sar)) calc(6px + var(--sab)) calc(10px + var(--sal));border-radius:0;border-left:0;border-right:0;box-shadow:none}
+  body.driving .driveactions button,body.driving .driveactions #driveMode{flex:1 1 0}
+  body.driving .driveactions #driveMode{flex:2 1 0;display:grid}
+  body.driving #minimap,.driving #minimap{width:64px;height:64px;left:calc(10px + var(--sal))}
+  body.driving #touchReverse,body.driving.minimal-hud #touchReverse{bottom:calc(var(--strip) + 8px);right:calc(10px + var(--sar))}
+  body.driving #audioPanel,.driving #audioPanel{top:calc(50px + var(--sat));left:50%;right:auto;transform:translateX(-50%);width:min(460px,80vw);max-height:calc(100dvh - 56px - var(--strip))}
+  #driveCard{left:auto;right:calc(10px + var(--sar));width:240px;top:calc(50px + var(--sat))}
+  #driveCard img{height:80px}
+  aside.places,body:not(.driving) aside.places{max-height:min(66dvh,300px)!important}
+  .camera,body:not(.driving) .camera{bottom:calc(min(66dvh,300px) + 8px)!important}
+  #tourOverlay,.touring #tourOverlay{padding-top:40px}
+  #tourOverlay h2{font-size:22px;margin-top:4px}
+  #tourOverlay .stopcard img{display:none}
+  #tourOverlay .stopcard .line{font-size:12px}
+  #tourOverlay .tourbar{margin-top:8px}
+}
+
+/* ---------- big screens: everything scales up with the picture ---------- */
+@media (min-width:2000px){
+  :root{--gutter:36px;--map-size:clamp(240px,11vw,300px);--r:22px;--r-sm:14px}
+  button{font-size:16px;min-height:50px;padding:12px 22px}
+  .brand b{font-size:40px}.brand span{font-size:12px}
+  header,body.immersive header,body.driving header{padding-top:calc(20px + var(--sat))}
+  .places,body:not(.driving) .places{width:420px;top:calc(110px + var(--sat));padding:28px 26px 0}
+  header>button,header>#fullscreen,header>#info{font-size:16px;min-height:50px;padding:12px 22px}
+  .places h1,body:not(.driving) .places h1{font-size:32px}
+  .places .explore-help,#tourList .tourmeta em,.layers,.coverage-switch{font-size:14px}
+  #tourList .tourmeta b{font-size:22px}
+  #tourList .touracts button,body:not(.driving) .destinations button,.modebar button{font-size:14px;min-height:46px}
+  .explore-actions{margin-left:-26px;margin-right:-26px;padding-left:26px;padding-right:26px}
+  .explore-actions #drive{min-height:58px;font-size:18px}
+  body.driving .driveheading,.driving .driveheading{top:calc(110px + var(--sat))}
+  body.driving .driveheading span,.driving .driveheading span{font-size:17px}
+  body.driving .speedometer small,.driving .speedometer small{font-size:15px}
+  body.driving .driveactions button,.driving .driveactions button{min-width:104px;max-width:150px;min-height:84px;font-size:15px}
+  body.driving .driveactions button::before{width:26px;height:26px}
+  body.driving .driveactions #driveMode button,#driveMode button{min-width:130px;min-height:84px;font-size:16px!important}
+  .look-controls{bottom:calc(136px + var(--sab))}.look-controls button{font-size:15px;min-height:44px;padding:8px 20px}
+  body.driving .drivehelp{font-size:13px}
+  body.driving .speedometer,.driving .speedometer{bottom:calc(52px + var(--sab))}
+  body.driving #audioPanel,.driving #audioPanel{width:400px;top:calc(110px + var(--sat));bottom:calc(130px + var(--sab));font-size:16px}
+  #audioPanel select,#audioPanel label,.audiobuttons button,.garageExtras button{font-size:15px}
+  #driveCard{width:340px;top:calc(110px + var(--sat))}#driveCard img{height:180px}#driveCard h3{font-size:22px}#driveCard .line{font-size:15px}
+  #tourOverlay .stopcard .line{font-size:17px}#tourOverlay .stopcard img{max-width:440px;max-height:250px}
+  #tourOverlay .tourbar button,#tourOverlay select{font-size:16px;min-height:50px}
+  footer,footer a{font-size:13px}
+  #maplabels .maplabel{font-size:14px;padding:7px 14px}
+  #spotActions strong{font-size:24px}#spotActions button{font-size:15px}
+}
