@@ -100,6 +100,21 @@
   body.driving.minimal-hud .pedals { bottom: 76px; }
   body.driving #minimap { bottom: 182px; }
 
+  /* put-away controls (phone.js) */
+  #sheetToggle { display: flex; justify-content: space-between; align-items: center; width: 100%; min-height: 40px; padding: 8px 4px; margin: 0 0 6px; background: none; border: 0; font-size: 15px; font-weight: 600; color: inherit; }
+  #sheetToggle b { font-size: 14px; opacity: .8; }
+  aside.places.collapsed { max-height: 56px !important; overflow: hidden !important; padding-bottom: 6px; }
+  aside.places.collapsed > *:not(#sheetToggle) { visibility: hidden; }
+  .camera { transition: bottom .25s; }
+  body:has(aside.places.collapsed) .camera { bottom: 66px !important; }
+  #roadWarning .closeWarn { position: absolute; top: 4px; right: 6px; width: 32px; height: 32px; padding: 0; min-height: 0; border: 0; background: none; font-size: 22px; line-height: 1; color: #fff; }
+  #touchReverse { display: none; }
+  body.driving #touchReverse { display: block; position: fixed; right: 8px; bottom: 76px; z-index: 12; width: 54px; height: 54px; min-height: 0; padding: 0; border-radius: 50%; font-size: 18px; font-weight: 700; background: #0b1a22cc; border: 1px solid #ffffff3a; color: #dfe9ee; }
+  body.driving #touchReverse.held { background: #edb567; color: #102b36; }
+  body.driving.minimal-hud .driveheading, body.driving.minimal-hud .speedometer, body.driving.minimal-hud #touchDrive .hint, body.driving.minimal-hud #touchReverse { display: none !important; }
+  body.driving.minimal-hud .driveactions button { display: none !important; }
+  body.driving.minimal-hud .driveactions #phoneHud, body.driving.minimal-hud .driveactions #exitDrive { display: inline-flex !important; }
+  body.driving.minimal-hud #touchDrive { display: block; }
   /* the flyover and checklist panels fit the screen */
   #houseChecklist { left: 8px; right: 8px; top: 54px; width: auto; max-height: calc(100dvh - 70px); padding: 12px; }
 }

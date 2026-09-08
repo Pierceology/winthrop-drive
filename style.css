@@ -37,3 +37,6 @@
 
 .look-controls{position:fixed;bottom:138px;left:50%;transform:translateX(-50%);display:flex;gap:5px;padding:5px;border-radius:12px;background:#10252cdb;border:1px solid #a9dce42b;z-index:12}.look-controls button{font-size:14px;min-height:38px}.look-controls button[aria-pressed="true"]{background:#bcecf2;color:#0c242f}.review-open .look-controls{left:calc(50% + 130px)}@media(max-width:800px){.look-controls{bottom:105px}.review-open .look-controls{display:none}}
 
+
+#touchReverse,#phoneHud,#sheetToggle,#roadWarning .closeWarn{display:none}
+@media(max-width:700px){#phoneHud,#sheetToggle,#roadWarning .closeWarn{display:inline-flex}}
