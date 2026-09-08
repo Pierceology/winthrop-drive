@@ -43,3 +43,9 @@
 
 .review-redfin{display:inline-block;margin:6px 0 0;font-size:13px;color:#9fd8e6}
 .coverage-legend .photo-key::before{border:2px solid #3ddc84}
+
+/* Auto drive has to read at a glance: green while the car is driving, the button says what pressing it does */
+#autoDrive.on{background:#2f9e57!important;color:#fff!important;border-color:#2f9e57!important;animation:autoPulse 1.8s ease-in-out infinite}
+@keyframes autoPulse{0%,100%{box-shadow:0 0 0 0 rgba(47,158,87,.55)}50%{box-shadow:0 0 0 9px rgba(47,158,87,0)}}
+#autoBadge{display:none;margin-left:8px;padding:2px 8px;border-radius:999px;background:#2f9e57;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;vertical-align:middle}
+body.auto-driving #autoBadge{display:inline-block}
