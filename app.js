@@ -92,6 +92,11 @@ async function init(){
  const [focusTexture,focusExtent,...textures]=await Promise.all([loader.loadAsync('./data/focus/aerial.webp'),get('./data/focus/extent.json'),...tiles.map(t=>loader.loadAsync('./data/detailed/'+t.file))]);
  roofTiles=[{bbox:focusExtent,texture:focusTexture},...tiles.map((t,i)=>({...t,texture:textures[i]}))];
  for(const t of roofTiles){t.texture.colorSpace=THREE.SRGBColorSpace;t.texture.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),16);}
+ // Real roofs from the 2021 LiDAR: unpack the centimetre binary into the same roof-triangle format the estimates use.
+ try{const [idx,buf]=await Promise.all([get('./data/roofs-index.json'),fetch('./data/roofs.bin').then(r=>r.arrayBuffer())]);const dv=new DataView(buf);let applied=0;const centers=new Map(world.buildings.map(b=>[b.id,b.center]));
+  for(const [id,[off,nv,nt,wall]] of Object.entries(idx.buildings)){const c=centers.get(id);if(!c)continue;const xs=new Int16Array(buf,off,nv),ys=new Uint16Array(buf,off+nv*2,nv),zs=new Int16Array(buf,off+nv*4,nv),tri=new Uint16Array(buf,off+nv*6,nt*3);const roof=new Array(nt*9);for(let i=0;i<nt*3;i++){const v=tri[i];roof[i*3]=c[0]+xs[v]/100;roof[i*3+1]=ys[v]/100;roof[i*3+2]=c[1]+zs[v]/100;}
+   const rec=neighborhoods.buildings[id]||(neighborhoods.buildings[id]={address:'',stories:0,accessory:false});rec.wall=wall;rec.roof=roof;rec.roofSource='lidar';applied++;}
+  window.__lidarRoofs=applied;}catch(e){console.warn('LiDAR roofs unavailable',e);}
  groundWorld=await buildGroundWorld(foundationData,roofTiles,origin,asphaltMaterial());
  terrain=groundWorld.ground;pavement=groundWorld.road;terrainMeshes=[terrain,groundWorld.walk,groundWorld.curb];surfaceAt=groundWorld.field.height;heightAt=surfaceAt;scene.add(terrain,pavement,groundWorld.walk,groundWorld.curb);
  addGeometry();
