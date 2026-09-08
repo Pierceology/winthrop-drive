@@ -15,7 +15,7 @@ export class DrivingState {
  if(this.lastSafe){Object.assign(this,this.lastSafe,{speed:0,steer:0,blocked:false,wrongWay:false,recoveryTime:1.4});this.recoveryCount++;return true;}return false;
  }
  step(dt,input){dt=Math.min(.05,Math.max(0,dt));this.recoveryTime=0;this.assisting=false;
- const target=(input.left?1:0)-(input.right?1:0);this.steer+=(target*.56/(1+Math.abs(this.speed)/20)-this.steer)*Math.min(1,dt*9);
+ const target=(typeof input.steerAxis==='number')?Math.max(-1,Math.min(1,input.steerAxis)):(input.left?1:0)-(input.right?1:0);this.steer+=(target*.56/(1+Math.abs(this.speed)/20)-this.steer)*Math.min(1,dt*9);
  const p=this.performance;this.speed+=((input.accel?Math.min(p.launch,p.power/Math.max(1,Math.abs(this.speed))):0)-(input.reverse?(this.speed>0?12:3):0))*dt;const drag=(.15+.000335*this.speed*this.speed+(input.brake?12:0))*dt;
  this.speed=Math.abs(this.speed)<=drag?0:this.speed-Math.sign(this.speed)*drag;this.speed=Math.max(-5,Math.min(this.performance.top,this.speed));
  const current=this.network.nearest(this.x,this.z);this.wrongWay=!!(current?.direction&&(-Math.sin(this.yaw)*current.dx-Math.cos(this.yaw)*current.dz)*current.direction<-.1);
