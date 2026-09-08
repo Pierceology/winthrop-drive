@@ -112,7 +112,9 @@
   body.driving #touchReverse { display: block; position: fixed; right: 8px; bottom: 76px; z-index: 12; width: 54px; height: 54px; min-height: 0; padding: 0; border-radius: 50%; font-size: 18px; font-weight: 700; background: #0b1a22cc; border: 1px solid #ffffff3a; color: #dfe9ee; }
   body.driving #touchReverse.held { background: #edb567; color: #102b36; }
   body.driving.minimal-hud .driveheading, body.driving.minimal-hud .speedometer, body.driving.minimal-hud #touchDrive .hint, body.driving.minimal-hud #touchReverse { display: none !important; }
-  body.driving.minimal-hud .driveactions button { display: none !important; }
+  body.driving.minimal-hud .driveactions button, body.driving.minimal-hud #garageToggle { display: none !important; }
+  #phoneHud::before, #phoneHud::after { display: none !important; content: none !important; }
+  #phoneHud { padding: 6px 12px !important; }
   body.driving.minimal-hud .driveactions #phoneHud, body.driving.minimal-hud .driveactions #exitDrive { display: inline-flex !important; }
   body.driving.minimal-hud #touchDrive { display: block; }
   /* the flyover and checklist panels fit the screen */
