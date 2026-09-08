@@ -65,3 +65,5 @@ body.auto-driving #autoBadge{display:inline-block}
 #tourList .tourrow button{min-height:34px;padding:4px 10px;font-size:12px}
 #tourOverlay .tourbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}#tourOverlay select{min-height:34px;border-radius:8px;background:#0e1418;color:#fff;border:1px solid #ffffff2e;padding:4px 8px}
 body:not(.tour-flight) #tourOverlay .flightonly{display:none}
+
+#tourOverlay .tourbar{justify-content:center}
