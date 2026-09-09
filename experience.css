@@ -238,6 +238,9 @@ body.driving .pedals button{border-radius:var(--r-sm);min-height:48px}
 #driveCard .addr{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);padding:8px 18px 16px}
 #driveCard .line:empty,#driveCard .addr:empty{display:none}
 body.driving:has(#audioPanel[open]) #driveCard{display:none}
+/* the turn-around: a dock control that stands down while the car is driving itself */
+#turnAround{--icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 21V10a4 4 0 0 1 8 0v11'/%3E%3Cpath d='m5 13 3-3 3 3'/%3E%3C/g%3E%3C/svg%3E")}
+body.auto-driving #turnAround{display:none!important}
 
 /* controls fade while you drive; anything brings them back */
 body.driving.idle .driveactions,body.driving.idle .look-controls,body.driving.idle .drivehelp,body.driving.idle header,body.driving.idle footer,body.driving.idle #touchReverse,body.driving.idle .pedals,body.driving.idle #touchDrive .hint{opacity:0!important;pointer-events:none!important;transition:opacity .9s ease .1s}
@@ -385,6 +388,14 @@ dialog dd{font-size:15px;color:#dfe6ea}
   body.driving #roadWarning{top:calc(62px + var(--sat))!important;left:12px!important;right:12px!important;width:auto;transform:none}
   #driveCard{top:calc(126px + var(--sat));left:12px;right:12px;width:auto;max-width:none}
   #driveCard img{height:110px}
+  /* the turn-around leaves the strip on phones and stands as its own control above the reverse pedal */
+  body.driving #turnAround{position:fixed;left:auto;bottom:calc(var(--strip) + 72px);right:calc(12px + var(--sar));
+    width:54px!important;height:54px;min-height:54px!important;min-width:0!important;max-width:none!important;padding:0!important;
+    border-radius:50%;font-size:0!important;overflow:hidden!important;
+    background:var(--glass);border:1px solid var(--edge-hi);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);color:var(--ink)}
+  body.driving #turnAround::before{display:block!important;content:''!important;width:24px;height:24px;margin:0 auto;
+    background:currentColor;mask:var(--icon) center/contain no-repeat;-webkit-mask:var(--icon) center/contain no-repeat}
+  body.driving.minimal-hud #turnAround{bottom:calc(126px + var(--sab))}
   /* flyover */
   #tourOverlay,.touring #tourOverlay{top:auto;bottom:0;padding:70px 12px calc(14px + var(--sab))}
   #tourOverlay h2{font-size:clamp(24px,7vw,34px)}
@@ -414,6 +425,7 @@ dialog dd{font-size:15px;color:#dfe6ea}
   body.driving #audioPanel,.driving #audioPanel{top:calc(50px + var(--sat));left:50%;right:auto;transform:translateX(-50%);width:min(460px,80vw);max-height:calc(100dvh - 56px - var(--strip))}
   #driveCard{left:auto;right:calc(10px + var(--sar));width:240px;top:calc(50px + var(--sat))}
   #driveCard img{height:80px}
+  body.driving #turnAround{bottom:calc(var(--strip) + 70px);right:calc(10px + var(--sar))}
   aside.places,body:not(.driving) aside.places{max-height:min(66dvh,300px)!important}
   .camera,body:not(.driving) .camera{bottom:calc(min(66dvh,300px) + 8px)!important}
   #tourOverlay,.touring #tourOverlay{padding-top:40px}
