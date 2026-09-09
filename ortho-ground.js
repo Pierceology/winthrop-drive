@@ -13,7 +13,9 @@ function noiseTexture(){// a tileable 256 px value-noise sheet: r fine grain, g 
  for(let y=0;y<N;y++)for(let x=0;x<N;x++){const o=(y*N+x)*4;d[o]=255*(.5*f1(x,y)+.5*f2(x,y));d[o+1]=255*(.6*c1(x,y)+.4*c2(x,y));d[o+2]=255*(.7*s1(x*8,y)+.3*s2(x,y));d[o+3]=255*(.6*k1(x,y)+.4*k2(x,y));}
  const t=new THREE.DataTexture(d,N,N);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.generateMipmaps=true;t.minFilter=THREE.LinearMipmapLinearFilter;t.magFilter=THREE.LinearFilter;t.needsUpdate=true;return t;}
 export class OrthoGround{
- constructor({origin,renderer,lowMemory=false,url='./assets/ortho/'}){
+ constructor({origin,renderer,lowMemory=false,url}){
+  // ?ground=summer picks an alternative tile set (assets/ortho-summer, same index shape); the default stays assets/ortho
+  const set=(new URLSearchParams(location.search).get('ground')||'').toLowerCase();url=url||(/^[a-z][a-z0-9-]{0,15}$/.test(set)&&set!=='default'?`./assets/ortho-${set}/`:'./assets/ortho/');
   this.origin=origin;this.lowMemory=lowMemory;this.url=url;this.index=null;this.loader=new THREE.TextureLoader();this.images=new THREE.ImageLoader();this.anisotropy=Math.min(renderer.capabilities?.getMaxAnisotropy?.()||1,8);
   this.levels=lowMemory?[]:LEVELS.map(l=>this.makeLevel(l));this.inflight=0;this.loaded=0;this.detail=noiseTexture();this.blank=new THREE.DataTexture(new Uint8Array([128,128,128,255]),1,1);this.blank.needsUpdate=true;
   this.material=this.buildMaterial();this.ready=this.load();
