@@ -246,6 +246,16 @@ body.driving .pedals button{border-radius:var(--r-sm);min-height:48px}
 #driveCard .line{font-size:13.5px;line-height:1.55;color:var(--muted);margin:8px 0 0;padding:0}
 #driveCard .addr{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:9px 0 0;padding:0}
 #driveCard .line:empty,#driveCard .addr:empty,#driveCard .kicker:empty{display:none}
+/* the arrival photo: a full-bleed band across the top of the card, in the owner's own pictures of the place.
+   It is capped in height at every size so the card never grows down over the road or the driving controls,
+   and a stop with no picture simply keeps the card it always had. */
+#driveCard .cardmedia{display:block;position:relative;margin:-16px -18px 12px;padding:0;aspect-ratio:16/9;max-height:196px;
+  overflow:hidden;background:rgba(10,14,20,.34);border-bottom:1px solid var(--edge)}
+#driveCard .cardmedia img,#driveCard .cardmedia video{display:block;width:100%;height:100%;object-fit:cover;border:0;margin:0}
+#driveCard .cardmedia[hidden]{display:none}
+/* over a photograph the close button needs its own ground to be seen against */
+#driveCard.has-media .cardclose{background:rgba(10,14,20,.5);color:#fff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#driveCard.has-media .cardclose:hover{background:rgba(10,14,20,.72)}
 body.driving:has(#audioPanel[open]) #driveCard{display:none}
 /* the turn-around: a dock control that stands down while the car is driving itself */
 #turnAround{--icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 21V10a4 4 0 0 1 8 0v11'/%3E%3Cpath d='m5 13 3-3 3 3'/%3E%3C/g%3E%3C/svg%3E")}
@@ -322,6 +332,7 @@ dialog dd{font-size:15px;color:#dfe6ea}
   #driveCard .kicker{font-size:10px;letter-spacing:.15em;padding-right:34px}
   #driveCard h3{font-size:18px;padding-right:34px}
   #driveCard .line{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+  #driveCard .cardmedia{margin:-13px -15px 10px;max-height:148px}
   body.driving .driveheading{max-width:calc(100vw - 2*var(--gutter) - 200px)}
 }
 
@@ -405,6 +416,13 @@ dialog dd{font-size:15px;color:#dfe6ea}
   #driveCard h3{font-size:17px;margin-top:5px}
   #driveCard .line{font-size:12.5px;line-height:1.45;margin-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   #driveCard .addr{margin-top:6px}
+  /* the card is a sheet above the strip here, so the picture stays a band: tall enough to read, short
+     enough that the card and the photo together still leave the road ahead in view. With a picture the
+     blurb gives up its third line, which is what keeps the whole card clear of the middle of the road. */
+  /* an explicit height, not a capped 16/9 box: capping the ratio would shrink the band's width instead of
+     cropping it, and the picture should run the full width of the sheet however short it has to be */
+  #driveCard .cardmedia{margin:-12px -14px 10px;aspect-ratio:auto;height:72px;max-height:none}
+  #driveCard.has-media .line{-webkit-line-clamp:2}
   body.driving.stopcard-open #minimap,body.driving.stopcard-open #touchReverse,body.driving.stopcard-open #turnAround{
     bottom:calc(var(--strip) + 20px + var(--drivecard-height,120px))}
   /* the turn-around leaves the strip on phones and stands as its own control above the reverse pedal */
@@ -444,6 +462,7 @@ dialog dd{font-size:15px;color:#dfe6ea}
   body.driving #audioPanel,.driving #audioPanel{top:calc(50px + var(--sat));left:50%;right:auto;transform:translateX(-50%);width:min(460px,80vw);max-height:calc(100dvh - 56px - var(--strip))}
   #driveCard{left:auto;right:calc(10px + var(--sar));width:min(224px,42vw);top:auto;bottom:calc(var(--strip) + 8px);padding:10px 12px 11px}
   #driveCard h3{font-size:15px}#driveCard .line{font-size:11.5px;-webkit-line-clamp:3}
+  #driveCard .cardmedia{margin:-10px -12px 8px;aspect-ratio:auto;height:64px;max-height:none}
   body.driving.stopcard-open #minimap{bottom:calc(var(--strip) + 10px)}
   body.driving.stopcard-open #touchReverse,body.driving.stopcard-open #turnAround{display:none}
   body.driving #turnAround{bottom:calc(var(--strip) + 70px);right:calc(10px + var(--sar))}
@@ -482,6 +501,7 @@ dialog dd{font-size:15px;color:#dfe6ea}
   body.driving #audioPanel,.driving #audioPanel{width:400px;top:calc(110px + var(--sat));bottom:calc(130px + var(--sab));font-size:16px}
   #audioPanel select,#audioPanel label,.audiobuttons button,.garageExtras button{font-size:15px}
   #driveCard{width:min(380px,calc(26vw - 2*var(--gutter)));padding:20px 22px 19px}#driveCard h3{font-size:24px}#driveCard .line{font-size:15px}
+  #driveCard .cardmedia{margin:-20px -22px 15px;max-height:228px}
   #tourOverlay .stopcard .line{font-size:17px}#tourOverlay .stopcard img{max-width:440px;max-height:250px}
   #tourOverlay .tourbar button,#tourOverlay select{font-size:16px;min-height:50px}
   footer,footer a{font-size:13px}
