@@ -28,6 +28,7 @@ import {asphaltMaterial} from './road-mesh.js';
 import {makeResidence} from './residential.js';
 import {Driving} from './driving.js';
 import {OrthoGround} from './ortho-ground.js';
+import {playSurfaces} from './play-surfaces.js';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 const PUBLIC=!new URLSearchParams(location.search).has('studio');if(!PUBLIC)document.body.classList.add('studio');
 const $=id=>document.getElementById(id);
@@ -39,7 +40,7 @@ let assetData,assetGroup,neighborhoods;
 let water,labels,ambient,tour,poi,terrainMeshes=[],spot=null,spotMarker;
 let scene,camera,renderer,controls,world,elevation,terrain,buildings,outlineGroup,roadGroup,selection,flight,auto=false;
 let driving,sun,sunOffset=new THREE.Vector3(-300,450,180),roofTiles=[],pavement;
-let surfaceAt,focusElevation,terrainPatches=[],residential=[],buildingMeshes=[],heightAt,origin,frame=0,lastTime=0;
+let surfaceAt,playGround,focusElevation,terrainPatches=[],residential=[],buildingMeshes=[],heightAt,origin,frame=0,lastTime=0;
 const raycaster=new THREE.Raycaster();const pointer=new THREE.Vector2();
 const places={whole:{target:[-350,0,-900],offset:[4100,5200,5300]},center:{target:[-1400,0,-1500],offset:[350,500,520]},beach:{target:[190,0,-90],offset:[400,340,450]},deer:{target:[1136,0,928],offset:[850,1100,1150]}};
 function error(e){$('loading').hidden=false;$('loading').querySelector('h2').textContent='The model could not load';$('loadmessage').textContent=(/WebGL/i.test(e.message)?'This browser cannot start 3D graphics. Enable hardware acceleration or try a browser with WebGL support.':e.message+' — refresh to try again.');$('loading').querySelector('.spinner').style.display='none';console.error(e)}
@@ -125,6 +126,11 @@ async function init(){
   $('tourPrev').onclick=()=>tourFlight.prev();$('tourNext').onclick=()=>tourFlight.next();}).catch(()=>{});
  if(new URLSearchParams(location.search).get('fronts')==='1')get('./data/assessor-photos.json').then(photos=>{photoFronts=new PhotoFronts({scene,world,neighborhoods,photos,network:driving.state.network,anisotropy:Math.min(renderer.capabilities.getMaxAnisotropy(),8)});photoFronts.update(camera.position.x,camera.position.z);window.__fronts=photoFronts;}).catch(e=>console.warn('Photo fronts unavailable',e));
  roadsideGroup=roadside(assetData,driving.state.network,surfaceAt);scene.add(roadsideGroup);
+ // The designed ground: the town's real courts, ball fields, parks, pools, beaches and golf holes, laid over the photograph.
+ window.__groundField=groundWorld.field;
+ get('./data/surfaces.json').then(async data=>{const onLand=(x,z)=>groundWorld.field.ground.sample(x,z)!==null,onRoad=(x,z)=>groundWorld.field.road.sample(x,z)!==null;
+  playGround=await playSurfaces(data,surfaceAt,onLand,onRoad,(x,z)=>driving.state.network.obstructed(x,z),lowMemory);
+  scene.add(playGround);window.__surfaces=playGround.userData.audit;}).catch(e=>console.warn('Ground surfaces unavailable',e));
  Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem);scene.add(g);furnitureGroup=g;window.__furniture=g;}).catch(e=>console.warn('Street furniture unavailable',e));evening=new EveningDrive(scene,surfaceAt);weather=new Weather({scene,hemi,sun});weather.bind(['weather','weatherDrive']);
  assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Signs, poles and hydrants · ${assetData.assets.length}`;
 window.__drive=driving;window.__controls=controls;window.__camera=camera; ambient=new AmbientLife(scene,driving.state.network,surfaceAt);driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;
