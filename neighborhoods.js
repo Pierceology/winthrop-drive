@@ -64,7 +64,7 @@ export function neighborhoodMaterial(texture){
  if(hasPorch>.5){float pu=u-vFacade.w;float post=1.-smoothstep(.05,.09,abs(mod(pu+.7,1.4)-.7));float rail=step(.85,y)*step(y,.98)+step(.35,y)*step(y,.43);float slat=1.-smoothstep(.02,.04,abs(mod(pu,.16)-.08));float porchRoof=step(2.5,y)*step(y,2.72);
   vec3 porchPaint=vec3(.86,.85,.80);float porchMask=clamp(post*step(y,2.72)+rail+slat*step(.43,y)*step(y,.85)+porchRoof,0.,1.);wall=mix(wall,porchPaint,porchMask*.9);}
  wall=mix(vec3(.39,.40,.38),wall,smoothstep(.28,.38,y));
- float eave=step(vHouse.y-.16,y);wall=mix(wall,vec3(.84,.83,.77),eave);
+ float eave=step(vHouse.y-.16,y)*step(y,vHouse.y+.03);wall=mix(wall,vec3(.84,.83,.77),eave);
  if(vHouse.w>.5){wall=paint*(1.-groove*.15);float garage=step(.3,mod(u,4.5))*step(mod(u,4.5),3.9)*step(.1,y)*step(y,2.25);wall=mix(wall,vec3(.68,.69,.66)*(1.-groove*.2),garage);}
  float shingle=1.-smoothstep(.012,.035,mod(y+u*.06,.24));
  vec3 roofColor=vec3(.105,.12,.13)*(1.-shingle*.16);

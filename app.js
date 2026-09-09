@@ -101,9 +101,9 @@ async function init(){
  try{const fp=await get('./data/facade-params.json');let n=0;for(const [id,v] of Object.entries(fp.buildings)){const rec=neighborhoods.buildings[id];if(rec){rec.facade=v;n++;}}window.__facades=n;}catch(e){}
  const lowMemory=(navigator.deviceMemory&&navigator.deviceMemory<=4)||(matchMedia('(pointer:coarse)').matches&&Math.min(innerWidth,innerHeight)<800);window.__lowMemory=lowMemory;
  if(!lowMemory)try{const [idx,buf]=await Promise.all([get('./data/roofs-index.json'),fetch('./data/roofs.bin').then(r=>r.arrayBuffer())]);const dv=new DataView(buf);let applied=0;const centers=new Map(world.buildings.map(b=>[b.id,b.center]));
-  for(const [id,[off,nv,nt,wall]] of Object.entries(idx.buildings)){const c=centers.get(id);if(!c)continue;const xs=new Int16Array(buf,off,nv),ys=new Uint16Array(buf,off+nv*2,nv),zs=new Int16Array(buf,off+nv*4,nv),tri=new Uint16Array(buf,off+nv*6,nt*3);const roof=new Float32Array(nt*9);for(let i=0;i<nt*3;i++){const v=tri[i];roof[i*3]=c[0]+xs[v]/100;roof[i*3+1]=ys[v]/100;roof[i*3+2]=c[1]+zs[v]/100;}
+  const roofTypes={};for(const [id,[off,nv,nt,wall,kind]] of Object.entries(idx.buildings)){const c=centers.get(id);if(!c)continue;roofTypes[kind||'?']=(roofTypes[kind||'?']||0)+1;const xs=new Int16Array(buf,off,nv),ys=new Uint16Array(buf,off+nv*2,nv),zs=new Int16Array(buf,off+nv*4,nv),tri=new Uint16Array(buf,off+nv*6,nt*3);const roof=new Float32Array(nt*9);for(let i=0;i<nt*3;i++){const v=tri[i];roof[i*3]=c[0]+xs[v]/100;roof[i*3+1]=ys[v]/100;roof[i*3+2]=c[1]+zs[v]/100;}
    const rec=neighborhoods.buildings[id]||(neighborhoods.buildings[id]={address:'',stories:0,accessory:false});rec.wall=wall;rec.roof=roof;rec.roofSource='lidar';applied++;}
-  window.__lidarRoofs=applied;}catch(e){console.warn('LiDAR roofs unavailable',e);}
+  window.__lidarRoofs=applied;window.__lidarRoofTypes=roofTypes;}catch(e){console.warn('LiDAR roofs unavailable',e);}
  // The ground's photograph streams in behind the first frame: a 2 m/px base of the whole town, then 25 cm tiles by distance from the car.
  const ortho=new OrthoGround({origin,renderer,lowMemory});window.__ortho=ortho;
  groundWorld=await buildGroundWorld(foundationData,roofTiles,origin,asphaltMaterial(),ortho.material);
