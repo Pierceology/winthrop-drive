@@ -529,3 +529,14 @@ dialog dd{font-size:15px;color:#dfe6ea}
   #maplabels .maplabel{font-size:14px;padding:7px 14px}
   #spotActions strong{font-size:24px}#spotActions button{font-size:15px}
 }
+
+
+/* The who-drives pair was the only thing in the driving strip that could not shrink:
+   flex:0 0 auto on desktop, flex:0 0 200px in landscape, and a 96px floor under each of its
+   two buttons. Every other control gives ground, so the slack came out of the end of the row
+   and Exit drive was pushed past the strip's edge at every width from a landscape phone to a
+   1440 laptop — clean off the window at 844x390, where you could see the button and not press
+   it. Letting it shrink costs nothing where there is room: the basis is unchanged, so above
+   about 1600px the strip looks exactly as it did. Measured by qa/dock-overflow.js. */
+body.driving .driveactions #driveMode{flex-shrink:1;min-width:0}
+body.driving .driveactions #driveMode button{min-width:0}
