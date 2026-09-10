@@ -24,6 +24,15 @@ const JUMP = 80;                   // metres in one tick that no car can drive: 
 const MIN_AWAY = 200;              // metres — closer than this is a walk, not an errand
 const TURNAROUND = 7;              // seconds par allows for pressing Turn around before setting off
 
+/* ---------- the way there: what the minimap draws and the readout says while an errand runs ---------- */
+const TURN_ANGLE = 0.35;           // radians — the same bend auto-cruise calls a real turn, and par charges for
+const TURN_SPAN = 20;              // metres — a corner cut into several short pieces is still one corner
+const TURN_NEAR = 70;              // metres — closer than this the instruction drops the distance
+const REPLAN = 2.5;                // seconds of car clock between route searches
+const OFF_ROUTE = 28;              // metres off the line before the way is worked out again
+const ROUTE_INK = '#f0b860';       // games.css --accent
+const CASING = 'rgba(6,11,16,.85)';
+
 const $ = id => document.getElementById(id);
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const dist = (ax, az, bx, bz) => Math.hypot(ax - bx, az - bz);
@@ -37,6 +46,18 @@ function miles(m) {
   return (v < 0.1 ? v.toFixed(2) : v.toFixed(1)) + ' mi';
 }
 function plural(n, one, many) { return n + ' ' + (n === 1 ? one : many); }
+// Under a tenth of a mile, "0.04 mi" tells a driver nothing. Feet do.
+function away(m) {
+  const feet = m * 3.28084;
+  return feet < 528 ? Math.max(50, Math.round(feet / 50) * 50) + ' ft' : miles(m);
+}
+// Street names arrive from OpenStreetMap in capitals. The road-name panel is uppercased by CSS anyway; a line
+// of guidance is a sentence, so it is set the way it is spoken. Nothing is renamed, only recased.
+function titleCase(name) {
+  return String(name || '').toLowerCase()
+    .replace(/\b[a-z]/g, c => c.toUpperCase())
+    .replace(/\bMc([a-z])/g, (_, c) => 'Mc' + c.toUpperCase());
+}
 
 function readBest() {
   try { return JSON.parse(localStorage.getItem(STORE) || '{}') || {}; } catch (_) { return {}; }
@@ -124,6 +145,125 @@ function bestPar(cruise, errand, origin, yaw) {
   return best;
 }
 
+/* ---------- the way there ----------
+   One route, from the same planner par was built on, turned into three things: a line for the minimap, a
+   marker for the door, and one sentence about the next corner. The route is re-planned from wherever the car
+   actually is, so a wrong turn is followed rather than argued with. Nothing here is scored, and nothing here
+   claims a rule the game does not enforce: it says which way, not how fast, and never mentions a light. */
+
+// The directed edge the car is on and pointed along — the same test auto-cruise uses to set off.
+function edgeUnder(cruise, s) {
+  const near = cruise.edgesNear ? cruise.edgesNear(s.x, s.z, 90) : [];
+  let best = null;
+  for (const g of near.slice(0, 10)) {
+    const aligned = (-Math.sin(s.yaw) * g.e.dx - Math.cos(s.yaw) * g.e.dz) >= 0;
+    const score = g.d + (aligned ? 0 : 3);
+    if (!best || score < best.score) best = { g, score };
+  }
+  return best && best.g;
+}
+
+// Signed bend from one unit heading to the next: negative is a left turn (north is up, z runs south).
+function bend(a, b) {
+  const cos = clamp(a[0] * b[0] + a[1] * b[1], -1, 1);
+  return ((a[0] * b[1] - a[1] * b[0]) < 0 ? -1 : 1) * Math.acos(cos);
+}
+
+// Every real corner on the line, in order, with how far along the line it is and the street it turns onto.
+// A corner OSM has cut into three short pieces is one corner: the bend is gathered over TURN_SPAN metres.
+function cornersOf(pts, cum, names) {
+  const dirs = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const dx = pts[i + 1][0] - pts[i][0], dz = pts[i + 1][1] - pts[i][1], l = Math.hypot(dx, dz) || 1;
+    dirs.push([dx / l, dz / l, l]);
+  }
+  const out = [];
+  for (let i = 0; i < dirs.length - 1; i++) {
+    let angle = 0, span = 0, j = i, onto = '';
+    while (j < dirs.length - 1) {
+      angle += bend(dirs[j], dirs[j + 1]);
+      span += dirs[j + 1][2];
+      if (!onto && names[j + 1] && names[j + 1] !== names[i]) onto = names[j + 1];
+      j++;
+      if (Math.abs(angle) > TURN_ANGLE || span > TURN_SPAN) break;
+    }
+    if (Math.abs(angle) > TURN_ANGLE) {
+      out.push({ at: cum[i + 1], left: angle < 0, name: onto, angle: Math.abs(angle) });
+      i = j - 1;
+    }
+  }
+  return out;
+}
+
+// Plan the way from where the car stands to a point, and keep it as a polyline over the street centres —
+// the same lines the minimap already draws, so the route sits on the roads rather than beside them.
+function planGuide(cruise, s, to) {
+  const from = edgeUnder(cruise, s);
+  if (!from || !cruise.planRoute) return null;
+  let plan = null;
+  try { plan = cruise.planRoute(from.e, to); } catch (_) { return null; }
+  if (!plan || !plan.route || !plan.route.length) return null;
+  const route = plan.route, n = route.length, t0 = clamp(from.t, 0, 1), tEnd = clamp(plan.t, 0, 1);
+  const pts = [], names = [];
+  const push = (p, name) => {
+    const last = pts[pts.length - 1];
+    if (last && dist(last[0], last[1], p[0], p[1]) < 0.75) { names[names.length - 1] = name; return; }
+    pts.push(p); names.push(name);
+  };
+  push([route[0].a[0] + route[0].dx * t0, route[0].a[1] + route[0].dz * t0], route[0].name || '');
+  for (let i = 0; i < n; i++) {
+    const p = i < n - 1 ? [route[i].b[0], route[i].b[1]]
+      : [route[n - 1].a[0] + route[n - 1].dx * tEnd, route[n - 1].a[1] + route[n - 1].dz * tEnd];
+    push(p, (i < n - 1 ? route[i + 1].name : route[i].name) || '');
+  }
+  if (pts.length < 2) return null;
+  const cum = [0];
+  for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + dist(pts[i - 1][0], pts[i - 1][1], pts[i][0], pts[i][1]));
+  const end = pts[pts.length - 1];
+  return {
+    pts, cum, names, corners: cornersOf(pts, cum, names), total: cum[cum.length - 1],
+    door: dist(end[0], end[1], to.x, to.z), travelled: 0, off: 0, turn: null
+  };
+}
+
+// Where along the line the car has got to, how far off it, and which corner comes next. Cheap: it runs every
+// frame, on a handful of points, and never searches the graph.
+function follow(guide, s) {
+  let best = null;
+  for (let i = 0; i < guide.pts.length - 1; i++) {
+    const a = guide.pts[i], b = guide.pts[i + 1];
+    const dx = b[0] - a[0], dz = b[1] - a[1], l2 = dx * dx + dz * dz || 1;
+    const t = clamp(((s.x - a[0]) * dx + (s.z - a[1]) * dz) / l2, 0, 1);
+    const d = dist(s.x, s.z, a[0] + dx * t, a[1] + dz * t);
+    const at = guide.cum[i] + Math.hypot(dx, dz) * t;
+    // where a route passes near itself, stay on the part of it the car was already driving
+    const score = d + Math.min(60, Math.abs(at - guide.travelled)) * 0.25;
+    if (!best || score < best.score) best = { score, d, at };
+  }
+  if (!best) return guide;
+  guide.off = best.d;
+  guide.travelled = best.at;
+  guide.remaining = Math.max(0, guide.total - best.at);
+  const turn = guide.corners.find(c => c.at - best.at > 6) || null;
+  guide.turn = turn && { ...turn, dist: turn.at - best.at };
+  return guide;
+}
+
+// How much of the journey is left, by road: the route still to drive plus the last few metres from the kerb
+// to the door. It is the number the readout and the map both use, so they never disagree.
+function toGo(guide) { return guide && typeof guide.remaining === 'number' ? guide.remaining + guide.door : null; }
+
+// One sentence. A corner with a name gets the name; a corner without one is still a corner, and saying
+// "left" without pretending to know the street is better than naming the wrong street.
+function turnWords(guide) {
+  if (!guide) return '';
+  const t = guide.turn, left = toGo(guide);
+  if (!t) return left > 30 ? 'Straight for ' + away(left) : '';
+  const way = t.left ? 'Left' : 'Right';
+  if (t.dist <= TURN_NEAR) return t.name ? way + ' on ' + titleCase(t.name) : 'Turn ' + way.toLowerCase();
+  return (t.name ? way + ' on ' + titleCase(t.name) : way) + ' in ' + away(t.dist);
+}
+
 /* ---------- the module ---------- */
 
 function start(drive) {
@@ -170,7 +310,11 @@ function start(drive) {
   readout.id = 'errandRun';
   readout.hidden = true;
   readout.setAttribute('role', 'status');
-  readout.innerHTML = '<b class="ertime">0:00</b><span class="erto"></span><span class="erwhere"></span>' +
+  // The next corner is the line a driver reads, so it is given the whole width of the readout on its own row
+  // rather than a share of one. games.css orders it last; it stays here, next to the distance it belongs to.
+  readout.innerHTML = '<b class="ertime">0:00</b>' +
+    '<span class="erline"><span class="erto"></span><span class="erwhere"></span></span>' +
+    '<span class="erturn"></span>' +
     '<button type="button" class="ergiveup">Give up</button>';
   document.body.append(readout);
 
@@ -179,6 +323,8 @@ function start(drive) {
   const erTime = readout.querySelector('.ertime');
   const erTo = readout.querySelector('.erto');
   const erWhere = readout.querySelector('.erwhere');
+  const erTurn = readout.querySelector('.erturn');
+  const mapCanvas = $('minimap');
 
   button.onclick = () => { panelOpen ? closePanel() : openPanel(); };
   panel.querySelector('.errandclose').onclick = closePanel;
@@ -297,12 +443,13 @@ function start(drive) {
       elapsed: 0, clock: drive.clock,
       legIndex: 0, radius: arrivalRadius(p.gap, errand.radius || 45), homeRadius: 55,
       wrongWay: 0, kerbs: 0, wrongTimer: 0, kerbTimer: 0, wrongOn: false, kerbOn: false,
-      lastX: s.x, lastZ: s.z, voided: null
+      lastX: s.x, lastZ: s.z, voided: null, guide: null
     };
     closePanel();
     result.hidden = true;
     readout.hidden = false;
     document.body.classList.add('errand-running');
+    drive.mapOverlay = drawGuide;
     paint();
     tick();
   }
@@ -320,13 +467,99 @@ function start(drive) {
     return run.legIndex === 0 ? run.radius : run.homeRadius;
   }
 
+  // The route is re-planned from where the car actually is, not from where it was told to go: every REPLAN
+  // seconds of car clock, whenever the driver strays off the line, and the moment a round trip turns for home.
+  // A search that comes back empty keeps the last good line for a few seconds rather than blinking it away.
+  function guideNow() {
+    if (!run) return null;
+    const s = drive.state;
+    let g = run.guide;
+    if (!g || g.leg !== run.legIndex || drive.clock - g.at > REPLAN || g.off > OFF_ROUTE) {
+      const built = planGuide(drive.cruise, s, target());
+      if (built) { built.leg = run.legIndex; built.at = built.fresh = drive.clock; run.guide = built; }
+      else if (!g || g.leg !== run.legIndex || drive.clock - g.fresh > 12) run.guide = null;
+      else g.at = drive.clock - REPLAN + 0.6;
+      g = run.guide;
+    }
+    return g && follow(g, s);
+  }
+
   function paint() {
     if (!run) return;
-    const s = drive.state, t = target();
+    const s = drive.state, t = target(), g = guideNow(), crow = dist(s.x, s.z, t.x, t.z);
     erTime.textContent = clock(run.elapsed);
-    erTo.textContent = miles(dist(s.x, s.z, t.x, t.z)) + ' to go';
+    // by road while there is a route to measure — the way round a one-way is part of the errand — and as the
+    // crow flies when the planner has nothing to offer from here.
+    erTo.textContent = miles(toGo(g) ?? crow) + ' to go';
     erWhere.textContent = targetName();
-    readout.classList.toggle('close', dist(s.x, s.z, t.x, t.z) < radius() * 1.8);
+    readout.classList.toggle('close', crow < radius() * 1.8);
+    erTurn.textContent = turnWords(g);
+  }
+
+  /* ---- the minimap, while an errand is running ---- */
+
+  // North up, the car at the centre, the same 0.4 px per metre the streets are drawn at. Registered when a run
+  // starts and taken off the moment it ends, so free drive and tours see exactly the map they saw before.
+  function drawGuide(ctx, s, size, scale) {
+    if (!run) return;
+    const half = size / 2, to = target(), g = run.guide;
+    // 180 px of canvas is shown at whatever the layout allows — 84 px on a phone. Weights are set in canvas
+    // pixels, so they are scaled up to still read at the size the map is really drawn.
+    const shown = mapCanvas.clientWidth || size, k = clamp(size / shown, 1, 1.9);
+    const at = (x, z) => [half + (x - s.x) * scale, half + (z - s.z) * scale];
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+
+    if (g && g.pts.length > 1) {
+      ctx.beginPath();
+      for (let i = 0; i < g.pts.length; i++) {
+        const [px, py] = at(g.pts[i][0], g.pts[i][1]);
+        i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+      }
+      ctx.strokeStyle = CASING; ctx.lineWidth = 5.6 * k; ctx.stroke();
+      ctx.strokeStyle = ROUTE_INK; ctx.lineWidth = 3 * k; ctx.stroke();
+      // the last stretch from the kerb the route can reach to the door itself, which is not always on a road
+      const end = g.pts[g.pts.length - 1];
+      if (g.door > 12) {
+        ctx.setLineDash([3 * k, 3 * k]);
+        ctx.beginPath();
+        ctx.moveTo(...at(end[0], end[1]));
+        ctx.lineTo(...at(to.x, to.z));
+        ctx.lineWidth = 2 * k; ctx.strokeStyle = ROUTE_INK; ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+
+    const dx = (to.x - s.x) * scale, dz = (to.z - s.z) * scale, inset = 13 * k, edge = half - inset;
+    if (Math.abs(dx) <= edge && Math.abs(dz) <= edge) {
+      const [x, y] = at(to.x, to.z), r = 4.2 * k;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = ROUTE_INK; ctx.fill();
+      ctx.lineWidth = 1.8 * k; ctx.strokeStyle = CASING; ctx.stroke();
+      ctx.beginPath(); ctx.arc(x, y, r * 2.2, 0, Math.PI * 2);
+      ctx.lineWidth = 1.4 * k; ctx.strokeStyle = ROUTE_INK; ctx.stroke();
+      return;
+    }
+    // off the edge of the map: an arrow on the rim, pointing at it, with how far it still is
+    const push = Math.min(edge / Math.max(1e-6, Math.abs(dx)), edge / Math.max(1e-6, Math.abs(dz)));
+    const x = half + dx * push, y = half + dz * push, angle = Math.atan2(dz, dx), w = 5.5 * k;
+    ctx.save();
+    ctx.translate(x, y); ctx.rotate(angle);
+    ctx.beginPath(); ctx.moveTo(w, 0); ctx.lineTo(-w * .8, w * .82); ctx.lineTo(-w * .8, -w * .82); ctx.closePath();
+    ctx.fillStyle = ROUTE_INK; ctx.fill();
+    ctx.lineWidth = 1.6 * k; ctx.strokeStyle = CASING; ctx.stroke();
+    ctx.restore();
+    // A phone shows this map at 84 px. A number on it would be too small to read, and the readout above
+    // carries the same distance in type that is not, so the map keeps the arrow and drops the label.
+    if (shown < 120) return;
+    const label = miles(toGo(g) ?? dist(s.x, s.z, to.x, to.z));
+    ctx.font = '600 ' + Math.round(clamp(11 * k, 11, 15)) + 'px Arial';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const tx = clamp(x - Math.cos(angle) * 15 * k, 22, size - 22);
+    let ty = clamp(y - Math.sin(angle) * 15 * k, 13, size - 13);
+    if (ty < 28 && Math.abs(tx - 89) < 30) ty = 28;   // the compass letter owns the top of the map
+    if (ty > 148 && tx < 66) ty = 148;                // and the scale bar owns the bottom left corner
+    ctx.lineWidth = 3.5; ctx.strokeStyle = CASING; ctx.strokeText(label, tx, ty);
+    ctx.fillStyle = ROUTE_INK; ctx.fillText(label, tx, ty);
   }
 
   function tick() {
@@ -382,7 +615,10 @@ function start(drive) {
     const r = run;
     run = null;
     readout.hidden = true;
+    erTurn.textContent = '';
     document.body.classList.remove('errand-running');
+    // the way there goes with the errand: the minimap is the plain map again in free drive and on a tour
+    if (drive.mapOverlay === drawGuide) drive.mapOverlay = null;
     if (why !== 'arrived') {
       if (why === 'left the drive') return;
       showAbandoned(r, why);
@@ -542,6 +778,9 @@ function start(drive) {
     get run() { return run; },
     get open() { return panelOpen; },
     get share() { return result.__share || null; },
+    get guide() { return (run && run.guide) ? { ...run.guide } : null; },
+    get turn() { return erTurn.textContent; },
+    get overlay() { return drive.mapOverlay === drawGuide; },
     nearby, parOf, begin, openPanel, closePanel,
     finish: () => finish('arrived')
   };
