@@ -136,3 +136,14 @@ body.intro-error #loading .intro-note{display:none}
  #about .intro-brag h3{font-size:19px}
  #about .brag-list li{font-size:13.5px}
 }
+
+
+/* Pierce, 2026-09-10: the opening says the town's name and nothing else. The progress
+   sentence and the headline above it stay in the DOM — app.js writes the failure message
+   into exactly those two elements — so they are hidden here and revealed again the moment
+   the load actually fails. The sweeping bar stays: it is feedback, not writing. */
+body.intro-live #loading h2,
+body.intro-live #loading #loadmessage{opacity:0;visibility:hidden}
+body.intro-error #loading h2,
+body.intro-error #loading #loadmessage{opacity:1;visibility:visible;animation:none}
+body.intro-error #loading h2{margin-top:26px}

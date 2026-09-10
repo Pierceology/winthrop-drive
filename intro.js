@@ -95,13 +95,15 @@ function opening() {
   document.body.insertBefore(stage, loading);
   document.body.classList.add('intro-live');   // stage carries the same gradient: no visual jump
 
-  // One true line, quietly, under the progress text.
-  const note = document.createElement('p');
-  note.className = 'intro-note';
-  note.setAttribute('aria-hidden', 'true');
-  for (const line of ['5,633 measured buildings', '47 miles of road', 'the ground is a 2023 aerial photograph'])
-    note.appendChild(Object.assign(document.createElement('span'), { textContent: line }));
-  loading.appendChild(note);
+  // Pierce, 2026-09-10: "there's too much written on this page. I just want it to read
+  // Winthrop by the Sea." So the opening says the town's name over the town and nothing
+  // else. The h2 and #loadmessage stay in the DOM untouched because app.js writes the
+  // failure message into them; intro.css hides them until body.intro-error reveals them.
+  if (brand) {
+    const b = brand.querySelector('b'), sub = brand.querySelector('span');
+    if (b) b.textContent = 'Winthrop';
+    if (sub) sub.textContent = 'by the Sea';
+  }
 
   let active = null, other = null;
   let videoOn = false, secondReady = false, swapping = false, dismissed = false, errored = false;
