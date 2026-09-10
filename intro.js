@@ -109,6 +109,7 @@ function opening() {
   /* every fallback the sequence has, in order */
   const posterOnly = () => { videoOn = false; stopScheduler(); };
   const nothingWorked = () => {                       // no video, no poster: the original gradient
+    if (videoOn) return;
     document.body.classList.remove('intro-live');
     stage.hidden = true;
   };
@@ -145,6 +146,8 @@ function opening() {
   function playing() {
     if (dismissed || videoOn) return;
     videoOn = true;
+    stage.hidden = false;                              // a poster that 404'd must not keep the picture down
+    document.body.classList.add('intro-live');
     active = vA; other = vB;
     vA.classList.add('is-on');
     // The second clip is only fetched once the first is genuinely running, so it never
