@@ -39,10 +39,21 @@ const MAX_EDGE=8, MAX_EDGE_LOW=18;
 // the broad grounds: a park does not get painted over the pitch, pool or playground mapped inside it
 const BROAD=new Set(['water','marsh','park','grass','scrub','rough','garden','sand','fairway','baseball']);
 
+// A mapped pitch OpenStreetMap gives no recognised sport for arrives here as 'court'. Slate paint is
+// right for a real hard court, but a "court" the size of a football field is a mown grass playing
+// field with games marked out on it - and painting that slate lays what looks like a road across it.
+// Anything bigger than the largest genuine bank of courts in town (1,398 m2) is grass.
+const HARD=new Set(['court','basketball','tennis','skatepark','rink']);
+const HARD_MAX=2200;
+function realKind(r){
+ if(HARD.has(r.k)&&r.a>HARD_MAX)return 'grass';
+ return KIND[r.k]?r.k:'grass';
+}
+
 // every specific surface, in a 40 m grid, so a broad triangle can ask "is something better already here?"
 class Cutouts{
  constructor(records){this.cell=40;this.grid=new Map();
-  for(const r of records){if(BROAD.has(r.k))continue;
+  for(const r of records){if(BROAD.has(realKind(r)))continue;
    let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;for(const p of r.r){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);z0=Math.min(z0,p[1]);z1=Math.max(z1,p[1]);}
    for(let i=Math.floor(x0/this.cell);i<=Math.floor(x1/this.cell);i++)for(let j=Math.floor(z0/this.cell);j<=Math.floor(z1/this.cell);j++){
     const k=i+','+j;if(!this.grid.has(k))this.grid.set(k,[]);this.grid.get(k).push(r.r);}}}
@@ -194,13 +205,13 @@ export async function playSurfaces(data,heightAt,onLand,onRoad,onBuilding,lowMem
  const build=new Builder({heightAt,onLand,onRoad,onBuilding,maxEdge});
  const cutouts=new Cutouts(records);
  const courts={tennis:[],basketball:[]},nets=[],hoops=[];
- const counts={};
+ const counts={};let regraded=0;
 
  for(const r of records){
-  const kind=KIND[r.k]?r.k:'grass';counts[r.k]=(counts[r.k]||0)+1;
-  build.polygon(r.r,kind,{cutouts:BROAD.has(r.k)?cutouts:null});
-  if(r.k==='baseball'&&r.h)ballField(build,r,lowMemory);
-  if(!lowMemory&&(r.k==='tennis'||r.k==='basketball')&&r.b)courts[r.k].push(...courtCells(r.b,r.k));
+  const kind=realKind(r);counts[kind]=(counts[kind]||0)+1;if(kind!==r.k)regraded++;
+  build.polygon(r.r,kind,{cutouts:BROAD.has(kind)?cutouts:null});
+  if(kind==='baseball'&&r.h)ballField(build,r,lowMemory);
+  if(!lowMemory&&(kind==='tennis'||kind==='basketball')&&r.b)courts[kind].push(...courtCells(r.b,kind));
  }
  // the painted lines, one merged mesh per game
  for(const [kind,cells] of Object.entries(courts)){
@@ -221,7 +232,7 @@ export async function playSurfaces(data,heightAt,onLand,onRoad,onBuilding,lowMem
 
  const geo=build.geometry();
  if(geo){const mesh=new THREE.Mesh(geo,surfaceMaterial(grainTexture()));mesh.name='groundSurfaces';mesh.receiveShadow=true;mesh.renderOrder=1;group.add(mesh);}
- group.userData.audit={polygons:records.length,kinds:counts,triangles:build.tris,maskedOut:build.dropped,lowMemory,
+ group.userData.audit={polygons:records.length,kinds:counts,triangles:build.tris,maskedOut:build.dropped,lowMemory,oversizedCourtsRegraded:regraded,
   source:'OpenStreetMap contributors'};
  return group;
 }
