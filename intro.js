@@ -27,10 +27,15 @@ const $ = id => document.getElementById(id);
    in the Winthrop site's media library, so until he points at it the opening leads with the
    beach at sunset alone, which is his and which he has not objected to. Put the right clip
    FIRST in this list when it turns up; the sequence handles one clip or two without changes. */
+/* Pierce shot this one and asked for it as the opener, with a fade to black before the end.
+   The file carries the fades itself — 0.9s in, 2.4s out, picture and sound together — so the
+   loop runs black to black instead of snapping back to a bright frame, which is the hard loop
+   he has always refused. The poster is deliberately the THIRD generated still, not the first:
+   frame zero is now black by design, and a black poster would look like a broken page. */
 const CLIPS = [
-  { name: 'beachside sunset',
-    video: 'https://video.wixstatic.com/video/0caac7_3aa61477c2194affbeada3b902ca6c8c/{q}/mp4/file.mp4',
-    poster: 'https://static.wixstatic.com/media/0caac7_3aa61477c2194affbeada3b902ca6c8cf000.jpg' }
+  { name: 'sea fog burning off',
+    video: 'https://video.wixstatic.com/video/6c593b_eb742e07bbf94b78b65afc864f0cd0f6/{q}/mp4/file.mp4',
+    poster: 'https://static.wixstatic.com/media/6c593b_eb742e07bbf94b78b65afc864f0cd0f6f002.jpg' }
 ];
 
 const FADE = 900;   // crossfade, ms — must stay in step with --intro-fade in intro.css
