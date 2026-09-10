@@ -1,1 +1,138 @@
-/* Drive Winthrop — the opening. Filled in by the intro work. */
+/* Drive Winthrop — the opening.
+   A title card cut from the town's own footage: the water tower, then the beach at
+   sunset, crossfading behind the type while the world loads. The game always wins —
+   the moment #loading is hidden this dissolves and drops every byte of video it held.
+   #loading keeps its own gradient underneath, so if the footage never arrives the
+   opening looks exactly like it did before. */
+
+#introStage{
+ position:fixed;inset:0;z-index:20;overflow:hidden;pointer-events:none;
+ background:radial-gradient(120% 90% at 50% 110%,#17313f 0%,#0c1218 60%);
+ opacity:1;transform:none;
+ transition:opacity .62s ease,transform 1.15s cubic-bezier(.2,.6,.2,1);
+}
+#introStage .intro-frame,
+#introStage .intro-still{
+ position:absolute;inset:0;width:100%;height:100%;
+ object-fit:cover;object-position:50% 46%;
+ opacity:0;transition:opacity var(--intro-fade,900ms) ease;
+ will-change:opacity;background:transparent;border:0;
+}
+#introStage .is-on{opacity:1}
+
+/* One scrim over both a bright sky and a sunset: a vertical wash that protects the
+   type top and bottom, and a soft vignette so the middle never blows out. */
+#introStage .intro-scrim{
+ position:absolute;inset:0;transition:opacity .45s ease;
+ background:
+  radial-gradient(48% 27% at 50% 47%,rgba(5,11,15,.36) 0%,rgba(5,11,15,.15) 56%,rgba(5,11,15,0) 100%),
+  linear-gradient(180deg,
+   rgba(5,11,15,.80) 0%,rgba(5,11,15,.34) 26%,rgba(5,11,15,.18) 50%,
+   rgba(5,11,15,.42) 72%,rgba(5,11,15,.88) 100%),
+  radial-gradient(80% 64% at 50% 46%,rgba(5,11,15,0) 0%,rgba(5,11,15,.30) 100%);
+}
+
+/* The type layer is the untouched #loading; it just stops painting its own ground. */
+body.intro-live #loading{background:transparent}
+body.intro-live #loading .loadbrand b{text-shadow:0 2px 34px rgba(3,9,13,.9),0 1px 4px rgba(3,9,13,.7)}
+body.intro-live #loading .loadbrand span{text-shadow:0 1px 12px rgba(3,9,13,.9)}
+body.intro-live #loading h2,
+body.intro-live #loading p{text-shadow:0 1px 16px rgba(3,9,13,.95),0 0 3px rgba(3,9,13,.6)}
+body.intro-live #loading .spinner{box-shadow:0 1px 10px rgba(3,9,13,.8)}
+
+/* The title arrives rather than appearing. */
+body.intro-live #loading .loadbrand b{animation:intro-title 1400ms cubic-bezier(.16,.84,.28,1) both}
+body.intro-live #loading .loadbrand span{animation:intro-sub 1200ms ease 500ms both}
+@keyframes intro-title{
+ from{opacity:0;letter-spacing:.30em;transform:translateY(14px)}
+ to{opacity:1;letter-spacing:.08em;transform:none}
+}
+@keyframes intro-sub{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+/* One restrained, true line under the progress text. */
+#loading .intro-note{
+ display:flex;flex-wrap:wrap;justify-content:center;gap:5px 15px;
+ margin:26px 20px 0;max-width:min(790px,calc(100vw - 40px));
+ font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+ color:#c3d8e5;opacity:0;text-align:center;text-wrap:pretty;
+ animation:intro-note 1000ms ease 1500ms both;
+}
+#loading .intro-note span:not(:last-child)::after{
+ content:'·';margin-left:15px;color:var(--accent,#e8d5ae);opacity:.7;
+}
+@media(max-width:860px){
+ #loading .intro-note{flex-direction:column;flex-wrap:nowrap;gap:6px;max-width:none}
+ #loading .intro-note span::after{content:none}
+}
+@keyframes intro-note{from{opacity:0;transform:translateY(6px)}to{opacity:.82;transform:none}}
+
+/* Something went wrong: hold the last frame, pull it right back so the error reads. */
+body.intro-error #introStage .intro-frame,
+body.intro-error #introStage .intro-still{filter:saturate(.45) brightness(.5)}
+body.intro-error #introStage .intro-scrim{background:rgba(5,11,15,.72)}
+body.intro-error #loading .loadbrand b{animation:none}
+body.intro-error #loading .intro-note{display:none}
+
+/* Getting out of the way. The type is cloned into the stage so the whole card
+   dissolves together instead of the words blinking out ahead of the picture. */
+#introStage.is-leaving{opacity:0;transform:scale(1.035)}
+#introStage.is-leaving .intro-scrim{opacity:0}
+#introStage .loadbrand{
+ display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+ pointer-events:none;
+}
+#introStage .loadbrand b{
+ font-family:var(--display,'Fraunces',Georgia,serif);font-weight:900;
+ font-size:clamp(46px,9vw,96px);line-height:1;letter-spacing:.08em;text-transform:uppercase;
+ font-variation-settings:'opsz' 144;color:#fff;
+ text-shadow:0 2px 34px rgba(3,9,13,.9),0 1px 4px rgba(3,9,13,.7);
+}
+#introStage .loadbrand span{
+ font-size:11px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;
+ color:var(--accent,#e8d5ae);text-shadow:0 1px 12px rgba(3,9,13,.9);
+}
+
+@media(max-width:760px){
+ #loading .intro-note{font-size:9.5px;letter-spacing:.16em;margin-top:20px;gap:6px}
+ #introStage .loadbrand b{font-size:44px}
+ #introStage .intro-scrim{
+  background:
+   linear-gradient(180deg,
+    rgba(5,11,15,.84) 0%,rgba(5,11,15,.40) 24%,rgba(5,11,15,.22) 50%,
+    rgba(5,11,15,.48) 74%,rgba(5,11,15,.9) 100%),
+   radial-gradient(92% 60% at 50% 46%,rgba(5,11,15,0) 0%,rgba(5,11,15,.32) 100%);
+ }
+}
+
+/* No motion asked for, no motion given: one still, no crossfade, no drift. */
+@media(prefers-reduced-motion:reduce){
+ #introStage,
+ #introStage .intro-frame,
+ #introStage .intro-still,
+ #introStage .intro-scrim{transition:none!important}
+ body.intro-live #loading .loadbrand b,
+ body.intro-live #loading .loadbrand span,
+ #loading .intro-note{animation:none!important;opacity:1}
+ #loading .intro-note{opacity:.82}
+ #introStage.is-leaving{transform:none}
+}
+
+/* The brag, in the About dialog where a curious person will find it. */
+#about .intro-brag{margin-top:32px;border-top:1px solid #a8cbd433;padding-top:26px}
+#about .intro-brag h3{
+ font-family:var(--display,'Fraunces',Georgia,serif);font-weight:500;font-size:21px;
+ line-height:1.3;margin:0 0 14px;color:#f2f8fb;text-wrap:pretty;
+}
+#about .intro-brag p{text-wrap:pretty}
+#about .brag-list{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:14px}
+#about .brag-list li{
+ font-size:14.5px;line-height:1.62;color:#c6d9e3;
+ padding-left:15px;border-left:2px solid #d1b88855;text-wrap:pretty;
+}
+#about .brag-list b{color:#f0f6f9;font-weight:600;font-variant-numeric:tabular-nums}
+#about .brag-sources{font-size:13px;line-height:1.65;color:#9db4c1;margin-top:24px;text-wrap:pretty}
+#about .brag-close{margin-top:16px;font-size:15px;color:#dfeaf1;text-wrap:pretty}
+@media(max-width:760px){
+ #about .intro-brag h3{font-size:19px}
+ #about .brag-list li{font-size:13.5px}
+}
