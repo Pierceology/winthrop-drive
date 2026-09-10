@@ -17,9 +17,9 @@ const SITE = 'https://www.winthropbythesea.com/';
 const MI = 1 / 1609.344;
 const ARRIVE_SPEED = 1.6;          // m/s — "roughly stopped"
 const WRONGWAY_HOLD = 0.4;         // seconds before a wrong-way counts as one
-const KERB_HOLD = 0.5;             // seconds of road-edge assist before a kerb counts as one
+const CURB_HOLD = 0.5;             // seconds of road-edge assist before a curb counts as one
 const WRONGWAY_COST = 8;           // seconds added per wrong-way
-const KERB_COST = 3;               // seconds added per kerb
+const CURB_COST = 3;               // seconds added per curb
 const JUMP = 80;                   // metres in one tick that no car can drive: the run was moved, not driven
 const MIN_AWAY = 200;              // metres — closer than this is a walk, not an errand
 const TURNAROUND = 7;              // seconds par allows for pressing Turn around before setting off
@@ -104,7 +104,7 @@ function leg(cruise, from, fromT, target) {
     }
   }
   // Where the route actually puts the car down, and how far that is from the pin on the building: a shop
-  // is reached from the kerb outside it, and on some streets that kerb is the length of a garden away.
+  // is reached from the curb outside it, and on some streets that curb is the length of a garden away.
   const g = route[route.length - 1], gt = clamp(plan.t, 0, 1);
   const gap = dist(g.a[0] + g.dx * gt, g.a[1] + g.dz * gt, target.x, target.z);
   return { metres, seconds, turns, gap, last: g, lastT: plan.t };
@@ -249,7 +249,7 @@ function follow(guide, s) {
   return guide;
 }
 
-// How much of the journey is left, by road: the route still to drive plus the last few metres from the kerb
+// How much of the journey is left, by road: the route still to drive plus the last few metres from the curb
 // to the door. It is the number the readout and the map both use, so they never disagree.
 function toGo(guide) { return guide && typeof guide.remaining === 'number' ? guide.remaining + guide.door : null; }
 
@@ -427,7 +427,7 @@ function start(drive) {
 
   /* ---- running one ---- */
 
-  // "Arrived" is measured from the kerb the route can actually reach, plus a couple of car lengths —
+  // "Arrived" is measured from the curb the route can actually reach, plus a couple of car lengths —
   // not from the pin on the roof, which on some streets is a whole garden away from any road.
   const arrivalRadius = (gap, floor) => clamp((gap || 0) + 16, floor, 120);
 
@@ -442,7 +442,7 @@ function start(drive) {
       errand, home, par: p.par, metres: p.metres,
       elapsed: 0, clock: drive.clock,
       legIndex: 0, radius: arrivalRadius(p.gap, errand.radius || 45), homeRadius: 55,
-      wrongWay: 0, kerbs: 0, wrongTimer: 0, kerbTimer: 0, wrongOn: false, kerbOn: false,
+      wrongWay: 0, curbs: 0, wrongTimer: 0, curbTimer: 0, wrongOn: false, curbOn: false,
       lastX: s.x, lastZ: s.z, voided: null, guide: null
     };
     closePanel();
@@ -517,7 +517,7 @@ function start(drive) {
       }
       ctx.strokeStyle = CASING; ctx.lineWidth = 5.6 * k; ctx.stroke();
       ctx.strokeStyle = ROUTE_INK; ctx.lineWidth = 3 * k; ctx.stroke();
-      // the last stretch from the kerb the route can reach to the door itself, which is not always on a road
+      // the last stretch from the curb the route can reach to the door itself, which is not always on a road
       const end = g.pts[g.pts.length - 1];
       if (g.door > 12) {
         ctx.setLineDash([3 * k, 3 * k]);
@@ -580,9 +580,9 @@ function start(drive) {
           // wrong way: a mapped one-way taken against its direction. driving-physics sets this every step.
           if (s.wrongWay) { run.wrongTimer += drove; if (!run.wrongOn && run.wrongTimer > WRONGWAY_HOLD) { run.wrongOn = true; run.wrongWay++; } }
           else { run.wrongTimer = 0; run.wrongOn = false; }
-          // kerb: the road-edge assist is holding the car back onto the pavement.
-          if (s.assisting) { run.kerbTimer += drove; if (!run.kerbOn && run.kerbTimer > KERB_HOLD) { run.kerbOn = true; run.kerbs++; } }
-          else { run.kerbTimer = 0; run.kerbOn = false; }
+          // curb: the road-edge assist is holding the car back onto the pavement.
+          if (s.assisting) { run.curbTimer += drove; if (!run.curbOn && run.curbTimer > CURB_HOLD) { run.curbOn = true; run.curbs++; } }
+          else { run.curbTimer = 0; run.curbOn = false; }
           const t = target();
           if (dist(s.x, s.z, t.x, t.z) <= radius() && Math.abs(s.speed) < ARRIVE_SPEED) {
             if (run.legIndex === 0 && run.errand.roundTrip) { run.legIndex = 1; }
@@ -599,11 +599,11 @@ function start(drive) {
 
   /* ---- the result ---- */
 
-  function penaltySeconds(r) { return r.wrongWay * WRONGWAY_COST + r.kerbs * KERB_COST; }
+  function penaltySeconds(r) { return r.wrongWay * WRONGWAY_COST + r.curbs * CURB_COST; }
   function penaltyWords(r) {
     const bits = [];
     if (r.wrongWay) bits.push(plural(r.wrongWay, 'wrong way', 'wrong ways'));
-    if (r.kerbs) bits.push(plural(r.kerbs, 'kerb', 'kerbs'));
+    if (r.curbs) bits.push(plural(r.curbs, 'curb', 'curbs'));
     return bits.join(', ');
   }
   function sharePhrase(e) {
@@ -672,7 +672,7 @@ function start(drive) {
     lines.push(miles(r.metres) + ' of road at the posted limits' + (r.errand.roundTrip ? ', there and back' : ''));
     lines.push(penalties
       ? 'Driven in ' + clock(r.elapsed) + ' plus ' + penalties + 's for ' + penaltyWords(r)
-      : 'Clean run: no wrong ways, no kerbs');
+      : 'Clean run: no wrong ways, no curbs');
     if (r.errand.address) lines.push(r.errand.address);
     lines.push(record
       ? (previous === null ? 'Your first time here' : 'A new best: ' + clock(previous) + ' before')

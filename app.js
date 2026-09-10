@@ -153,10 +153,25 @@ function chooseSpot(point,center=true){
  if(center&&!driving.active){const offset=camera.position.clone().sub(controls.target);offset.setLength(THREE.MathUtils.clamp(offset.length()*.65,65,420));fly([spot.x,0,spot.z],offset.toArray());}
 }
 function driveSpot(){if(!spot||$('spotDrive').disabled)return;tour.stop();driving.enter(spot.x,spot.z);}
+/* Winthrop is a peninsula with two ways in, and everybody arrives through one of them.
+   Starting the car wherever the camera happened to be left meant no two people ever drove the
+   same town, and an errand from a random back street is not the errand anybody else ran. So a
+   drive always begins at a gate: Revere Street coming down from Revere, or Main Street coming
+   over from East Boston. Whichever is nearer to what you were looking at is the one you get,
+   so the button still answers where you are, but the drive is the same drive for everyone.
+   Coordinates are the real ends of those two roads in data/world.json. */
+const GATES=[
+ {name:'Revere Street',x:-660.5,z:-3522.9},   // north, in from Revere
+ {name:'Main Street',  x:-1710.4,z:-2542.1}   // west, in over Belle Isle from East Boston
+];
+function nearestGate(x,z){let best=GATES[0],bd=Infinity;
+ for(const g of GATES){const d=(g.x-x)**2+(g.z-z)**2;if(d<bd){bd=d;best=g;}}return best;}
+
 async function startDriveFromView(automatic=false){
  const target=(flight?.target||controls.target).clone();flight=null;tour.stop();checklist.open(false);
+ const gate=nearestGate(target.x,target.z);
  const button=$('driveCurrent');if(button.disabled)return;button.disabled=true;button.textContent='Preparing car…';
- try{if(automatic)await driving.goForDrive(target.x,target.z);else await driving.enter(target.x,target.z);}finally{button.disabled=false;button.textContent='Drive here';}
+ try{if(automatic)await driving.goForDrive(gate.x,gate.z);else await driving.enter(gate.x,gate.z);}finally{button.disabled=false;button.textContent='Drive here';}
 }
 function bind(){
  $('driveCurrent').onclick=()=>startDriveFromView();

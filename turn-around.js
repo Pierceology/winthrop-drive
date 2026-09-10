@@ -4,7 +4,7 @@ import {lanePoint,laneOffset} from './lane-position.js';
 // It plans before it moves: swing left across the centreline at full lock, and if the street is too narrow
 // to come round in one, shuttle forward-left / reverse-right / forward-left until the nose points back the
 // way it came. Every pose in the plan is checked with all four tyres against the mapped roadway and against
-// the buildings, so the car never mounts a kerb, clips a corner or brushes a pole standing at the kerbside.
+// the buildings, so the car never mounts a curb, clips a corner or brushes a pole standing at the curbside.
 // It finishes in the OTHER lane, facing the other way, exactly where the auto-driver would have put it.
 // One-way streets get a refusal with a note instead of a manoeuvre: turning there would be driving the
 // wrong way, and no button is worth that.
@@ -17,7 +17,7 @@ const SPEED=2.6;           // m/s while manoeuvring, about walking pace for a ca
 
 export class TurnAround{
  constructor(network){this.network=network;this.plan=null;this.note='';this.noteAt=-99;this.clock=0;this.cells=new Map();}
- // Poles, signs, hydrants, lamps and bus-stop flags, in a 20 m grid. They stand at the kerb, but the
+ // Poles, signs, hydrants, lamps and bus-stop flags, in a 20 m grid. They stand at the curb, but the
  // manoeuvre swings wide, so it is asked about every one of them before it commits.
  // Each one goes into its own cell and its eight neighbours, so a single lookup on the car's centre
  // finds everything that could reach the bodywork.

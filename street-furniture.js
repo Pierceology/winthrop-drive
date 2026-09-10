@@ -45,7 +45,7 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
  // junction on the driver's right (the usual post-mounted head, in view from the stop line). Lamps follow SignalSystem.
  const heads=[];
  for(const node of(lights&&lights.nodes)||[])for(const a of node.approaches){const rx=-a.hz,rz=a.hx,W=Math.max(6,Math.min(16,a.width||9)),far=Math.max(4,Math.min(9,(a.cross||9)/2+1.2));let x=a.vx+a.hx*far+rx*(W/2+.8),z=a.vz+a.hz*far+rz*(W/2+.8);
-  if(network.contains(x,z,-.6)){/* the post landed on another arm's pavement (a wider cross street): the nearest spot beyond every kerb, sideways first, then further along */
+  if(network.contains(x,z,-.6)){/* the post landed on another arm's pavement (a wider cross street): the nearest spot beyond every curb, sideways first, then further along */
    const c=[];for(let f=0;f<=8;f+=.5)for(let l=0;l<=5;l+=.25)c.push([f,l]);c.sort((p,q)=>Math.hypot(p[0],p[1]*1.2)-Math.hypot(q[0],q[1]*1.2));
    for(const [f,l] of c){const cx=a.vx+a.hx*(far+f)+rx*(W/2+.8+l),cz=a.vz+a.hz*(far+f)+rz*(W/2+.8+l);if(!network.contains(cx,cz,-.6)&&!network.obstructed(cx,cz)){x=cx;z=cz;break;}}
   }

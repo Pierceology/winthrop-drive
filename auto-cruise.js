@@ -24,7 +24,7 @@ export class AutoCruise{
  nextStop(){if(!this.tour)return;for(;;){this.tour.index++;const st=this.tour.stops[this.tour.index];if(!st){this.tourLine=this.tour.name+' · done';this.tour=null;this.route=null;return;}
    const plan=this.planRoute(this.edge,st);if(plan){
     // A tour sets you down at its first stop, so that stop is not somewhere the car arrived: idling seven
-    // seconds at the kerb before it has driven a metre is what made starting a tour feel frozen. Skip
+    // seconds at the curb before it has driven a metre is what made starting a tour feel frozen. Skip
     // straight to driving toward stop two; every stop the car really reaches still gets its full pause.
     if(this.tour.index===0){const here=lanePoint(this.edge,this.t);if(Math.hypot(here.x-st.x,here.z-st.z)<70)continue;}
     this.route=plan.route;this.routeT=plan.t;this.stop_=st;this.tourLine=this.tour.name+' · '+(this.tour.index+1)+'/'+this.tour.stops.length+' · next: '+st.name;return;}}}
