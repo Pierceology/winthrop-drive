@@ -8,7 +8,34 @@ export class RoadNetwork {
 }
 export class DrivingState {
  constructor(network){this.network=network;this.performance={top:325/3.6,launch:8.8,power:260};this.x=0;this.z=0;this.yaw=0;this.speed=0;this.steer=0;this.distance=0;this.blocked=false;this.road=null;this.recoveryTime=0;this.recoveryCount=0;this.lastSafe=null;}
- spawn(x,z,preferred=null){const chosen=preferred&&this.network.segments.includes(preferred)?preferred:null;const t0=chosen?Math.max(0,Math.min(1,((x-chosen.a[0])*chosen.dx+(z-chosen.a[1])*chosen.dz)/chosen.length**2)):0;const s=chosen?{...chosen,t:t0}:this.network.nearest(x,z,true);if(!s)throw Error('No road found');const t=Math.max(2.6/s.length,Math.min(1-2.6/s.length,s.t));this.x=s.a[0]+t*s.dx;this.z=s.a[1]+t*s.dz;this.yaw=Math.atan2(-s.dx,-s.dz)+(s.direction===-1?Math.PI:0);if(s.direction===0){const p=lanePoint(s,t);if(this.network.contains(p.x,p.z,.95)){this.x=p.x;this.z=p.z;}}this.speed=0;this.steer=0;this.road=s;this.blocked=false;this.wrongWay=false;return s;}
+ spawn(x,z,preferred=null){const chosen=preferred&&this.network.segments.includes(preferred)?preferred:null;const t0=chosen?Math.max(0,Math.min(1,((x-chosen.a[0])*chosen.dx+(z-chosen.a[1])*chosen.dz)/chosen.length**2)):0;const s=chosen?{...chosen,t:t0}:this.network.nearest(x,z,true);if(!s)throw Error('No road found');const t=Math.max(2.6/s.length,Math.min(1-2.6/s.length,s.t));this.x=s.a[0]+t*s.dx;this.z=s.a[1]+t*s.dz;this.yaw=Math.atan2(-s.dx,-s.dz)+(s.direction===-1?Math.PI:0);
+  /* Never start the car facing a wall or the end of the road. A two-way segment runs whichever way
+     the source data happened to draw it, so taking its heading blind meant a coin flip, and at the end
+     of a street that coin flip pointed off the tarmac. A one-way has only one legal answer and keeps it;
+     otherwise look both ways along the road and take whichever has more of it in front of you. */
+  if(!s.direction){const ahead=(yaw)=>{const fx=-Math.sin(yaw),fz=-Math.cos(yaw);let d=0;for(;d<60;d+=2){if(!this.network.contains(this.x+fx*(d+2),this.z+fz*(d+2),.1))break;}return d;};  const back=this.yaw+Math.PI;if(ahead(back)>ahead(this.yaw)+2)this.yaw=back;}
+  if(!this.fitsAt(this.x,this.z,this.yaw)&&this.fitsAt(this.x,this.z,this.yaw+Math.PI))this.yaw+=Math.PI;
+  /* Still nose-to-the-wall? Then it is not the heading that is wrong, it is where the car was put down —
+     the very end of a stub. Keep the heading and reverse the car back up its own road until it has room
+     to pull away. Better to start a few metres further back than to start unable to move. */
+  {const room=()=>{const fx=-Math.sin(this.yaw),fz=-Math.cos(this.yaw);let d=0;
+     for(;d<40;d+=2){if(!this.network.contains(this.x+fx*(d+2),this.z+fz*(d+2),.1))break;}return d;};
+   const fx=-Math.sin(this.yaw),fz=-Math.cos(this.yaw);let guard=0;
+   while(room()<12&&guard++<12){const nx=this.x-fx*2.5,nz=this.z-fz*2.5;
+     if(!this.network.contains(nx,nz,.1)||!this.fitsAt(nx,nz,this.yaw))break;this.x=nx;this.z=nz;}
+   /* A stub shorter than the car cannot be reversed out of. Rather than leave someone parked in a
+      hedge, move to the nearest segment that is actually long enough to drive and take that instead. */
+   if(room()<8){const here={x:this.x,z:this.z};const alt=this.network.segments
+       .filter(g=>g!==s&&g.length>25&&g.width>=3)
+       .map(g=>{const t=Math.max(.2,Math.min(.8,((here.x-g.a[0])*g.dx+(here.z-g.a[1])*g.dz)/g.length**2));
+                return{g,t,d:Math.hypot(here.x-g.a[0]-t*g.dx,here.z-g.a[1]-t*g.dz)};})
+       .sort((a,b)=>a.d-b.d)[0];
+     if(alt&&alt.d<180){const g=alt.g;this.x=g.a[0]+alt.t*g.dx;this.z=g.a[1]+alt.t*g.dz;
+       this.yaw=Math.atan2(-g.dx,-g.dz)+(g.direction===-1?Math.PI:0);this.road=g;
+       if(!g.direction){const bk=this.yaw+Math.PI;const look=(y)=>{const ax=-Math.sin(y),az=-Math.cos(y);let m=0;
+           for(;m<60;m+=2){if(!this.network.contains(this.x+ax*(m+2),this.z+az*(m+2),.1))break;}return m;};
+         if(look(bk)>look(this.yaw)+2)this.yaw=bk;}}}}
+  if(s.direction===0){const p=lanePoint(s,t);if(this.network.contains(p.x,p.z,.95)){this.x=p.x;this.z=p.z;}}this.speed=0;this.steer=0;this.road=s;this.blocked=false;this.wrongWay=false;return s;}
  fitsAt(x,z,yaw){const fx=-Math.sin(yaw),fz=-Math.cos(yaw),rx=Math.cos(yaw),rz=-Math.sin(yaw);for(const l of[-1.1,1.1])for(const w of[-.76,.76])if(!this.network.contains(x+fx*l+rx*w,z+fz*l+rz*w,.1))return false;return true;}
  recover(){const candidates=this.network.segments.filter(s=>s.length>6&&s.width>=3).map(s=>{const t=Math.max(2.5/s.length,Math.min(1-2.5/s.length,((this.x-s.a[0])*s.dx+(this.z-s.a[1])*s.dz)/s.length**2));return{s,t,d:Math.hypot(this.x-s.a[0]-t*s.dx,this.z-s.a[1]-t*s.dz)};}).sort((a,b)=>a.d-b.d);
  for(const {s,t}of candidates.slice(0,100)){const sign=s.direction||((-Math.sin(this.yaw)*s.dx-Math.cos(this.yaw)*s.dz)>=0?1:-1),yaw=Math.atan2(-s.dx*sign,-s.dz*sign);for(const at of[t,.5])for(const offset of[s.direction?0:Math.min(s.width/4,2),0]){const x=s.a[0]+at*s.dx-s.dz/s.length*offset*sign,z=s.a[1]+at*s.dz+s.dx/s.length*offset*sign;if(!this.fitsAt(x,z,yaw))continue;Object.assign(this,{x,z,yaw,speed:0,steer:0,blocked:false,wrongWay:false,road:s,recoveryTime:1.4});this.recoveryCount++;this.lastSafe={x,z,yaw};return true;}}

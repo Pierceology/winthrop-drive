@@ -540,3 +540,12 @@ dialog dd{font-size:15px;color:#dfe6ea}
    about 1600px the strip looks exactly as it did. Measured by qa/dock-overflow.js. */
 body.driving .driveactions #driveMode{flex-shrink:1;min-width:0}
 body.driving .driveactions #driveMode button{min-width:0}
+
+
+/* The label colour already meant something — amber is a business, white is not — and nothing
+   on screen said so. Pierce asked outright: "why are some yellow and some not do we have a
+   legend?" We did not. Now we do, next to the switch that turns the labels on. */
+.labelkey{margin:8px 0 0;font-size:11.5px;line-height:1.5;color:var(--muted);text-wrap:pretty}
+.labelkey .k{font-weight:700}
+.labelkey .biz{color:#ffe1ad}
+.labelkey .civ{color:#f0ede0}

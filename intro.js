@@ -28,14 +28,14 @@ const $ = id => document.getElementById(id);
    beach at sunset alone, which is his and which he has not objected to. Put the right clip
    FIRST in this list when it turns up; the sequence handles one clip or two without changes. */
 /* Pierce shot this one and asked for it as the opener, with a fade to black before the end.
-   The file carries the fades itself — 0.9s in, 2.4s out, picture and sound together — so the
+   The file carries the fades itself — 0.7s in, 1.6s out, picture and sound together — so the
    loop runs black to black instead of snapping back to a bright frame, which is the hard loop
    he has always refused. The poster is deliberately the THIRD generated still, not the first:
    frame zero is now black by design, and a black poster would look like a broken page. */
 const CLIPS = [
   { name: 'sea fog burning off',
-    video: 'https://video.wixstatic.com/video/6c593b_eb742e07bbf94b78b65afc864f0cd0f6/{q}/mp4/file.mp4',
-    poster: 'https://static.wixstatic.com/media/6c593b_eb742e07bbf94b78b65afc864f0cd0f6f002.jpg' }
+    video: 'https://video.wixstatic.com/video/6c593b_43d1f5f8d36b43beb29a9d008b38caff/{q}/mp4/file.mp4',
+    poster: 'https://static.wixstatic.com/media/6c593b_43d1f5f8d36b43beb29a9d008b38cafff002.jpg' }
 ];
 
 const FADE = 900;   // crossfade, ms — must stay in step with --intro-fade in intro.css
