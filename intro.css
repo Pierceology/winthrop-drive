@@ -147,3 +147,11 @@ body.intro-live #loading #loadmessage{opacity:0;visibility:hidden}
 body.intro-error #loading h2,
 body.intro-error #loading #loadmessage{opacity:1;visibility:visible;animation:none}
 body.intro-error #loading h2{margin-top:26px}
+
+
+/* The invitation comes first and reads like a person talking; the inventory below it drops
+   back to receipts, because most people who open this live in the town and want to know what
+   they are looking at, not how it was assembled. */
+#about .brag-invite{margin-top:18px;font-size:16px;color:#f0f6f9}
+#about .brag-receipts{margin:26px 0 -6px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#8fa8b6}
+#about .brag-list li{font-size:14px}

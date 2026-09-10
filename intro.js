@@ -361,9 +361,17 @@ function brag() {
   const s = document.createElement('section');
   s.className = 'intro-brag';
   s.innerHTML = `
-<h3>What you are actually looking&nbsp;at</h3>
-<p>This is Winthrop, Massachusetts, at full size and measured rather than imagined.
-Almost nothing in it was placed by&nbsp;hand.</p>
+<h3>Winthrop by the Sea, pixel by&nbsp;pixel</h3>
+<p>The whole peninsula, at full size, built out of the town's own records. Your roof is the shape
+a laser survey found over your house. Your walls are the colour the assessor has on file. The tree
+in your yard is standing where it stands. The street outside runs the way it runs, at the speed it
+is&nbsp;posted.</p>
+<p>It is Beetlejuice in the attic. Somebody is up there most days adding another piece, and the
+model keeps creeping closer to the real&nbsp;thing.</p>
+<p>Still a work in progress, on purpose. More of Winthrop gets its real face every&nbsp;week.</p>
+<p class="brag-invite">Drive it yourself, or let it drive you. Two ways onto the peninsula and
+everything in&nbsp;between.</p>
+<p class="brag-receipts">The details, for anyone who wants&nbsp;them:</p>
 <ul class="brag-list">
 <li><b>${n(f.buildings)} buildings</b>, each standing on its own surveyed footprint — the shape
 of that house, not a box standing in for&nbsp;it.</li>
