@@ -21,10 +21,13 @@ const $ = id => document.getElementById(id);
 
 /* ─────────────────────────── the footage ─────────────────────────── */
 
+/* Pierce, 2026-09-10, on the water-tower aerial that used to open this:
+   "that video, terrible. it was a poor one i did and it does not work." He wants a clip he
+   shot on brown grass with the tower in the distance, not the bog or marsh. That file is not
+   in the Winthrop site's media library, so until he points at it the opening leads with the
+   beach at sunset alone, which is his and which he has not objected to. Put the right clip
+   FIRST in this list when it turns up; the sequence handles one clip or two without changes. */
 const CLIPS = [
-  { name: 'water tower',
-    video: 'https://video.wixstatic.com/video/6c593b_83386c2af4a646a584e452d497317fad/{q}/mp4/file.mp4',
-    poster: 'https://static.wixstatic.com/media/6c593b_83386c2af4a646a584e452d497317fadf000.jpg' },
   { name: 'beachside sunset',
     video: 'https://video.wixstatic.com/video/0caac7_3aa61477c2194affbeada3b902ca6c8c/{q}/mp4/file.mp4',
     poster: 'https://static.wixstatic.com/media/0caac7_3aa61477c2194affbeada3b902ca6c8cf000.jpg' }
@@ -157,6 +160,9 @@ function opening() {
   }
 
   function loadSecond() {
+    // With only one clip in the list there is nothing to hand off to: the single clip loops,
+    // which is exactly what the error path already does when the second clip fails to load.
+    if (CLIPS.length < 2) { if (active) active.loop = true; return; }
     if (dismissed || secondReady || vB.src) return;
     vB.addEventListener('error', () => { secondReady = false; if (active) active.loop = true; }, { once: true });
     vB.addEventListener('canplay', () => { secondReady = true; }, { once: true });
