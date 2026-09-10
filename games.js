@@ -319,7 +319,6 @@ function start(drive) {
   document.body.append(readout);
 
   const list = panel.querySelector('.errandlist');
-  panel.append(comingSoon(null));
   const erTime = readout.querySelector('.ertime');
   const erTo = readout.querySelector('.erto');
   const erWhere = readout.querySelector('.erwhere');
@@ -696,24 +695,12 @@ function start(drive) {
     result.append(say);
     result.__share = share;
 
-    if (r.errand.order) result.append(comingSoon(r.errand.place));
   }
 
-  // The one quiet line about real ordering. It is a link to the town site, not a form: a box that
-  // swallowed an email address and did nothing with it would be worse than saying nothing.
-  function comingSoon(place) {
-    const wrap = document.createElement('div');
-    wrap.className = 'errandsoon';
-    const p = document.createElement('p');
-    p.textContent = 'Ordering from ' + (place || 'these places') +
-      ' for real is coming. There is nothing to sign up for yet.';
-    const a = document.createElement('a');
-    a.className = 'errandnotify';
-    a.href = SITE; a.target = '_blank'; a.rel = 'noreferrer';
-    a.textContent = 'Follow it at winthropbythesea.com';
-    wrap.append(p, a);
-    return wrap;
-  }
+  // There was a "real ordering is coming" line on the result card. Pierce, 2026-09-10:
+  // "i thought we werent saying this yet". He is right, and it was my brief that asked for it.
+  // Announcing a feature with no date, nothing to sign up for and nothing to click is a promise
+  // with nothing behind it, and it sat on every errand card. Say it when it exists.
 
   function showAbandoned(r, why) {
     result.textContent = '';
