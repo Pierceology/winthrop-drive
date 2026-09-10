@@ -40,14 +40,20 @@ body.intro-live #loading h2,
 body.intro-live #loading p{text-shadow:0 1px 16px rgba(3,9,13,.95),0 0 3px rgba(3,9,13,.6)}
 body.intro-live #loading .spinner{box-shadow:0 1px 10px rgba(3,9,13,.8)}
 
-/* The title arrives rather than appearing. */
-body.intro-live #loading .loadbrand b{animation:intro-title 1400ms cubic-bezier(.16,.84,.28,1) both}
-body.intro-live #loading .loadbrand span{animation:intro-sub 1200ms ease 500ms both}
+/* The title resolves out of the fog instead of arriving on top of it: a little large, a little soft, and
+   settling over most of two seconds — the same rate the footage moves at. The old entrance animated
+   letter-spacing, which reflows the line every frame and drags the word sideways as it tightens; scale and
+   blur are composited, so nothing shifts and nothing jitters. Then the line under it, once the name is set. */
+body.intro-live #loading .loadbrand b{animation:intro-title 1900ms cubic-bezier(.18,.72,.24,1) both}
+body.intro-live #loading .loadbrand span{animation:intro-sub 1300ms cubic-bezier(.2,.7,.2,1) 950ms both}
+body.intro-live #loading .spinner{animation:sweep 1.4s ease-in-out infinite,intro-bar 1100ms ease 1600ms both}
 @keyframes intro-title{
- from{opacity:0;letter-spacing:.30em;transform:translateY(14px)}
- to{opacity:1;letter-spacing:.08em;transform:none}
+ 0%{opacity:0;transform:scale(1.055);filter:blur(12px)}
+ 45%{opacity:.7}
+ 100%{opacity:1;transform:none;filter:blur(0)}
 }
-@keyframes intro-sub{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes intro-sub{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes intro-bar{from{opacity:0}to{opacity:.55}}
 
 /* One restrained, true line under the progress text. */
 #loading .intro-note{
@@ -78,23 +84,24 @@ body.intro-error #loading .intro-note{display:none}
 #introStage.is-leaving{opacity:0;transform:scale(1.035)}
 #introStage.is-leaving .intro-scrim{opacity:0}
 #introStage .loadbrand{
- display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+ display:flex;flex-direction:column;align-items:center;gap:17px;text-align:center;
  pointer-events:none;
 }
 #introStage .loadbrand b{
- font-family:var(--display,'Fraunces',Georgia,serif);font-weight:900;
- font-size:clamp(46px,9vw,96px);line-height:1;letter-spacing:.08em;text-transform:uppercase;
+ font-family:var(--display,'Fraunces',Georgia,serif);font-weight:500;
+ font-size:clamp(42px,8.4vw,92px);line-height:.95;letter-spacing:.17em;text-indent:.17em;text-transform:uppercase;
  font-variation-settings:'opsz' 144;color:#fff;
  text-shadow:0 2px 34px rgba(3,9,13,.9),0 1px 4px rgba(3,9,13,.7);
 }
 #introStage .loadbrand span{
- font-size:11px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;
+ font-family:var(--display,'Fraunces',Georgia,serif);font-style:italic;font-weight:500;
+ font-size:clamp(15px,1.6vw,20px);letter-spacing:.03em;text-transform:none;
  color:var(--accent,#e8d5ae);text-shadow:0 1px 12px rgba(3,9,13,.9);
 }
 
 @media(max-width:760px){
  #loading .intro-note{font-size:9.5px;letter-spacing:.16em;margin-top:20px;gap:6px}
- #introStage .loadbrand b{font-size:44px}
+ #introStage .loadbrand b{font-size:44px;letter-spacing:.15em;text-indent:.15em}
  #introStage .intro-scrim{
   background:
    linear-gradient(180deg,
@@ -112,7 +119,8 @@ body.intro-error #loading .intro-note{display:none}
  #introStage .intro-scrim{transition:none!important}
  body.intro-live #loading .loadbrand b,
  body.intro-live #loading .loadbrand span,
- #loading .intro-note{animation:none!important;opacity:1}
+ #loading .intro-note{animation:none!important;opacity:1;filter:none!important;transform:none!important}
+ body.intro-live #loading .spinner{animation:none!important;opacity:.55}
  #loading .intro-note{opacity:.82}
  #introStage.is-leaving{transform:none}
 }

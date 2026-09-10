@@ -282,9 +282,12 @@ function start(drive) {
   button.setAttribute('aria-controls', 'errandPanel');
 
   const strip = document.querySelector('#drivehud .driveactions');
-  const tray = $('dockExtras');          // phones keep secondary controls one tap behind More
-  if (tray) tray.prepend(button);
-  else if (strip) strip.prepend(button);
+  const tray = $('dockExtras');
+  // A phone puts everything secondary behind More, and an errand is secondary to steering with a thumb.
+  // On a mouse the errand is the reason the dock exists, so it sits in the row, next to Turn around —
+  // the two things you do while you are already driving, together and to the right of who is driving.
+  if (tray && document.body.classList.contains('touch-ui')) tray.prepend(button);
+  else if (strip) strip.insertBefore(button, $('turnAround'));
   else return;
 
   const panel = document.createElement('section');
@@ -310,12 +313,13 @@ function start(drive) {
   readout.id = 'errandRun';
   readout.hidden = true;
   readout.setAttribute('role', 'status');
-  // The next corner is the line a driver reads, so it is given the whole width of the readout on its own row
-  // rather than a share of one. games.css orders it last; it stays here, next to the distance it belongs to.
+  // Pierce, 2026-09-10: "the score and timing is so tight". Four things were on one line. Now the clock is
+  // an anchor on the left, where you are going sits above how far is left, and the next corner gets a band
+  // of its own under a rule. Reading order is the DOM order; games.css only places it.
   readout.innerHTML = '<b class="ertime">0:00</b>' +
-    '<span class="erline"><span class="erto"></span><span class="erwhere"></span></span>' +
-    '<span class="erturn"></span>' +
-    '<button type="button" class="ergiveup">Give up</button>';
+    '<span class="erline"><span class="erwhere"></span><span class="erto"></span></span>' +
+    '<button type="button" class="ergiveup">Give up</button>' +
+    '<span class="erturn"></span>';
   document.body.append(readout);
 
   const list = panel.querySelector('.errandlist');
@@ -529,7 +533,14 @@ function start(drive) {
     }
 
     const dx = (to.x - s.x) * scale, dz = (to.z - s.z) * scale, inset = 13 * k, edge = half - inset;
-    if (Math.abs(dx) <= edge && Math.abs(dz) <= edge) {
+    // The canvas is heading-up: driving.js turns it by the car's yaw before handing it over, so the town
+    // rotates and the four edges of the map do not. Whether the door is still on the map, and where on the
+    // rim its arrow belongs, are both questions about the canvas, so both are answered in canvas space.
+    // Asked in map space, a door out towards a corner put its arrow off the 180px square altogether.
+    const yaw = s.yaw || 0, cs = Math.cos(yaw), sn = Math.sin(yaw);
+    const ex = dx * cs - dz * sn, ez = dx * sn + dz * cs;
+    if (Math.abs(ex) <= edge && Math.abs(ez) <= edge) {
+      // the door itself is a place in the town, so it is drawn in the town's space and turns with it
       const [x, y] = at(to.x, to.z), r = 4.2 * k;
       ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
       ctx.fillStyle = ROUTE_INK; ctx.fill();
@@ -539,26 +550,42 @@ function start(drive) {
       return;
     }
     // off the edge of the map: an arrow on the rim, pointing at it, with how far it still is
-    const push = Math.min(edge / Math.max(1e-6, Math.abs(dx)), edge / Math.max(1e-6, Math.abs(dz)));
-    const x = half + dx * push, y = half + dz * push, angle = Math.atan2(dz, dx), w = 5.5 * k;
+    const push = Math.min(edge / Math.max(1e-6, Math.abs(ex)), edge / Math.max(1e-6, Math.abs(ez)));
+    const px = half + ex * push, py = half + ez * push, out = Math.atan2(ez, ex), w = 6.6 * k;
+    // 6.6, not 5.5: with the number beside it at 11px the old triangle read as a speck, and when the
+    // door is off the map this arrow is the only thing saying which way it is.
     ctx.save();
-    ctx.translate(x, y); ctx.rotate(angle);
+    ctx.translate(half, half); ctx.rotate(-yaw); ctx.translate(-half, -half);   // out of the town's rotation
+    ctx.save();
+    ctx.translate(px, py); ctx.rotate(out);
     ctx.beginPath(); ctx.moveTo(w, 0); ctx.lineTo(-w * .8, w * .82); ctx.lineTo(-w * .8, -w * .82); ctx.closePath();
     ctx.fillStyle = ROUTE_INK; ctx.fill();
     ctx.lineWidth = 1.6 * k; ctx.strokeStyle = CASING; ctx.stroke();
     ctx.restore();
     // A phone shows this map at 84 px. A number on it would be too small to read, and the readout above
     // carries the same distance in type that is not, so the map keeps the arrow and drops the label.
-    if (shown < 120) return;
-    const label = miles(toGo(g) ?? dist(s.x, s.z, to.x, to.z));
-    ctx.font = '600 ' + Math.round(clamp(11 * k, 11, 15)) + 'px Arial';
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    const tx = clamp(x - Math.cos(angle) * 15 * k, 22, size - 22);
-    let ty = clamp(y - Math.sin(angle) * 15 * k, 13, size - 13);
-    if (ty < 28 && Math.abs(tx - 89) < 30) ty = 28;   // the compass letter owns the top of the map
-    if (ty > 148 && tx < 66) ty = 148;                // and the scale bar owns the bottom left corner
-    ctx.lineWidth = 3.5; ctx.strokeStyle = CASING; ctx.strokeText(label, tx, ty);
-    ctx.fillStyle = ROUTE_INK; ctx.fillText(label, tx, ty);
+    //
+    // Pierce, 2026-09-10: "distnaces in map mini are updaisde down i notce and not nice". It was drawn
+    // inside the town's rotation and turned with it, so heading south stood the number on its head. The
+    // arrow turns; the type never does. This is also the space the compass badge and the scale bar are
+    // drawn in, so the two rules that keep the label off them finally mean what they say.
+    if (shown >= 120) {
+      const label = miles(toGo(g) ?? dist(s.x, s.z, to.x, to.z));
+      // 19px back from the rim, not 15: at 15 the number's casing halo sat on the tail of the arrow
+      let tx = clamp(px - Math.cos(out) * 19 * k, 22, size - 22);
+      let ty = clamp(py - Math.sin(out) * 19 * k, 13, size - 13);
+      const nx = half + Math.sin(yaw) * 70, ny = half - Math.cos(yaw) * 70;   // the compass badge
+      for (let i = 0; i < 3 && dist(tx, ty, nx, ny) < 24; i++) {              // step in along the arrow
+        tx = clamp(tx - Math.cos(out) * 13 * k, 22, size - 22);
+        ty = clamp(ty - Math.sin(out) * 13 * k, 13, size - 13);
+      }
+      if (ty > 148 && tx < 66) ty = 148;                    // the scale bar owns the bottom left corner
+      ctx.font = '600 ' + Math.round(clamp(11 * k, 11, 15)) + 'px Arial';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 3.5; ctx.strokeStyle = CASING; ctx.strokeText(label, tx, ty);
+      ctx.fillStyle = ROUTE_INK; ctx.fillText(label, tx, ty);
+    }
+    ctx.restore();
   }
 
   function tick() {

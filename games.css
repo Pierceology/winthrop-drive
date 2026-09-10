@@ -68,29 +68,36 @@
 .errandnotify:hover{color:var(--accent-hi,#f7cb84);border-bottom-color:currentColor}
 
 /* ---------- the live readout ---------- */
+/* Pierce, 2026-09-10: "the score and timing is so tight". Four things sat shoulder to shoulder on one line
+   at the same size, so nothing was first. A grid instead of a wrap: the clock is an anchor on the left, big
+   and in the display face, the way the result card already sets it; where you are going sits above how far
+   is left, so the eye reads the name then the number; Give up is a quiet end cap; and the next corner — the
+   only line you read while the car is moving — gets a band of its own under a full-bleed rule. */
 #errandRun{position:fixed;top:calc(158px + var(--sat,0px));left:calc(var(--gutter,24px) + var(--sal,0px));
-  z-index:11;display:flex;flex-wrap:wrap;align-items:center;align-content:center;gap:3px 11px;
+  z-index:11;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;column-gap:16px;
   /* a rounded card, not a lozenge: a second row of type cannot live inside a 999px end cap */
-  border-radius:var(--r,18px);padding:6px 6px 7px 15px;background:var(--glass-strong,rgba(9,13,18,.9));
+  border-radius:var(--r,18px);padding:11px 12px 12px 17px;background:var(--glass-strong,rgba(9,13,18,.9));
   border:1px solid var(--edge,rgba(255,255,255,.13));backdrop-filter:var(--blur,blur(20px) saturate(1.3));
   -webkit-backdrop-filter:var(--blur,blur(20px) saturate(1.3));box-shadow:0 10px 30px rgba(0,0,0,.4);
-  max-width:min(460px,calc(100vw - 2*var(--gutter,24px)));color:var(--ink,#f6f3ec)}
+  max-width:min(470px,calc(100vw - 2*var(--gutter,24px)));color:var(--ink,#f6f3ec)}
 #errandRun[hidden]{display:none}
-#errandRun .ertime{font-family:var(--display,Georgia,serif);font-weight:500;font-size:22px;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums;color:var(--accent,#f0b860)}
-/* Two rows where the errand has a route to give: what is left and where, then the next corner on a row of its
-   own. The corner is ordered last so it wraps under the clock and the button and gets the readout's full
-   width — on a phone there are only 258 px of it, and a truncated instruction is no instruction. */
-#errandRun .erline{flex:1 1 0;display:flex;align-items:baseline;gap:9px;min-width:0}
-#errandRun .erto{font-size:12.5px;font-weight:600;white-space:nowrap}
-#errandRun .erwhere{font-size:12.5px;color:var(--muted,#b4bec6);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
-#errandRun .erturn{order:1;flex:1 0 100%;font-size:12.5px;font-weight:600;letter-spacing:.01em;
+#errandRun .ertime{grid-column:1;grid-row:1;font-family:var(--display,Georgia,serif);font-weight:500;font-size:30px;
+  line-height:1;letter-spacing:-.015em;font-variant-numeric:tabular-nums;color:var(--accent,#f0b860)}
+#errandRun .erline{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;max-width:100%}
+#errandRun .erwhere{max-width:100%;font-size:13.5px;font-weight:600;line-height:1.15;color:var(--ink,#f6f3ec);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#errandRun .erto{font-size:12px;font-weight:600;line-height:1.1;letter-spacing:.015em;color:var(--muted,#b4bec6);white-space:nowrap}
+#errandRun.close .erto{color:var(--go,#3aa862)}
+#errandRun .ergiveup{grid-column:3;grid-row:1;min-height:36px;min-width:0;padding:9px 14px;font-size:11.5px;font-weight:600;
+  border-radius:var(--pill,999px);background:transparent;border:1px solid var(--edge,rgba(255,255,255,.13));
+  box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--dim,#8c979f);white-space:nowrap}
+#errandRun .ergiveup:hover{background:rgba(255,255,255,.1);border-color:var(--edge-hi,rgba(255,255,255,.28));color:var(--ink,#f6f3ec)}
+@media (pointer:coarse){#errandRun .ergiveup{min-height:44px}}
+/* the instruction band: the readout's full width, its own rule, and never truncated into nonsense */
+#errandRun .erturn{grid-column:1/-1;grid-row:2;margin:11px -12px 0 -17px;padding:10px 12px 0 17px;
+  border-top:1px solid var(--edge,rgba(255,255,255,.13));font-size:13px;font-weight:600;line-height:1.2;letter-spacing:.01em;
   color:var(--accent,#f0b860);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 #errandRun .erturn:empty{display:none}
-#errandRun.close .erto{color:var(--go,#3aa862)}
-#errandRun .ergiveup{flex:0 0 auto;min-height:44px;min-width:74px;padding:8px 14px;font-size:12px;
-  border-radius:var(--pill,999px);background:var(--glass-lite,rgba(255,255,255,.06));border:1px solid var(--edge,rgba(255,255,255,.13));
-  box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--muted,#b4bec6)}
-#errandRun .ergiveup:hover{background:rgba(255,255,255,.12);color:var(--ink,#f6f3ec)}
 
 /* The road card and the errand sheet want the same slot above the dock on a phone; the sheet is the one
    the driver just asked for, so it wins for as long as it is open. */
@@ -108,19 +115,28 @@ body.errands-open #driveCard{display:none}
   .errandphoto{height:124px;margin-bottom:9px}
   .erdetail{margin-bottom:11px}
   .errandsoon{margin-top:11px;padding-top:9px}
-  /* under the road name, on the left: the speedometer owns the top-right corner of a phone */
-  #errandRun{top:calc(122px + var(--sat,0px));left:calc(12px + var(--sal,0px));right:auto;
-    max-width:calc(100vw - 132px - var(--sal,0px) - var(--sar,0px));gap:3px 8px;padding:5px 5px 6px 12px}
-  #errandRun .ertime{font-size:19px}
-  #errandRun .erto,#errandRun .erwhere,#errandRun .erturn{font-size:11.5px}
-  #errandRun .erline{gap:7px}
-  #errandRun .ergiveup{min-width:66px;padding:8px 10px;font-size:11px}
+  /* Under the road name AND under the speedometer, which is what buys back the width: the speedometer owns
+     the top-right corner down to 122px, so from 130px the readout can have the whole screen instead of the
+     258px it used to be squeezed into. */
+  #errandRun{top:calc(130px + var(--sat,0px));left:calc(12px + var(--sal,0px));right:calc(12px + var(--sar,0px));
+    max-width:none;column-gap:13px;padding:10px 10px 11px 14px}
+  #errandRun .ertime{font-size:26px}
+  #errandRun .erwhere{font-size:13px}
+  #errandRun .erto{font-size:11.5px}
+  #errandRun .erturn{font-size:12.5px;margin:10px -10px 0 -14px;padding:9px 10px 0 14px}
+  #errandRun .ergiveup{padding:9px 12px;font-size:11px}
 }
 
 /* Landscape phone: barely 390px of height, most of it road. The picture goes, the sheet takes what is left,
    and the two buttons stay pinned to the bottom of it so the thing you came to press is never scrolled away. */
 @media (max-width:950px) and (max-height:460px){
-  #errandRun{top:calc(100px + var(--sat,0px));right:auto;max-width:min(58vw,340px)}
+  /* the readout keeps the ranking and gives back the padding; Give up keeps its 44px, it is still a thumb */
+  #errandRun{top:calc(100px + var(--sat,0px));left:calc(12px + var(--sal,0px));right:auto;max-width:min(64vw,400px);
+    column-gap:12px;padding:8px 9px 9px 13px}
+  #errandRun .ertime{font-size:23px}
+  #errandRun .erline{gap:3px}
+  #errandRun .erturn{margin:8px -9px 0 -13px;padding:7px 9px 0 13px;font-size:12px}
+  #errandRun .ergiveup{padding:7px 11px}
   .errandsheet,#errandResult{max-height:calc(100dvh - 74px - var(--strip,66px))}
   .errandphoto{display:none}
   .errandhead{margin-bottom:6px}

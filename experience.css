@@ -178,23 +178,46 @@ body.driving #assistValue,.speedometer #assistValue{display:block;margin:4px 0 0
 
 body.driving #minimap,.driving #minimap{top:auto;right:auto;left:calc(var(--gutter) + var(--sal));bottom:calc(26px + var(--sab));width:var(--map-size);height:var(--map-size);border:2px solid var(--edge-hi);border-radius:20px;background:#0f1a22;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:.94}
 
-/* the dock: everything you can do, in one strip under the road */
-body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{position:fixed;top:auto;bottom:calc(26px + var(--sab));left:50%;right:auto;transform:translateX(-50%);width:auto;max-width:calc(100vw - 2*var(--map-size) - 2*var(--gutter) - 60px);
-  display:flex;align-items:stretch;gap:4px;padding:6px;border-radius:22px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow);z-index:6}
-body.driving .driveactions button,.driving .driveactions button{flex:1 1 0;min-width:78px;max-width:120px;min-height:64px;padding:9px 8px 8px;border:0;border-radius:16px;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;font-size:12px;font-weight:600;line-height:1.15;white-space:normal;color:var(--ink)}
-body.driving .driveactions button:hover{background:var(--glass-lite)}
-body.driving .driveactions button::before{content:'';display:block;width:22px;height:22px;margin:0 auto 6px;background:currentColor;mask:var(--icon) center/contain no-repeat;-webkit-mask:var(--icon) center/contain no-repeat}
+/* The dock: one row under the road, and a rank inside it. Pierce, 2026-09-10: "look how massive the buttons
+   are loo and not pretty and not clean or organized." Eight identical 64px icon-over-label boxes said every
+   control mattered the same. Now: the mode switch is the only filled thing, because it is the only one that
+   changes who is driving; Errands and the U-turn are the two things you do while the car is moving; Explore
+   is behind a hairline, because it is the way out and not another action; and everything you set once and
+   leave — garage, evening light, hood camera — is one tap behind More. Label beside glyph, not under it,
+   and the strip goes from 720x87 to 620x56 at 1440 wide, with every target still 44px. */
+body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{position:fixed;top:auto;bottom:calc(38px + var(--sab));left:50%;right:auto;transform:translateX(-50%);width:auto;max-width:calc(100vw - 2*var(--map-size) - 2*var(--gutter) - 60px);
+  display:flex;align-items:center;gap:2px;padding:5px;border-radius:18px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shadow);z-index:6}
+body.driving .driveactions button,.driving .driveactions button{flex:0 0 auto;min-width:0;max-width:none;min-height:44px;padding:0 13px;border:0;border-radius:13px;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:12.5px;font-weight:600;line-height:1;letter-spacing:.005em;white-space:nowrap;color:var(--muted)}
+body.driving .driveactions button:hover{background:var(--glass-lite);color:var(--ink)}
+body.driving .driveactions button::before{content:'';display:block;flex:0 0 auto;width:18px;height:18px;margin:0;background:currentColor;mask:var(--icon) center/contain no-repeat;-webkit-mask:var(--icon) center/contain no-repeat}
+/* A U-turn and three dots need no caption. The words stay in the DOM — tooltip, screen reader, and the
+   phone layout still sets them — so only the type is switched off here. */
+body.driving .driveactions>#turnAround,body.driving .driveactions>#dockMore{width:44px;padding:0;gap:0;font-size:0}
+body.driving .driveactions>#errandsBtn{margin-left:4px}
+body.driving .driveactions>#exitDrive{margin-left:6px;padding-left:15px;border-left:1px solid var(--edge);border-radius:0 13px 13px 0}
 body.driving .driveactions #eveningDrive[aria-pressed="true"]{background:rgba(240,184,96,.18);color:var(--accent-hi)}
-body.driving .driveactions #driveMode,#driveMode{flex:0 0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0 4px;border:1px solid var(--edge);border-radius:16px;overflow:hidden;background:rgba(0,0,0,.28);padding:0!important}
-body.driving .driveactions #driveMode button,#driveMode button{min-width:96px;max-width:none;min-height:64px;padding:8px 12px!important;border-radius:0!important;font-size:13px!important;font-weight:700;background:transparent!important;color:var(--muted)!important}
+body.driving .driveactions #driveMode,#driveMode{flex:0 0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0;border:0;border-radius:13px;overflow:hidden;background:rgba(0,0,0,.34);padding:2px!important}
+body.driving .driveactions #driveMode button,#driveMode button{min-width:84px;max-width:none;min-height:40px;padding:0 12px!important;border-radius:11px!important;font-size:12.5px!important;font-weight:700;background:transparent!important;color:var(--muted)!important}
 #driveMode button::before{display:none!important;content:none!important}
 #driveMode button[aria-pressed="true"]{color:#fff!important}
 #driveMode #autoDrive[aria-pressed="true"]{background:var(--go)!important;animation:none}
 #driveMode #manualDrive[aria-pressed="true"]{background:var(--accent)!important;color:var(--accent-ink)!important}
 #driveMode button[aria-pressed="false"]:hover{background:rgba(255,255,255,.1)!important;color:#fff!important}
-/* the dock's icons: drawn small, so a phone can put a picture where a word used to be */
-#dockExtras{display:contents}                                    /* on anything wider the dock is exactly what it was */
-#dockMore{display:none}
+
+/* More: a small panel that lifts off the right end of the dock. Hidden means visibility:hidden, not just
+   transparent — a tray nobody can see must not be tab-stoppable, and it must not count as on-screen. */
+#dockExtras{position:absolute;left:auto;right:5px;bottom:calc(100% + 9px);display:grid;gap:2px;width:208px;padding:5px;
+  border-radius:16px;background:var(--glass-strong);border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:0 16px 40px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(7px);
+  transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;z-index:2}
+body.dock-open #dockExtras{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease,transform .18s ease}
+/* Idle fades the whole strip, the tray with it. It deliberately does NOT set visibility: an open tray that
+   has merely faded out is still the tray, and the moment a mouse moves it is back. visibility:hidden is for
+   the shut tray only — that is a different thing, and it should be gone from the layout and the tab order. */
+body.driving.idle #dockExtras{opacity:0;pointer-events:none}
+#dockExtras button{width:100%;justify-content:flex-start!important;padding:0 12px!important;min-height:44px!important;border-radius:11px!important;text-align:left}
+body.dock-open .driveactions #dockMore{background:var(--glass-lite);color:var(--ink)}
 #dockMore{--icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='black'%3E%3Ccircle cx='5.5' cy='12' r='1.8'/%3E%3Ccircle cx='12' cy='12' r='1.8'/%3E%3Ccircle cx='18.5' cy='12' r='1.8'/%3E%3C/g%3E%3C/svg%3E")}
 #phoneHud{--icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z' fill='none' stroke='black' stroke-width='1.8'/%3E%3Ccircle cx='12' cy='12' r='3' fill='none' stroke='black' stroke-width='1.8'/%3E%3C/svg%3E")}
 
@@ -274,8 +297,10 @@ body.driving.idle #drivehud::after{opacity:.55;transition:opacity .9s}
 @media (pointer:coarse){.look-controls button,.camera button,header>button,#tourOverlay .tourbar button,#tourOverlay select,.explore-actions #tour{min-height:44px}body.driving .pedals button{min-width:56px;min-height:48px}footer a{min-height:32px;display:inline-flex;align-items:center}}
 @media (min-width:701px) and (min-height:461px){#touchDrive{display:none!important}}   /* the hold-the-road layer is a phone control; tablets get pedals */
 
-/* minimal HUD (desktop "Minimal HUD" and the phone "Hide panels") keeps the road, the exit and the garage */
-body.driving.minimal-hud .driveactions{display:flex!important;background:var(--glass);border:1px solid var(--edge);padding:6px;top:auto}
+/* minimal HUD (desktop "Minimal HUD" and the phone "Hide panels") keeps the road, the exit and the garage.
+   The garage moved behind More, so More is now the way back and must survive the strip being stripped. */
+body.driving.minimal-hud .driveactions{display:flex!important;background:var(--glass);border:1px solid var(--edge);padding:5px;top:auto}
+body.driving.minimal-hud .driveactions #dockMore{display:inline-flex!important}
 body.driving.minimal-hud .speedometer{bottom:calc(26px + var(--sab));opacity:.9}
 body.driving.minimal-hud .driveheading{opacity:.9}
 
@@ -306,10 +331,16 @@ dialog p{font-size:16px;line-height:1.65;color:#dfe6ea}
 dialog dt{font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#e8d5ae;margin-top:22px}
 dialog dd{font-size:15px;color:#dfe6ea}
 #loading{background:radial-gradient(120% 90% at 50% 110%,#17313f 0%,#0c1218 60%);gap:0}
-#loading .loadbrand{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:34px;text-align:center}
-#loading .loadbrand b{font-family:var(--display);font-weight:900;font-size:clamp(46px,9vw,96px);line-height:1;letter-spacing:.08em;text-transform:uppercase;font-variation-settings:'opsz' 144;color:#fff}
-#loading .loadbrand span{font-size:11px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:#e8d5ae}
-#loading .spinner{width:120px;height:2px;border:0;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:sweep 1.4s ease-in-out infinite;margin-bottom:22px}
+/* The opening wordmark. Pierce, 2026-09-10: "id love the clouds intro rebuilt ... some elegance." It was
+   Fraunces at 900 with .08em of tracking — at 96px that is a stamp, and it sat on the fog rather than in it.
+   Weight 500 at the same optical size keeps the high-contrast serif and gives the letters air; the tracking
+   goes up to .17em and text-indent puts the same amount back at the front, so the word stays optically
+   centred instead of drifting left by half its own letter-space. "by the Sea" stops being a tracked-out
+   micro-cap label and becomes what it is on a title page: the same face, italic, sentence case. */
+#loading .loadbrand{display:flex;flex-direction:column;align-items:center;gap:17px;margin-bottom:46px;text-align:center}
+#loading .loadbrand b{font-family:var(--display);font-weight:500;font-size:clamp(42px,8.4vw,92px);line-height:.95;letter-spacing:.17em;text-indent:.17em;text-transform:uppercase;font-variation-settings:'opsz' 144;color:#fff}
+#loading .loadbrand span{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(15px,1.6vw,20px);letter-spacing:.03em;text-transform:none;color:#e8d5ae}
+#loading .spinner{width:96px;height:1px;border:0;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:sweep 1.4s ease-in-out infinite;margin-bottom:22px;opacity:.55}
 @keyframes sweep{0%{transform:translateX(-60px);opacity:.3}50%{transform:translateX(0);opacity:1}100%{transform:translateX(60px);opacity:.3}}
 #loading h2{font-family:var(--display);font-weight:500;font-style:italic;font-size:clamp(18px,2.4vw,26px);margin:0 0 8px;color:#f6f3ec}
 #loading p{font-size:13px;color:var(--muted);letter-spacing:.02em}
@@ -319,9 +350,11 @@ dialog dd{font-size:15px;color:#dfe6ea}
 @media (max-width:1100px){
   :root{--gutter:16px;--map-size:clamp(120px,15vw,160px)}
   .places,body:not(.driving) .places{width:312px}
-  body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{max-width:calc(100vw - 2*var(--gutter));left:50%;bottom:calc(20px + var(--sab))}
-  body.driving .driveactions button,.driving .driveactions button{min-width:64px;min-height:58px;font-size:11px;padding:8px 6px}
-  body.driving .driveactions #driveMode button,#driveMode button{min-width:80px;min-height:58px;font-size:12px!important}
+  /* the footer credit is 34px tall at the bottom of the window; the dock used to sit 20px up and clip it */
+  body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{max-width:calc(100vw - 2*var(--gutter));left:50%;bottom:calc(38px + var(--sab))}
+  body.driving .driveactions button,.driving .driveactions button{min-height:44px;font-size:12px;padding:0 11px}
+  body.driving .driveactions>#turnAround,body.driving .driveactions>#dockMore{width:44px;padding:0}
+  body.driving .driveactions #driveMode button,#driveMode button{min-width:76px;min-height:40px;font-size:12px!important;padding:0 10px!important}
   body.driving #minimap,.driving #minimap{bottom:calc(104px + var(--sab));border-radius:16px}
   body.driving .speedometer,.driving .speedometer{bottom:calc(104px + var(--sab))}
   body.driving .speedometer b,.driving .speedometer b{font-size:clamp(48px,7vw,72px)}
@@ -412,9 +445,13 @@ dialog dd{font-size:15px;color:#dfe6ea}
   /* the tray: a sheet that lifts off the dock, three across, only while More is pressed */
   body.driving #dockExtras{display:grid;position:absolute;left:calc(10px + var(--sal));right:calc(10px + var(--sar));bottom:100%;margin-bottom:8px;
     grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:8px;border-radius:16px;border:1px solid var(--edge);background:var(--glass-strong);
-    box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
-  body.driving.dock-open #dockExtras{opacity:1;transform:none;pointer-events:auto}
-  body.driving #dockExtras button{display:block!important;flex:none!important;min-height:48px!important;font-size:11px!important;background:var(--glass-lite);border:1px solid rgba(255,255,255,.08);color:var(--ink)}
+    box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;visibility:hidden;transform:translateY(8px);pointer-events:none;
+    transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;width:auto}
+  body.driving.dock-open #dockExtras{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .18s ease,transform .18s ease}
+  /* the desktop tray is a list of rows; here it is three icon-over-label tiles, so the padding and the
+     centring the wider rule sets have to be put back by name — an id selector outranks the strip's own. */
+  body.driving #dockExtras button{display:block!important;flex:none!important;min-height:48px!important;font-size:11px!important;
+    padding:5px 4px!important;text-align:center;border-radius:13px!important;background:var(--glass-lite);border:1px solid rgba(255,255,255,.08);color:var(--ink)}
   /* the tray borrows the corner the minimap, reverse and turn-around live in; they come back when it shuts */
   body.driving.dock-open #minimap,body.driving.dock-open #touchReverse,body.driving.dock-open #turnAround,body.driving.dock-open footer{opacity:0;pointer-events:none;transition:opacity .18s ease}
   body.driving #dockExtras button::before{display:block!important;content:''!important;width:19px;height:19px;margin:0 auto 3px;
@@ -461,7 +498,7 @@ dialog dd{font-size:15px;color:#dfe6ea}
   #tourOverlay .tourbar button,#tourOverlay select{min-height:44px;font-size:13px}
   #tourOverlay select{max-width:150px}
   dialog{padding:26px 22px}
-  #loading .loadbrand b{font-size:44px}
+  #loading .loadbrand b{font-size:44px;letter-spacing:.15em;text-indent:.15em}
 }
 
 /* landscape phones: one-row strip, the corners inside the notch insets */
@@ -513,9 +550,16 @@ dialog dd{font-size:15px;color:#dfe6ea}
   body.driving .driveheading,.driving .driveheading{top:calc(110px + var(--sat))}
   body.driving .driveheading span,.driving .driveheading span{font-size:17px}
   body.driving .speedometer small,.driving .speedometer small{font-size:15px}
-  body.driving .driveactions button,.driving .driveactions button{min-width:104px;max-width:150px;min-height:84px;font-size:15px}
-  body.driving .driveactions button::before{width:26px;height:26px}
-  body.driving .driveactions #driveMode button,#driveMode button{min-width:130px;min-height:84px;font-size:16px!important}
+  /* the dock scales up here, it does not go back to being a stack of slabs: same row, larger type */
+  body.driving .driveactions,.driving .driveactions,body.driving.minimal-hud .driveactions{gap:3px;padding:6px;border-radius:20px}
+  body.driving .driveactions button,.driving .driveactions button{min-height:52px;font-size:14px;padding:0 16px;gap:9px;border-radius:15px}
+  body.driving .driveactions>#turnAround,body.driving .driveactions>#dockMore{width:52px;padding:0}
+  body.driving .driveactions>#exitDrive{padding-left:18px;border-radius:0 15px 15px 0}
+  body.driving .driveactions button::before{width:21px;height:21px}
+  body.driving .driveactions #driveMode,#driveMode{border-radius:15px}
+  body.driving .driveactions #driveMode button,#driveMode button{min-width:104px;min-height:48px;font-size:14px!important;padding:0 16px!important;border-radius:13px!important}
+  #dockExtras{width:238px;padding:6px;border-radius:18px}
+  #dockExtras button{min-height:48px!important;padding:0 14px!important}
   .look-controls{bottom:calc(136px + var(--sab))}.look-controls button{font-size:15px;min-height:44px;padding:8px 20px}
   body.driving .drivehelp{font-size:13px}
   body.driving .speedometer,.driving .speedometer{bottom:calc(52px + var(--sab))}

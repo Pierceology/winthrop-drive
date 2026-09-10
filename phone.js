@@ -24,31 +24,19 @@ if (coarse) {
     x.onclick = () => { warn.classList.add('dismissed'); }; warn.prepend(x);
     new MutationObserver(() => { if (warn.hidden) warn.classList.remove('dismissed'); }).observe(warn, { attributes: true, attributeFilter: ['hidden'] });
   }
+  // Every layout is a touch layout as far as the rest of the app is concerned; games.js reads this to decide
+  // whether the errand button belongs in the row or behind More.
+  document.body.classList.add('touch-ui');
+
+  // The dock keeps only what a driver reaches for with a thumb: who is driving, and the way out. The tray
+  // behind More is built in hud.js and shared with every other size; a phone adds the two controls that
+  // only make sense here — Hide panels, and Pause, which a thumb on the road is not hunting for.
   const strip = document.querySelector('.driveactions');
-  if (strip && !document.getElementById('phoneHud')) {
+  const tray = document.getElementById('dockExtras');
+  if (strip && tray && !document.getElementById('phoneHud')) {
     const b = document.createElement('button'); b.id = 'phoneHud'; b.type = 'button'; b.textContent = 'Hide panels';
     b.onclick = () => { const on = document.body.classList.toggle('minimal-hud'); b.textContent = on ? 'Show panels' : 'Hide panels'; };
-    strip.prepend(b);
-  }
-  // The dock keeps only what a driver reaches for with a thumb: who is driving, and the way out. Everything
-  // else moves behind one More button, so the road gets the screen back. On anything wider the tray is
-  // display:contents and the dock is exactly what it always was.
-  if (strip && !document.getElementById('dockMore')) {
-    const tray = document.createElement('div'); tray.id = 'dockExtras';
-    for (const id of ['phoneHud', 'garageToggle', 'eveningDrive', 'pauseDrive', 'driveCamera']) {
-      const b = document.getElementById(id); if (b) tray.append(b);
-    }
-    const more = document.createElement('button'); more.id = 'dockMore'; more.type = 'button';
-    more.textContent = 'More'; more.setAttribute('aria-expanded', 'false'); more.setAttribute('aria-controls', 'dockExtras');
-    const shut = () => { if (!document.body.classList.contains('dock-open')) return; document.body.classList.remove('dock-open'); more.setAttribute('aria-expanded', 'false'); };
-    more.onclick = e => { e.stopPropagation(); const open = document.body.classList.toggle('dock-open'); more.setAttribute('aria-expanded', String(open)); };
-    tray.addEventListener('click', shut);            // any secondary action closes the tray behind it
-    strip.append(tray);
-    const exit = document.getElementById('exitDrive');
-    exit ? strip.insertBefore(more, exit) : strip.append(more);
-    document.getElementById('touchDrive')?.addEventListener('pointerdown', shut);
-    addEventListener('keydown', e => { if (e.code === 'Escape') shut(); });
-    new MutationObserver(() => { if (!document.body.classList.contains('driving')) shut(); })
-      .observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    tray.prepend(b);
+    const pause = document.getElementById('pauseDrive'); if (pause) tray.append(pause);
   }
 }
