@@ -15,6 +15,7 @@ import {trafficSigns} from './traffic-signs.js';
 import {roadside} from './roadside.js';
 import {streetFurniture} from './street-furniture.js';
 import {SignalSystem} from './signals.js';
+import {parkedCars} from './parked-cars.js';
 import {Weather} from './weather.js';
 import {TourFlight} from './tour-flight.js';
 import {EveningDrive} from './evening.js';
@@ -35,7 +36,7 @@ const $=id=>document.getElementById(id);
 const get=async path=>{const r=await fetch(path);if(!r.ok)throw Error(`Unable to load ${path}`);return r.json()};
 let photoCatalog=[],photoStop=0;
 let additionalRegistration,photoRegistration,photoTextures={},photoWires=[],photoPool,photoFronts,canopyGroup,canopyData;
-let evening,hemi,roadsideGroup,signData,signGroup,signalSystem,furnitureGroup,weather,tourFlight,tourData=[];
+let evening,hemi,roadsideGroup,signData,signGroup,signalSystem,furnitureGroup,parkedGroup,weather,tourFlight,tourData=[];
 let assetData,assetGroup,neighborhoods;
 let water,labels,ambient,tour,poi,terrainMeshes=[],spot=null,spotMarker;
 let scene,camera,renderer,controls,world,elevation,terrain,buildings,outlineGroup,roadGroup,selection,flight,auto=false;
@@ -132,7 +133,9 @@ async function init(){
  get('./data/surfaces.json').then(async data=>{const onLand=(x,z)=>groundWorld.field.ground.sample(x,z)!==null,onRoad=(x,z)=>groundWorld.field.road.sample(x,z)!==null;
   playGround=await playSurfaces(data,surfaceAt,onLand,onRoad,(x,z)=>driving.state.network.obstructed(x,z),lowMemory);
   scene.add(playGround);window.__surfaces=playGround.userData.audit;}).catch(e=>console.warn('Ground surfaces unavailable',e));
- Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{driving.turn.setObstacles([...(powerLines.poles||[]).map(p=>({x:p.x,z:p.z,r:.3})),...(furniture.lamps||[]).map(p=>({x:p.x,z:p.z,r:.22})),...(furniture.busStops||[]).map(p=>({x:p.x,z:p.z,r:.35})),...(furniture.signals||[]).map(p=>({x:p.x,z:p.z,r:.3})),...assetData.assets.map(a=>({x:a.x,z:a.z,r:a.kind==='hydrant'?.22:.28}))]);driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem);scene.add(g);furnitureGroup=g;window.__furniture=g;}).catch(e=>console.warn('Street furniture unavailable',e));evening=new EveningDrive(scene,surfaceAt);weather=new Weather({scene,hemi,sun});weather.bind(['weather','weatherDrive']);
+ Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{driving.turn.setObstacles([...(powerLines.poles||[]).map(p=>({x:p.x,z:p.z,r:.3})),...(furniture.lamps||[]).map(p=>({x:p.x,z:p.z,r:.22})),...(furniture.busStops||[]).map(p=>({x:p.x,z:p.z,r:.35})),...(furniture.signals||[]).map(p=>({x:p.x,z:p.z,r:.3})),...assetData.assets.map(a=>({x:a.x,z:a.z,r:a.kind==='hydrant'?.22:.28}))]);driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem);scene.add(g);furnitureGroup=g;window.__furniture=g;
+  /* Cars at the kerb, from the same fetch: they need the furniture and the street assets to know what not to park on. */
+  parkedCars(driving.state.network,surfaceAt,{assets:assetData.assets,furniture,crossings}).then(pc=>{scene.add(pc);parkedGroup=pc;window.__parked=pc;}).catch(e=>console.warn('Parked cars unavailable',e));}).catch(e=>console.warn('Street furniture unavailable',e));evening=new EveningDrive(scene,surfaceAt);weather=new Weather({scene,hemi,sun});weather.bind(['weather','weatherDrive']);
  assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Signs, poles and hydrants · ${assetData.assets.length}`;
 window.__drive=driving;window.__controls=controls;window.__camera=camera; ambient=new AmbientLife(scene,driving.state.network,surfaceAt);driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;
  tour={get active(){return coastal.active||flight.active;},start(){flight.stop();coastal.start();},stop(){coastal.stop();flight.stop();},update(dt){coastal.update(dt);flight.update(dt);}};}
@@ -194,7 +197,7 @@ function bind(){
  $('roads').onchange=e=>roadGroup.visible=e.target.checked;$('footprints').onchange=e=>outlineGroup.visible=e.target.checked;
  $('top').onclick=()=>fly(controls.target.toArray(),[0,Math.max(500,camera.position.distanceTo(controls.target)),.1]);$('reset').onclick=()=>goPlace('whole');
  $('orbit').onclick=()=>{flight=null;auto=!auto;controls.autoRotate=auto;$('orbit').classList.toggle('active',auto);$('orbit').setAttribute('aria-pressed',String(auto))};
- $('info').onclick=()=>{$('about').showModal();$('info').setAttribute('aria-expanded','true')};$('closeabout').onclick=()=>$('about').close();$('about').addEventListener('close',()=>$('info').setAttribute('aria-expanded','false'));
+ $('info').onclick=()=>{$('about').showModal();$('info').setAttribute('aria-expanded','true')};$('credits')?.addEventListener('click',()=>$('about').showModal());$('closeabout').onclick=()=>$('about').close();$('about').addEventListener('close',()=>$('info').setAttribute('aria-expanded','false'));
  $('closeinspect').onclick=()=>{$('inspector').hidden=true;if(selection){scene.remove(selection);selection.geometry.dispose();selection.material.dispose();selection=null}};
  const SUF={STREET:'ST',AVENUE:'AVE',ROAD:'RD',DRIVE:'DR',COURT:'CT',PLACE:'PL',TERRACE:'TER',LANE:'LN',BOULEVARD:'BLVD',CIRCLE:'CIR',PARKWAY:'PKWY',SQUARE:'SQ',HIGHWAY:'HWY'};const normAddr=a=>a.toUpperCase().replace(/[.,]/g,'').replace(/\b(WINTHROP|MA|02152)\b/g,'').replace(/\s+/g,' ').trim().split(' ').map(w=>SUF[w]||w).join(' ');
  let addressIndex=null;get('./data/addresses.json').then(d=>{addressIndex=d.addresses;const list=$('roadnames');if(list){const frag=document.createDocumentFragment();for(const a of Object.keys(addressIndex)){const o=document.createElement('option');o.value=a.replace(/\b([A-Z])([A-Z]+)\b/g,(m,a,b)=>a+b.toLowerCase());frag.append(o);}list.append(frag);}}).catch(()=>{});
@@ -216,7 +219,7 @@ function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):.016;
  controls.target.x=THREE.MathUtils.clamp(controls.target.x,-3500,3500);controls.target.z=THREE.MathUtils.clamp(controls.target.z,-3900,3900);if(tour?.active)tour.update(dt);else if(driving?.active){ambient?.constrainPlayer(driving.state);driving.update(dt,time);}else controls.update(dt);
  ambient?.update(driving?.paused?0:dt,controls.target,driving,$('life').checked);water.material.uniforms.time.value=time/1000;water.material.uniforms.sunDirection.value.copy(sunOffset).normalize();if(frame%6===0)labels?.update(camera,controls.target,$('labels').checked&&!tour?.active);
  if(frame%6===0)checklist?.update(camera,buildings.visible&&!tour?.active);
- signalSystem?.tick(dt);if(frame%6===0)furnitureGroup?.userData.lights?.update();weather?.update(dt,camera);
+ signalSystem?.tick(dt);if(frame%6===0)furnitureGroup?.userData.lights?.update();if(frame%12===0)parkedGroup?.userData.update?.(camera.position.x,camera.position.z);weather?.update(dt,camera);
  if(window.__ortho&&time-(window.__orthoAt||0)>250){window.__orthoAt=time;const o=window.__ortho,fx=driving?.active?driving.state.x:controls.target.x,fz=driving?.active?driving.state.z:controls.target.z,h=Math.max(0,camera.position.y-heightAt(fx,fz));o.update(fx,fz,h,driving?.active?1:Math.max(0,1-h/160));}
  if(frame%24===0){photoPool?.update(camera.position.x,camera.position.z);photoFronts?.update(camera.position.x,camera.position.z);coverageMap?.update(controls.target);}
  evening?.update(driving?.state,driving?.active);

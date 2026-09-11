@@ -136,6 +136,14 @@ footer,.driving footer,.immersive footer{position:fixed;inset:auto 0 0 0;height:
   background:none;border:0;font-size:11px;color:#d9e1e6;text-shadow:0 1px 6px rgba(0,0,0,.8);pointer-events:none;z-index:5}
 footer>*{pointer-events:auto}
 footer .help{margin-right:auto;letter-spacing:.02em;opacity:.85}
+/* The OpenStreetMap credit used to float over the water as a pill, and Pierce is right that it did not
+   belong there. It cannot simply go: every road, name and place in Winthrop comes from OSM under the ODbL,
+   which requires the attribution to be reachable. So it moves behind this, and the About panel carries the
+   full credit with a live link to the licence. Small, quiet, and one tap from the thing it credits. */
+footer .credits{width:22px;height:22px;min-height:0;flex:0 0 auto;align-self:center;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.22);
+  background:rgba(9,13,18,.45);color:#e6ecf0;font:italic 600 12px/1 Georgia,serif;cursor:pointer;
+  display:grid;place-items:center;opacity:.7;transition:opacity .18s,background .18s}
+footer .credits:hover,footer .credits:focus-visible{opacity:1;background:var(--glass)}
 footer #position{display:none}
 footer a,.driving footer a{color:#e6ecf0;text-decoration:none;white-space:nowrap;font-size:11px;padding:6px 10px;border-radius:var(--pill);background:rgba(9,13,18,.5);border:1px solid rgba(255,255,255,.1)}
 footer a:hover{background:var(--glass)}
