@@ -146,9 +146,14 @@ async function init(){
      so a descent started here would finish behind it and nobody would see a cloud. Start it the instant the card
      hides (the way the old intro watched the same attribute), from wherever the framing has put the camera by then. */
   const startArrival=()=>{if(touched||driving?.active)return;arrival({scene,camera,controls,target:controls.target.clone(),finalPos:camera.position.clone()});};
+  /* And even then not on the first frame: the furniture, the parked cars and the trees keep arriving after the card
+     is gone, and each lands as a stall of a second or more. Measured in Chrome on the published page: a 200 ms poller
+     got three samples in sixteen seconds. A flight timed by the clock would spend itself inside those stalls. So wait
+     for the town to be drawing smoothly -- three frames in a row under 90 ms -- and give up waiting after twelve seconds. */
+  const whenSmooth=(go)=>{let last=0,run=0;const t0=performance.now();const tick=now=>{if(last&&now-last<90)run++;else run=0;last=now;if(run>=3||now-t0>12000)go();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
   const card=$('loading');
-  if(card&&!card.hidden){const watch=new MutationObserver(()=>{if(card.hidden){watch.disconnect();startArrival();}});watch.observe(card,{attributes:true,attributeFilter:['hidden']});}
-  else startArrival();
+  if(card&&!card.hidden){const watch=new MutationObserver(()=>{if(card.hidden){watch.disconnect();whenSmooth(startArrival);}});watch.observe(card,{attributes:true,attributeFilter:['hidden']});}
+  else whenSmooth(startArrival);
  }
  controls.addEventListener('start',()=>{touched=true;});
  const names=[...new Set(world.roads.map(r=>r.name))].filter(n=>n!=='Unnamed road').sort();for(const name of [...names,...poi.places.map(p=>p.name)]){const o=document.createElement('option');o.value=name;$('roadnames').append(o)}
