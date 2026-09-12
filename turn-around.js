@@ -21,7 +21,9 @@ export class TurnAround{
  // manoeuvre swings wide, so it is asked about every one of them before it commits.
  // Each one goes into its own cell and its eight neighbours, so a single lookup on the car's centre
  // finds everything that could reach the bodywork.
- setObstacles(list){this.cells=new Map();
+ /* Remember what was handed over: the parked cars arrive after the poles and hydrants and have to be
+    added to them, not instead of them. */
+ setObstacles(list){this.obstacleList=list||[];this.cells=new Map();
   for(const o of list||[]){const ci=Math.floor(o.x/20),cj=Math.floor(o.z/20);
    for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){const c=(ci+i)+','+(cj+j);
     if(!this.cells.has(c))this.cells.set(c,[]);this.cells.get(c).push(o);}}

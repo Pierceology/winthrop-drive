@@ -3,8 +3,27 @@ import {lanePoint} from './lane-position.js';
 export class RoadNetwork {
  constructor(roads,buildings=[]){this.obstacles=new Map();for(const b of buildings){const xs=b.rings[0].map(p=>p[0]),zs=b.rings[0].map(p=>p[1]);for(let x=Math.floor(Math.min(...xs)/60);x<=Math.floor(Math.max(...xs)/60);x++)for(let z=Math.floor(Math.min(...zs)/60);z<=Math.floor(Math.max(...zs)/60);z++){const k=x+","+z;if(!this.obstacles.has(k))this.obstacles.set(k,[]);this.obstacles.get(k).push(b.rings)}}this.segments=[];this.cells=new Map();this.cellSize=60;for(const road of roads){if([7,8].includes(road.type))continue;for(let i=1;i<road.points.length;i++){const a=road.points[i-1],b=road.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);if(length<.05)continue;const s={a,b,dx,dz,length,width:road.width||6,name:road.name,speed:road.speed,id:road.id,direction:road.directions?.[i-1]??null,directionSource:road.directionSources?.[i-1]??null};this.segments.push(s);const pad=s.width/2+3;for(let x=Math.floor((Math.min(a[0],b[0])-pad)/60);x<=Math.floor((Math.max(a[0],b[0])+pad)/60);x++)for(let z=Math.floor((Math.min(a[1],b[1])-pad)/60);z<=Math.floor((Math.max(a[1],b[1])+pad)/60);z++){const key=x+','+z;if(!this.cells.has(key))this.cells.set(key,[]);this.cells.get(key).push(s)}}}}
  nearest(x,z,global=false){const list=global?this.segments.filter(s=>s.length>8&&s.width>=3):(this.cells.get(Math.floor(x/60)+','+Math.floor(z/60))||[]);let best=null;for(const s of list){const t=Math.max(0,Math.min(1,((x-s.a[0])*s.dx+(z-s.a[1])*s.dz)/s.length**2)),px=s.a[0]+t*s.dx,pz=s.a[1]+t*s.dz,d=Math.hypot(x-px,z-pz);if(!best||d<best.distance)best={...s,x:px,z:pz,distance:d,t}}return best;}
+ /* Things parked on the road. Buildings are polygons and never move; a parked car is a small box that the
+    town puts there and may take away again, so it gets its own grid and its own switch. Each car is two
+    circles along its axis rather than a box: a box test in the middle of contains() would be felt, and two
+    circles are close enough that you cannot drive through a wing mirror.
+    Pierce, 2026-09-12: the cars were scenery you drove straight through, which is the difference between a
+    place and a backdrop. This is what makes the street actually narrower. */
+ setBlockers(list){this.blockers=new Map();this.blockerR=0;
+  for(const c of list||[]){const fx=-Math.sin(c.yaw),fz=-Math.cos(c.yaw);
+   for(const along of[-1.35,0,1.35]){const x=c.x+fx*along,z=c.z+fz*along,r=1.05;this.blockerR=Math.max(this.blockerR,r);
+    const k=Math.floor(x/12)+','+Math.floor(z/12);if(!this.blockers.has(k))this.blockers.set(k,[]);this.blockers.get(k).push({x,z,r});}}
+  return this.blockers.size;}
+ blockerAt(x,z){if(!this.blockers||!this.blockers.size)return null;const cx=Math.floor(x/12),cz=Math.floor(z/12);let best=null;
+  for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){const list=this.blockers.get((cx+i)+','+(cz+j));if(!list)continue;
+   for(const b of list){const dx=x-b.x,dz=z-b.z,d=Math.hypot(dx,dz);if(d<b.r&&(!best||b.r-d>best.depth))best={b,d,depth:b.r-d,dx,dz};}}
+  return best;}
+ blocked(x,z){if(!this.blockers||!this.blockers.size)return false;const cx=Math.floor(x/12),cz=Math.floor(z/12);
+  for(let i=-1;i<=1;i++)for(let j=-1;j<=1;j++){const list=this.blockers.get((cx+i)+','+(cz+j));if(!list)continue;
+   for(const b of list){const dx=b.x-x,dz=b.z-z;if(dx*dx+dz*dz<b.r*b.r)return true;}}
+  return false;}
  obstructed(x,z){const inside=ring=>{let hit=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>z)!==(b[1]>z)&&x<(b[0]-a[0])*(z-a[1])/(b[1]-a[1])+a[0])hit=!hit}return hit};return (this.obstacles.get(Math.floor(x/60)+","+Math.floor(z/60))||[]).some(r=>inside(r[0])&&!r.slice(1).some(inside));}
- contains(x,z,margin=.9){if(this.obstructed(x,z))return false;const list=this.cells.get(Math.floor(x/60)+','+Math.floor(z/60))||[];for(const s of list){const t=Math.max(0,Math.min(1,((x-s.a[0])*s.dx+(z-s.a[1])*s.dz)/s.length**2)),dx=x-s.a[0]-t*s.dx,dz=z-s.a[1]-t*s.dz;if(Math.hypot(dx,dz)<=Math.max(.6,s.width/2-margin))return true}return false;}
+ contains(x,z,margin=.9){if(this.obstructed(x,z)||this.blocked(x,z))return false;const list=this.cells.get(Math.floor(x/60)+','+Math.floor(z/60))||[];for(const s of list){const t=Math.max(0,Math.min(1,((x-s.a[0])*s.dx+(z-s.a[1])*s.dz)/s.length**2)),dx=x-s.a[0]-t*s.dx,dz=z-s.a[1]-t*s.dz;if(Math.hypot(dx,dz)<=Math.max(.6,s.width/2-margin))return true}return false;}
 }
 export class DrivingState {
  constructor(network){this.network=network;this.performance={top:325/3.6,launch:8.8,power:260};this.x=0;this.z=0;this.yaw=0;this.speed=0;this.steer=0;this.distance=0;this.blocked=false;this.road=null;this.recoveryTime=0;this.recoveryCount=0;this.lastSafe=null;}
@@ -56,6 +75,8 @@ export class DrivingState {
    let cx=0,cz=0,count=0;const fx=-Math.sin(yaw),fz=-Math.cos(yaw),rx=Math.cos(yaw),rz=-Math.sin(yaw);
    for(const l of[-1.1,1.1])for(const w of[-.76,.76]){
     const px=x+fx*l+rx*w,pz=z+fz*l+rz*w;if(this.network.contains(px,pz,.1))continue;
+    const hit=this.network.blockerAt(px,pz);
+    if(hit){const len=hit.d||.001;cx+=hit.dx/len*hit.depth;cz+=hit.dz/len*hit.depth;count++;continue;}
     const list=this.network.cells.get(Math.floor(px/60)+','+Math.floor(pz/60))||[];let best;
     for(const e of list){const t=Math.max(0,Math.min(1,((px-e.a[0])*e.dx+(pz-e.a[1])*e.dz)/e.length**2)),qx=e.a[0]+t*e.dx,qz=e.a[1]+t*e.dz,d=Math.hypot(qx-px,qz-pz),depth=d-Math.max(.6,e.width/2-.14);if(!best||depth<best.depth)best={qx,qz,d,depth};}
     if(best&&best.depth>0&&best.d>0){cx+=(best.qx-px)/best.d*best.depth;cz+=(best.qz-pz)/best.d*best.depth;count++;}

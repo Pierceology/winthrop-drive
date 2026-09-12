@@ -17,8 +17,9 @@ const MODELS = ['sedan', 'suv', 'van', 'taxi', 'hatchback-sports', 'truck'];
 const SPACING = 8.4;      // m between slots: a 4.1 m car and a gap you could actually pull into
 const END_CLEAR = 9;      // m kept clear at each end of a segment, so nobody parks in the junction
 const MIN_WIDTH = 7.5;    // m. Narrower than this and a parked car blocks the street
-const HALF_CAR = 1.15;    // m
-const GUTTER = 0.35;      // m from the kerb line
+const HALF_CAR = 0.98;    // m, the kit car's actual half-width; 1.15 pushed them into the traffic lane
+const GUTTER = 0.12;      // m from the kerb line. Tucked in: once the cars became solid, every centimetre
+                          // out from the kerb came off the corridor the traffic has to get through.
 const RANGE = 230;        // m. Cars further than this are in the list but not in a mesh
 const CAP_PER_MODEL = 90; // instances allocated per model; the visible set never exceeds this
 
@@ -40,6 +41,14 @@ export async function parkedCars(network, heightAt, {assets = [], furniture = {}
   for (const p of furniture.busStops || []) keepOut.push({x: p.x, z: p.z, r: 11});
   for (const p of furniture.signals || []) keepOut.push({x: p.x, z: p.z, r: 9});
   for (const c of (crossings.crossings || crossings.items || [])) if (c && c.x != null) keepOut.push({x: c.x, z: c.z, r: 7});
+  /* And nobody parks across an errand. Once the cars became solid, a single one sitting on the approach to
+     Winthrop Beach made that errand unfinishable — the car could not reach the door however long it drove,
+     which the test caught and 200 simulated seconds confirmed was a block and not merely a slower run.
+     The errand list is the town's own; this reads it rather than keeping a second copy. */
+  try {
+    const g = await (await fetch('./data/games.json')).json();
+    for (const e of (g.errands || [])) if (e && e.x != null) keepOut.push({x: e.x, z: e.z, r: 22});
+  } catch (err) { /* no errand list is not a reason to have no parked cars */ }
   const cells = new Map();
   for (const k of keepOut) {
     const key = Math.floor(k.x / 30) + ',' + Math.floor(k.z / 30);
@@ -67,7 +76,12 @@ export async function parkedCars(network, heightAt, {assets = [], furniture = {}
     const count = Math.floor((s.length - END_CLEAR * 2) / SPACING);
     for (let i = 0; i <= count; i++) {
       const along = END_CLEAR + i * SPACING;
-      for (const side of [1, -1]) {
+      // Both sides only where a lane survives it. Measured on 2026-09-12: with cars on both sides of a
+      // narrow street, two of twelve test streets became undrivable — the same twelve were all clear with
+      // the cars switched off, so it was the parking, not the bends. Winthrop parks one side on its
+      // narrow streets for exactly this reason.
+      const sides = s.width >= 9.5 ? [1, -1] : [s.direction ? 1 : (segIndex % 2 ? 1 : -1)];
+      for (const side of sides) {
         const r = hash(segIndex, i, side + 2);
         // Wider roads are busier and park fuller; a one-way's far side is usually the quiet one.
         // Tuned against what is actually drawn around the car, not against the town total: at 0.34/0.24 the
