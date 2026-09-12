@@ -17,6 +17,9 @@ import {streetFurniture} from './street-furniture.js';
 import {SignalSystem} from './signals.js';
 import {parkedCars} from './parked-cars.js';
 import {arrival} from './arrival.js';
+/* Resolved when the last heavy load -- the parked cars, at the end of the furniture chain -- is in the scene. The
+   arrival waits on it: measured in Chrome, the seconds after the loading card are a run of one-second stalls. */
+let resolveTown=null;const townReady=new Promise(r=>{resolveTown=r;});
 import {Weather} from './weather.js';
 import {TourFlight} from './tour-flight.js';
 import {EveningDrive} from './evening.js';
@@ -150,10 +153,12 @@ async function init(){
      is gone, and each lands as a stall of a second or more. Measured in Chrome on the published page: a 200 ms poller
      got three samples in sixteen seconds. A flight timed by the clock would spend itself inside those stalls. So wait
      for the town to be drawing smoothly -- three frames in a row under 90 ms -- and give up waiting after twelve seconds. */
-  const whenSmooth=(go)=>{let last=0,run=0;const t0=performance.now();const tick=now=>{if(last&&now-last<90)run++;else run=0;last=now;if(run>=3||now-t0>12000)go();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
+  const whenSmooth=(go)=>{let last=0,run=0;const t0=performance.now();const tick=now=>{if(last&&now-last<90)run++;else run=0;last=now;if(run>=12||now-t0>12000)go();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
   const card=$('loading');
-  if(card&&!card.hidden){const watch=new MutationObserver(()=>{if(card.hidden){watch.disconnect();whenSmooth(startArrival);}});watch.observe(card,{attributes:true,attributeFilter:['hidden']});}
-  else whenSmooth(startArrival);
+  const settled=Promise.race([townReady,new Promise(r=>setTimeout(r,15000))]);
+  const go=()=>settled.then(()=>whenSmooth(startArrival));
+  if(card&&!card.hidden){const watch=new MutationObserver(()=>{if(card.hidden){watch.disconnect();go();}});watch.observe(card,{attributes:true,attributeFilter:['hidden']});}
+  else go();
  }
  controls.addEventListener('start',()=>{touched=true;});
  const names=[...new Set(world.roads.map(r=>r.name))].filter(n=>n!=='Unnamed road').sort();for(const name of [...names,...poi.places.map(p=>p.name)]){const o=document.createElement('option');o.value=name;$('roadnames').append(o)}
@@ -174,7 +179,7 @@ async function init(){
   scene.add(playGround);window.__surfaces=playGround.userData.audit;}).catch(e=>console.warn('Ground surfaces unavailable',e));
  Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{driving.turn.setObstacles([...(powerLines.poles||[]).map(p=>({x:p.x,z:p.z,r:.3})),...(furniture.lamps||[]).map(p=>({x:p.x,z:p.z,r:.22})),...(furniture.busStops||[]).map(p=>({x:p.x,z:p.z,r:.35})),...(furniture.signals||[]).map(p=>({x:p.x,z:p.z,r:.3})),...assetData.assets.map(a=>({x:a.x,z:a.z,r:a.kind==='hydrant'?.22:.28}))]);driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem,driving.cruise.junctions);scene.add(g);furnitureGroup=g;window.__furniture=g;
   /* Cars at the curb, from the same fetch: they need the furniture and the street assets to know what not to park on. */
-  parkedCars(driving.state.network,surfaceAt,{assets:assetData.assets,furniture,crossings}).then(pc=>{scene.add(pc);parkedGroup=pc;window.__parked=pc;
+  parkedCars(driving.state.network,surfaceAt,{assets:assetData.assets,furniture,crossings}).then(pc=>{scene.add(pc);parkedGroup=pc;window.__parked=pc;resolveTown();
    /* And they are solid. Placement runs first and asks contains() where the road is, so the blockers go in
       afterwards - otherwise the cars would park themselves out of existence one by one. */
    /* Solid, and on. The one thing that stood in the way was the beach loop: with the cars solid the car
