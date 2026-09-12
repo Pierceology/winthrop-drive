@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import {carKit, KIT} from './car-kit.js';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
-// Cars at the kerb. Winthrop has nine thousand people and, until now, not one parked car in it: the word
+// Cars at the curb. Winthrop has nine thousand people and, until now, not one parked car in it: the word
 // "parkedCar" appeared nowhere in the codebase, so every street was a runway with houses either side. This
-// puts the town's own cars back on its own kerbs, from the road graph's width and direction — no new survey
+// puts the town's own cars back on its own curbs, from the road graph's width and direction — no new survey
 // data, because none exists and inventing one would be worse than reading the geometry we already trust.
 //
 // They are scenery, not obstacles. Making them solid changes how every street drives and every errand times,
@@ -18,8 +18,8 @@ const SPACING = 8.4;      // m between slots: a 4.1 m car and a gap you could ac
 const END_CLEAR = 9;      // m kept clear at each end of a segment, so nobody parks in the junction
 const MIN_WIDTH = 7.5;    // m. Narrower than this and a parked car blocks the street
 const HALF_CAR = 0.98;    // m, the kit car's actual half-width; 1.15 pushed them into the traffic lane
-const GUTTER = 0.12;      // m from the kerb line. Tucked in: once the cars became solid, every centimetre
-                          // out from the kerb came off the corridor the traffic has to get through.
+const GUTTER = 0.12;      // m from the curb line. Tucked in: once the cars became solid, every centimetre
+                          // out from the curb came off the corridor the traffic has to get through.
 const RANGE = 230;        // m. Cars further than this are in the list but not in a mesh
 const CAP_PER_MODEL = 90; // instances allocated per model; the visible set never exceeds this
 

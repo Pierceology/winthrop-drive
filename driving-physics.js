@@ -96,6 +96,13 @@ export class DrivingState {
    }
   }
  }
+ /* If the car did not actually go where its speed said it would, its speed is a lie. Until now nothing
+    reconciled the two: a car pinned against something kept reading 5.7 m/s with the odometer frozen,
+    which is what stopped the beach loop from ever finishing - the errand needs the car within the
+    radius AND under 1.6 m/s, and it was sitting still at the beach reporting that it was not. Drive
+    into a parked car and you stop, which is also what happens outside. */
+ {const moved=Math.hypot(x-this.x,z-this.z),wanted=Math.abs(this.speed)*dt;
+  if(wanted>.02&&moved<wanted*.4)this.speed*=Math.max(0,moved/wanted);}
  this.distance+=Math.hypot(x-this.x,z-this.z);this.x=x;this.z=z;this.yaw=yaw;this.blocked=false;
  if(this.fitsAt(x,z,yaw))this.lastSafe={x,z,yaw};this.road=this.network.nearest(x,z);return this;
  }

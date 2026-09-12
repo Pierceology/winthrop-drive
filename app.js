@@ -134,16 +134,17 @@ async function init(){
   playGround=await playSurfaces(data,surfaceAt,onLand,onRoad,(x,z)=>driving.state.network.obstructed(x,z),lowMemory);
   scene.add(playGround);window.__surfaces=playGround.userData.audit;}).catch(e=>console.warn('Ground surfaces unavailable',e));
  Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{driving.turn.setObstacles([...(powerLines.poles||[]).map(p=>({x:p.x,z:p.z,r:.3})),...(furniture.lamps||[]).map(p=>({x:p.x,z:p.z,r:.22})),...(furniture.busStops||[]).map(p=>({x:p.x,z:p.z,r:.35})),...(furniture.signals||[]).map(p=>({x:p.x,z:p.z,r:.3})),...assetData.assets.map(a=>({x:a.x,z:a.z,r:a.kind==='hydrant'?.22:.28}))]);driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem);scene.add(g);furnitureGroup=g;window.__furniture=g;
-  /* Cars at the kerb, from the same fetch: they need the furniture and the street assets to know what not to park on. */
+  /* Cars at the curb, from the same fetch: they need the furniture and the street assets to know what not to park on. */
   parkedCars(driving.state.network,surfaceAt,{assets:assetData.assets,furniture,crossings}).then(pc=>{scene.add(pc);parkedGroup=pc;window.__parked=pc;
    /* And they are solid. Placement runs first and asks contains() where the road is, so the blockers go in
       afterwards - otherwise the cars would park themselves out of existence one by one. */
-   /* Solid is built and proven - you cannot drive through one, and the streets they are parked on still
-      drive - but it is OFF by default until one errand is fixed. With the cars solid the beach loop cannot
-      be finished: the car reaches Winthrop Beach and the run never completes, and 200 simulated seconds
-      confirmed that is a block rather than a slower drive. Keeping every errand winnable beats having the
-      kerbs be real, so this waits. ?hardcars=1 turns them solid to drive it and feel it. */
-   if(/[?&]hardcars=1/.test(location.search))driving.state.network.setBlockers(pc.userData.slots);
+   /* Solid, and on. The one thing that stood in the way was the beach loop: with the cars solid the car
+      reached Winthrop Beach and the run never finished. The cause was not the parking at all - a car
+      pinned against anything kept reporting the speed it was trying to travel at, and an errand only
+      completes when you are inside the radius AND under 1.6 m/s. It was sitting still at the beach
+      insisting it was doing 5.7. driving-physics now reconciles speed with what the car actually did.
+      ?softcars=1 makes them scenery again, which is how the A/B is run. */
+   if(!/[?&]softcars=1/.test(location.search))driving.state.network.setBlockers(pc.userData.slots);
    driving.turn.setObstacles((driving.turn.obstacleList||[]).concat(pc.userData.slots.map(c=>({x:c.x,z:c.z,r:1.25}))));}).catch(e=>console.warn('Parked cars unavailable',e));}).catch(e=>console.warn('Street furniture unavailable',e));evening=new EveningDrive(scene,surfaceAt);weather=new Weather({scene,hemi,sun});weather.bind(['weather','weatherDrive']);
  assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Signs, poles and hydrants · ${assetData.assets.length}`;
 window.__drive=driving;window.__controls=controls;window.__camera=camera; ambient=new AmbientLife(scene,driving.state.network,surfaceAt);driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;

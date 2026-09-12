@@ -1,7 +1,7 @@
 import {speedLimit} from './junctions.js';
 // What the town expects of the person at the wheel. Until now only the auto-driver knew Winthrop had rules:
 // auto-cruise.js reads Junctions.lookAhead every frame and stops for signs and red lights, while the human
-// driver ran on driving-physics.js alone, which knew about kerbs and nothing else. You could take every stop
+// driver ran on driving-physics.js alone, which knew about curbs and nothing else. You could take every stop
 // sign in town at forty and the game had no opinion. This module gives the human driver the same reading of
 // the same junction data — one rule set, as junctions.js puts it, so every vehicle reads the same corner the
 // same way — and reports what it sees. It does not touch the controls: braking the car for someone who is
