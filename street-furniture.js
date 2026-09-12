@@ -4,19 +4,48 @@ import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 // Street furniture from OpenStreetMap, at OSM's positions: painted crossings across the through road,
 // power poles with their wires hung between consecutive poles, street lamps and bus-stop posts. Nothing here is guessed
 // beyond road width (the mapped inventory width, else 9 m) and the standard shapes of the objects.
-export function streetFurniture({crossings,powerLines,furniture},network,heightAt,lights=null){
+export function streetFurniture({crossings,powerLines,furniture},network,heightAt,lights=null,junctions=null){
  const group=new THREE.Group();group.name='streetFurniture';
  // Crossings: continental bars 0.4 m wide across the road, 2.4 m deep, at road grade.
- const bars=[];
- for(const c of crossings.crossings){
-  const seg=network.nearest(c.x,c.z,true),W=Math.max(6,Math.min(16,(seg&&seg.width)||9)),depth=c.style==='zebra'?3:2.4;
-  const ux=c.ux,uz=c.uz,vx=-uz,vz=ux;const n=Math.floor((W-1.2)/.9)+1,start=-(n-1)*.45;
+ // OSM gives the node; the node is not always where the paint goes. Pierce, 2026-09-12: "plenty of crosswalks are not where
+ // they need to be." Measured that day, 297 nodes: 135 lie outside the town entirely (the fetch box reaches East Boston and
+ // Revere), 39 in-town nodes sit on a sidewalk beside the road rather than on it, 32 carry a direction that is not the road's,
+ // and 18 are tagged on the corner node itself. So each crossing is placed against the road network rather than trusted:
+ //   · a node with no road within 12 m is not drawn;
+ //   · a node on the corner itself becomes one walk per arm, each at that arm's stop line (that is what a marked corner is);
+ //   · every other node is snapped sideways onto the centreline of the road it belongs to, and its bars run across THAT road.
+ // The road a node belongs to is the nearby segment that best agrees with the node's mapped direction, so a crossing five
+ // metres from a corner stays on its own street instead of jumping onto the cross street.
+ // The contact field hands back the road surface MINUS 0.12 m (ground-world.js: the car adds its own 0.14). Paint that
+ // trusted that number sat 7 cm under the asphalt and showed only where the crown happened to dip -- the half-crosswalks.
+ const ROAD_TOP=.12;
+ const bars=[],placed=new Set();
+ const pickRoad=(c)=>{let best=null;for(const s of network.segments){if(s.length<4||s.width<3)continue;
+   const t=Math.max(0,Math.min(1,((c.x-s.a[0])*s.dx+(c.z-s.a[1])*s.dz)/s.length**2)),px=s.a[0]+t*s.dx,pz=s.a[1]+t*s.dz,d=Math.hypot(c.x-px,c.z-pz);if(d>12)continue;
+   const rx=s.dx/s.length,rz=s.dz/s.length,agree=Math.abs(rx*c.ux+rz*c.uz);const score=d-agree*4;if(!best||score<best.score)best={s,px,pz,rx,rz,d,score};}
+  return best;};
+ // Two nodes can describe one walk (a corner node and a node four metres up the arm): the second one within 4 m, running the same way, is the same paint.
+ const paintWalk=(x,z,ux,uz,width,depth)=>{for(const w of placed)if(Math.hypot(w.x-x,w.z-z)<4&&Math.abs(w.ux*ux+w.uz*uz)>.9)return;placed.add({x,z,ux,uz});
+  const W=Math.max(6,Math.min(16,width||9)),vx=-uz,vz=ux,n=Math.floor((W-1.2)/.9)+1,start=-(n-1)*.45;
   for(let i=0;i<n;i++){
-   const o=start+i*.9,cx=c.x+vx*o,cz=c.z+vz*o;const g=new THREE.PlaneGeometry(.42,depth);g.rotateX(-Math.PI/2);g.rotateY(Math.atan2(ux,uz));
-   // sample grade at both ends so the bar follows the crown of the road
-   const y=Math.max(heightAt(cx+ux*depth/2,cz+uz*depth/2),heightAt(cx-ux*depth/2,cz-uz*depth/2),heightAt(cx,cz))+.045;g.translate(cx,y,cz);bars.push(g);
-  }
+   const o=start+i*.9,cx=x+vx*o,cz=z+vz*o;const g=new THREE.PlaneGeometry(.42,depth);g.rotateX(-Math.PI/2);g.rotateY(Math.atan2(ux,uz));
+   // sample grade along the bar and across it so the paint rides the crown of the road instead of sinking under it
+   const y=Math.max(heightAt(cx+ux*depth/2,cz+uz*depth/2),heightAt(cx-ux*depth/2,cz-uz*depth/2),heightAt(cx,cz),heightAt(cx+vx*.45,cz+vz*.45),heightAt(cx-vx*.45,cz-vz*.45))+ROAD_TOP+.03;g.translate(cx,y,cz);bars.push(g);
+  }};
+ let dropped=0,corners=0,snapped=0;
+ for(const c of crossings.crossings){
+  const depth=c.style==='zebra'?3:2.4;
+  const v=junctions&&junctions.nearestVertex(c.x,c.z,3.5,3);
+  if(v){corners++;
+   for(const s of v.segs){const atA=Math.hypot(s.a[0]-v.x,s.a[1]-v.z)<1.5,far=atA?s.b:s.a;let dx=far[0]-v.x,dz=far[1]-v.z;const L=Math.hypot(dx,dz);if(L<8)continue;dx/=L;dz/=L;
+    const others=v.segs.filter(o=>o!==s).map(o=>o.width||9),line=Math.min(10,Math.max(3.5,Math.max(...others)/2+1.5));
+    paintWalk(v.x+dx*line,v.z+dz*line,dx,dz,s.width,depth);}
+   continue;}
+  const r=pickRoad(c);if(!r){dropped++;continue;}
+  if(r.d>.5)snapped++;
+  paintWalk(r.px,r.pz,r.rx,r.rz,r.s.width,depth);
  }
+ group.userData.crossingPlacement={nodes:crossings.crossings.length,dropped,corners,snapped,walks:placed.size};
  if(bars.length){const paint=new THREE.Mesh(mergeGeometries(bars,false),new THREE.MeshLambertMaterial({color:'#e9e9df',polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));paint.receiveShadow=true;paint.name='crossings';group.add(paint);for(const g of bars)g.dispose();}
  // Power lines. Poles and wires come from the same file (power-lines.json: poles[], lines[] of pole indices), so a wire is
  // never drawn without the two poles it hangs from. 8.8 m pole, crossarm at 8.45 m turned across the line, three conductors
