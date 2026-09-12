@@ -148,7 +148,7 @@ async function init(){
   /* Not yet, though: the flight is 4.5 s and the loading card can stay up longer than that on a slow connection,
      so a descent started here would finish behind it and nobody would see a cloud. Start it the instant the card
      hides (the way the old intro watched the same attribute), from wherever the framing has put the camera by then. */
-  const startArrival=()=>{if(touched||driving?.active)return;arrival({scene,camera,controls,target:controls.target.clone(),finalPos:camera.position.clone()});};
+  const startArrival=(ready)=>{if(touched||driving?.active)return;arrival({scene,camera,controls,target:controls.target.clone(),finalPos:camera.position.clone(),ready});};
   /* And even then not on the first frame: the furniture, the parked cars and the trees keep arriving after the card
      is gone, and each lands as a stall of a second or more. Measured in Chrome on the published page: a 200 ms poller
      got three samples in sixteen seconds. A flight timed by the clock would spend itself inside those stalls. So wait
@@ -156,7 +156,9 @@ async function init(){
   const whenSmooth=(go)=>{let last=0,run=0;const t0=performance.now();const tick=now=>{if(last&&now-last<90)run++;else run=0;last=now;if(run>=12||now-t0>12000)go();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
   const card=$('loading');
   const settled=Promise.race([townReady,new Promise(r=>setTimeout(r,15000))]);
-  const go=()=>settled.then(()=>whenSmooth(startArrival));
+  /* The camera goes up into the weather the moment the card hides and holds there; the descent itself begins when
+     the town is in and drawing smoothly, so there is never a still town, a snap to the sky, and the town again. */
+  const go=()=>startArrival(settled.then(()=>new Promise(r=>whenSmooth(r))));
   if(card&&!card.hidden){const watch=new MutationObserver(()=>{if(card.hidden){watch.disconnect();go();}});watch.observe(card,{attributes:true,attributeFilter:['hidden']});}
   else go();
  }

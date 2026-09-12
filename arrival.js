@@ -57,7 +57,10 @@ function cloudTexture(seed = 1, size = 256) {
 
 const easeOut = t => 1 - Math.pow(1 - t, 3);
 
-export function arrival({scene, camera, controls, target, finalPos, seconds = 4.5, onDone}) {
+/* `ready` is optional: a promise for the moment the town is fully drawn. Until it resolves the camera sits above
+   the weather with the deck drifting under it and the clock does not run -- so the visitor never sees the town,
+   then a snap to the sky, then the town again. Any touch still lands it at once. */
+export function arrival({scene, camera, controls, target, finalPos, seconds = 4.5, onDone, ready = null}) {
   const deck = new THREE.Group();
   deck.name = 'arrival-clouds';
   deck.renderOrder = 9;
@@ -89,7 +92,8 @@ export function arrival({scene, camera, controls, target, finalPos, seconds = 4.
   controls.enabled = false;
   controls.target.copy(target);
 
-  let t0 = 0, raf = 0, done = false;
+  let t0 = 0, raf = 0, done = false, released = !ready;
+  if (ready) Promise.resolve(ready).then(() => { released = true; }, () => { released = true; });
   const land = () => {
     if (done) return;
     done = true;
@@ -121,8 +125,9 @@ export function arrival({scene, camera, controls, target, finalPos, seconds = 4.
   const step = () => {
     if (done) return;
     const now = performance.now();
+    if (!released) t0 = 0;              // holding above the clouds: the flight has not begun
     if (!t0) t0 = now;
-    const k = Math.min(1, (now - t0) / (seconds * 1000)), e = easeOut(k);
+    const k = released ? Math.min(1, (now - t0) / (seconds * 1000)) : 0, e = easeOut(k);
     camera.position.lerpVectors(start, finalPos, e);
     camera.lookAt(target);
     /* The weather clears as you come down through it rather than being switched off at the bottom. */
