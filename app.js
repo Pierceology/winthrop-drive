@@ -16,6 +16,7 @@ import {roadside} from './roadside.js';
 import {streetFurniture} from './street-furniture.js';
 import {SignalSystem} from './signals.js';
 import {parkedCars} from './parked-cars.js';
+import {arrival} from './arrival.js';
 import {Weather} from './weather.js';
 import {TourFlight} from './tour-flight.js';
 import {EveningDrive} from './evening.js';
@@ -43,6 +44,20 @@ let scene,camera,renderer,controls,world,elevation,terrain,buildings,outlineGrou
 let driving,sun,sunOffset=new THREE.Vector3(-300,450,180),roofTiles=[],pavement;
 let surfaceAt,playGround,focusElevation,terrainPatches=[],residential=[],buildingMeshes=[],heightAt,origin,frame=0,lastTime=0;
 const raycaster=new THREE.Raycaster();const pointer=new THREE.Vector2();
+let framedFor=0,touched=false;   /* set the moment the visitor moves the camera themselves */
+function frameWhole(){
+ if(!world||!world.roads||!world.roads.length)return;
+ let minx=1e9,maxx=-1e9,minz=1e9,maxz=-1e9;
+ for(const r of world.roads)for(const q of r.points){if(q[0]<minx)minx=q[0];if(q[0]>maxx)maxx=q[0];if(q[1]<minz)minz=q[1];if(q[1]>maxz)maxz=q[1];}
+ if(!(maxx>minx))return;
+ const cx=(minx+maxx)/2,cz=(minz+maxz)/2,halfX=(maxx-minx)/2,halfZ=(maxz-minz)/2;
+ const vfov=camera.fov*Math.PI/180,aspect=Math.max(.42,innerWidth/innerHeight);
+ // Winthrop runs north-south, so its long axis usually governs; fit whichever side is tighter.
+ const need=Math.max(halfZ/Math.tan(vfov/2),halfX/Math.tan(vfov/2)/aspect)*1.18;
+ const dir=new THREE.Vector3(.30,.86,.41).normalize().multiplyScalar(Math.max(900,need));
+ places.whole={target:[cx,0,cz],offset:dir.toArray()};
+ framedFor=innerWidth+innerHeight;
+}
 const places={whole:{target:[-350,0,-900],offset:[4100,5200,5300]},center:{target:[-1400,0,-1500],offset:[350,500,520]},beach:{target:[190,0,-90],offset:[400,340,450]},deer:{target:[1136,0,928],offset:[850,1100,1150]}};
 function error(e){$('loading').hidden=false;$('loading').querySelector('h2').textContent='The model could not load';$('loadmessage').textContent=(/WebGL/i.test(e.message)?'This browser cannot start 3D graphics. Enable hardware acceleration or try a browser with WebGL support.':e.message+' — refresh to try again.');$('loading').querySelector('.spinner').style.display='none';console.error(e)}
 function makeShape(rings){const s=new THREE.Shape(rings[0].map(p=>new THREE.Vector2(p[0],-p[1])));for(const ring of rings.slice(1))s.holes.push(new THREE.Path(ring.map(p=>new THREE.Vector2(p[0],-p[1]))));return s}
@@ -116,7 +131,20 @@ async function init(){
  photoCatalog=residential.filter(r=>additionalRegistration[r.id]||(/ SHIRLEY ST$/.test(r.address)&&photoRegistration[r.address.split(' ')[0]]));photoStop=photoCatalog.findIndex(r=>r.address.startsWith('1040 '));for(const [i,r]of photoCatalog.entries())places['photo'+i]={target:[r.center[0],0,r.center[1]],offset:[r.front[0]*30,11,r.front[1]*30]};
  // Derive neighborhood focus from authoritative street geometry.
  const wood=world.roads.filter(r=>/WOODSIDE|WOOD SIDE/i.test(r.name));if(wood.length){const pts=wood.flatMap(r=>r.points);places.center.target=[pts.reduce((s,p)=>s+p[0],0)/pts.length,0,pts.reduce((s,p)=>s+p[1],0)/pts.length];}
+ /* Frame the town, not the ocean. The opening used a fixed offset 8.5 km out, which put the peninsula at
+    about a tenth of the screen in a field of flat water - the largest, emptiest surface on the page winning
+    the composition. The town's extent is already known from its own road geometry, so the distance is
+    computed to fit it rather than guessed, and it fits on a phone and a monitor for the same reason.
+    This also fixes Reset view, which goes to the same place. */
+ frameWhole();
  controls.target.set(...places.whole.target);controls.target.y=surfaceAt(controls.target.x,controls.target.z);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
+ /* Come down through the weather onto it. The camera is already where it should end up, so the arrival
+    borrows that as its landing and starts above it - nothing is held back waiting for the flight, and any
+    touch lands it early. Runs once, on a first visit, and never in front of a driver. */
+ if(!/[?&](noarrival|drive)=/.test(location.search)){
+  arrival({scene,camera,controls,target:controls.target.clone(),finalPos:camera.position.clone()});
+ }
+ controls.addEventListener('start',()=>{touched=true;});
  const names=[...new Set(world.roads.map(r=>r.name))].filter(n=>n!=='Unnamed road').sort();for(const name of [...names,...poi.places.map(p=>p.name)]){const o=document.createElement('option');o.value=name;$('roadnames').append(o)}
  $('counts').textContent=`${world.audit.buildings.toLocaleString()} building outlines · ${world.audit.roadSegments} road segments`;
  driving=new Driving({scene,camera,controls,world,heightAt:surfaceAt,collisionMeshes:buildingMeshes,onEnter:()=>{checklist?.open(false);if(coverageMap)coverageMap.outlines.visible=false;tour?.stop();$('spotActions').hidden=true;flight=null;auto=false;buildings.visible=true;pavement.visible=true;roadGroup.visible=false;$('inspector').hidden=true;$('notice').textContent=`${photoCatalog.length} photographed homes · other exteriors estimated`;},onExit:()=>{if(coverageMap)coverageMap.outlines.visible=$('coverageLayer').checked;$('notice').textContent=`${photoCatalog.length} homes with photographic surfaces · other exteriors estimated`;}});
@@ -133,7 +161,7 @@ async function init(){
  get('./data/surfaces.json').then(async data=>{const onLand=(x,z)=>groundWorld.field.ground.sample(x,z)!==null,onRoad=(x,z)=>groundWorld.field.road.sample(x,z)!==null;
   playGround=await playSurfaces(data,surfaceAt,onLand,onRoad,(x,z)=>driving.state.network.obstructed(x,z),lowMemory);
   scene.add(playGround);window.__surfaces=playGround.userData.audit;}).catch(e=>console.warn('Ground surfaces unavailable',e));
- Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{driving.turn.setObstacles([...(powerLines.poles||[]).map(p=>({x:p.x,z:p.z,r:.3})),...(furniture.lamps||[]).map(p=>({x:p.x,z:p.z,r:.22})),...(furniture.busStops||[]).map(p=>({x:p.x,z:p.z,r:.35})),...(furniture.signals||[]).map(p=>({x:p.x,z:p.z,r:.3})),...assetData.assets.map(a=>({x:a.x,z:a.z,r:a.kind==='hydrant'?.22:.28}))]);driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem);scene.add(g);furnitureGroup=g;window.__furniture=g;
+ Promise.all([get('./data/crossings.json'),get('./data/power-lines.json'),get('./data/street-furniture.json')]).then(([crossings,powerLines,furniture])=>{driving.turn.setObstacles([...(powerLines.poles||[]).map(p=>({x:p.x,z:p.z,r:.3})),...(furniture.lamps||[]).map(p=>({x:p.x,z:p.z,r:.22})),...(furniture.busStops||[]).map(p=>({x:p.x,z:p.z,r:.35})),...(furniture.signals||[]).map(p=>({x:p.x,z:p.z,r:.3})),...assetData.assets.map(a=>({x:a.x,z:a.z,r:a.kind==='hydrant'?.22:.28}))]);driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem,driving.cruise.junctions);scene.add(g);furnitureGroup=g;window.__furniture=g;
   /* Cars at the curb, from the same fetch: they need the furniture and the street assets to know what not to park on. */
   parkedCars(driving.state.network,surfaceAt,{assets:assetData.assets,furniture,crossings}).then(pc=>{scene.add(pc);parkedGroup=pc;window.__parked=pc;
    /* And they are solid. Placement runs first and asks contains() where the road is, so the blockers go in
@@ -222,7 +250,10 @@ function bind(){
  renderer.domElement.addEventListener('pointercancel',e=>{pointers.delete(e.pointerId);down=null;});
  renderer.domElement.addEventListener('pointerup',e=>{pointers.delete(e.pointerId);if(!down||dragged||e.button!==0)return;down=null;pointer.set(e.clientX/innerWidth*2-1,1-e.clientY/innerHeight*2);raycaster.setFromCamera(pointer,camera);const objects=[...(sceneryTrees.visible?sceneryTrees.userData.pickable:[]),...(canopyGroup.visible?canopyGroup.userData.pickable:[]),...signGroup.userData.pickable,...(assetGroup.visible?assetGroup.children:[]),...terrainMeshes,pavement,...(buildings.visible?buildingMeshes:[])];const hit=raycaster.intersectObjects(objects,false)[0];if(!hit)return;const now=performance.now(),double=now-lastTap<310&&lastTapPoint&&Math.hypot(e.clientX-lastTapPoint[0],e.clientY-lastTapPoint[1])<24;lastTap=now;lastTapPoint=[e.clientX,e.clientY];clearTimeout(tapTimer);if(double){chooseSpot(hit.point,false);driveSpot();lastTap=0;}else tapTimer=setTimeout(()=>{chooseSpot(hit.point);if(hit.object.userData.canopy){const p=hit.object.userData.canopy;detail('Canopy near '+p.nearestStreet,[['Review',p.review==='accepted'?'Visible canopy screened in aerial photo':'Candidate awaiting review'],['Source','Massachusetts aerial imagery · '+canopyData.imageryYear],['Observed',p.reviewReason],['Dimensions','Crown extent estimated from pixels; height and trunk position unmeasured']]);const img=document.createElement('img');img.src=p.referenceImage;img.alt='Aerial reference centered on this canopy candidate';img.style.width='100%';$('selectionDetails').append(img);return;}if(hit.object.userData.streetSign){const a=hit.object.userData.streetSign;detail(a.text,[['Source','MassDOT sign inventory'],['Street',a.street||'Not recorded'],['Facing',a.orientation],['Inventory date',a.recorded?new Date(a.recorded).getFullYear():'Not recorded'],['Fidelity','Recorded point and orientation; current condition unverified']]);const link=document.createElement('a');link.textContent='View source sign';link.href=a.url;link.target='_blank';link.rel='noopener';$('selectionDetails').append(link);return;}if(hit.object.userData.streetAsset){const a=hit.object.userData.streetAsset;detail('Mapped '+a.kind,[['Source','OpenStreetMap'],['Coverage','Incomplete inventory; field verification needed'],['Position','Mapped point; marker is not a reconstructed object']]);const link=document.createElement('a');link.textContent='View source record';link.href=a.url;link.target='_blank';link.rel='noopener';$('selectionDetails').append(link);return;}const r=hit.object.userData.ranges?.find(r=>hit.faceIndex*3<r.end);if(r)selectBuilding(r.data);},310);});
  renderer.domElement.addEventListener('wheel',()=>{flight=null;tour.stop();},{passive:true});
- addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+ addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);
+  /* A phone turned sideways should still show the town. Only while the visitor has not moved the camera:
+     after that it is theirs and re-framing it would be the rudest thing this file could do. */
+  if(!touched&&framedFor&&Math.abs(framedFor-(innerWidth+innerHeight))>60&&!driving.active){frameWhole();goPlace('whole');}});
 }
 function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):.016;lastTime=time;
  if(flight){const t=Math.min(1,(time-flight.start)/1600),ease=t*t*(3-2*t);camera.position.lerpVectors(flight.from,flight.to,ease);controls.target.lerpVectors(flight.fromTarget,flight.target,ease);if(t===1)flight=null;}
