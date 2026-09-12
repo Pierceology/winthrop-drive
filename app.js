@@ -142,7 +142,13 @@ async function init(){
     borrows that as its landing and starts above it - nothing is held back waiting for the flight, and any
     touch lands it early. Runs once, on a first visit, and never in front of a driver. */
  if(!/[?&](noarrival|drive)=/.test(location.search)){
-  arrival({scene,camera,controls,target:controls.target.clone(),finalPos:camera.position.clone()});
+  /* Not yet, though: the flight is 4.5 s and the loading card can stay up longer than that on a slow connection,
+     so a descent started here would finish behind it and nobody would see a cloud. Start it the instant the card
+     hides (the way the old intro watched the same attribute), from wherever the framing has put the camera by then. */
+  const startArrival=()=>{if(touched||driving?.active)return;arrival({scene,camera,controls,target:controls.target.clone(),finalPos:camera.position.clone()});};
+  const card=$('loading');
+  if(card&&!card.hidden){const watch=new MutationObserver(()=>{if(card.hidden){watch.disconnect();startArrival();}});watch.observe(card,{attributes:true,attributeFilter:['hidden']});}
+  else startArrival();
  }
  controls.addEventListener('start',()=>{touched=true;});
  const names=[...new Set(world.roads.map(r=>r.name))].filter(n=>n!=='Unnamed road').sort();for(const name of [...names,...poi.places.map(p=>p.name)]){const o=document.createElement('option');o.value=name;$('roadnames').append(o)}

@@ -114,8 +114,13 @@ export function arrival({scene, camera, controls, target, finalPos, seconds = 4.
   addEventListener('wheel', land, true);
   document.body.classList.add('arriving');
 
-  const step = now => {
+  /* The clock is performance.now(), not the frame's own timestamp. The first frame after the loading card
+     hides is often a long one (shaders compiling on a phone), and its rAF timestamp is stamped for when the
+     frame was scheduled, seconds before it actually runs -- measured at 7 s under SwiftShader. Trusting it
+     put the whole flight in the past and the descent landed on its second frame. */
+  const step = () => {
     if (done) return;
+    const now = performance.now();
     if (!t0) t0 = now;
     const k = Math.min(1, (now - t0) / (seconds * 1000)), e = easeOut(k);
     camera.position.lerpVectors(start, finalPos, e);
