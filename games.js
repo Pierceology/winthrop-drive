@@ -11,6 +11,8 @@
    scored: driving-physics.js never consults the signals for a human driver, so a red light is not something
    this game can see, and a score that pretended otherwise would be a lie. */
 
+import {gate, disposeGate} from './gates.js';
+
 const DATA = './data/games.json';
 const STORE = 'dw.errands.best.v1';
 const SITE = 'https://www.winthropbythesea.com/';
@@ -23,6 +25,27 @@ const CURB_COST = 3;               // seconds added per curb
 const JUMP = 80;                   // metres in one tick that no car can drive: the run was moved, not driven
 const MIN_AWAY = 200;              // metres — closer than this is a walk, not an errand
 const TURNAROUND = 7;              // seconds par allows for pressing Turn around before setting off
+
+/* ---------- where an errand begins ---------- */
+// Pierce, 2026-09-11: "the errands always had to start at either end of town crest ave, deer island, or main street
+// i believe where adrianas is coming into winthrop", and "i really need for the errands to be consistant options and
+// when a user choose that, it first asks where they'd like to start from and lets get a start flag ... and a finish
+// line". So a run never starts where the car happens to be. It starts at one of the three mouths of the town, behind
+// a flag, and the same three every time, so a time from one visit means something on the next. The points are the
+// ends of the mapped roads where they leave the town; tx,tz is the next mapped point, which is the way in.
+const STARTS = [
+  { id: 'crest', name: 'Crest Avenue', short: 'Crest Ave', note: 'from Revere, along the shore', x: -660.51, z: -3522.87, tx: -651.19, tz: -3504.63 },
+  { id: 'deer',  name: 'Deer Island',  short: 'Deer Island', note: 'the far end of Tafts Avenue', x: 1095.91, z: 1146.77, tx: 1069.27, tz: 1142.62 },
+  { id: 'main',  name: 'Main Street',  short: 'Main St', note: 'coming into town past Adriana\'s', x: -1710.36, z: -2542.13, tx: -1680.09, tz: -2538.31 }
+];
+const FLAG_IN = 10;                // metres in from the town line to the flag, so there is mapped road behind the line
+const CAR_BACK = 4;                // metres behind the flag the car is set down
+function mouth(start) {
+  const L = Math.hypot(start.tx - start.x, start.tz - start.z) || 1, ux = (start.tx - start.x) / L, uz = (start.tz - start.z) / L;
+  return { ux, uz, yaw: Math.atan2(-ux, -uz),                       // driving.js: forward = (-sin yaw, -cos yaw)
+    flag: { x: start.x + ux * FLAG_IN, z: start.z + uz * FLAG_IN },
+    car: { x: start.x + ux * (FLAG_IN - CAR_BACK), z: start.z + uz * (FLAG_IN - CAR_BACK) } };
+}
 
 /* ---------- the way there: what the minimap draws and the readout says while an errand runs ---------- */
 const TURN_ANGLE = 0.35;           // radians — the same bend auto-cruise calls a real turn, and par charges for
@@ -272,6 +295,15 @@ function start(drive) {
   let panelOpen = false;
   let raf = null;
 
+  /* the three start flags stand in the world from the first frame; the finish line is raised per run */
+  const mouths = STARTS.map(st => ({ ...st, ...mouth(st) }));
+  for (const m of mouths) {
+    const seg = drive.state.network.nearest(m.flag.x, m.flag.z, true);
+    m.gate = gate({ x: m.flag.x, z: m.flag.z, ux: m.ux, uz: m.uz, width: clamp((seg && seg.width) || 9, 6, 14), kind: 'start', heightAt: drive.heightAt });
+    drive.scene.add(m.gate);
+  }
+  let finishGate = null;
+
   /* ---- chrome ---- */
 
   const button = document.createElement('button');
@@ -297,7 +329,7 @@ function start(drive) {
   panel.setAttribute('aria-label', 'Run an errand');
   panel.innerHTML =
     '<div class="errandhead"><h2>Run an errand</h2><button type="button" class="errandclose" aria-label="Close errands">×</button></div>' +
-    '<p class="errandnote">Short drives from where you are standing. You drive; the clock runs until you stop at the door.</p>' +
+    '<p class="errandnote">Pick an errand, then where you start: Crest Avenue, Deer Island or Main Street. The clock runs from the flag to the finish line.</p>' +
     '<ul class="errandlist"></ul>';
   document.body.append(panel);
 
@@ -350,6 +382,7 @@ function start(drive) {
     panel.hidden = false;
     button.setAttribute('aria-expanded', 'true');
     document.body.classList.add('errands-open');
+    panel.querySelector('h2').textContent = 'Run an errand';
     buildList();
     tick();
   }
@@ -377,50 +410,85 @@ function start(drive) {
     return out;
   }
 
+  // The same errands, in the same order, every time. "Consistent options": nothing depends on where the car is.
+  function bestAcross(e, best) {
+    let b = null;
+    for (const m of mouths) { const r = best[e.id + '@' + m.id]; if (r && (!b || r.time < b.time)) b = { ...r, from: m.short }; }
+    return b;
+  }
   function buildList() {
     const best = readBest();
-    const rows = nearby();
     list.textContent = '';
-    if (!rows.length) {
+    if (!errands.length) {
       const li = document.createElement('li');
       li.className = 'errandempty';
       li.textContent = 'No errands loaded.';
       list.append(li);
       return;
     }
-    const pending = [];
-    for (const row of rows) {
-      const e = row.e;
+    for (const e of errands) {
       const li = document.createElement('li');
       const go = document.createElement('button');
       go.type = 'button';
       go.className = 'errandpick';
       go.dataset.errand = e.id;
-      const b = best[e.id];
+      const b = bestAcross(e, best);
       go.innerHTML =
         '<span class="ername"></span>' +
-        '<span class="ermeta"><span class="erdist"></span><span class="erpar">working out a target…</span></span>' +
+        '<span class="ermeta"><span class="erdist"></span></span>' +
         (b ? '<span class="erbest"></span>' : '');
       go.querySelector('.ername').textContent = e.title;
-      go.querySelector('.erdist').textContent = miles(row.d) + ' away' + (e.roundTrip ? ', there and back' : '');
-      if (b) go.querySelector('.erbest').textContent = 'Your best: ' + clock(b.time);
-      go.onclick = () => begin(e);
+      go.querySelector('.erdist').textContent = (e.address ? e.address : e.kind) + (e.roundTrip ? ' · there and back' : '');
+      if (b) go.querySelector('.erbest').textContent = 'Your best: ' + clock(b.time) + ' from ' + b.from;
+      go.onclick = () => pickStart(e);
       li.append(go);
       list.append(li);
-      pending.push({ e, node: go.querySelector('.erpar') });
     }
-    // Par comes from a real route search, which is not free. Fill them in one per frame so the
-    // list is on screen at once and nothing stutters.
+  }
+
+  // Choosing an errand asks where you start. The three mouths of the town, each with its own target time,
+  // because Deer Island to the ice cream is not the drive Main Street to the ice cream is.
+  function pickStart(e) {
+    const best = readBest();
+    panel.querySelector('h2').textContent = e.title;
+    list.textContent = '';
+    const backRow = document.createElement('li');
+    const back = document.createElement('button');
+    back.type = 'button'; back.className = 'erback'; back.textContent = '\u2190 All errands';
+    back.onclick = () => { panel.querySelector('h2').textContent = 'Run an errand'; buildList(); };
+    backRow.append(back); list.append(backRow);
+    const pending = [];
+    for (const m of mouths) {
+      const li = document.createElement('li');
+      const go = document.createElement('button');
+      go.type = 'button'; go.className = 'errandpick erstart'; go.dataset.start = m.id;
+      const b = best[e.id + '@' + m.id];
+      go.innerHTML =
+        '<span class="ername"></span>' +
+        '<span class="ermeta"><span class="ernote"></span><span class="erpar">working out a target\u2026</span></span>' +
+        (b ? '<span class="erbest"></span>' : '');
+      go.querySelector('.ername').textContent = 'Start at ' + m.name;
+      go.querySelector('.ernote').textContent = m.note;
+      if (b) go.querySelector('.erbest').textContent = 'Your best from here: ' + clock(b.time);
+      go.onclick = () => begin(e, m);
+      li.append(go); list.append(li);
+      pending.push({ m, node: go.querySelector('.erpar'), btn: go });
+    }
+    // Par comes from a real route search, which is not free. One per frame so the sheet is on screen at once.
     let i = 0;
     const step = () => {
       if (!panelOpen || i >= pending.length) return;
-      const { e, node } = pending[i++];
-      const p = parOf(e);
-      node.textContent = p ? 'Target ' + clock(p.par) + ' · ' + miles(p.metres) + ' of road' : 'No mapped route from here';
-      if (!p) node.closest('.errandpick').disabled = true;
+      const { m, node, btn } = pending[i++];
+      const p = parAt(e, m);
+      node.textContent = p ? 'Target ' + clock(p.par) + ' \u00b7 ' + miles(p.metres) + ' of road' : 'No mapped route from here';
+      if (!p) btn.disabled = true;
       requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
+  }
+
+  function parAt(errand, m) {
+    return bestPar(drive.cruise, errand, { x: m.car.x, z: m.car.z }, m.yaw);
   }
 
   function parOf(errand) {
@@ -434,15 +502,28 @@ function start(drive) {
   // not from the pin on the roof, which on some streets is a whole garden away from any road.
   const arrivalRadius = (gap, floor) => clamp((gap || 0) + 16, floor, 120);
 
-  function begin(errand) {
-    const s = drive.state;
-    const home = { x: s.x, z: s.z };
-    const p = bestPar(drive.cruise, errand, home, s.yaw);
+  function begin(errand, m) {
+    if (!m) m = mouths[0];
+    const p = parAt(errand, m);
     if (!p) return;
     if (drive.cruise && drive.cruise.active) drive.cruise.stop();
     if (drive.paused) drive.pause(false);
+    // Set the car down behind the flag, facing into town. recover() finds the lane; the heading is ours.
+    const s = drive.state;
+    s.x = m.car.x; s.z = m.car.z; s.speed = 0;
+    if (s.recover) s.recover();
+    s.yaw = m.yaw;
+    const home = { x: m.flag.x, z: m.flag.z };
+    // The finish line stands across the road at the curb the route can reach, not on the roof of the pin.
+    if (finishGate) { disposeGate(finishGate); finishGate = null; }
+    const seg = drive.state.network.nearest(errand.x, errand.z, true);
+    if (seg) {
+      const L = seg.length || 1;
+      finishGate = gate({ x: seg.x, z: seg.z, ux: seg.dx / L, uz: seg.dz / L, width: clamp(seg.width || 9, 6, 14), kind: 'finish', heightAt: drive.heightAt });
+      drive.scene.add(finishGate);
+    }
     run = {
-      errand, home, par: p.par, metres: p.metres,
+      errand, start: m, home, par: p.par, metres: p.metres,
       elapsed: 0, clock: drive.clock,
       legIndex: 0, radius: arrivalRadius(p.gap, errand.radius || 45), homeRadius: 55,
       wrongWay: 0, curbs: 0, wrongTimer: 0, curbTimer: 0, wrongOn: false, curbOn: false,
@@ -463,7 +544,7 @@ function start(drive) {
   }
   function targetName() {
     if (!run) return '';
-    return run.legIndex === 0 ? run.errand.place : 'back where you started';
+    return run.legIndex === 0 ? run.errand.place : 'back to the ' + run.start.short + ' flag';
   }
   function radius() {
     if (!run) return 45;
@@ -640,6 +721,7 @@ function start(drive) {
     if (!run) return;
     const r = run;
     run = null;
+    if (finishGate) { disposeGate(finishGate); finishGate = null; }
     readout.hidden = true;
     erTurn.textContent = '';
     document.body.classList.remove('errand-running');
@@ -654,11 +736,12 @@ function start(drive) {
     const official = r.elapsed + penalties;
     const stars = official <= r.par ? 3 : official <= r.par * 1.25 ? 2 : 1;
     const best = readBest();
-    const previous = best[r.errand.id] ? best[r.errand.id].time : null;
+    const key = r.errand.id + '@' + r.start.id;      // a time only means something against the same start
+    const previous = best[key] ? best[key].time : null;
     const record = previous === null || official < previous;
-    if (record) { best[r.errand.id] = { time: Math.round(official), at: Date.now() }; writeBest(best); }
+    if (record) { best[key] = { time: Math.round(official), at: Date.now() }; writeBest(best); }
 
-    const share = 'Drive Winthrop — ' + sharePhrase(r.errand) + ' in ' + clock(official) +
+    const share = 'Drive Winthrop — ' + sharePhrase(r.errand) + ' from ' + r.start.short + ' in ' + clock(official) +
       ' (par ' + clock(r.par) + '). ' + (penalties ? penaltyWords(r) + '.' : 'Clean run.') +
       ' ' + SITE.replace(/^https:\/\/www\./, '').replace(/\/$/, '');
 
@@ -695,6 +778,7 @@ function start(drive) {
     const detail = document.createElement('ul');
     detail.className = 'erdetail';
     const lines = [];
+    lines.push('From the ' + r.start.name + ' flag, ' + r.start.note);
     lines.push(miles(r.metres) + ' of road at the posted limits' + (r.errand.roundTrip ? ', there and back' : ''));
     lines.push(penalties
       ? 'Driven in ' + clock(r.elapsed) + ' plus ' + penalties + 's for ' + penaltyWords(r)
@@ -702,7 +786,7 @@ function start(drive) {
     if (r.errand.address) lines.push(r.errand.address);
     lines.push(record
       ? (previous === null ? 'Your first time here' : 'A new best: ' + clock(previous) + ' before')
-      : 'Your best here is still ' + clock(previous));
+      : 'Your best from here is still ' + clock(previous));
     for (const line of lines) { const li = document.createElement('li'); li.textContent = line; detail.append(li); }
     result.append(detail);
 
@@ -795,7 +879,8 @@ function start(drive) {
     get guide() { return (run && run.guide) ? { ...run.guide } : null; },
     get turn() { return erTurn.textContent; },
     get overlay() { return drive.mapOverlay === drawGuide; },
-    nearby, parOf, begin, openPanel, closePanel,
+    get starts() { return mouths; },
+    nearby, parOf, parAt, pickStart, begin, openPanel, closePanel,
     finish: () => finish('arrived')
   };
 }
