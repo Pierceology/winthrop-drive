@@ -35,7 +35,10 @@ const TURNAROUND = 7;              // seconds par allows for pressing Turn aroun
 // ends of the mapped roads where they leave the town; tx,tz is the next mapped point, which is the way in.
 const STARTS = [
   { id: 'crest', name: 'Crest Avenue', short: 'Crest Ave', note: 'from Revere, along the shore', x: -660.51, z: -3522.87, tx: -651.19, tz: -3504.63 },
-  { id: 'deer',  name: 'Deer Island',  short: 'Deer Island', note: 'the far end of Tafts Avenue', x: 1095.91, z: 1146.77, tx: 1069.27, tz: 1142.62 },
+  // Not the very end of Tafts Avenue: the last 60 m run through the treatment plant's buildings, and a car driven at
+  // the flag there was stopped by a wall 32 m short (Pierce, 2026-09-13, 5:56 PM). The flag stands 160 m back, on the
+  // open causeway, with nothing but road for a hundred metres either side.
+  { id: 'deer',  name: 'Deer Island',  short: 'Deer Island', note: 'Tafts Avenue, at the island', x: 956.0, z: 1075.9, tx: 941.1, tz: 1063.7 },
   { id: 'main',  name: 'Main Street',  short: 'Main St', note: 'coming into town past Adriana\'s', x: -1710.36, z: -2542.13, tx: -1680.09, tz: -2538.31 }
 ];
 const FLAG_IN = 10;                // metres in from the town line to the flag, so there is mapped road behind the line
@@ -300,8 +303,36 @@ function start(drive) {
   for (const m of mouths) {
     const seg = drive.state.network.nearest(m.flag.x, m.flag.z, true);
     m.gate = gate({ x: m.flag.x, z: m.flag.z, ux: m.ux, uz: m.uz, width: clamp((seg && seg.width) || 9, 6, 14), kind: 'start', heightAt: drive.heightAt });
+    // Pierce, 2026-09-13: "The race flags can only, should only be seen during races." Built once, shown per run.
+    m.gate.visible = false;
     drive.scene.add(m.gate);
   }
+  const showGates = (on, m) => { for (const mm of mouths) mm.gate.visible = !!(on && mm === m); };
+  /* The start tree. Pierce, 2026-09-13: "give us a cool red, yellow, green starting light and dont start the time
+     until then." Three lamps over the road on screen; red, then amber, then green, a second apart; the car is held
+     on the line and the clock does not run until the green. */
+  const LIGHT_STEP = 1000;
+  const tree = document.createElement('div');
+  tree.id = 'raceTree';
+  tree.hidden = true;
+  tree.setAttribute('aria-live', 'assertive');
+  tree.innerHTML = '<span class="lamp red"></span><span class="lamp amber"></span><span class="lamp green"></span><b class="treeword"></b>';
+  document.body.append(tree);
+  let treeTimer = null;
+  function startTree(onGreen) {
+    clearTimeout(treeTimer);
+    tree.hidden = false;
+    tree.className = '';
+    const word = tree.querySelector('.treeword');
+    const stage = (cls, text) => { tree.className = cls; word.textContent = text; };
+    stage('lit-red', 'Ready');
+    treeTimer = setTimeout(() => { stage('lit-amber', 'Set');
+      treeTimer = setTimeout(() => { stage('lit-green', 'GO'); onGreen();
+        treeTimer = setTimeout(() => { tree.hidden = true; tree.className = ''; }, 1100);
+      }, LIGHT_STEP);
+    }, LIGHT_STEP);
+  }
+  function stopTree() { clearTimeout(treeTimer); tree.hidden = true; tree.className = ''; }
   let finishGate = null;
   // Pierce, 2026-09-13: "race end to end not to rileys". The race is town mouth to town mouth: start behind one flag,
   // finish under the chequered gate at another. Every ordered pair, so six races, each shaped like an errand so the
@@ -560,7 +591,7 @@ function start(drive) {
     const home = { x: m.flag.x, z: m.flag.z };
     // The finish line stands across the road at the curb the route can reach, not on the roof of the pin.
     if (finishGate) { disposeGate(finishGate); finishGate = null; }
-    for (const mm of mouths) mm.gate.visible = true;
+    showGates(true, m);
     if (errand.race) {
       // the far flag turns chequered for the run and faces the driver coming out of town
       const to = errand.to;
@@ -581,7 +612,8 @@ function start(drive) {
       // an errand ends when you stop at the door; a race ends when the nose crosses the line
       legIndex: 0, radius: errand.race ? 12 : arrivalRadius(p.gap, errand.radius || 45), homeRadius: 55,
       wrongWay: 0, curbs: 0, wrongTimer: 0, curbTimer: 0, wrongOn: false, curbOn: false,
-      lastX: s.x, lastZ: s.z, voided: null, guide: null
+      lastX: s.x, lastZ: s.z, voided: null, guide: null,
+      armed: false                     // held on the line until the green
     };
     closePanel();
     result.hidden = true;
@@ -589,6 +621,8 @@ function start(drive) {
     document.body.classList.add('errand-running');
     drive.mapOverlay = drawGuide;
     paint();
+    const thisRun = run;
+    startTree(() => { if (run === thisRun) { run.armed = true; run.clock = drive.clock; } });
     tick();
   }
 
@@ -732,9 +766,11 @@ function start(drive) {
       else if (dist(s.x, s.z, run.lastX, run.lastZ) > JUMP) { finish('the car was moved'); }
       else {
         run.lastX = s.x; run.lastZ = s.z;
+        // Held on the line until the green: no distance, no clock.
+        if (!run.armed) { s.speed = 0; run.clock = drive.clock; paint(); }
         // The clock is the car's clock, not the visitor's frame rate: driving.clock only advances while the
         // drive is live and unpaused, so a slow phone and a fast desktop time the same errand the same way.
-        const drove = clamp(drive.clock - run.clock, 0, 2);
+        const drove = run.armed ? clamp(drive.clock - run.clock, 0, 2) : 0;
         run.clock = drive.clock;
         if (drove > 0) {
           run.elapsed += drove;
@@ -776,7 +812,8 @@ function start(drive) {
     const r = run;
     run = null;
     if (finishGate) { disposeGate(finishGate); finishGate = null; }
-    for (const mm of mouths) mm.gate.visible = true;
+    showGates(false);
+    stopTree();
     readout.hidden = true;
     erTurn.textContent = '';
     document.body.classList.remove('errand-running');

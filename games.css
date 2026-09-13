@@ -159,3 +159,16 @@ body.errands-open #driveCard{display:none}
 .erback:hover{color:var(--accent-hi,#f7cb84)}
 .errandpick .ernote{color:var(--muted,#b4bec6);font-weight:500}
 .errule{margin:8px 2px 2px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim,#8c979f)}
+
+/* the start tree: three lamps, red then amber then green, and the clock waits for the green */
+#raceTree{position:fixed;left:50%;top:18%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:12px 18px;border-radius:999px;background:rgba(6,11,16,.82);border:1px solid var(--edge,rgba(255,255,255,.13));backdrop-filter:blur(10px);z-index:60;pointer-events:none}
+#raceTree[hidden]{display:none}
+#raceTree .lamp{width:34px;height:34px;border-radius:50%;background:#2a2f34;box-shadow:inset 0 2px 6px rgba(0,0,0,.6);transition:background .12s,box-shadow .12s}
+#raceTree.lit-red .lamp.red{background:#ff3b30;box-shadow:0 0 18px 4px rgba(255,59,48,.65)}
+#raceTree.lit-amber .lamp.red{background:#7a1e18}
+#raceTree.lit-amber .lamp.amber{background:#ffcc00;box-shadow:0 0 18px 4px rgba(255,204,0,.65)}
+#raceTree.lit-green .lamp.red,#raceTree.lit-green .lamp.amber{background:#2a2f34}
+#raceTree.lit-green .lamp.green{background:#34c759;box-shadow:0 0 22px 6px rgba(52,199,89,.7)}
+#raceTree .treeword{margin-left:6px;font-family:var(--display,Georgia,serif);font-weight:500;font-size:22px;letter-spacing:.04em;color:var(--ink,#f6f3ec);min-width:3.2em}
+#raceTree.lit-green .treeword{color:#34c759}
+@media (max-width:640px){#raceTree{top:14%;gap:10px;padding:10px 14px}#raceTree .lamp{width:26px;height:26px}#raceTree .treeword{font-size:18px}}
