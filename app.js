@@ -110,7 +110,9 @@ async function init(){
  let arrivalCtl=null;
  if(!/[?&](noarrival|drive)=/.test(location.search)){
   const t0=new THREE.Vector3(...places.whole.target),f0=t0.clone().add(new THREE.Vector3(...places.whole.offset));
-  const whenSmooth=(go)=>{let last=0,run=0;const t=performance.now();const tick=now=>{if(last&&now-last<90)run++;else run=0;last=now;if(run>=12||now-t>12000)go();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
+  /* Twelve smooth frames in a row, or twelve seconds -- and the twelve seconds is a real timer, because a tab in the
+     background gets no animation frames at all and would otherwise hang in the clouds until it was looked at. */
+  const whenSmooth=(go)=>{let last=0,run=0,done=false;const fire=()=>{if(done)return;done=true;clearTimeout(cap);go();};const cap=setTimeout(fire,12000);const tick=now=>{if(done)return;if(last&&now-last<90)run++;else run=0;last=now;if(run>=12)fire();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
   const settled=Promise.race([townReady,new Promise(r=>setTimeout(r,25000))]);
   arrivalCtl=arrival({scene,camera,controls,target:t0,finalPos:f0,ready:settled.then(()=>new Promise(r=>whenSmooth(r)))});
  }
