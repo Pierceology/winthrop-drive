@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import {RoadSurface,loadSurfaces} from './road-surface.js';
+import {inTown} from './town-limits.js';
+function clipTriangles(a){if(!a||!a.length)return a;const out=new Float32Array(a.length);let n=0;for(let i=0;i<a.length;i+=9){const cx=(a[i]+a[i+3]+a[i+6])/3,cz=(a[i+2]+a[i+5]+a[i+8])/3;if(!inTown(cx,cz))continue;out.set(a.subarray(i,i+9),n);n+=9;}return n===a.length?a:out.subarray(0,n);}
 
 // Coordinates remain in the original local EPSG:26986 frame. The source
 // triangle arrays are shared by the renderer and contact sampler.
@@ -33,7 +35,7 @@ function aerialMaterial(tiles,origin){
  return material;
 }
 export async function buildGroundWorld(data,tiles,origin,roadMaterial,groundMaterial=null){
- const arrays=await loadSurfaces(data,new URL('./',location.href)),field=contactField(data,arrays);
+ const arrays=await loadSurfaces(data,new URL('./',location.href));for(const k of ['ground','walk','road','curb'])arrays[k]=clipTriangles(arrays[k]);const field=contactField(data,arrays);
  const ground=mesh(arrays.ground,groundMaterial||aerialMaterial(tiles,origin)),road=mesh(arrays.road,roadMaterial);
  const walk=mesh(arrays.walk,new THREE.MeshStandardMaterial({color:'#a3a49e',roughness:1,side:THREE.DoubleSide}));
  const curb=mesh(arrays.curb,new THREE.MeshStandardMaterial({color:'#b3b5b1',roughness:1,side:THREE.DoubleSide}));

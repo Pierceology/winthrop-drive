@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
+import {inTown} from './town-limits.js';
 
 // Street furniture from OpenStreetMap, at OSM's positions: painted crossings across the through road,
 // power poles with their wires hung between consecutive poles, street lamps and bus-stop posts. Nothing here is guessed
@@ -51,11 +52,11 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
  // never drawn without the two poles it hangs from. 8.8 m pole, crossarm at 8.45 m turned across the line, three conductors
  // on the arm at the pole top (-0.6 / 0 / +0.6 m) and a neutral on the pole at 7.1 m, all sagging with the span.
  const POLE_H=8.8,ARM_Y=8.45,TOP=POLE_H,LOW=7.1,OFFSETS=[-.6,0,.6],STEPS=8;
- const poles=(powerLines.poles||[]).map(p=>({...p,y:heightAt(p.x,p.z),ax:Math.cos(p.yaw||0),az:-Math.sin(p.yaw||0)}));
+ const poles=(powerLines.poles||[]).map(p=>inTown(p.x,p.z)?({...p,y:heightAt(p.x,p.z),ax:Math.cos(p.yaw||0),az:-Math.sin(p.yaw||0)}):null);
  const attach=(p,off,h)=>[p.x+p.ax*off,p.y+h,p.z+p.az*off];
  const wire=[];let spans=0;
  for(const line of powerLines.lines||[])for(let i=1;i<line.length;i++){
-  const a=poles[line[i-1]],b=poles[line[i]];if(!a||!b)continue;const span=Math.hypot(b.x-a.x,b.z-a.z);if(span<1)continue;
+  const a=poles[line[i-1]],b=poles[line[i]];if(!a||!b)continue;   /* a pole beyond the town line is null: no wire */const span=Math.hypot(b.x-a.x,b.z-a.z);if(span<1)continue;
   const flip=(a.ax*b.ax+a.az*b.az)<0?-1:1,sag=Math.min(1.4,.006*span+.15);spans++;/* arms that face opposite ways swap the outer conductors so they never cross */
   for(const [off,h] of [...OFFSETS.map(o=>[o,TOP]),[0,LOW]]){const A=attach(a,off,h),B=attach(b,off*flip,h);let prev=null;for(let s=0;s<=STEPS;s++){const t=s/STEPS,x=A[0]+(B[0]-A[0])*t,z=A[2]+(B[2]-A[2])*t,y=A[1]+(B[1]-A[1])*t-sag*4*t*(1-t);if(prev)wire.push(...prev,x,y,z);prev=[x,y,z];}}
  }
@@ -64,8 +65,8 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
  const post=new THREE.MeshStandardMaterial({color:'#4a4f52',roughness:.7}),bulb=new THREE.MeshStandardMaterial({color:'#f2e8c8',emissive:'#8a7a4a',emissiveIntensity:.35,roughness:.5}),plate=new THREE.MeshStandardMaterial({color:'#1f4d8f',roughness:.6});
  function batch(geometry,material,items,h,name){if(!items.length)return;const mesh=new THREE.InstancedMesh(geometry,material,items.length),o=new THREE.Object3D();items.forEach((p,i)=>{o.position.set(p.x,heightAt(p.x,p.z)+h,p.z);o.rotation.set(0,p.yaw||0,0);o.updateMatrix();mesh.setMatrixAt(i,o.matrix);});mesh.castShadow=true;mesh.name=name;group.add(mesh);}
  const wood=new THREE.MeshStandardMaterial({color:'#675347',roughness:1}),glass=new THREE.MeshStandardMaterial({color:'#9fb7b0',roughness:.35});
- batch(new THREE.CylinderGeometry(.12,.19,POLE_H,7),wood,poles,POLE_H/2,'powerPoles');batch(new THREE.BoxGeometry(1.7,.12,.12),wood,poles,ARM_Y,'powerArms');
- {const pins=mergeGeometries(OFFSETS.map(o=>{const g=new THREE.CylinderGeometry(.05,.07,TOP-ARM_Y,6);g.translate(o,(TOP+ARM_Y)/2,0);return g;}),false);batch(pins,glass,poles,0,'powerInsulators');}
+ {const stood=poles.filter(Boolean);batch(new THREE.CylinderGeometry(.12,.19,POLE_H,7),wood,stood,POLE_H/2,"powerPoles");batch(new THREE.BoxGeometry(1.7,.12,.12),wood,stood,ARM_Y,"powerArms");}
+ {const pins=mergeGeometries(OFFSETS.map(o=>{const g=new THREE.CylinderGeometry(.05,.07,TOP-ARM_Y,6);g.translate(o,(TOP+ARM_Y)/2,0);return g;}),false);batch(pins,glass,poles.filter(Boolean),0,"powerInsulators");}
  const lamps=furniture.lamps.filter(a=>!network.contains(a.x,a.z,.2));
  batch(new THREE.CylinderGeometry(.07,.11,7,8),post,lamps,3.5,'lampPosts');batch(new THREE.CylinderGeometry(.22,.3,.32,10),bulb,lamps,7.05,'lampHeads');
  const stops=furniture.busStops.filter(a=>!network.contains(a.x,a.z,.2)).map(a=>{const s=network.nearest(a.x,a.z,true);return {...a,yaw:s?Math.atan2(s.dx,s.dz):0};});
@@ -86,6 +87,6 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
   for(const [dy,col] of [[.32,'#e0392b'],[0,'#f2c230'],[-.32,'#37b061']]){const lamp=new THREE.MeshBasicMaterial({color:'#ffffff'});const g=new THREE.SphereGeometry(.1,10,8);g.translate(0,0,.16);const mesh=new THREE.InstancedMesh(g,lamp,heads.length),o=new THREE.Object3D();heads.forEach((p,i)=>{o.position.set(p.x,heightAt(p.x,p.z)+4.25+dy,p.z);o.rotation.set(0,p.yaw,0);o.updateMatrix();mesh.setMatrixAt(i,o.matrix);mesh.setColorAt(i,OFF);});mesh.name='signalLamps';group.add(mesh);lampMeshes.push({mesh,on:new THREE.Color(col),state:dy>0?'red':dy<0?'green':'yellow'});}
   group.userData.lights={heads,lamps:lampMeshes,update(){if(!lights)return;heads.forEach((h,i)=>{const st=lights.state(h.node,h.axis);for(const l of lampMeshes)l.mesh.setColorAt(i,l.state===st?l.on:OFF);});for(const l of lampMeshes)l.mesh.instanceColor.needsUpdate=true;}};
  }
- group.userData.audit={crossings:crossings.crossings.length,poles:poles.length,estimatedPoles:poles.filter(p=>p.estimated).length,movedPoles:poles.filter(p=>p.mapped).length,spans,lamps:lamps.length,busStops:stops.length,signalHeads:heads.length,pole:{h:POLE_H,top:TOP,low:LOW,offsets:OFFSETS,steps:STEPS}};
+ group.userData.audit={crossings:crossings.crossings.length,poles:poles.filter(Boolean).length,estimatedPoles:poles.filter(p=>p&&p.estimated).length,movedPoles:poles.filter(p=>p&&p.mapped).length,spans,lamps:lamps.length,busStops:stops.length,signalHeads:heads.length,pole:{h:POLE_H,top:TOP,low:LOW,offsets:OFFSETS,steps:STEPS}};
  return group;
 }

@@ -34,7 +34,7 @@ const TURNAROUND = 7;              // seconds par allows for pressing Turn aroun
 // a flag, and the same three every time, so a time from one visit means something on the next. The points are the
 // ends of the mapped roads where they leave the town; tx,tz is the next mapped point, which is the way in.
 const STARTS = [
-  { id: 'crest', name: 'Crest Avenue', short: 'Crest Ave', note: 'from Revere, along the shore', x: -660.51, z: -3522.87, tx: -651.19, tz: -3504.63 },
+  { id: 'crest', name: 'Crest Avenue', short: 'Crest Ave', note: 'the north end of the shore road', x: -597.0, z: -3390.0, tx: -594.0, tz: -3378.0 },
   // Not the very end of Tafts Avenue: the last 60 m run through the treatment plant's buildings, and a car driven at
   // the flag there was stopped by a wall 32 m short (Pierce, 2026-09-13, 5:56 PM). The flag stands 160 m back, on the
   // open causeway, with nothing but road for a hundred metres either side.
