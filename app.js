@@ -16,7 +16,6 @@ import {roadside} from './roadside.js';
 import {streetFurniture} from './street-furniture.js';
 import {SignalSystem} from './signals.js';
 import {parkedCars} from './parked-cars.js';
-import {arrival} from './arrival.js';
 import {inTown} from './town-limits.js';
 /* Resolved when the last heavy load -- the parked cars, at the end of the furniture chain -- is in the scene. The
    arrival waits on it: measured in Chrome, the seconds after the loading card are a run of one-second stalls. */
@@ -104,18 +103,12 @@ async function init(){
  controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.07;controls.minDistance=5;controls.maxDistance=15500;controls.maxPolarAngle=Math.PI/2-.035;controls.autoRotateSpeed=.3;controls.zoomToCursor=true;controls.screenSpacePanning=false;controls.mouseButtons={LEFT:THREE.MOUSE.PAN,MIDDLE:THREE.MOUSE.DOLLY,RIGHT:THREE.MOUSE.ROTATE};controls.touches={ONE:THREE.TOUCH.PAN,TWO:THREE.TOUCH.DOLLY_ROTATE};
  water=makeWater();water.userData.previewColor=[.035,.16,.20];scene.add(water);
  hemi=new THREE.HemisphereLight(0xe6f1ff,0x515c56,2);scene.add(hemi);sun=new THREE.DirectionalLight(0xfff2da,1.6);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-180,right:180,top:180,bottom:-180,near:1,far:1600});sun.shadow.bias=-.00015;sun.shadow.normalBias=.4;scene.add(sun,sun.target);
- /* Sky first. Pierce, 2026-09-13, of the loading card: 'i dont want this page in my experience'. So there is no card:
-    the renderer runs from this line, the camera sits above the weather over where the town will be, and the town is
-    fetched and built beneath the deck. The descent begins when it is in (townReady) and drawing smoothly. */
- let arrivalCtl=null;
- if(!/[?&](noarrival|drive)=/.test(location.search)){
-  const t0=new THREE.Vector3(...places.whole.target),f0=t0.clone().add(new THREE.Vector3(...places.whole.offset));
-  /* Twelve smooth frames in a row, or twelve seconds -- and the twelve seconds is a real timer, because a tab in the
-     background gets no animation frames at all and would otherwise hang in the clouds until it was looked at. */
-  const whenSmooth=(go)=>{let last=0,run=0,done=false;const fire=()=>{if(done)return;done=true;clearTimeout(cap);go();};const cap=setTimeout(fire,12000);const tick=now=>{if(done)return;if(last&&now-last<90)run++;else run=0;last=now;if(run>=12)fire();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
-  const settled=Promise.race([townReady,new Promise(r=>setTimeout(r,25000))]);
-  arrivalCtl=arrival({scene,camera,controls,target:t0,finalPos:f0,ready:settled.then(()=>new Promise(r=>whenSmooth(r)))});
- }
+ /* No card, no clouds. Pierce, 2026-09-13: 'i dont want this page in my experience', then 'open at this
+    magnification, no clouds'. The renderer runs from here with the camera already on the whole-town shot; a veil the
+    colour of the sky covers the build and lifts when the town is in. frameWhole() corrects the shot once the roads
+    are known, before the veil has lifted, so nobody sees the correction. */
+ controls.target.set(...places.whole.target);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
+ {const veil=$('veil');const lift=()=>{if(veil){veil.classList.add('gone');setTimeout(()=>veil.remove(),1600);}};Promise.race([townReady,new Promise(r=>setTimeout(r,25000))]).then(()=>setTimeout(lift,250));}
  if(!loopStarted){loopStarted=true;renderer.setAnimationLoop(animate);}
  [world,foundationData,residential,poi,assetData,neighborhoods,signData,photoRegistration]=await Promise.all([get('./data/world.json'),get('./data/road-foundation.json'),get('./data/residential.json'),get('./data/places.json'),get('./data/street-assets.json'),get('./data/neighborhoods.json'),get('./data/traffic-signs.json'),get('./data/photo-facades.json')]);origin=world.origin;heightAt=gridHeight(foundationData.terrain);
  world.roads=world.roads.map(r=>{const keep=r.points.map(q=>inTown(q[0],q[1]));if(keep.every(Boolean))return r;const pts=r.points.filter((q,i)=>keep[i]);if(pts.length<2)return null;const dirs=r.directions?r.directions.filter((d,i)=>keep[i]&&keep[i+1]):r.directions;return {...r,points:pts,directions:dirs};}).filter(Boolean);
@@ -157,8 +150,6 @@ async function init(){
     This also fixes Reset view, which goes to the same place. */
  frameWhole();
  controls.target.set(...places.whole.target);controls.target.y=surfaceAt(controls.target.x,controls.target.z);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
- /* The town is measured now: point the flight at its real centre and landing. */
- if(arrivalCtl&&!touched)arrivalCtl.retarget(controls.target.clone(),camera.position.clone());
  controls.addEventListener('start',()=>{touched=true;});
  const names=[...new Set(world.roads.map(r=>r.name))].filter(n=>n!=='Unnamed road').sort();for(const name of [...names,...poi.places.map(p=>p.name)]){const o=document.createElement('option');o.value=name;$('roadnames').append(o)}
  $('counts').textContent=`${world.audit.buildings.toLocaleString()} building outlines · ${world.audit.roadSegments} road segments`;
