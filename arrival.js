@@ -142,5 +142,13 @@ export function arrival({scene, camera, controls, target, finalPos, seconds = 4.
     if (k >= 1) land(); else raf = requestAnimationFrame(step);
   };
   raf = requestAnimationFrame(step);
-  return {skip: land};
+  /* The town's true extent is only known once its roads are in. Until then the deck hangs over a stand-in
+     centre; this moves the landing (and the deck with it) without restarting anything. */
+  const retarget = (newTarget, newFinalPos) => {
+    target.copy(newTarget); finalPos.copy(newFinalPos);
+    start.set(target.x + (finalPos.x - target.x) * 0.38, finalPos.y * 3.1, target.z + (finalPos.z - target.z) * 0.38);
+    deck.children.forEach((m, i) => m.position.set(target.x + (i % 2 ? 1 : -1) * (600 + i * 260), finalPos.y * (0.92 + i * 0.26), target.z + (i % 3 - 1) * (700 + i * 210)));
+    controls.target.copy(target);
+  };
+  return {skip: land, retarget};
 }

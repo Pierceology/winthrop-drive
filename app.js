@@ -17,6 +17,7 @@ import {streetFurniture} from './street-furniture.js';
 import {SignalSystem} from './signals.js';
 import {parkedCars} from './parked-cars.js';
 import {arrival} from './arrival.js';
+import {inTown} from './town-limits.js';
 /* Resolved when the last heavy load -- the parked cars, at the end of the furniture chain -- is in the scene. The
    arrival waits on it: measured in Chrome, the seconds after the loading card are a run of one-second stalls. */
 let resolveTown=null;const townReady=new Promise(r=>{resolveTown=r;});
@@ -45,9 +46,9 @@ let assetData,assetGroup,neighborhoods;
 let water,labels,ambient,tour,poi,terrainMeshes=[],spot=null,spotMarker;
 let scene,camera,renderer,controls,world,elevation,terrain,buildings,outlineGroup,roadGroup,selection,flight,auto=false;
 let driving,sun,sunOffset=new THREE.Vector3(-300,450,180),roofTiles=[],pavement;
-let surfaceAt,playGround,focusElevation,terrainPatches=[],residential=[],buildingMeshes=[],heightAt,origin,frame=0,lastTime=0;
+let surfaceAt,playGround,focusElevation,terrainPatches=[],residential=[],buildingMeshes=[],heightAt=()=>0,origin,frame=0,lastTime=0;
 const raycaster=new THREE.Raycaster();const pointer=new THREE.Vector2();
-let framedFor=0,touched=false;   /* set the moment the visitor moves the camera themselves */
+let framedFor=0,touched=false,loopStarted=false;   /* set the moment the visitor moves the camera themselves */
 function frameWhole(){
  if(!world||!world.roads||!world.roads.length)return;
  let minx=1e9,maxx=-1e9,minz=1e9,maxz=-1e9;
@@ -98,15 +99,28 @@ function addGeometry(){
  buildings.visible=true;outlineGroup.visible=false;roadGroup.visible=false;
 }
 async function init(){
- [world,foundationData,residential,poi,assetData,neighborhoods,signData,photoRegistration]=await Promise.all([get('./data/world.json'),get('./data/road-foundation.json'),get('./data/residential.json'),get('./data/places.json'),get('./data/street-assets.json'),get('./data/neighborhoods.json'),get('./data/traffic-signs.json'),get('./data/photo-facades.json')]);origin=world.origin;heightAt=gridHeight(foundationData.terrain);
- // MassDOT Road Inventory: posted speed limits for every road it covers, lanes where the map had none, and one-way/two-way for pieces OpenStreetMap left unknown. Mapped directions are never overridden.
- try{const inv=await get('./data/road-inventory.json');let speeds=0,dirs=0,lanes=0;world.roads.forEach((r,i)=>{const rec=inv.roads[r.id!==null&&r.id!==undefined?String(r.id):'x'+i];if(!rec||!rec.matched)return;const posted=rec.speedLimit||rec.speedReg||rec.opDirSpeed;if(posted&&r.speed!==posted){r.speed=posted;speeds++;}if(!r.lanes&&rec.lanes){r.lanes=rec.lanes;lanes++;}r.inventory=rec;
-  r.directions=r.directions||[];for(let k=0;k<r.points.length-1;k++){if((r.directions[k]===null||r.directions[k]===undefined)&&rec.oneway&&rec.oneway[k]!==null&&rec.oneway[k]!==undefined){r.directions[k]=rec.oneway[k];r.directionSources=r.directionSources||[];r.directionSources[k]=inv.source;dirs++;}}});window.__roadInventory={speeds,dirs,lanes,roads:Object.keys(inv.roads).length};}catch(e){console.warn('road inventory unavailable',e);}
  if(new URLSearchParams(location.search).get('render')==='software'){const {SoftwareRenderer}=await import('./inspection-renderer.js');renderer=new SoftwareRenderer(document.createElement('canvas'));const badge=document.createElement('div');badge.textContent='Geometry preview · lighting and vegetation simplified';badge.style.cssText='position:fixed;left:12px;bottom:32px;z-index:30;background:#102a35;color:white;padding:8px;font:12px system-ui';document.body.append(badge);}else renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;$('viewport').append(renderer.domElement);
  scene=new THREE.Scene();scene.background=new THREE.Color('#a2bdc9');scene.fog=new THREE.Fog('#a2bdc9',4500,18000);camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.15,45000);
  controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.07;controls.minDistance=5;controls.maxDistance=15500;controls.maxPolarAngle=Math.PI/2-.035;controls.autoRotateSpeed=.3;controls.zoomToCursor=true;controls.screenSpacePanning=false;controls.mouseButtons={LEFT:THREE.MOUSE.PAN,MIDDLE:THREE.MOUSE.DOLLY,RIGHT:THREE.MOUSE.ROTATE};controls.touches={ONE:THREE.TOUCH.PAN,TWO:THREE.TOUCH.DOLLY_ROTATE};
  water=makeWater();water.userData.previewColor=[.035,.16,.20];scene.add(water);
  hemi=new THREE.HemisphereLight(0xe6f1ff,0x515c56,2);scene.add(hemi);sun=new THREE.DirectionalLight(0xfff2da,1.6);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-180,right:180,top:180,bottom:-180,near:1,far:1600});sun.shadow.bias=-.00015;sun.shadow.normalBias=.4;scene.add(sun,sun.target);
+ /* Sky first. Pierce, 2026-09-13, of the loading card: 'i dont want this page in my experience'. So there is no card:
+    the renderer runs from this line, the camera sits above the weather over where the town will be, and the town is
+    fetched and built beneath the deck. The descent begins when it is in (townReady) and drawing smoothly. */
+ let arrivalCtl=null;
+ if(!/[?&](noarrival|drive)=/.test(location.search)){
+  const t0=new THREE.Vector3(...places.whole.target),f0=t0.clone().add(new THREE.Vector3(...places.whole.offset));
+  const whenSmooth=(go)=>{let last=0,run=0;const t=performance.now();const tick=now=>{if(last&&now-last<90)run++;else run=0;last=now;if(run>=12||now-t>12000)go();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
+  const settled=Promise.race([townReady,new Promise(r=>setTimeout(r,25000))]);
+  arrivalCtl=arrival({scene,camera,controls,target:t0,finalPos:f0,ready:settled.then(()=>new Promise(r=>whenSmooth(r)))});
+ }
+ if(!loopStarted){loopStarted=true;renderer.setAnimationLoop(animate);}
+ [world,foundationData,residential,poi,assetData,neighborhoods,signData,photoRegistration]=await Promise.all([get('./data/world.json'),get('./data/road-foundation.json'),get('./data/residential.json'),get('./data/places.json'),get('./data/street-assets.json'),get('./data/neighborhoods.json'),get('./data/traffic-signs.json'),get('./data/photo-facades.json')]);origin=world.origin;heightAt=gridHeight(foundationData.terrain);
+ world.roads=world.roads.map(r=>{const keep=r.points.map(q=>inTown(q[0],q[1]));if(keep.every(Boolean))return r;const pts=r.points.filter((q,i)=>keep[i]);if(pts.length<2)return null;const dirs=r.directions?r.directions.filter((d,i)=>keep[i]&&keep[i+1]):r.directions;return {...r,points:pts,directions:dirs};}).filter(Boolean);
+ world.buildings=world.buildings.filter(b=>inTown(b.center[0],b.center[1]));
+ // MassDOT Road Inventory: posted speed limits for every road it covers, lanes where the map had none, and one-way/two-way for pieces OpenStreetMap left unknown. Mapped directions are never overridden.
+ try{const inv=await get('./data/road-inventory.json');let speeds=0,dirs=0,lanes=0;world.roads.forEach((r,i)=>{const rec=inv.roads[r.id!==null&&r.id!==undefined?String(r.id):'x'+i];if(!rec||!rec.matched)return;const posted=rec.speedLimit||rec.speedReg||rec.opDirSpeed;if(posted&&r.speed!==posted){r.speed=posted;speeds++;}if(!r.lanes&&rec.lanes){r.lanes=rec.lanes;lanes++;}r.inventory=rec;
+  r.directions=r.directions||[];for(let k=0;k<r.points.length-1;k++){if((r.directions[k]===null||r.directions[k]===undefined)&&rec.oneway&&rec.oneway[k]!==null&&rec.oneway[k]!==undefined){r.directions[k]=rec.oneway[k];r.directionSources=r.directionSources||[];r.directionSources[k]=inv.source;dirs++;}}});window.__roadInventory={speeds,dirs,lanes,roads:Object.keys(inv.roads).length};}catch(e){console.warn('road inventory unavailable',e);}
  $('loadmessage').textContent=`Aligning terrain, roads and ${world.buildings.length.toLocaleString()} building outlines…`;
  additionalRegistration=await get('./data/additional-photo-facades.json');
  const loader=new THREE.TextureLoader();
@@ -141,27 +155,8 @@ async function init(){
     This also fixes Reset view, which goes to the same place. */
  frameWhole();
  controls.target.set(...places.whole.target);controls.target.y=surfaceAt(controls.target.x,controls.target.z);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
- /* Come down through the weather onto it. The camera is already where it should end up, so the arrival
-    borrows that as its landing and starts above it - nothing is held back waiting for the flight, and any
-    touch lands it early. Runs once, on a first visit, and never in front of a driver. */
- if(!/[?&](noarrival|drive)=/.test(location.search)){
-  /* Not yet, though: the flight is 4.5 s and the loading card can stay up longer than that on a slow connection,
-     so a descent started here would finish behind it and nobody would see a cloud. Start it the instant the card
-     hides (the way the old intro watched the same attribute), from wherever the framing has put the camera by then. */
-  const startArrival=(ready)=>{if(touched||driving?.active)return;arrival({scene,camera,controls,target:controls.target.clone(),finalPos:camera.position.clone(),ready});};
-  /* And even then not on the first frame: the furniture, the parked cars and the trees keep arriving after the card
-     is gone, and each lands as a stall of a second or more. Measured in Chrome on the published page: a 200 ms poller
-     got three samples in sixteen seconds. A flight timed by the clock would spend itself inside those stalls. So wait
-     for the town to be drawing smoothly -- three frames in a row under 90 ms -- and give up waiting after twelve seconds. */
-  const whenSmooth=(go)=>{let last=0,run=0;const t0=performance.now();const tick=now=>{if(last&&now-last<90)run++;else run=0;last=now;if(run>=12||now-t0>12000)go();else requestAnimationFrame(tick);};requestAnimationFrame(tick);};
-  const card=$('loading');
-  const settled=Promise.race([townReady,new Promise(r=>setTimeout(r,15000))]);
-  /* The camera goes up into the weather the moment the card hides and holds there; the descent itself begins when
-     the town is in and drawing smoothly, so there is never a still town, a snap to the sky, and the town again. */
-  const go=()=>startArrival(settled.then(()=>new Promise(r=>whenSmooth(r))));
-  if(card&&!card.hidden){const watch=new MutationObserver(()=>{if(card.hidden){watch.disconnect();go();}});watch.observe(card,{attributes:true,attributeFilter:['hidden']});}
-  else go();
- }
+ /* The town is measured now: point the flight at its real centre and landing. */
+ if(arrivalCtl&&!touched)arrivalCtl.retarget(controls.target.clone(),camera.position.clone());
  controls.addEventListener('start',()=>{touched=true;});
  const names=[...new Set(world.roads.map(r=>r.name))].filter(n=>n!=='Unnamed road').sort();for(const name of [...names,...poi.places.map(p=>p.name)]){const o=document.createElement('option');o.value=name;$('roadnames').append(o)}
  $('counts').textContent=`${world.audit.buildings.toLocaleString()} building outlines · ${world.audit.roadSegments} road segments`;
@@ -199,10 +194,12 @@ window.__drive=driving;window.__controls=controls;window.__camera=camera; ambien
  const canopyAreas=await get('./data/lidar-trees.json').catch(()=>get('./data/canopy-scenery.json'));sceneryTrees=await treeScenery(canopyData,surfaceAt,driving.state.network,canopyAreas);scene.add(sceneryTrees);$('treeSummary').textContent=sceneryTrees.userData.count.toLocaleString()+' trees, each one where it really stands.';
  const reviewCatalog=await get('./data/review-catalog.json');labels.occluded=addressVisibility(world.buildings,reviewCatalog.houses,surfaceAt);checklist=new HouseChecklist(reviewCatalog,{occluded:addressVisibility(world.buildings,reviewCatalog.houses,surfaceAt),heightAt:surfaceAt,pause:()=>{if(driving.active)driving.pause(true)},visit:async h=>{tour?.stop();if(driving.active){return await driving.inspectHouse(h);}else fly([h.center[0],0,h.center[1]],h.front?[h.front[0]*30,12,h.front[1]*30]:[30,20,30]);}});
  coverageMap=new CoverageMap({world,catalog:reviewCatalog,photos:photoCatalog,scene,heightAt:surfaceAt,onReview:()=>checklist.open(true),onCenter:p=>fly([p[0],0,p[1]],[180,260,220]),onVisit:r=>{photoStop=photoCatalog.indexOf(r);photoPool.update(...r.center);checklist.selectAddress(r.address);goPlace('photo'+photoStop);},onStreet:(street,entries)=>{const r=entries.find(h=>h.address==='274 WINTHROP ST')||entries[0];photoStop=photoCatalog.indexOf(r);photoPool.update(...r.center);checklist.selectAddress(r.address);fly([r.center[0],0,r.center[1]],[r.front[0]*80,60,r.front[1]*80]);$('searchstatus').textContent=street+' · '+entries.length+' buildings with partial photo walls';}});
- bind();$('photoCoverage').textContent=photoCatalog.length+' buildings with registered photographic surfaces. Each uses individually traced visible wall planes. Heights and unseen elevations remain estimates.';$('notice').textContent=`${photoCatalog.length} homes with photographic surfaces · other exteriors estimated`;$('loading').hidden=true;renderer.setAnimationLoop(animate);
+ bind();$('photoCoverage').textContent=photoCatalog.length+' buildings with registered photographic surfaces. Each uses individually traced visible wall planes. Heights and unseen elevations remain estimates.';$('notice').textContent=`${photoCatalog.length} homes with photographic surfaces · other exteriors estimated`;$('loading').hidden=true;if(!loopStarted){loopStarted=true;renderer.setAnimationLoop(animate);};
  for(const id of ['driveCurrent','drive','goDrive','spotDrive','spotCruise','tourDrive'])$(id)?.addEventListener('pointerenter',()=>driving.loadCar().catch(()=>{}),{once:true});
  const requestedBuilding=world.buildings.find(b=>b.id===new URLSearchParams(location.search).get('building'));if(requestedBuilding){controls.target.set(requestedBuilding.center[0],surfaceAt(...requestedBuilding.center),requestedBuilding.center[1]);camera.position.copy(controls.target).add(new THREE.Vector3(35,22,35));controls.update();chooseSpot(controls.target.clone(),false);}
- if(!requestedBuilding)goPlace('whole');
+ /* With no loading card the visitor can be driving, or have taken the view, before init is done; neither gets
+    thrown to the whole-town shot, which used to end a drive mid-race in the harness. */
+ if(!requestedBuilding&&!driving?.active&&!touched)goPlace('whole');
  if(ownedFacades.loaded)$('counts').textContent+=' · '+ownedFacades.loaded+' original photo walls';
  window.__worldAudit={...world.audit,ownedFacades,terrainVertices:terrain.geometry.attributes.position.count,drawGroups:buildingMeshes.length,imageryReady:true,residentialModels:residential.length,roads:pavement.userData.audit,localTerrainSpacing:4,terrainSource:foundationData.audit.sourceTerrain,sidewalks:foundationData.audit.sidewalkSides};
 }
