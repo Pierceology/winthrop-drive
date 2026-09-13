@@ -303,13 +303,22 @@ function start(drive) {
     drive.scene.add(m.gate);
   }
   let finishGate = null;
+  // Pierce, 2026-09-13: "race end to end not to rileys". The race is town mouth to town mouth: start behind one flag,
+  // finish under the chequered gate at another. Every ordered pair, so six races, each shaped like an errand so the
+  // clock, the guide, par and the result card all work unchanged. The errands stay as the second list.
+  const races = [];
+  for (const a of mouths) for (const b of mouths) if (a !== b) races.push({
+    id: 'race-' + a.id + '-' + b.id, race: true, from: a, to: b,
+    title: a.name + ' to ' + b.name, label: 'Race across town', place: 'the ' + b.short + ' flag', kind: 'race',
+    x: b.flag.x, z: b.flag.z, radius: 30, roundTrip: false, address: a.note + ' \u2192 ' + b.note
+  });
 
   /* ---- chrome ---- */
 
   const button = document.createElement('button');
   button.id = 'errandsBtn';
   button.type = 'button';
-  button.textContent = 'Errands';
+  button.textContent = 'Race';
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', 'errandPanel');
 
@@ -328,8 +337,8 @@ function start(drive) {
   panel.hidden = true;
   panel.setAttribute('aria-label', 'Run an errand');
   panel.innerHTML =
-    '<div class="errandhead"><h2>Run an errand</h2><button type="button" class="errandclose" aria-label="Close errands">×</button></div>' +
-    '<p class="errandnote">Pick an errand, then where you start: Crest Avenue, Deer Island or Main Street. The clock runs from the flag to the finish line.</p>' +
+    '<div class="errandhead"><h2>Race</h2><button type="button" class="errandclose" aria-label="Close errands">×</button></div>' +
+    '<p class="errandnote">End to end: from the flag at one mouth of the town to the chequered gate at another. Or an errand, from any of the three.</p>' +
     '<ul class="errandlist"></ul>';
   document.body.append(panel);
 
@@ -382,7 +391,7 @@ function start(drive) {
     panel.hidden = false;
     button.setAttribute('aria-expanded', 'true');
     document.body.classList.add('errands-open');
-    panel.querySelector('h2').textContent = 'Run an errand';
+    panel.querySelector('h2').textContent = 'Race';
     buildList();
     tick();
   }
@@ -426,6 +435,30 @@ function start(drive) {
       list.append(li);
       return;
     }
+    const pendingPar = [];
+    for (const r of races) {
+      const li = document.createElement('li');
+      const go = document.createElement('button');
+      go.type = 'button';
+      go.className = 'errandpick errace';
+      go.dataset.errand = r.id;
+      const b = best[r.id + '@' + r.from.id];
+      go.innerHTML =
+        '<span class="ername"></span>' +
+        '<span class="ermeta"><span class="erdist"></span><span class="erpar">working out a target\u2026</span></span>' +
+        (b ? '<span class="erbest"></span>' : '');
+      go.querySelector('.ername').textContent = r.title;
+      go.querySelector('.erdist').textContent = 'End to end';
+      if (b) go.querySelector('.erbest').textContent = 'Your best: ' + clock(b.time);
+      go.onclick = () => begin(r, r.from);
+      li.append(go);
+      list.append(li);
+      pendingPar.push({ e: r, m: r.from, node: go.querySelector('.erpar'), btn: go });
+    }
+    const rule = document.createElement('li');
+    rule.className = 'errule';
+    rule.textContent = 'Errands';
+    list.append(rule);
     for (const e of errands) {
       const li = document.createElement('li');
       const go = document.createElement('button');
@@ -444,6 +477,17 @@ function start(drive) {
       li.append(go);
       list.append(li);
     }
+    // the race targets come from real route searches, one per frame
+    let i = 0;
+    const step = () => {
+      if (!panelOpen || i >= pendingPar.length) return;
+      const { e, m, node, btn } = pendingPar[i++];
+      const p = parAt(e, m);
+      node.textContent = p ? 'Target ' + clock(p.par) + ' \u00b7 ' + miles(p.metres) + ' of road' : 'No mapped route';
+      if (!p) btn.disabled = true;
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   }
 
   // Choosing an errand asks where you start. The three mouths of the town, each with its own target time,
@@ -455,7 +499,7 @@ function start(drive) {
     const backRow = document.createElement('li');
     const back = document.createElement('button');
     back.type = 'button'; back.className = 'erback'; back.textContent = '\u2190 All errands';
-    back.onclick = () => { panel.querySelector('h2').textContent = 'Run an errand'; buildList(); };
+    back.onclick = () => { panel.querySelector('h2').textContent = 'Race'; buildList(); };
     backRow.append(back); list.append(backRow);
     const pending = [];
     for (const m of mouths) {
@@ -516,16 +560,26 @@ function start(drive) {
     const home = { x: m.flag.x, z: m.flag.z };
     // The finish line stands across the road at the curb the route can reach, not on the roof of the pin.
     if (finishGate) { disposeGate(finishGate); finishGate = null; }
-    const seg = drive.state.network.nearest(errand.x, errand.z, true);
-    if (seg) {
-      const L = seg.length || 1;
-      finishGate = gate({ x: seg.x, z: seg.z, ux: seg.dx / L, uz: seg.dz / L, width: clamp(seg.width || 9, 6, 14), kind: 'finish', heightAt: drive.heightAt });
+    for (const mm of mouths) mm.gate.visible = true;
+    if (errand.race) {
+      // the far flag turns chequered for the run and faces the driver coming out of town
+      const to = errand.to;
+      to.gate.visible = false;
+      finishGate = gate({ x: to.flag.x, z: to.flag.z, ux: -to.ux, uz: -to.uz, width: to.gate.userData.gate.width, kind: 'finish', heightAt: drive.heightAt });
       drive.scene.add(finishGate);
+    } else {
+      const seg = drive.state.network.nearest(errand.x, errand.z, true);
+      if (seg) {
+        const L = seg.length || 1;
+        finishGate = gate({ x: seg.x, z: seg.z, ux: seg.dx / L, uz: seg.dz / L, width: clamp(seg.width || 9, 6, 14), kind: 'finish', heightAt: drive.heightAt });
+        drive.scene.add(finishGate);
+      }
     }
     run = {
       errand, start: m, home, par: p.par, metres: p.metres,
       elapsed: 0, clock: drive.clock,
-      legIndex: 0, radius: arrivalRadius(p.gap, errand.radius || 45), homeRadius: 55,
+      // an errand ends when you stop at the door; a race ends when the nose crosses the line
+      legIndex: 0, radius: errand.race ? 12 : arrivalRadius(p.gap, errand.radius || 45), homeRadius: 55,
       wrongWay: 0, curbs: 0, wrongTimer: 0, curbTimer: 0, wrongOn: false, curbOn: false,
       lastX: s.x, lastZ: s.z, voided: null, guide: null
     };
@@ -691,7 +745,7 @@ function start(drive) {
           if (s.assisting) { run.curbTimer += drove; if (!run.curbOn && run.curbTimer > CURB_HOLD) { run.curbOn = true; run.curbs++; } }
           else { run.curbTimer = 0; run.curbOn = false; }
           const t = target();
-          if (dist(s.x, s.z, t.x, t.z) <= radius() && Math.abs(s.speed) < ARRIVE_SPEED) {
+          if (dist(s.x, s.z, t.x, t.z) <= radius() && (run.errand.race || Math.abs(s.speed) < ARRIVE_SPEED)) {
             if (run.legIndex === 0 && run.errand.roundTrip) { run.legIndex = 1; }
             else finish('arrived');
           }
@@ -722,6 +776,7 @@ function start(drive) {
     const r = run;
     run = null;
     if (finishGate) { disposeGate(finishGate); finishGate = null; }
+    for (const mm of mouths) mm.gate.visible = true;
     readout.hidden = true;
     erTurn.textContent = '';
     document.body.classList.remove('errand-running');
@@ -741,7 +796,7 @@ function start(drive) {
     const record = previous === null || official < previous;
     if (record) { best[key] = { time: Math.round(official), at: Date.now() }; writeBest(best); }
 
-    const share = 'Drive Winthrop — ' + sharePhrase(r.errand) + ' from ' + r.start.short + ' in ' + clock(official) +
+    const share = 'Drive Winthrop — ' + (r.errand.race ? r.errand.title + ', end to end,' : sharePhrase(r.errand) + ' from ' + r.start.short) + ' in ' + clock(official) +
       ' (par ' + clock(r.par) + '). ' + (penalties ? penaltyWords(r) + '.' : 'Clean run.') +
       ' ' + SITE.replace(/^https:\/\/www\./, '').replace(/\/$/, '');
 
@@ -880,6 +935,7 @@ function start(drive) {
     get turn() { return erTurn.textContent; },
     get overlay() { return drive.mapOverlay === drawGuide; },
     get starts() { return mouths; },
+    get races() { return races; },
     nearby, parOf, parAt, pickStart, begin, openPanel, closePanel,
     finish: () => finish('arrived')
   };
