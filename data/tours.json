@@ -464,13 +464,13 @@
     },
     {
      "name": "Cafe Delite",
-     "x": -1053.1,
-     "z": -1701.1,
+     "x": -1098.0,
+     "z": -1675.0,
      "kind": "cafe",
      "line": "Coffee shop serving bagels, breakfast and lunch.",
      "address": "82 Jefferson St",
      "photo": "https://static.wixstatic.com/media/6c593b_e41463e9001c4105bf97ac8571a27afb~mv2.jpg/v1/fill/w_480,h_270,al_c,q_85/file.jpg",
-     "placed": "OpenStreetMap building (geocoded)"
+     "placed": "US Census geocoder, 82 Jefferson St (2026-09-14 audit); Nominatim agrees within 10 m; was sharing a point with 71 Jefferson across the street"
     },
     {
      "name": "Mexico En Tu Casa",
