@@ -119,7 +119,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
  const group=new THREE.Group();group.name='live';scene.add(group);
  const ground=(x,z)=>{const y=heightAt(x,z);return Number.isFinite(y)?y:0;};
  const now=()=>performance.now();
- const buses=new Map(),aircraft=new Map();
+ const buses=new Map(),aircraft=new Map();let following=null;   // declared up here: tick() runs before the follow block below is reached
  const live={group,buses,aircraft,tide:null,counts:{buses:0,aircraft:0,polls:{buses:0,aircraft:0,tide:0}},errors:{buses:0,aircraft:0,tide:0},toLocal,toMassMainland};
 
  /* buses: each record eases from where it was drawn to the new fix over one poll interval */
@@ -184,7 +184,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    timers.push(setTimeout(run,wait));};run();}
  /* Follow a bus, and its next stop with the time (Pierce, 09-14: "show me the live busses so people can follow them and the time").
     Predictions come from the same MBTA API (keyless); the first prediction per vehicle, sorted by time, is its next stop. */
- const preds=new Map();live.predictions=preds;let following=null;
+ const preds=new Map();live.predictions=preds;
  live.ingestPredictions=json=>{const inc=new Map((json.included||[]).map(i=>[i.type+':'+i.id,i]));preds.clear();
   for(const p of (json.data||[])){const veh=p.relationships&&p.relationships.vehicle&&p.relationships.vehicle.data;if(!veh)continue;const a=p.attributes||{};const when=a.departure_time||a.arrival_time;if(!when)continue;
    const stop=inc.get('stop:'+p.relationships.stop.data.id),trip=inc.get('trip:'+p.relationships.trip.data.id);
