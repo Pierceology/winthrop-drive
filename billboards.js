@@ -28,6 +28,8 @@ function plate(text, sub) {
 }
 
 /* Pick the slots: the longest segments of the most important drivable roads, spread out so no two are within 220 m. */
+const FACE_IN = 28 * Math.PI / 180;   // how far the screen turns from 'straight back along the road' toward the road itself
+
 export function chooseSlots(network, count = 6) {
   /* a network segment carries width, length, speed and a name -- not the road class -- so 'busy' is read from those:
      the widest, fastest, longest named streets first */
@@ -39,7 +41,10 @@ export function chooseSlots(network, count = 6) {
     if (out.some(o => Math.hypot(o.x - mx, o.z - mz) < 220)) continue;
     const dx = s.dx / s.length, dz = s.dz / s.length, nx = -dz, nz = dx;      // right-hand side of travel
     const off = s.width / 2 + 5;
-    out.push({x: mx + nx * off, z: mz + nz * off, yaw: Math.atan2(-nx, -nz), road: s.name});
+    /* face the oncoming driver, not the far curb: the screen looks back along the road at the cars coming
+       toward it, turned FACE_IN toward the road so it reads from the driver's lane (Pierce: "it must face the driver") */
+    const fx = -dx * Math.cos(FACE_IN) - nx * Math.sin(FACE_IN), fz = -dz * Math.cos(FACE_IN) - nz * Math.sin(FACE_IN);
+    out.push({x: mx + nx * off, z: mz + nz * off, yaw: Math.atan2(fx, fz), road: s.name});
     if (out.length >= count) break;
   }
   return out;
@@ -65,6 +70,9 @@ export function billboards({scene, network, heightAt, slots = null, rows = [], c
     screen.position.set(0, POST + H / 2, .19); b.add(screen);
     const pl = new THREE.Mesh(new THREE.PlaneGeometry(W * .8, .95), new THREE.MeshBasicMaterial({map: plate(row && row.sponsor ? row.sponsor : 'THIS BILLBOARD IS OPEN', row && row.sponsor ? (row.link || '') : 'Tap About to put your video here, on every drive through ' + (townName || 'town')), toneMapped: false}));
     pl.position.set(0, POST - .6, .19); b.add(pl);
+    // the same screen and plate on the back, turned round, for the cars coming the other way
+    const screen2 = new THREE.Mesh(screen.geometry, screen.material); screen2.position.set(0, POST + H / 2, -.19); screen2.rotation.y = Math.PI; b.add(screen2);
+    const pl2 = new THREE.Mesh(pl.geometry, pl.material); pl2.position.set(0, POST - .6, -.19); pl2.rotation.y = Math.PI; b.add(pl2);
     b.userData = {slot: i, road: p.road, link: row && row.link, sponsor: row && row.sponsor};
     group.add(b);
   });
