@@ -656,6 +656,7 @@ body.driving #globeBack{display:none}
 #tourList .tourmeta{cursor:pointer}
 #tourList .tourcard:not(.open) .tourmeta{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 #tourList .tourcard:not(.open) .tourmeta b{font-size:17px}
+#tourList .tourcard:not(.open) .tourmeta small{white-space:nowrap}
 #tourList .tourcard:not(.open) .tourmeta em,#tourList .tourcard:not(.open) .touracts{display:none}
 #tourList .tourcard.open{padding:14px 14px 12px;border-color:rgba(240,184,96,.55)}
 .explore-actions{grid-template-columns:1fr 1fr}

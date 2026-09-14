@@ -44,6 +44,7 @@ export const FEEDS={
 export const AIRCRAFT_BOX={lamin:42.33,lomin:-71.05,lamax:42.42,lomax:-70.93};
 const ADSB_LOL='https://api.adsb.lol/v2/lat/42.375/lon/-70.99/dist/5';
 export const AIRCRAFT_SOURCES=[
+ {name:'winthropbythesea relay',url:'https://www.winthropbythesea.com/_functions/aircraft',parse:fromAdsbLol},   // WBTS backend fetches adsb.lol server-side and answers with CORS (live after the next editor Publish)
  {name:'opensky',url:FEEDS.aircraft,parse:j=>j&&Array.isArray(j.states)?j:null},
  {name:'adsb.lol',url:ADSB_LOL,parse:fromAdsbLol},
  {name:'adsb.lol via allorigins',url:'https://api.allorigins.win/raw?url='+encodeURIComponent(ADSB_LOL),parse:fromAdsbLol}

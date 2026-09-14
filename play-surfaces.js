@@ -207,7 +207,9 @@ export async function playSurfaces(data,heightAt,onLand,onRoad,onBuilding,lowMem
  const courts={tennis:[],basketball:[]},nets=[],hoops=[];
  const counts={};let regraded=0;
 
+ let yielded=0;
  for(const r of records){
+  if(++yielded%20===0)await new Promise(res=>setTimeout(res,0));   // hand the frame back every 20 polygons so the sketch keeps moving (the whole loop was a 2.3 s stall on 2026-09-14)
   const kind=realKind(r);counts[kind]=(counts[kind]||0)+1;if(kind!==r.k)regraded++;
   build.polygon(r.r,kind,{cutouts:BROAD.has(kind)?cutouts:null});
   if(kind==='baseball'&&r.h)ballField(build,r,lowMemory);
@@ -230,6 +232,7 @@ export async function playSurfaces(data,heightAt,onLand,onRoad,onBuilding,lowMem
   const mesh=new THREE.Mesh(g,[new THREE.MeshStandardMaterial({color:'#4d5257',roughness:.7,metalness:.4}),new THREE.MeshStandardMaterial({color:'#e6e6e0',roughness:.8}),new THREE.MeshStandardMaterial({color:'#d4592c',roughness:.6,metalness:.5})]);
   mesh.castShadow=true;group.add(mesh);hoops.forEach(h=>h.geometry.dispose());}
 
+ await new Promise(res=>setTimeout(res,0));performance.mark('stage:play-surfaces-merge');
  const geo=build.geometry();
  if(geo){const mesh=new THREE.Mesh(geo,surfaceMaterial(grainTexture()));mesh.name='groundSurfaces';mesh.receiveShadow=true;mesh.renderOrder=1;group.add(mesh);}
  group.userData.audit={polygons:records.length,kinds:counts,triangles:build.tris,maskedOut:build.dropped,lowMemory,oversizedCourtsRegraded:regraded,
