@@ -211,9 +211,11 @@ export async function playSurfaces(data,heightAt,onLand,onRoad,onBuilding,lowMem
  for(const r of records){
   if(++yielded%20===0)await new Promise(res=>setTimeout(res,0));   // hand the frame back every 20 polygons so the sketch keeps moving (the whole loop was a 2.3 s stall on 2026-09-14)
   const kind=realKind(r);counts[kind]=(counts[kind]||0)+1;if(kind!==r.k)regraded++;
+  const t0=performance.now();
   build.polygon(r.r,kind,{cutouts:BROAD.has(kind)?cutouts:null});
   if(kind==='baseball'&&r.h)ballField(build,r,lowMemory);
   if(!lowMemory&&(kind==='tennis'||kind==='basketball')&&r.b)courts[kind].push(...courtCells(r.b,kind));
+  const dt=performance.now()-t0;if(dt>60)performance.mark('stage:ps-slow-'+kind+'-'+Math.round(r.a||0)+'m2-'+Math.round(dt)+'ms');
  }
  // the painted lines, one merged mesh per game
  for(const [kind,cells] of Object.entries(courts)){

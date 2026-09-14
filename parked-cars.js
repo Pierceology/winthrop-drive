@@ -133,7 +133,9 @@ export async function parkedCars(network, heightAt, {assets = [], furniture = {}
     const mine = slots.filter(s => s.model === m);
     if (!mine.length) continue;
     let template;
+    performance.mark('stage:parked-model-'+m+'-load');
     try { template = await carKit.load(MODELS[m]); }
+    performance.mark('stage:parked-model-'+m+'-loaded');
     catch (e) { continue; }                                  /* a missing model costs its share, not the town */
     template.updateMatrixWorld(true);
     const parts = [];
@@ -146,6 +148,7 @@ export async function parkedCars(network, heightAt, {assets = [], furniture = {}
       parts.push(g.index ? g.toNonIndexed() : g);
     });
     if (!parts.length) continue;
+    performance.mark('stage:parked-model-'+m+'-merge');
     const geometry = mergeGeometries(parts, false);
     parts.forEach(g => g.dispose());
     const cap = Math.min(mine.length, CAP_PER_MODEL);
