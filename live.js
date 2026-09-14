@@ -210,8 +210,11 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
     controls.target.x+=(c.x-controls.target.x)*.15;controls.target.y+=(c.y-controls.target.y)*.15;controls.target.z+=(c.z-controls.target.z)*.15;}}
   else if(following&&String(following).startsWith('in:')){const p=aircraft.get(following.slice(3));
    if(!p||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){live.follow(null);}
-   else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz)||1;const dx=p.vx/sp,dz=p.vz/sp;
-    camera.position.set(c.x+dx*22,c.y+3.4,c.z+dz*22);camera.lookAt(c.x+dx*600,c.y+3.4+Math.max(-40,Math.min(40,p.vy*6)),c.z+dz*600);}}
+   else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz);const dx=sp>1?p.vx/sp:Math.cos(p.yaw),dz=sp>1?p.vz/sp:-Math.sin(p.yaw);   // parked: the nose, not a zero velocity
+    /* OrbitControls.update() re-aims the camera at its target every frame even with input off, so the target itself goes
+       down the runway ahead (Pierce, 09-14: "ride along goes the wrong direction") */
+    const ly=c.y+3.4+Math.max(-40,Math.min(40,p.vy*6));controls.target.set(c.x+dx*600,ly,c.z+dz*600);
+    camera.position.set(c.x+dx*22,c.y+3.4,c.z+dz*22);camera.lookAt(c.x+dx*600,ly,c.z+dz*600);}}
   else if(following){const b=buses.get(following);
    if(!b||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
    else if(camera&&controls){let dx=b.to.x-b.from.x,dz=b.to.z-b.from.z;const L=Math.hypot(dx,dz);if(L>.5){b.dir=[dx/L,dz/L];}const d=b.dir||[0,1];
@@ -259,7 +262,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    const acts=document.createElement('div');acts.className='acts';
    for(const [key,label] of [['ac:'+icao,following==='ac:'+icao?'Following · stop':'Follow'],['in:'+icao,following==='in:'+icao?'Aboard · step off':'Ride along']]){const b=document.createElement('button');b.textContent=label;b.onclick=()=>live.follow(following===key?null:key);acts.append(b);}
    el.append(bb,sp,acts);chip.append(el);}}
- live.follow=id=>{const s=String(id||'');following=id&&(buses.has(id)||((s.startsWith('ac:')||s.startsWith('in:'))&&aircraft.has(s.slice(3))))?id:null;
+ live.follow=id=>{const s=String(id||'');if(following&&String(following).startsWith('in:')&&controls){const q=aircraft.get(following.slice(3));if(q){const c=pos(q,now());controls.target.set(c.x,c.y,c.z);camera.position.set(c.x-60,c.y+30,c.z+60);}}following=id&&(buses.has(id)||((s.startsWith('ac:')||s.startsWith('in:'))&&aircraft.has(s.slice(3))))?id:null;
   if(controls){controls.autoRotate=false;controls.enabled=!(following&&String(following).startsWith('in:'));}
   for(const p of aircraft.values()){const tag=p.mesh.getObjectByName('tag');if(tag)tag.visible=following==='ac:'+p.icao||following==='in:'+p.icao;p.mesh.visible=following!=='in:'+p.icao;}
   if(typeof document!=='undefined')document.body.classList.toggle('aboard',!!(following&&String(following).startsWith('in:')));renderChip();return following;};
