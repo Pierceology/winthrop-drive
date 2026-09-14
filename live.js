@@ -34,6 +34,7 @@ export const yawFromBearing=b=>Math.PI/2-b*D;
 /* ---------- feeds ---------- */
 export const FEEDS={
  buses:'https://api-v3.mbta.com/vehicles?filter[route]=713',
+ predictions:'https://api-v3.mbta.com/predictions?filter[route]=713&include=stop,trip&sort=departure_time&page[limit]=16',
  aircraft:'https://opensky-network.org/api/states/all?lamin=42.33&lomin=-71.05&lamax=42.42&lomax=-70.93',
  tide:'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=water_level&station=8443970&date=latest&datum=MLLW&units=metric&time_zone=lst_ldt&format=json'
 };
@@ -113,8 +114,8 @@ function makePlane(){
 const lerpAngle=(a,b,t)=>{let d=(b-a+Math.PI)%(2*Math.PI);if(d<0)d+=2*Math.PI;return a+(d-Math.PI)*t;};
 
 /* ---------- the layers ---------- */
-export function liveWinthrop({scene,heightAt=()=>0,water=null,intervals={}}={}){
- const I={buses:10000,aircraft:20000,tide:360000,...intervals};
+export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,controls=null,intervals={}}={}){
+ const I={buses:10000,predictions:30000,aircraft:20000,tide:360000,...intervals};
  const group=new THREE.Group();group.name='live';scene.add(group);
  const ground=(x,z)=>{const y=heightAt(x,z);return Number.isFinite(y)?y:0;};
  const now=()=>performance.now();
@@ -161,6 +162,12 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,intervals={}}={}){
  /* per-frame easing; runs on its own rAF so mounting needs no hook in the game loop */
  let raf=0,stopped=false;
  function tick(){if(stopped)return;raf=requestAnimationFrame(tick);const t=now();
+  if(following){const b=buses.get(following);
+   if(!b||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
+   else if(camera&&controls){let dx=b.to.x-b.from.x,dz=b.to.z-b.from.z;const L=Math.hypot(dx,dz);if(L>.5){b.dir=[dx/L,dz/L];}const d=b.dir||[0,1];
+    const y=ground(b.x,b.z);const gx=b.x-d[0]*46,gz=b.z-d[1]*46,gy=y+22;
+    camera.position.x+=(gx-camera.position.x)*.06;camera.position.y+=(gy-camera.position.y)*.06;camera.position.z+=(gz-camera.position.z)*.06;
+    controls.target.x+=(b.x-controls.target.x)*.12;controls.target.y+=(y+2-controls.target.y)*.12;controls.target.z+=(b.z-controls.target.z)*.12;}}
   for(const b of buses.values()){const k=Math.min(1,(t-b.t0)/I.buses);b.x=b.from.x+(b.to.x-b.from.x)*k;b.z=b.from.z+(b.to.z-b.from.z)*k;b.yaw=lerpAngle(b.from.yaw,b.to.yaw,k);
    b.mesh.position.set(b.x,ground(b.x,b.z),b.z);b.mesh.rotation.y=b.yaw;}
   for(const p of aircraft.values()){const c=pos(p,t);p.mesh.position.set(c.x,c.y,c.z);p.mesh.rotation.y=p.yaw;
@@ -175,8 +182,27 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,intervals={}}={}){
    if(typeof document==='undefined'||!document.hidden){let j;if(name==='aircraft'){const r=await getAircraft(air);j=r&&r.json?r.json:r;live.aircraftSource=r&&r.source||null;}else j=await getJSON(FEEDS[name]);live.counts.polls[name]++;
     if(j&&!j.error){try{ingest(j);}catch(e){}wait=I[name];}else{live.errors[name]++;if(j&&j.error===429)wait=Math.min(wait*2,300000);}}
    timers.push(setTimeout(run,wait));};run();}
- poll('buses',live.ingestBuses);poll('aircraft',live.ingestAircraft);poll('tide',live.ingestTide);
+ /* Follow a bus, and its next stop with the time (Pierce, 09-14: "show me the live busses so people can follow them and the time").
+    Predictions come from the same MBTA API (keyless); the first prediction per vehicle, sorted by time, is its next stop. */
+ const preds=new Map();live.predictions=preds;let following=null;
+ live.ingestPredictions=json=>{const inc=new Map((json.included||[]).map(i=>[i.type+':'+i.id,i]));preds.clear();
+  for(const p of (json.data||[])){const veh=p.relationships&&p.relationships.vehicle&&p.relationships.vehicle.data;if(!veh)continue;const a=p.attributes||{};const when=a.departure_time||a.arrival_time;if(!when)continue;
+   const stop=inc.get('stop:'+p.relationships.stop.data.id),trip=inc.get('trip:'+p.relationships.trip.data.id);
+   if(!preds.has(veh.id))preds.set(veh.id,{stop:stop?stop.attributes.name:'',headsign:trip?trip.attributes.headsign:'',when});}
+  renderChip();return preds.size;};
+ const chip=typeof document!=='undefined'?document.createElement('div'):null;if(chip){chip.id='liveChip';chip.hidden=true;document.body.appendChild(chip);}
+ function renderChip(){if(!chip)return;if(!buses.size){chip.hidden=true;return;}chip.hidden=false;chip.textContent='';
+  for(const [id,b] of buses){const p=preds.get(id);const el=document.createElement('button');el.className='bus'+(following===id?' on':'');
+   const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
+   const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):'')):String(b.status||'').toLowerCase().replace(/_/g,' ');
+   const bb=document.createElement('b');bb.textContent='713 bus'+(b.label?' '+b.label:'');const sp=document.createElement('span');sp.textContent=line;const em=document.createElement('em');em.textContent=following===id?'Following · tap to stop':'Follow this bus';
+   el.append(bb,sp,em);el.onclick=()=>live.follow(following===id?null:id);chip.append(el);}}
+ live.follow=id=>{following=id&&buses.has(id)?id:null;if(following&&controls)controls.autoRotate=false;renderChip();return following;};
+ live.following=()=>following;
+ if(typeof addEventListener==='function')addEventListener('pointerdown',e=>{if(following&&e.target&&e.target.tagName==='CANVAS'){following=null;renderChip();}},{passive:true});
+ const chipTimer=setInterval(renderChip,15000);
+ poll('buses',j=>{live.ingestBuses(j);renderChip();});poll('predictions',live.ingestPredictions);poll('aircraft',live.ingestAircraft);poll('tide',live.ingestTide);
 
- live.stop=()=>{stopped=true;cancelAnimationFrame(raf);for(const t of timers)clearTimeout(t);scene.remove(group);};
+ live.stop=()=>{stopped=true;cancelAnimationFrame(raf);clearInterval(chipTimer);for(const t of timers)clearTimeout(t);if(chip)chip.remove();scene.remove(group);};
  return live;
 }
