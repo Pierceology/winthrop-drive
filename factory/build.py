@@ -266,6 +266,47 @@ def build_places_and_furniture(s, w, n, e, frame):
              'lamps': lamps, 'busStops': busStops, 'signals': signals, 'assets': hydrants})
 
 
+TOUR_CATS = [
+    ('food', 'Eat your way through {t}', 'Every restaurant, cafe, bar and bakery in town.', lambda t: t.get('amenity') in ('restaurant', 'cafe', 'fast_food', 'bar', 'pub', 'ice_cream', 'bakery'), 'food'),
+    ('landmarks', 'Landmarks', 'The places people come to see: the historic, the museums, the views.', lambda t: t.get('historic') or t.get('tourism') in ('attraction', 'museum', 'viewpoint', 'artwork', 'gallery', 'zoo', 'aquarium'), 'landmark'),
+    ('worship', 'Churches and temples', 'Every place of worship in town.', lambda t: t.get('amenity') == 'place_of_worship', 'church'),
+    ('parks', 'All the parks', 'Every park, playground and garden in town, in one loop.', lambda t: t.get('leisure') in ('park', 'playground', 'garden', 'nature_reserve'), 'park'),
+    ('beaches', 'Beach to beach', 'Every beach and marina on the water.', lambda t: t.get('natural') == 'beach' or t.get('leisure') in ('marina', 'beach_resort'), 'beach'),
+    ('schools', 'Schools', 'Every school and library.', lambda t: t.get('amenity') in ('school', 'library'), 'school'),
+    ('nightlife', 'A night out', 'Theatres, cinemas and stadiums.', lambda t: t.get('amenity') in ('theatre', 'cinema') or t.get('leisure') == 'stadium', 'night'),
+]
+
+
+def build_tours(s, w, n, e, frame, town):
+    q = f"""[out:json][timeout:120];(nwr["amenity"~"^(restaurant|cafe|fast_food|bar|pub|ice_cream|bakery|place_of_worship|school|library|theatre|cinema)$"]({s},{w},{n},{e});
+    nwr["tourism"~"^(attraction|museum|viewpoint|artwork|gallery|zoo|aquarium)$"]({s},{w},{n},{e});nwr["historic"]({s},{w},{n},{e});
+    nwr["leisure"~"^(park|playground|garden|nature_reserve|stadium|marina)$"]({s},{w},{n},{e});nwr["natural"="beach"]({s},{w},{n},{e}););out center tags;"""
+    log('overpass rides…')
+    try: d = overpass(q)
+    except SystemExit: log('rides skipped: overpass unavailable'); return []
+    items = []
+    for el in d['elements']:
+        t = el.get('tags', {}); name = t.get('name')
+        if not name: continue
+        lat = el.get('lat') or (el.get('center') or {}).get('lat'); lon = el.get('lon') or (el.get('center') or {}).get('lon')
+        if lat is None: continue
+        x, z = frame.xz(lon, lat)
+        items.append({'name': name, 'x': x, 'z': z, 't': t, 'address': ' '.join(filter(None, [t.get('addr:housenumber'), t.get('addr:street')])) or None})
+    tours = []
+    for cid, title, blurb, test, kind in TOUR_CATS:
+        seen = set(); stops = []
+        for i in items:
+            if test(i['t']) and i['name'] not in seen: seen.add(i['name']); stops.append(i)
+        if len(stops) < 3: continue
+        order, cur, left = [], (0.0, 0.0), stops[:]
+        while left and len(order) < 18:
+            bi = min(range(len(left)), key=lambda k: (left[k]['x'] - cur[0]) ** 2 + (left[k]['z'] - cur[1]) ** 2)
+            cur = (left[bi]['x'], left[bi]['z']); order.append(left.pop(bi))
+        tours.append({'id': cid, 'name': title.format(t=town), 'blurb': blurb, 'stops': [{'name': s_['name'], 'x': round(s_['x'], 1), 'z': round(s_['z'], 1), 'kind': kind, 'address': s_['address'], 'photo': None} for s_ in order]})
+    log('rides', len(tours), [t['id'] + ':' + str(len(t['stops'])) for t in tours])
+    return tours
+
+
 def naip(s, w, n, e, out, frame, px=2048, cells=2):
     """US only. A few large WMS tiles for the ground photo; outside the US the request 404s and the ground stays a colour."""
     os.makedirs(out, exist_ok=True); got = []
@@ -311,7 +352,12 @@ def main():
     for f, d in [('places.json', places), ('crossings.json', crossings), ('power-lines.json', power), ('street-assets.json', assets)]:
         json.dump(d, open(os.path.join(a.out, f), 'w'), separators=(',', ':'))
     if not a.no_naip: naip(s, w, n, e, os.path.join(a.out, 'naip'), frame)
-    json.dump({'name': a.name, 'bbox': [s, w, n, e], 'built': time.strftime('%Y-%m-%d %H:%M'), 'audit': world['audit']}, open(os.path.join(a.out, 'town.json'), 'w'), indent=1)
+    title = a.name.replace('-', ' ').title()
+    tours = build_tours(s, w, n, e, frame, title)
+    json.dump({'source': 'OpenStreetMap contributors, via Overpass', 'tours': tours}, open(os.path.join(a.out, 'tours.json'), 'w'), separators=(',', ':'))
+    json.dump({'name': title, 'slug': a.name, 'lat': frame.lat0, 'lon': frame.lon0, 'country': 'US' if not a.no_naip else None, 'bbox': [s, w, n, e], 'built': time.strftime('%Y-%m-%d %H:%M'),
+               'audit': world['audit'], 'rides': len(tours), 'prebuilt': True, 'tagline': f'Every street in {title}, from free open data -- built on the Mac with the full building set.'},
+              open(os.path.join(a.out, 'town.json'), 'w'), indent=1)
     log('done ->', a.out)
 
 

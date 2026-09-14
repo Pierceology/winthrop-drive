@@ -1,12 +1,16 @@
 {
- "name": "lihue",
+ "name": "Lihue",
+ "slug": "lihue",
+ "lat": 21.9775,
+ "lon": -159.37,
+ "country": "US",
  "bbox": [
   21.965,
   -159.385,
   21.99,
   -159.355
  ],
- "built": "2026-09-14 12:59",
+ "built": "2026-09-14 14:16",
  "audit": {
   "buildings": 1667,
   "roadSegments": 789,
@@ -19,5 +23,8 @@
   ],
   "source": "OpenStreetMap contributors, via Overpass",
   "fetched": "2026-09-14"
- }
+ },
+ "rides": 5,
+ "prebuilt": true,
+ "tagline": "Every street in Lihue, from free open data -- built on the Mac with the full building set."
 }

@@ -60,6 +60,7 @@ async function chips() {
   for (const t of list.sort((a, b) => (b.built || '').localeCompare(a.built || ''))) {
     const b = document.createElement('button'); b.type = 'button'; b.textContent = 'Drive ' + t.name; b.onclick = () => open(t.slug); box.append(b);
   }
+  for (const t of prebuilt.towns || []) { if (list.some(l => l.slug === t.slug)) continue; const b = document.createElement('button'); b.type = 'button'; b.textContent = 'Drive ' + t.name; b.onclick = () => open(t.slug); box.append(b); }
   const w = document.createElement('button'); w.type = 'button'; w.textContent = 'Drive Winthrop'; w.onclick = () => { location.href = './'; }; box.append(w);
 }
 async function ready() { if (!('serviceWorker' in navigator)) throw new Error('This browser cannot hold a built town (no service worker).'); await navigator.serviceWorker.register('./sw.js'); await navigator.serviceWorker.ready; }
@@ -80,6 +81,9 @@ $('form').addEventListener('submit', async e => {
     const already = (await builtCities().catch(() => [])).find(t => t.slug === slug);
     await ready();
     if (already) { stNote.textContent = 'Already built here — opening it.'; setTimeout(() => open(slug), 900); return; }
+    /* a town the Mac already built (with the full building set) is on the site: open it, no build */
+    const pre = (prebuilt.towns || []).find(t => t.lat != null && Math.hypot((t.lat - place.lat) * 111, (t.lon - place.lon) * 111 * Math.cos(place.lat * Math.PI / 180)) < 2.5);
+    if (pre) { stNote.textContent = pre.name + ' is already built, with every building — opening it.'; setTimeout(() => open(pre.slug), 1200); return; }
     await new Promise(r => setTimeout(r, 1400));
     stNote.textContent = 'Please allow about a minute while I build your drive of ' + place.name + '.';
     const t1 = performance.now();
@@ -92,4 +96,5 @@ $('form').addEventListener('submit', async e => {
     setTimeout(() => { status.classList.remove('on'); document.body.classList.remove('building'); target = null; zoomTo = 3.6; go.disabled = false; }, 2800);
   }
 });
-chips();
+let prebuilt = {towns: []};
+fetch('./worlds/index.json').then(r => r.ok ? r.json() : {towns: []}).then(j => { prebuilt = j; chips(); }).catch(() => chips());
