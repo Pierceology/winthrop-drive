@@ -34,10 +34,18 @@ const FACE_IN = 28 * Math.PI / 180;   // how far the screen turns from 'straight
    driver can actually see it — not glued to a house, not behind a pole, not behind the trees that line the approach —
    and only on a segment long enough that the car has a straight run at it. `obstacles` = {buildings:[{center,area}],
    trees:[{x,z,radius}], poles:[{x,z}]}; any list may be empty (a generated town has no tree survey). */
-const CLEAR = {house: 9, pole: 6, tree: 4, approach: 90, minRun: 100};
+const CLEAR = {house: 5, pole: 5, tree: 2, approach: 70, minRun: 90};
+function segDist(px, pz, a, b) {   // distance from a point to the segment a-b
+  const vx = b[0] - a[0], vz = b[1] - a[1], L2 = vx * vx + vz * vz || 1;
+  const t = Math.max(0, Math.min(1, ((px - a[0]) * vx + (pz - a[1]) * vz) / L2));
+  return Math.hypot(px - (a[0] + vx * t), pz - (a[1] + vz * t));
+}
 function clearView(x, z, dx, dz, o) {
   for (const p of o.poles || []) if (Math.hypot(p.x - x, p.z - z) < CLEAR.pole) return false;
-  for (const b of o.buildings || []) { if (!b.center) continue; const r = Math.sqrt(b.area || 60) / 2 + CLEAR.house; if (Math.hypot(b.center[0] - x, b.center[1] - z) < r) return false; }
+  for (const b of o.buildings || []) {      // the screen must stand CLEAR.house metres off any wall (distance to the footprint's edges, not its centre)
+    if (!b.center || Math.hypot(b.center[0] - x, b.center[1] - z) > 60) continue;
+    for (const ring of (b.rings || [])) for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) if (segDist(x, z, ring[j], ring[i]) < CLEAR.house) return false;
+  }
   for (const t of (o.trees || [])) {
     const r = (t.radius || 3) + CLEAR.tree, tx = t.x - x, tz = t.z - z;
     if (Math.hypot(tx, tz) < r) return false;
