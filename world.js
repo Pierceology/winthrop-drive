@@ -13,8 +13,22 @@ const sun = new THREE.DirectionalLight(0xfff2da, 2.2); sun.position.set(-3, 1.5,
 
 const earth = new THREE.Group(); scene.add(earth);
 const tex = new THREE.TextureLoader().load('assets/earth.jpg'); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
-const globe = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 96), new THREE.MeshStandardMaterial({map: tex, roughness: .95, metalness: 0}));
+const night = new THREE.TextureLoader().load('assets/earth-night.jpg'); night.colorSpace = THREE.SRGBColorSpace;
+/* day on the lit side, the city lights on the dark side, a warm terminator between -- the sun is fixed, the earth turns */
+const globeMat = new THREE.ShaderMaterial({uniforms: {day: {value: tex}, night: {value: night}, sunDir: {value: new THREE.Vector3(-3, 1.5, 2.5).normalize()}},
+  vertexShader: 'varying vec2 vUv; varying vec3 vN; void main(){ vUv = uv; vN = normalize(mat3(modelMatrix) * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+  fragmentShader: `uniform sampler2D day, night; uniform vec3 sunDir; varying vec2 vUv; varying vec3 vN;
+    void main(){ float l = dot(normalize(vN), sunDir); float d = smoothstep(-0.12, 0.25, l);
+      vec3 dayC = texture2D(day, vUv).rgb * (0.35 + 0.85 * max(l, 0.0));
+      vec3 nightC = texture2D(night, vUv).rgb * 1.6;
+      vec3 c = mix(nightC, dayC, d) + vec3(0.9, 0.55, 0.25) * (1.0 - abs(l)) * 0.05;
+      gl_FragColor = vec4(c, 1.0); }`});
+const globe = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 96), globeMat);
 earth.add(globe);
+/* weather: a cloud map on a shell just above the ground, drifting a little faster than the earth turns */
+const cloudTex = new THREE.TextureLoader().load('assets/earth-clouds.jpg');
+const clouds = new THREE.Mesh(new THREE.SphereGeometry(1.012, 64, 64), new THREE.MeshBasicMaterial({map: cloudTex, alphaMap: cloudTex, transparent: true, opacity: .55, depthWrite: false}));
+scene.add(clouds);
 // a thin atmosphere: a slightly larger back-face shell, additive, brightest at the rim
 const halo = new THREE.Mesh(new THREE.SphereGeometry(1.035, 64, 64), new THREE.ShaderMaterial({transparent: true, blending: THREE.AdditiveBlending, side: THREE.BackSide, depthWrite: false,
   vertexShader: 'varying vec3 vN; void main(){ vN = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
@@ -31,7 +45,7 @@ const ring = new THREE.Mesh(new THREE.RingGeometry(.02, .028, 40), new THREE.Mes
 // lat/lon on the sphere; the texture's seam is at lon -180, so lon 0 faces +z when the group is unrotated
 const onSphere = (lat, lon, r = 1) => { const p = (90 - lat) * Math.PI / 180, t = (lon + 180) * Math.PI / 180; return new THREE.Vector3(-r * Math.sin(p) * Math.cos(t), r * Math.cos(p), r * Math.sin(p) * Math.sin(t)); };
 
-let spin = .12, target = null, zoom = 3.6, zoomTo = 3.6, t0 = performance.now(), drag = null, userYaw = 0;
+let diving = false, spin = .12, target = null, zoom = 3.6, zoomTo = 3.6, t0 = performance.now(), drag = null, userYaw = 0;
 function resize() { const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); camera.position.z = zoom * (w < h ? 1.35 : 1); }
 addEventListener('resize', resize); resize();
 canvas.addEventListener('pointerdown', e => { drag = {x: e.clientX, yaw: earth.rotation.y, pitch: earth.rotation.x, y: e.clientY}; });
@@ -47,7 +61,8 @@ function frame(now) {
     earth.rotation.y += dy * Math.min(1, dt * 2.6); earth.rotation.x += (wantX - earth.rotation.x) * Math.min(1, dt * 2.6);
   } else if (!drag) earth.rotation.y += spin * dt;
   zoom += (zoomTo - zoom) * Math.min(1, dt * 2.2); camera.position.z = zoom * (innerWidth < innerHeight ? 1.35 : 1);
-  halo.rotation.copy(earth.rotation);
+  halo.rotation.copy(earth.rotation); clouds.rotation.x = earth.rotation.x; clouds.rotation.y = earth.rotation.y + now / 90000;
+  if (diving) { zoomTo = Math.max(1.06, zoomTo - dt * .9); document.body.style.setProperty('--fade', Math.min(1, (1.7 - zoomTo) / .55)); }
   ring.scale.setScalar(1 + .25 * Math.sin(now / 300)); ring.material.opacity = .55 + .35 * Math.sin(now / 300);
   renderer.render(scene, camera); requestAnimationFrame(frame);
 }
@@ -66,7 +81,8 @@ async function chips() {
 async function ready() { if (!('serviceWorker' in navigator)) throw new Error('This browser cannot hold a built town (no service worker).'); await navigator.serviceWorker.register('./sw.js'); await navigator.serviceWorker.ready; }
 let ride = 'landmarks';
 $('rides').addEventListener('click', e => { const b = e.target.closest('button[data-ride]'); if (!b) return; ride = b.dataset.ride; for (const x of $('rides').querySelectorAll('button')) x.classList.toggle('on', x === b); });
-function open(slug) { location.href = './?world=' + slug + (ride ? '&ride=' + ride : ''); }   // land on the town; the chosen ride flies first, the rest stay in the list
+/* the dive: fall toward the pin until the ground fills the screen, fade, then the town inks in on the next page */
+function open(slug) { diving = true; spin = 0; setTimeout(() => { location.href = './?world=' + slug + (ride ? '&ride=' + ride : ''); }, 1500); }
 $('form').addEventListener('submit', async e => {
   e.preventDefault(); const q = $('city').value.trim(); if (!q) return;
   const go = $('go'); go.disabled = true;

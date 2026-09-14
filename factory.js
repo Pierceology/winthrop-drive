@@ -132,7 +132,7 @@ function makeTours(seed, frame, town) {
     const t = el.tags || {}; if (!t.name) continue;
     const lat = el.lat ?? el.center?.lat, lon = el.lon ?? el.center?.lon; if (lat == null) continue;
     const [x, z] = frame.xz(lon, lat);
-    items.push({name: t.name, x, z, t, address: [t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' ') || null});
+    items.push({name: t.name, x, z, lat, lon, t, address: [t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' ') || null});
   }
   const tours = [];
   for (const c of cats) {
@@ -141,7 +141,7 @@ function makeTours(seed, frame, town) {
     // nearest-neighbour order from the middle of town, so the ride is one loop rather than a zigzag
     const order = []; let cur = {x: 0, z: 0}; const left = stops.slice();
     while (left.length && order.length < 18) { let bi = 0, bd = 1e12; left.forEach((s, i) => { const d = (s.x - cur.x) ** 2 + (s.z - cur.z) ** 2; if (d < bd) { bd = d; bi = i; } }); cur = left.splice(bi, 1)[0]; order.push(cur); }
-    tours.push({id: c.id, name: c.name, blurb: c.blurb, stops: order.map(s => ({name: s.name, x: Math.round(s.x * 10) / 10, z: Math.round(s.z * 10) / 10, kind: c.kind, address: s.address, photo: null}))});
+    tours.push({id: c.id, name: c.name, blurb: c.blurb, stops: order.map(s => ({name: s.name, x: Math.round(s.x * 10) / 10, z: Math.round(s.z * 10) / 10, lat: +s.lat.toFixed(6), lon: +s.lon.toFixed(6), kind: c.kind, address: s.address, photo: null}))});
   }
   return tours;
 }
@@ -163,7 +163,10 @@ async function terrain(s, w, n, e, frame, step = 8, z = 14) {
   const sw = frame.xz(w, s), ne = frame.xz(e, n);
   const xmin = Math.min(sw[0], ne[0]), xmax = Math.max(sw[0], ne[0]), zmin = Math.min(sw[1], ne[1]), zmax = Math.max(sw[1], ne[1]);
   const cols = Math.floor((xmax - xmin) / step) + 2, rows = Math.floor((zmax - zmin) / step) + 2, values = new Array(cols * rows);
-  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) { const [lon, lat] = frame.lonlat(xmin + i * step, zmin + j * step); values[j * cols + i] = Math.round(Math.max(0, height(lat, lon)) * 100) / 100; }
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) { const [lon, lat] = frame.lonlat(xmin + i * step, zmin + j * step); values[j * cols + i] = height(lat, lon); }
+  /* level the town to its own floor: Bogotá sits at 2,600 m and was drawn as a mesa on the sea. The lowest 3% of the
+     box becomes y=0, so a coastal town keeps its shore and a plateau city rests on the ground. */
+  { const sorted = values.filter(Number.isFinite).slice().sort((a, b) => a - b); const floor = sorted.length ? Math.max(0, sorted[Math.floor(sorted.length * .03)]) : 0; for (let k = 0; k < values.length; k++) values[k] = Math.round(Math.max(0, (values[k] || 0) - floor) * 100) / 100; }
   return {grid: {x: Math.round(xmin * 100) / 100, z: Math.round(zmin * 100) / 100, step, cols, rows, values}, bounds: [xmin, zmin, xmax, zmax], tiles: tiles.size};
 }
 
@@ -182,7 +185,9 @@ function surfaces(world, grid) {
     for (const p of pts) disc(road, p, half, ROAD);
   }
   const X = Math.floor((grid.cols - 1) * grid.step / GSTEP), Z = Math.floor((grid.rows - 1) * grid.step / GSTEP);
-  for (let j = 0; j < Z; j++) for (let i = 0; i < X; i++) { const x = grid.x + i * GSTEP, z = grid.z + j * GSTEP, x2 = x + GSTEP, z2 = z + GSTEP; quad(ground, [x, h(x, z), z], [x2, h(x2, z), z], [x2, h(x2, z2), z2], [x, h(x, z2), z2]); }
+  /* the ground stops at the rim of the disc */
+  const R2 = (grid.cols - 1) * grid.step / 2, cx0 = grid.x + R2, cz0 = grid.z + (grid.rows - 1) * grid.step / 2, rr = Math.min(R2, (grid.rows - 1) * grid.step / 2) * 1.02;
+  for (let j = 0; j < Z; j++) for (let i = 0; i < X; i++) { const x = grid.x + i * GSTEP, z = grid.z + j * GSTEP, x2 = x + GSTEP, z2 = z + GSTEP; if (Math.hypot(x + GSTEP / 2 - cx0, z + GSTEP / 2 - cz0) > rr) continue; quad(ground, [x, h(x, z), z], [x2, h(x2, z), z], [x2, h(x2, z2), z2], [x, h(x, z2), z2]); }
   return {road: new Float32Array(road), walk: new Float32Array(walk), curb: new Float32Array(curb), ground: new Float32Array(ground)};
 }
 
@@ -200,6 +205,50 @@ async function naip(s, w, n, e, frame, onNote) {
     } catch (_) {}
   }
   return got;
+}
+
+
+/* ---- the ground photo outside the US: Sentinel-2 true colour (Copernicus, open licence), 10 m, via Earth Search ---- */
+const STAC = 'https://earth-search.aws.element84.com/v1/search';
+function utmForward(lat, lon, zone, south) {
+  const a = 6378137, f = 1 / 298.257223563, e2 = f * (2 - f), k0 = 0.9996, rad = Math.PI / 180, lon0 = (zone * 6 - 183) * rad;
+  const e4 = e2 * e2, e6 = e4 * e2, p = lat * rad, l = lon * rad - lon0;
+  const M = a * ((1 - e2 / 4 - 3 * e4 / 64 - 5 * e6 / 256) * p - (3 * e2 / 8 + 3 * e4 / 32 + 45 * e6 / 1024) * Math.sin(2 * p) + (15 * e4 / 256 + 45 * e6 / 1024) * Math.sin(4 * p) - (35 * e6 / 3072) * Math.sin(6 * p));
+  const N = a / Math.sqrt(1 - e2 * Math.sin(p) ** 2), T = Math.tan(p) ** 2, C = e2 / (1 - e2) * Math.cos(p) ** 2, A = Math.cos(p) * l;
+  const x = 500000 + k0 * N * (A + (1 - T + C) * A ** 3 / 6 + (5 - 18 * T + T * T + 72 * C - 58 * e2 / (1 - e2)) * A ** 5 / 120);
+  let y = k0 * (M + N * Math.tan(p) * (A * A / 2 + (5 - T + 9 * C + 4 * C * C) * A ** 4 / 24 + (61 - 58 * T + T * T + 600 * C - 330 * e2 / (1 - e2)) * A ** 6 / 720));
+  if (south) y += 10000000;
+  return [x, y];
+}
+async function sentinel(s, w, n, e, frame, onNote) {
+  if (typeof GeoTIFF === 'undefined') return [];
+  onNote && onNote('looking for a cloud-free satellite pass…');
+  const r = await fetch(STAC, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({collections: ['sentinel-2-l2a'], bbox: [w, s, e, n], query: {'eo:cloud_cover': {lt: 12}}, sortby: [{field: 'properties.datetime', direction: 'desc'}], limit: 6})});
+  if (!r.ok) return [];
+  const feats = (await r.json()).features || [];
+  // the scene that actually covers the whole box, newest first
+  const pick = feats.find(f => f.bbox && f.bbox[0] <= w && f.bbox[1] <= s && f.bbox[2] >= e && f.bbox[3] >= n) || feats[0];
+  if (!pick || !pick.assets || !pick.assets.visual) return [];
+  onNote && onNote('reading the satellite photo (' + pick.properties.datetime.slice(0, 10) + ', ' + Math.round(pick.properties['eo:cloud_cover']) + '% cloud)…');
+  const tiff = await GeoTIFF.fromUrl(pick.assets.visual.href, {allowFullFile: false});
+  const image = await tiff.getImage();
+  const epsg = pick.properties['proj:epsg'] || (image.geoKeys && image.geoKeys.ProjectedCSTypeGeoKey);
+  const zone = epsg % 100, south = Math.floor(epsg / 100) === 327;
+  const [ox, oy] = image.getOrigin(), [rx, ry] = image.getResolution();
+  const px = (lat, lon) => { const [X, Y] = utmForward(lat, lon, zone, south); return [(X - ox) / rx, (Y - oy) / ry]; };
+  const corners = [px(s, w), px(s, e), px(n, w), px(n, e)];
+  const x0 = Math.max(0, Math.floor(Math.min(...corners.map(c => c[0])))), x1 = Math.min(image.getWidth(), Math.ceil(Math.max(...corners.map(c => c[0]))));
+  const y0 = Math.max(0, Math.floor(Math.min(...corners.map(c => c[1])))), y1 = Math.min(image.getHeight(), Math.ceil(Math.max(...corners.map(c => c[1]))));
+  if (x1 - x0 < 8 || y1 - y0 < 8) return [];
+  const W = x1 - x0, H = y1 - y0;
+  const data = await image.readRasters({window: [x0, y0, x1, y1], interleave: true});
+  const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d'); const im = g.createImageData(W, H);
+  for (let i = 0, j = 0; i < W * H; i++, j += 3) { im.data[i * 4] = data[j]; im.data[i * 4 + 1] = data[j + 1]; im.data[i * 4 + 2] = data[j + 2]; im.data[i * 4 + 3] = 255; }
+  g.putImageData(im, 0, 0);
+  // the window's true corners back in lon/lat are the box we asked for (UTM axes align closely enough with the box at 3 km)
+  const blob = await new Promise(res => c.toBlob(res, 'image/jpeg', .9));
+  const sw = frame.xz(w, s), ne = frame.xz(e, n);
+  return [{file: 'sentinel.jpg', blob, bbox: [w, s, e, n], bboxLocal: [sw[0], -sw[1], ne[0], -ne[1]], source: 'Sentinel-2 ' + pick.id}];
 }
 
 /* ---- the whole build; writes into the Cache API under ./worlds/<slug>/ ---- */
@@ -222,6 +271,25 @@ export async function buildCity({name, lat, lon, country, slug, big = false}, on
   const osm = {elements: [...pts.elements, ...ways.elements]};
   note('laying out the streets…', .3);
   const parsed = parseOSM(osm, frame, name);
+  /* Pierce, 2026-09-14: 'still a square?' A town is a disc now: streets end at the rim, buildings inside it, the
+     ground drawn only inside it. A coin of the city, not a tile. */
+  const R = HALF * 1.02;
+  const inside = (x, z) => x * x + z * z <= R * R;
+  const rimPoint = (a, b) => { const dx = b[0] - a[0], dz = b[1] - a[1]; let lo = 0, hi = 1; for (let i = 0; i < 18; i++) { const m = (lo + hi) / 2; if (inside(a[0] + dx * m, a[1] + dz * m)) lo = m; else hi = m; } return [Math.round((a[0] + dx * lo) * 100) / 100, Math.round((a[1] + dz * lo) * 100) / 100]; };
+  const clipRoad = r => {
+    const out = []; let cur = [];
+    for (let i = 0; i < r.points.length; i++) {
+      const p = r.points[i];
+      if (inside(p[0], p[1])) { if (!cur.length && i > 0) cur.push(rimPoint(p, r.points[i - 1])); cur.push(p); }
+      else if (cur.length) { cur.push(rimPoint(cur[cur.length - 1], p)); if (cur.length > 1) out.push(cur); cur = []; }
+    }
+    if (cur.length > 1) out.push(cur);
+    return out.map((pts, k) => ({...r, id: k ? r.id + '_' + k : r.id, points: pts, directions: Array(pts.length - 1).fill(r.directions[0] || 0), directionSources: Array(pts.length - 1).fill('osm')}));
+  };
+  parsed.world.roads = parsed.world.roads.flatMap(clipRoad).filter(r => r.points.length > 1);
+  parsed.world.buildings = parsed.world.buildings.filter(b => inside(b.center[0], b.center[1]));
+  parsed.world.audit.roadSegments = parsed.world.roads.length; parsed.world.audit.buildings = parsed.world.buildings.length; parsed.world.audit.shape = 'disc r=' + Math.round(R) + ' m';
+  parsed.places.places = parsed.places.places.filter(p => inside(p.x, p.z)); parsed.crossings.crossings = parsed.crossings.crossings.filter(p => inside(p.x, p.z));
   const tours = makeTours(tourSeed, frame, name);
   if (parsed.world.roads.length < 5) throw new Error('OpenStreetMap has almost no streets here');
   note('reading the land (elevation tiles)…', .4);
@@ -230,6 +298,7 @@ export async function buildCity({name, lat, lon, country, slug, big = false}, on
   const surf = surfaces(parsed.world, terr.grid);
   let tiles = [];
   if (country === 'US') { note('fetching the aerial photo…', .65); tiles = await naip(s, w, n, e, frame, t => note(t, .7)); }
+  if (!tiles.length) { try { tiles = await sentinel(s, w, n, e, frame, t => note(t, .72)); } catch (err) { console.warn('satellite ground unavailable', err); tiles = []; } }
   note('writing the town…', .9);
   const base = new URL('./worlds/' + slug + '/', location.href).href;
   const cache = await caches.open('factory-worlds');
@@ -244,7 +313,7 @@ export async function buildCity({name, lat, lon, country, slug, big = false}, on
     put('world.json', JSON.stringify(parsed.world), J), put('road-foundation.json', JSON.stringify(foundation), J), put('outline.json', JSON.stringify(outline), J),
     put('places.json', JSON.stringify(parsed.places), J), put('crossings.json', JSON.stringify(parsed.crossings), J), put('power-lines.json', JSON.stringify(parsed.power), J), put('street-assets.json', JSON.stringify(parsed.assets), J),
     put('road-surface.bin', surf.road, 'application/octet-stream'), put('walk-surface.bin', surf.walk, 'application/octet-stream'), put('curb-surface.bin', surf.curb, 'application/octet-stream'), put('ground-surface.bin', surf.ground, 'application/octet-stream'),
-    put('naip/extent.json', JSON.stringify({source: 'USGS NAIP Plus WMS', tiles: tiles.map(t => ({file: t.file, bbox: t.bbox, bboxLocal: t.bboxLocal}))}), J),
+    put('naip/extent.json', JSON.stringify({source: tiles[0] && tiles[0].source ? tiles[0].source : 'USGS NAIP Plus WMS', tiles: tiles.map(t => ({file: t.file, bbox: t.bbox, bboxLocal: t.bboxLocal}))}), J),
     ...tiles.map(t => put('naip/' + t.file, t.blob, 'image/jpeg')),
     put('tours.json', JSON.stringify({source: 'OpenStreetMap contributors, built in the browser', tours}), J),
     put('town.json', JSON.stringify({name, slug, lat, lon, country, built: new Date().toISOString(), audit: parsed.world.audit, rides: tours.length, tagline: 'Every street in ' + name + ', from free open data. Built on this phone in a minute.'}), J)

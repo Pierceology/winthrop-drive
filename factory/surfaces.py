@@ -78,8 +78,10 @@ def main():
     # ground: the whole terrain at GROUND_STEP, at terrain height (the road sits 12 cm above it)
     x0, z0 = T.x, T.z; X = int((T.cols - 1) * T.step / GROUND_STEP); Z = int((T.rows - 1) * T.step / GROUND_STEP)
     H = [[T.h(x0 + i * GROUND_STEP, z0 + j * GROUND_STEP) for i in range(X + 1)] for j in range(Z + 1)]
+    cx0, cz0 = x0 + (T.cols - 1) * T.step / 2, z0 + (T.rows - 1) * T.step / 2; rr = min((T.cols - 1), (T.rows - 1)) * T.step / 2 * 1.02   # the ground stops at the rim of the disc
     for j in range(Z):
         for i in range(X):
+            if math.hypot(x0 + (i + .5) * GROUND_STEP - cx0, z0 + (j + .5) * GROUND_STEP - cz0) > rr: continue
             p = (x0 + i * GROUND_STEP, H[j][i], z0 + j * GROUND_STEP); q = (x0 + (i + 1) * GROUND_STEP, H[j][i + 1], z0 + j * GROUND_STEP)
             r_ = (x0 + (i + 1) * GROUND_STEP, H[j + 1][i + 1], z0 + (j + 1) * GROUND_STEP); s_ = (x0 + i * GROUND_STEP, H[j + 1][i], z0 + (j + 1) * GROUND_STEP)
             quad(ground, p, q, r_, s_)

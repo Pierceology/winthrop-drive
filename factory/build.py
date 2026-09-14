@@ -185,6 +185,38 @@ def ms_buildings(s, w, n, e, frame, have):
     return added
 
 
+
+def make_disc(world, R):
+    """A town is a disc: streets end at the rim, buildings inside it (the browser factory does the same)."""
+    inside = lambda x, z: x * x + z * z <= R * R
+    def rim(a, b):
+        dx, dz = b[0] - a[0], b[1] - a[1]; lo, hi = 0.0, 1.0
+        for _ in range(18):
+            m = (lo + hi) / 2
+            if inside(a[0] + dx * m, a[1] + dz * m): lo = m
+            else: hi = m
+        return [round(a[0] + dx * lo, 2), round(a[1] + dz * lo, 2)]
+    roads = []
+    for r in world['roads']:
+        pieces, cur = [], []
+        for i, p in enumerate(r['points']):
+            if inside(*p):
+                if not cur and i > 0: cur.append(rim(p, r['points'][i - 1]))
+                cur.append(p)
+            elif cur:
+                cur.append(rim(cur[-1], p))
+                if len(cur) > 1: pieces.append(cur)
+                cur = []
+        if len(cur) > 1: pieces.append(cur)
+        for k, pts in enumerate(pieces):
+            d0 = (r['directions'] or [0])[0]
+            roads.append({**r, 'id': r['id'] if k == 0 else f"{r['id']}_{k}", 'points': pts, 'directions': [d0] * (len(pts) - 1), 'directionSources': ['osm'] * (len(pts) - 1)})
+    world['roads'] = roads
+    world['buildings'] = [b for b in world['buildings'] if inside(*b['center'])]
+    world['audit']['roadSegments'] = len(roads); world['audit']['buildings'] = len(world['buildings']); world['audit']['shape'] = f'disc r={round(R)} m'
+    return world
+
+
 def terrarium_grid(s, w, n, e, frame, step=8, z=14):
     """8 m grid of elevations from Terrarium PNG tiles: h = (R*256 + G + B/256) - 32768."""
     from PIL import Image
@@ -213,7 +245,10 @@ def terrarium_grid(s, w, n, e, frame, step=8, z=14):
     for j in range(rows):
         for i in range(cols):
             lon, lat = inv.transform(xmin + i * step, -(zmin + j * step))
-            vals.append(round(max(0.0, height(lat, lon)), 2))   # the sea is the floor; below-sea pixels are noise here
+            vals.append(height(lat, lon))
+    # level the town to its own floor: the lowest 3% of the box becomes 0 (a plateau city rests on the ground; a shore keeps its sea)
+    floor = max(0.0, sorted(vals)[int(len(vals) * .03)]) if vals else 0.0
+    vals = [round(max(0.0, v - floor), 2) for v in vals]
     log('terrain grid', cols, 'x', rows)
     return {'x': round(xmin, 2), 'z': round(zmin, 2), 'step': step, 'cols': cols, 'rows': rows, 'values': vals}, [xmin, zmin, xmax, zmax]
 
@@ -291,7 +326,7 @@ def build_tours(s, w, n, e, frame, town):
         lat = el.get('lat') or (el.get('center') or {}).get('lat'); lon = el.get('lon') or (el.get('center') or {}).get('lon')
         if lat is None: continue
         x, z = frame.xz(lon, lat)
-        items.append({'name': name, 'x': x, 'z': z, 't': t, 'address': ' '.join(filter(None, [t.get('addr:housenumber'), t.get('addr:street')])) or None})
+        items.append({'name': name, 'x': x, 'z': z, 'lat': round(lat, 6), 'lon': round(lon, 6), 't': t, 'address': ' '.join(filter(None, [t.get('addr:housenumber'), t.get('addr:street')])) or None})
     tours = []
     for cid, title, blurb, test, kind in TOUR_CATS:
         seen = set(); stops = []
@@ -302,7 +337,7 @@ def build_tours(s, w, n, e, frame, town):
         while left and len(order) < 18:
             bi = min(range(len(left)), key=lambda k: (left[k]['x'] - cur[0]) ** 2 + (left[k]['z'] - cur[1]) ** 2)
             cur = (left[bi]['x'], left[bi]['z']); order.append(left.pop(bi))
-        tours.append({'id': cid, 'name': title.format(t=town), 'blurb': blurb, 'stops': [{'name': s_['name'], 'x': round(s_['x'], 1), 'z': round(s_['z'], 1), 'kind': kind, 'address': s_['address'], 'photo': None} for s_ in order]})
+        tours.append({'id': cid, 'name': title.format(t=town), 'blurb': blurb, 'stops': [{'name': s_['name'], 'x': round(s_['x'], 1), 'z': round(s_['z'], 1), 'lat': s_['lat'], 'lon': s_['lon'], 'kind': kind, 'address': s_['address'], 'photo': None} for s_ in order]})
     log('rides', len(tours), [t['id'] + ':' + str(len(t['stops'])) for t in tours])
     return tours
 
@@ -339,6 +374,8 @@ def main():
         world['audit']['verifiedBuildingHeights'] = sum(1 for b in world['buildings'] if b['height'])
     except Exception as ex:
         log('microsoft footprints skipped:', str(ex)[:100])
+    half_m = min((n - s) * 111320, (e - w) * 111320 * math.cos(math.radians((s + n) / 2))) / 2
+    world = make_disc(world, half_m * 1.02)
     json.dump(world, open(os.path.join(a.out, 'world.json'), 'w'), separators=(',', ':'))
     outline = [[[round(p[0]), round(p[1])] for p in r['points']] for r in world['roads'] if r['type'] not in (7, 8) and len(r['points']) > 1]
     json.dump(outline, open(os.path.join(a.out, 'outline.json'), 'w'), separators=(',', ':'))

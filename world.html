@@ -27,6 +27,7 @@ button:disabled{opacity:.55}
 .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .6s}
 .hint{position:fixed;left:0;right:0;bottom:6px;text-align:center;font-size:10px;letter-spacing:.06em;color:var(--muted);pointer-events:none}
 body.building .sheet{opacity:0;pointer-events:none;transition:opacity .4s}
+body::after{content:'';position:fixed;inset:0;background:#06090f;opacity:var(--fade,0);pointer-events:none;transition:opacity .2s}
 .err{color:#ffb4a8}
 </style></head><body>
 <canvas id="globe"></canvas>
@@ -40,6 +41,7 @@ body.building .sheet{opacity:0;pointer-events:none;transition:opacity .4s}
 </section>
 <div class="status" id="status"><h2 id="stName">Lihue</h2><p id="stNote">Turning the globe…</p><div class="bar"><i id="stBar"></i></div></div>
 <div class="hint">OpenStreetMap · Terrarium elevation · USGS NAIP · built in your browser</div>
+<script src="vendor/geotiff.js"></script>
 <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
 <script type="module" src="world.js"></script>
 </body></html>

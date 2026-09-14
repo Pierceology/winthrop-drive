@@ -72,6 +72,7 @@ const WORLD=(new URLSearchParams(location.search).get('world')||'winthrop').toLo
 const FACTORY=/^[a-z][a-z0-9-]{0,24}$/.test(WORLD)&&WORLD!=='winthrop';
 const DATA=FACTORY?`./worlds/${WORLD}/`:'./data/';
 window.__world=WORLD;if(FACTORY)document.documentElement.classList.add('factory-world');
+import('./globe-back.js').then(m=>m.globeBack({})).catch(()=>{});
 const getOr=(path,fallback)=>get(path).catch(()=>fallback);
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 if(FACTORY)getOr(DATA+'town.json',null).then(t=>{if(!t)return;const name=(t.title||t.name||WORLD).replace(/\b\w/g,c=>c.toUpperCase());window.__townName=name;document.title=name+' | Drive '+name;

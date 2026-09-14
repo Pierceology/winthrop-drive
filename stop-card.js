@@ -5,6 +5,26 @@
 // happens to be dismissible, parked clear of the road ahead and clear of every driving control.
 const OUT=460;   // must match the transition in experience.css
 
+const wikiCache=new Map();
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+async function wiki(stop){
+ const key=stop.name+'@'+stop.lat.toFixed(4)+','+stop.lon.toFixed(4);
+ if(wikiCache.has(key))return wikiCache.get(key);
+ const p=(async()=>{
+  const r=await fetch('https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord='+stop.lat+'|'+stop.lon+'&gsradius=180&gslimit=8&format=json&origin=*');
+  if(!r.ok)return null;
+  const hits=((await r.json()).query||{}).geosearch||[];if(!hits.length)return null;
+  const want=norm(stop.name);const words=want.split(' ').filter(w=>w.length>2);
+  const scored=hits.map(h=>{const t=norm(h.title);const shared=words.filter(w=>t.includes(w)).length;return {h,score:shared*100-h.dist};}).sort((a,b)=>b.score-a.score);
+  const best=scored[0];if(!best||best.score<50)return null;   // the article has to share a word with the stop's name
+  const s=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(best.h.title.replace(/ /g,'_')));
+  if(!s.ok)return null;const j=await s.json();
+  const line=(j.extract||'').split(/(?<=\.)\s/)[0].slice(0,160);
+  return {photo:j.thumbnail&&j.thumbnail.source?j.thumbnail.source.replace(/\/\d+px-/,'/640px-'):null,line,title:j.title};
+ })();
+ wikiCache.set(key,p);return p;
+}
+
 // A phone, or a machine the world has already told us is short of memory, gets the poster frame instead of
 // the clip: one decoded JPEG rather than a second video decoder running behind the road.
 function stills(){
@@ -79,6 +99,9 @@ export class StopCard{
  show(stop,index,total,tourName){
   const el=this.el;
   this.setMedia(stop);
+  /* Pierce, 2026-09-14: 'have the image and description show anywhere in the world'. A stop that arrived with no
+     picture asks Wikipedia (free, CORS-clean) for the article at that spot: its photo and its first sentence. */
+  if(!stop.photo&&!stop.line&&stop.lat&&stop.lon)wiki(stop).then(w=>{if(!w||this.key!==(tourName||'')+'#'+index+'#'+stop.name)return;if(w.photo)this.setMedia({photo:w.photo,name:stop.name});if(w.line)el.querySelector('.line').textContent=w.line;stop.photo=w.photo||stop.photo;stop.line=w.line||stop.line;if(this.open)this.place();}).catch(()=>{});
   el.querySelector('.kicker').textContent=total>1?`Stop ${index+1} of ${total}`:(tourName||'Arrived');
   el.querySelector('h3').textContent=stop.name||'';
   el.querySelector('.line').textContent=stop.line||'';
