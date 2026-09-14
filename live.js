@@ -100,21 +100,53 @@ function makeBus(){
  const tag=labelSprite('713');tag.position.set(0,5.2,0);g.add(tag);
  return g;
 }
-/** white plane silhouette, nose along +x, ~36 m long / 36 m span, with a fin */
-function makePlane(){
- const s=new THREE.Shape();
- s.moveTo(18,0);s.lineTo(14,1.5);s.lineTo(2,1.6);s.lineTo(-8,17);s.lineTo(-11,17);s.lineTo(-6,1.6);s.lineTo(-13,1.3);s.lineTo(-17,6);s.lineTo(-19,6);s.lineTo(-18,1);
- s.lineTo(-18,-1);s.lineTo(-19,-6);s.lineTo(-17,-6);s.lineTo(-13,-1.3);s.lineTo(-6,-1.6);s.lineTo(-11,-17);s.lineTo(-8,-17);s.lineTo(2,-1.6);s.lineTo(14,-1.5);s.closePath();
- const g=new THREE.Group();const body=new THREE.Mesh(new THREE.ShapeGeometry(s),MAT.white);body.rotation.x=-Math.PI/2;g.add(body);
- const f=new THREE.Shape();f.moveTo(-11,0);f.lineTo(-18,6);f.lineTo(-19,6);f.lineTo(-18,0);f.closePath();
- g.add(new THREE.Mesh(new THREE.ShapeGeometry(f),MAT.white));
- const sh=new THREE.Mesh(new THREE.ShapeGeometry(s),MAT.shadow);sh.rotation.x=-Math.PI/2;sh.name='shadow';g.add(sh);
+/* Airlines that fly Logan, by ICAO callsign prefix: name + tail colour. Unknown prefixes keep the callsign and a grey tail. */
+const AIRLINES={JBU:['JetBlue','#0a3d91'],DAL:['Delta','#c8102e'],AAL:['American','#0a4a8f'],UAL:['United','#1b3f8b'],SWA:['Southwest','#f9b612'],ASA:['Alaska','#01426a'],
+ FFT:['Frontier','#1a7a3e'],NKS:['Spirit','#ffd200'],ACA:['Air Canada','#d22630'],BAW:['British Airways','#1e3a8a'],AFR:['Air France','#0b2d8f'],DLH:['Lufthansa','#f4c400'],
+ EIN:['Aer Lingus','#0a7d5b'],VIR:['Virgin Atlantic','#c8102e'],KLM:['KLM','#00a1de'],ICE:['Icelandair','#f7c500'],QTR:['Qatar Airways','#5c0632'],UAE:['Emirates','#d71921'],
+ CPA:['Cathay Pacific','#006564'],JAL:['Japan Airlines','#c8102e'],TAP:['TAP Portugal','#00a54f'],IBE:['Iberia','#d7192d'],SAS:['SAS','#000f5c'],SWR:['Swiss','#e30613'],
+ FDX:['FedEx','#4d148c'],UPS:['UPS','#5b3a1a'],RPA:['Republic','#1b5faa'],EDV:['Endeavor','#c8102e'],JIA:['PSA','#0a4a8f'],ENY:['Envoy','#0a4a8f'],SKW:['SkyWest','#1b3f8b'],
+ PDT:['Piedmont','#0a4a8f'],KAP:['Cape Air','#0a4a8f'],GJS:['GoJet','#1b3f8b'],CNS:['Cape Air','#0a4a8f'],ELY:['El Al','#1d4b9b'],THY:['Turkish','#c8102e'],
+ ETH:['Ethiopian','#2f7d3a'],AZA:['ITA','#0b3c8c'],EJA:['NetJets','#0a2c5a'],LXJ:['Flexjet','#8a1b2e'],XOJ:['XOJet','#333']};
+export function airlineOf(callsign){const cs=String(callsign||'').trim();const m=cs.match(/^([A-Z]{3})(\d+[A-Z]?)$/);if(!m||!AIRLINES[m[1]])return {name:cs||'Aircraft',flight:'',color:'#8a9198',text:cs||'Aircraft'};
+ const [name,color]=AIRLINES[m[1]];return {name,flight:m[2],color,text:name+' '+m[2]};}
+/** an airliner, nose along +x, 1.5× real (about 55 m long) so it reads from the ground; white fuselage, airline tail */
+const PLANE_MAT={body:new THREE.MeshStandardMaterial({color:0xf4f6f8,roughness:.45,metalness:.15}),belly:new THREE.MeshStandardMaterial({color:0x9aa3ab,roughness:.6,metalness:.2}),
+ engine:new THREE.MeshStandardMaterial({color:0xd8dde2,roughness:.4,metalness:.4}),glass:new THREE.MeshStandardMaterial({color:0x1b2630,roughness:.2,metalness:.5})};
+function wingShape(rootFront,rootBack,span,tipFront,tipBack){const w=new THREE.Shape();w.moveTo(rootFront,0);w.lineTo(tipFront,span);w.lineTo(tipBack,span);w.lineTo(rootBack,0);w.closePath();return w;}
+function makePlane(callsign){
+ const al=airlineOf(callsign);const g=new THREE.Group();
+ const add=(geo,mat,x,y,z,rx=0,ry=0,rz=0)=>{const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);m.rotation.set(rx,ry,rz);m.castShadow=true;g.add(m);return m;};
+ add(new THREE.CapsuleGeometry(1.9,30,6,18),PLANE_MAT.body,0,0,0,0,0,Math.PI/2);                       // fuselage
+ add(new THREE.CapsuleGeometry(1.6,26,4,14),PLANE_MAT.belly,-.5,-.55,0,0,0,Math.PI/2);                  // darker belly
+ add(new THREE.BoxGeometry(2.2,.7,3.2),PLANE_MAT.glass,13.6,.9,0);                                       // cockpit glass
+ const wing=new THREE.ExtrudeGeometry(wingShape(3,-4.5,16.5,-7.5,-10),{depth:.45,bevelEnabled:false});
+ for(const side of [1,-1]){const w=add(wing,PLANE_MAT.body,0,-.9,0,side===1?-Math.PI/2:Math.PI/2,0,0);w.rotation.x+=side*.06;w.scale.set(1,1,1);if(side===-1)w.scale.z=1;
+  add(new THREE.CylinderGeometry(1.15,1.25,4.6,16),PLANE_MAT.engine,-1.2,-2.4,side*6.2,0,0,Math.PI/2);
+  add(new THREE.CylinderGeometry(.9,.9,.4,16),PLANE_MAT.glass,1.2,-2.4,side*6.2,0,0,Math.PI/2);}
+ const stab=new THREE.ExtrudeGeometry(wingShape(-13.5,-16.5,6.5,-16.5,-18),{depth:.3,bevelEnabled:false});
+ for(const side of [1,-1])add(stab,PLANE_MAT.body,0,.6,0,side===1?-Math.PI/2:Math.PI/2,0,0);
+ const finShape=new THREE.Shape();finShape.moveTo(-11,1.2);finShape.lineTo(-16.5,8.5);finShape.lineTo(-18.5,8.5);finShape.lineTo(-18.2,1.2);finShape.closePath();
+ add(new THREE.ExtrudeGeometry(finShape,{depth:.35,bevelEnabled:false}),new THREE.MeshStandardMaterial({color:al.color,roughness:.5}),0,0,-.17);
+ g.scale.setScalar(1.5);
+ /* ground shadow: the planform, flat, sized to the model */
+ const plan=new THREE.Shape();plan.moveTo(16,0);plan.lineTo(3,2);plan.lineTo(-7.5,16.5);plan.lineTo(-10,16.5);plan.lineTo(-4.5,2);plan.lineTo(-13.5,2);plan.lineTo(-16.5,6.5);plan.lineTo(-18,6.5);plan.lineTo(-17,1.5);
+ plan.lineTo(-17,-1.5);plan.lineTo(-18,-6.5);plan.lineTo(-16.5,-6.5);plan.lineTo(-13.5,-2);plan.lineTo(-4.5,-2);plan.lineTo(-10,-16.5);plan.lineTo(-7.5,-16.5);plan.lineTo(3,-2);plan.closePath();
+ const sh=new THREE.Mesh(new THREE.ShapeGeometry(plan),MAT.shadow);sh.rotation.x=-Math.PI/2;sh.name='shadow';g.add(sh);
  return g;
+}
+/** a small screen-sized name tag: same pixel size at any distance */
+function nameTag(text,color){
+ const c=document.createElement('canvas');c.width=512;c.height=96;const g=c.getContext('2d');
+ g.fillStyle='rgba(12,17,22,.82)';g.beginPath();g.roundRect(2,2,c.width-4,c.height-4,24);g.fill();g.fillStyle=color;g.fillRect(2,2,14,c.height-4);
+ g.fillStyle='#fff';g.font='700 46px system-ui,Helvetica,Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(text,c.width/2+6,c.height/2+2);
+ const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;
+ const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,depthTest:false,transparent:true,sizeAttenuation:false}));s.scale.set(.19,.036,1);s.renderOrder=20;return s;
 }
 const lerpAngle=(a,b,t)=>{let d=(b-a+Math.PI)%(2*Math.PI);if(d<0)d+=2*Math.PI;return a+(d-Math.PI)*t;};
 
 /* ---------- the layers ---------- */
-export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,controls=null,intervals={}}={}){
+export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,controls=null,network=null,intervals={}}={}){
  const I={buses:10000,predictions:30000,aircraft:20000,tide:360000,...intervals};
  const group=new THREE.Group();group.name='live';scene.add(group);
  const ground=(x,z)=>{const y=heightAt(x,z);return Number.isFinite(y)?y:0;};
@@ -126,10 +158,17 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
  live.ingestBuses=json=>{
   const rows=json&&Array.isArray(json.data)?json.data:[];const seen=new Set(),t=now();
   for(const v of rows){const a=v.attributes||{};if(!Number.isFinite(a.latitude)||!Number.isFinite(a.longitude))continue;
-   const [x,z]=toLocal(a.latitude,a.longitude),yaw=yawFromBearing(Number.isFinite(a.bearing)?a.bearing:0);seen.add(v.id);
+   let [x,z]=toLocal(a.latitude,a.longitude),yaw=yawFromBearing(Number.isFinite(a.bearing)?a.bearing:0);seen.add(v.id);
+   /* Snap to the road (Pierce, 09-14: "bus is on sidewalks"): the MBTA fix is 5–10 m off, so the raw point lands on the curb.
+      Put the bus on the nearest centerline, in the right-hand lane of its direction of travel, pointing along the road. */
+   const prev=buses.get(v.id);
+   if(network&&network.nearest){const n=network.nearest(x,z,true);if(n&&n.distance<30){
+    let dx=n.dx/n.length,dz=n.dz/n.length;const bv=Number.isFinite(a.bearing)?[Math.sin(a.bearing*D),-Math.cos(a.bearing*D)]:(prev?[Math.cos(prev.yaw),-Math.sin(prev.yaw)]:null);
+    if(bv&&bv[0]*dx+bv[1]*dz<0){dx=-dx;dz=-dz;}
+    const off=Math.min(2.2,(n.width||7)/4);x=n.x+(-dz)*off;z=n.z+dx*off;yaw=Math.atan2(-dz,dx);}}
    let b=buses.get(v.id);
-   if(!b){b={mesh:makeBus(),x,z,yaw,from:{x,z,yaw},to:{x,z,yaw},t0:t,label:a.label,status:a.current_status};b.mesh.position.set(x,ground(x,z),z);b.mesh.rotation.y=yaw;group.add(b.mesh);buses.set(v.id,b);}
-   else{b.from={x:b.x,z:b.z,yaw:b.yaw};b.to={x,z,yaw:Number.isFinite(a.bearing)?yaw:b.yaw};b.t0=t;b.status=a.current_status;}
+   if(!b){b={mesh:makeBus(),x,z,yaw,from:{x,z,yaw},to:{x,z,yaw},t0:t,label:a.label,status:a.current_status,direction:a.direction_id};b.mesh.position.set(x,ground(x,z),z);b.mesh.rotation.y=yaw;group.add(b.mesh);buses.set(v.id,b);}
+   else{b.from={x:b.x,z:b.z,yaw:b.yaw};b.to={x,z,yaw:Number.isFinite(a.bearing)?yaw:b.yaw};b.t0=t;b.status=a.current_status;b.direction=a.direction_id;}
    b.miss=0;}
   for(const [id,b] of buses){if(seen.has(id))continue;if(++b.miss>=2){group.remove(b.mesh);buses.delete(id);}}
   live.counts.buses=buses.size;return buses.size;
@@ -145,9 +184,10 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    const age=Math.max(0,feedTime-(tpos||feedTime));const v=Number.isFinite(vel)?vel:0,tr=(Number.isFinite(track)?track:0)*D,vr=Number.isFinite(vrate)?vrate:0;
    const fix={x:x+Math.sin(tr)*v*age,z:z-Math.cos(tr)*v*age,y:alt+vr*age,vx:Math.sin(tr)*v,vz:-Math.cos(tr)*v,vy:vr,yaw:yawFromBearing(Number.isFinite(track)?track:0),t0:t};
    seen.add(icao);let p=aircraft.get(icao);
-   if(!p){p={mesh:makePlane(),callsign:(cs||'').trim(),...fix,ox:0,oz:0,oy:0};const tag=labelSprite(p.callsign||icao,{bg:'#ffffff',size:34});tag.position.set(0,6,0);tag.scale.set(14,7,1);p.mesh.add(tag);group.add(p.mesh);aircraft.set(icao,p);}
+   if(!p){const callsign=(cs||'').trim(),al=airlineOf(callsign);p={mesh:makePlane(callsign),callsign,airline:al,...fix,ox:0,oz:0,oy:0};const tag=nameTag(al.text,al.color);tag.position.set(0,9,0);p.mesh.add(tag);group.add(p.mesh);aircraft.set(icao,p);}
    else{const cur=pos(p,t);p.ox=cur.x-fix.x;p.oz=cur.z-fix.z;p.oy=cur.y-fix.y;Object.assign(p,fix);}
-   p.miss=0;}
+   p.alt=alt;p.speed=v;p.climb=vr;p.miss=0;}
+  renderChip();
   for(const [id,p] of aircraft){if(seen.has(id))continue;if(++p.miss>=3){group.remove(p.mesh);aircraft.delete(id);}}
   live.counts.aircraft=aircraft.size;return aircraft.size;
  };
@@ -162,7 +202,13 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
  /* per-frame easing; runs on its own rAF so mounting needs no hook in the game loop */
  let raf=0,stopped=false;
  function tick(){if(stopped)return;raf=requestAnimationFrame(tick);const t=now();
-  if(following){const b=buses.get(following);
+  if(following&&String(following).startsWith('ac:')){const p=aircraft.get(following.slice(3));
+   if(!p||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
+   else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz)||1;const dx=p.vx/sp,dz=p.vz/sp;
+    const gx=c.x-dx*140,gz=c.z-dz*140,gy=c.y+45;
+    camera.position.x+=(gx-camera.position.x)*.08;camera.position.y+=(gy-camera.position.y)*.08;camera.position.z+=(gz-camera.position.z)*.08;
+    controls.target.x+=(c.x-controls.target.x)*.15;controls.target.y+=(c.y-controls.target.y)*.15;controls.target.z+=(c.z-controls.target.z)*.15;}}
+  else if(following){const b=buses.get(following);
    if(!b||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
    else if(camera&&controls){let dx=b.to.x-b.from.x,dz=b.to.z-b.from.z;const L=Math.hypot(dx,dz);if(L>.5){b.dir=[dx/L,dz/L];}const d=b.dir||[0,1];
     const y=ground(b.x,b.z);const gx=b.x-d[0]*30,gz=b.z-d[1]*30,gy=y+12;
@@ -191,13 +237,19 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    if(!preds.has(veh.id))preds.set(veh.id,{stop:stop?stop.attributes.name:'',headsign:trip?trip.attributes.headsign:'',when});}
   renderChip();return preds.size;};
  const chip=typeof document!=='undefined'?document.createElement('div'):null;if(chip){chip.id='liveChip';chip.hidden=true;document.body.appendChild(chip);}
- function renderChip(){if(!chip)return;if(!buses.size){chip.hidden=true;return;}chip.hidden=false;chip.textContent='';
-  for(const [id,b] of buses){const p=preds.get(id);const el=document.createElement('button');el.className='bus'+(following===id?' on':'');
-   const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
-   const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):'')):String(b.status||'').toLowerCase().replace(/_/g,' ');
-   const bb=document.createElement('b');bb.textContent='713 bus'+(b.label?' '+b.label:'');const sp=document.createElement('span');sp.textContent=line;const em=document.createElement('em');em.textContent=following===id?'Following · tap to stop':'Follow this bus';
-   el.append(bb,sp,em);el.onclick=()=>live.follow(following===id?null:id);chip.append(el);}}
- live.follow=id=>{following=id&&buses.has(id)?id:null;if(following&&controls)controls.autoRotate=false;renderChip();return following;};
+ const DIRECTION={0:'toward Winthrop Beach',1:'toward Orient Heights'};
+ function renderChip(){if(!chip)return;if(!buses.size&&!aircraft.size){chip.hidden=true;return;}chip.hidden=false;chip.textContent='';
+  const entry=(id,title,line,cls)=>{const el=document.createElement('button');el.className=cls+(following===id?' on':'');
+   const bb=document.createElement('b');bb.textContent=title;const sp=document.createElement('span');sp.textContent=line;const em=document.createElement('em');em.textContent=following===id?'Following · tap to stop':'Follow';
+   el.append(bb,sp,em);el.onclick=()=>live.follow(following===id?null:id);chip.append(el);};
+  for(const [id,b] of buses){const p=preds.get(id);const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
+   const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):''))
+    :((b.status==='STOPPED_AT'?'stopped, ':'')+(DIRECTION[b.direction]||'in service'));
+   entry(id,'713 bus'+(b.label?' '+b.label:''),line,'bus');}
+  const planes=[...aircraft.entries()].sort((a,b)=>Math.hypot(a[1].x,a[1].z)-Math.hypot(b[1].x,b[1].z)).slice(0,4);
+  for(const [icao,p] of planes){const ft=Math.round(p.alt/0.3048/100)*100,mph=Math.round((p.speed||0)*2.237);const phase=p.climb>1?'climbing':p.climb<-1?'descending':'level';
+   entry('ac:'+icao,p.airline.text,ft.toLocaleString()+' ft · '+phase+' · '+mph+' mph','plane');}}
+ live.follow=id=>{following=id&&(buses.has(id)||(String(id).startsWith('ac:')&&aircraft.has(id.slice(3))))?id:null;if(following&&controls)controls.autoRotate=false;renderChip();return following;};
  live.following=()=>following;
  if(typeof addEventListener==='function')addEventListener('pointerdown',e=>{if(following&&e.target&&e.target.tagName==='CANVAS'){following=null;renderChip();}},{passive:true});
  const chipTimer=setInterval(renderChip,15000);
