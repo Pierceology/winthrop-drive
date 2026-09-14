@@ -217,7 +217,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
     camera.position.set(c.x+dx*22,c.y+3.4,c.z+dz*22);camera.lookAt(c.x+dx*600,ly,c.z+dz*600);}}
   else if(following){const b=buses.get(following);
    if(!b||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
-   else if(camera&&controls){let dx=b.to.x-b.from.x,dz=b.to.z-b.from.z;const L=Math.hypot(dx,dz);if(L>.5){b.dir=[dx/L,dz/L];}const d=b.dir||[0,1];
+   else if(camera&&controls){let dx=b.to.x-b.from.x,dz=b.to.z-b.from.z;const L=Math.hypot(dx,dz);if(L>.5){b.dir=[dx/L,dz/L];}const d=b.dir||[Math.cos(b.yaw),-Math.sin(b.yaw)];   // a stopped bus: look along its nose (the road), never a default compass point
     const y=ground(b.x,b.z);const gx=b.x-d[0]*30,gz=b.z-d[1]*30,gy=y+12;
     camera.position.x+=(gx-camera.position.x)*.06;camera.position.y+=(gy-camera.position.y)*.06;camera.position.z+=(gz-camera.position.z)*.06;
     controls.target.x+=(b.x-controls.target.x)*.12;controls.target.y+=(y+2-controls.target.y)*.12;controls.target.z+=(b.z-controls.target.z)*.12;}}
@@ -241,6 +241,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
  live.ingestPredictions=json=>{const inc=new Map((json.included||[]).map(i=>[i.type+':'+i.id,i]));preds.clear();
   for(const p of (json.data||[])){const veh=p.relationships&&p.relationships.vehicle&&p.relationships.vehicle.data;if(!veh)continue;const a=p.attributes||{};const when=a.departure_time||a.arrival_time;if(!when)continue;
    const stop=inc.get('stop:'+p.relationships.stop.data.id),trip=inc.get('trip:'+p.relationships.trip.data.id);
+   if(new Date(when).getTime()<Date.now()-45000)continue;   // already happened: not a next stop
    if(!preds.has(veh.id))preds.set(veh.id,{stop:stop?stop.attributes.name:'',headsign:trip?trip.attributes.headsign:'',when});}
   renderChip();return preds.size;};
  const chip=typeof document!=='undefined'?document.createElement('div'):null;if(chip){chip.id='liveChip';chip.hidden=true;document.body.appendChild(chip);}
@@ -249,7 +250,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   const entry=(id,title,line,cls)=>{const el=document.createElement('button');el.className=cls+(following===id?' on':'');
    const bb=document.createElement('b');bb.textContent=title;const sp=document.createElement('span');sp.textContent=line;const em=document.createElement('em');em.textContent=following===id?'Following · tap to stop':'Follow';
    el.append(bb,sp,em);el.onclick=()=>live.follow(following===id?null:id);chip.append(el);};
-  for(const [id,b] of buses){const p=preds.get(id);const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
+  for(const [id,b] of buses){let p=preds.get(id);if(p&&p.when&&new Date(p.when).getTime()<Date.now()-45000)p=null;const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
    const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):''))
     :((b.status==='STOPPED_AT'?'stopped, ':'')+(DIRECTION[b.direction]||'in service'));
    entry(id,'713 bus'+(b.label?' '+b.label:''),line,'bus');}
