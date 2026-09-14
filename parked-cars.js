@@ -92,6 +92,7 @@ export async function parkedCars(network, heightAt, {assets = [], furniture = {}
         const x = s.a[0] + ux * along + nx * off * side;
         const z = s.a[1] + uz * along + nz * off * side;
         if (!network.contains(x, z, 0.2) || network.obstructed(x, z) || blocked(x, z)) continue;
+        if (s.parked) s.parked[side] = off;            // the traffic lane on this side moves inboard (lane-position, ambient)
         // Park with the flow: on a two-way that means nose the way traffic runs on your side of the road.
         const facing = s.direction ? (s.direction === 1 ? 1 : -1) : side;
         const yaw = Math.atan2(-ux * facing, -uz * facing) + (hash(segIndex, i, side + 9) - 0.5) * 0.06;

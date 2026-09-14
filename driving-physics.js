@@ -1,7 +1,7 @@
 import {lanePoint} from './lane-position.js';
 // A bounded, road-constrained bicycle model. Coordinates and distances are meters.
 export class RoadNetwork {
- constructor(roads,buildings=[]){this.obstacles=new Map();for(const b of buildings){const xs=b.rings[0].map(p=>p[0]),zs=b.rings[0].map(p=>p[1]);for(let x=Math.floor(Math.min(...xs)/60);x<=Math.floor(Math.max(...xs)/60);x++)for(let z=Math.floor(Math.min(...zs)/60);z<=Math.floor(Math.max(...zs)/60);z++){const k=x+","+z;if(!this.obstacles.has(k))this.obstacles.set(k,[]);this.obstacles.get(k).push(b.rings)}}this.segments=[];this.cells=new Map();this.cellSize=60;for(const road of roads){if([7,8].includes(road.type))continue;for(let i=1;i<road.points.length;i++){const a=road.points[i-1],b=road.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);if(length<.05)continue;const s={a,b,dx,dz,length,width:road.width||6,name:road.name,speed:road.speed,id:road.id,direction:road.directions?.[i-1]??null,directionSource:road.directionSources?.[i-1]??null};this.segments.push(s);const pad=s.width/2+3;for(let x=Math.floor((Math.min(a[0],b[0])-pad)/60);x<=Math.floor((Math.max(a[0],b[0])+pad)/60);x++)for(let z=Math.floor((Math.min(a[1],b[1])-pad)/60);z<=Math.floor((Math.max(a[1],b[1])+pad)/60);z++){const key=x+','+z;if(!this.cells.has(key))this.cells.set(key,[]);this.cells.get(key).push(s)}}}}
+ constructor(roads,buildings=[]){this.obstacles=new Map();for(const b of buildings){const xs=b.rings[0].map(p=>p[0]),zs=b.rings[0].map(p=>p[1]);for(let x=Math.floor(Math.min(...xs)/60);x<=Math.floor(Math.max(...xs)/60);x++)for(let z=Math.floor(Math.min(...zs)/60);z<=Math.floor(Math.max(...zs)/60);z++){const k=x+","+z;if(!this.obstacles.has(k))this.obstacles.set(k,[]);this.obstacles.get(k).push(b.rings)}}this.segments=[];this.cells=new Map();this.cellSize=60;for(const road of roads){if([7,8].includes(road.type))continue;for(let i=1;i<road.points.length;i++){const a=road.points[i-1],b=road.points[i],dx=b[0]-a[0],dz=b[1]-a[1],length=Math.hypot(dx,dz);if(length<.05)continue;const s={a,b,dx,dz,length,width:road.width||6,name:road.name,speed:road.speed,id:road.id,direction:road.directions?.[i-1]??null,directionSource:road.directionSources?.[i-1]??null,parked:{}};this.segments.push(s);const pad=s.width/2+3;for(let x=Math.floor((Math.min(a[0],b[0])-pad)/60);x<=Math.floor((Math.max(a[0],b[0])+pad)/60);x++)for(let z=Math.floor((Math.min(a[1],b[1])-pad)/60);z<=Math.floor((Math.max(a[1],b[1])+pad)/60);z++){const key=x+','+z;if(!this.cells.has(key))this.cells.set(key,[]);this.cells.get(key).push(s)}}}}
  nearest(x,z,global=false){const list=global?this.segments.filter(s=>s.length>8&&s.width>=3):(this.cells.get(Math.floor(x/60)+','+Math.floor(z/60))||[]);let best=null;for(const s of list){const t=Math.max(0,Math.min(1,((x-s.a[0])*s.dx+(z-s.a[1])*s.dz)/s.length**2)),px=s.a[0]+t*s.dx,pz=s.a[1]+t*s.dz,d=Math.hypot(x-px,z-pz);if(!best||d<best.distance)best={...s,x:px,z:pz,distance:d,t}}return best;}
  /* Things parked on the road. Buildings are polygons and never move; a parked car is a small box that the
     town puts there and may take away again, so it gets its own grid and its own switch. Each car is two
@@ -60,7 +60,7 @@ export class DrivingState {
  for(const {s,t}of candidates.slice(0,100)){const sign=s.direction||((-Math.sin(this.yaw)*s.dx-Math.cos(this.yaw)*s.dz)>=0?1:-1),yaw=Math.atan2(-s.dx*sign,-s.dz*sign);for(const at of[t,.5])for(const offset of[s.direction?0:Math.min(s.width/4,2),0]){const x=s.a[0]+at*s.dx-s.dz/s.length*offset*sign,z=s.a[1]+at*s.dz+s.dx/s.length*offset*sign;if(!this.fitsAt(x,z,yaw))continue;Object.assign(this,{x,z,yaw,speed:0,steer:0,blocked:false,wrongWay:false,road:s,recoveryTime:1.4});this.recoveryCount++;this.lastSafe={x,z,yaw};return true;}}
  if(this.lastSafe){Object.assign(this,this.lastSafe,{speed:0,steer:0,blocked:false,wrongWay:false,recoveryTime:1.4});this.recoveryCount++;return true;}return false;
  }
- step(dt,input){dt=Math.min(.05,Math.max(0,dt));this.recoveryTime=0;this.assisting=false;
+ step(dt,input){dt=Math.min(.05,Math.max(0,dt));this.recoveryTime=0;this.assisting=false;let hitBlocker=false;
  const target=(typeof input.steerAxis==='number')?Math.max(-1,Math.min(1,input.steerAxis)):(input.left?1:0)-(input.right?1:0);this.steer+=(target*.56/(1+Math.abs(this.speed)/20)-this.steer)*Math.min(1,dt*9);
  const p=this.performance;this.speed+=((input.accel?Math.min(p.launch,p.power/Math.max(1,Math.abs(this.speed))):0)-(input.reverse?(this.speed>0?12:3):0))*dt;const drag=(.15+.000335*this.speed*this.speed+(input.brake?12:0))*dt;
  this.speed=Math.abs(this.speed)<=drag?0:this.speed-Math.sign(this.speed)*drag;this.speed=Math.max(-5,Math.min(this.performance.top,this.speed));
@@ -76,7 +76,7 @@ export class DrivingState {
    for(const l of[-1.1,1.1])for(const w of[-.76,.76]){
     const px=x+fx*l+rx*w,pz=z+fz*l+rz*w;if(this.network.contains(px,pz,.1))continue;
     const hit=this.network.blockerAt(px,pz);
-    if(hit){const len=hit.d||.001;cx+=hit.dx/len*hit.depth;cz+=hit.dz/len*hit.depth;count++;continue;}
+    if(hit){hitBlocker=true;const len=hit.d||.001;cx+=hit.dx/len*hit.depth;cz+=hit.dz/len*hit.depth;count++;continue;}
     const list=this.network.cells.get(Math.floor(px/60)+','+Math.floor(pz/60))||[];let best;
     for(const e of list){const t=Math.max(0,Math.min(1,((px-e.a[0])*e.dx+(pz-e.a[1])*e.dz)/e.length**2)),qx=e.a[0]+t*e.dx,qz=e.a[1]+t*e.dz,d=Math.hypot(qx-px,qz-pz),depth=d-Math.max(.6,e.width/2-.14);if(!best||depth<best.depth)best={qx,qz,d,depth};}
     if(best&&best.depth>0&&best.d>0){cx+=(best.qx-px)/best.d*best.depth;cz+=(best.qz-pz)/best.d*best.depth;count++;}
@@ -102,7 +102,9 @@ export class DrivingState {
     radius AND under 1.6 m/s, and it was sitting still at the beach reporting that it was not. Drive
     into a parked car and you stop, which is also what happens outside. */
  {const moved=Math.hypot(x-this.x,z-this.z),wanted=Math.abs(this.speed)*dt;
-  if(wanted>.02&&moved<wanted*.4)this.speed*=Math.max(0,moved/wanted);}
+  /* Pierce, 2026-09-13: "curbs crush me". A parked car is a wall and the speed dies with the distance; a curb is
+     a scrape -- the road-edge assist holds the line and the speed bleeds off at 2.5/s instead of collapsing. */
+  if(wanted>.02&&moved<wanted*.4){if(hitBlocker)this.speed*=Math.max(0,moved/wanted);else this.speed*=Math.exp(-dt*2.5);}}
  this.distance+=Math.hypot(x-this.x,z-this.z);this.x=x;this.z=z;this.yaw=yaw;this.blocked=false;
  if(this.fitsAt(x,z,yaw))this.lastSafe={x,z,yaw};this.road=this.network.nearest(x,z);return this;
  }

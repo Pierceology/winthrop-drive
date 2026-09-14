@@ -31,7 +31,7 @@ export class AmbientLife{
   agent.model.visible=true;}
  choices(edge){return(this.nodes.get(this.key(edge.b))||[]).filter(s=>(s.dx*edge.dx+s.dz*edge.dz)/(s.length*edge.length)>-.6);}
  pick(agent){const choices=this.choices(agent.edge);return choices.length?choices[(agent.i+Math.floor(this.clock/12))%choices.length]:null;}
- point(agent,t=agent.t){const s=agent.edge,n=Math.hypot(s.dx,s.dz),offset=agent.pedestrian?s.width/2+.95:Math.min(1.65,s.width*.22);return{x:s.a[0]+s.dx*t-s.dz/n*offset,z:s.a[1]+s.dz*t+s.dx/n*offset};}
+ point(agent,t=agent.t){const s=agent.edge,n=Math.hypot(s.dx,s.dz);let offset=agent.pedestrian?s.width/2+.95:Math.min(1.65,s.width*.22);if(!agent.pedestrian){const p=s.parked&&s.parked[s.reversed?-1:1];if(p!=null)offset=Math.max(.15,Math.min(offset,p-2.1));}return{x:s.a[0]+s.dx*t-s.dz/n*offset,z:s.a[1]+s.dz*t+s.dx/n*offset};}
  update(dt,focus,player,enabled=true){this.group.visible=enabled;if(!enabled)return;this.clock+=dt;
  for(const a of this.agents){if(!a.edge||Math.hypot(a.model.position.x-focus.x,a.model.position.z-focus.z)>800)this.spawn(a,focus,player);if(!a.edge)continue;const p=this.point(a);let speed=Math.min(a.speed,speedLimit(a.edge)*.92);// never over the posted limit
   if(!a.pedestrian){const others=this.agents.filter(b=>b!==a&&!b.pedestrian&&b.edge&&b.model.visible).map(b=>b.model.position);if(player?.active)others.push({x:player.state.x,z:player.state.z});for(const b of others){const dx=b.x-p.x,dz=b.z-p.z,ahead=(dx*a.edge.dx+dz*a.edge.dz)/a.edge.length,side=Math.abs(dx*a.edge.dz-dz*a.edge.dx)/a.edge.length;if(ahead>0&&ahead<10&&side<2)speed=Math.min(speed,Math.max(0,ahead-5));}

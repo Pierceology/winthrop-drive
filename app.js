@@ -20,6 +20,7 @@ import {inTown} from './town-limits.js';
 /* Resolved when the last heavy load -- the parked cars, at the end of the furniture chain -- is in the scene. The
    arrival waits on it: measured in Chrome, the seconds after the loading card are a run of one-second stalls. */
 let resolveTown=null;const townReady=new Promise(r=>{resolveTown=r;});
+let resolveGround=null;const groundReady=new Promise(r=>{resolveGround=r;});
 import {Weather} from './weather.js';
 import {TourFlight} from './tour-flight.js';
 import {EveningDrive} from './evening.js';
@@ -108,7 +109,9 @@ async function init(){
     colour of the sky covers the build and lifts when the town is in. frameWhole() corrects the shot once the roads
     are known, before the veil has lifted, so nobody sees the correction. */
  controls.target.set(...places.whole.target);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
- {const veil=$('veil');const lift=()=>{if(veil){veil.classList.add('gone');setTimeout(()=>veil.remove(),1600);}};Promise.race([townReady,new Promise(r=>setTimeout(r,25000))]).then(()=>setTimeout(lift,250));}
+ {const veil=$('veil');const lift=()=>{if(veil){veil.classList.add('gone');setTimeout(()=>veil.remove(),1600);}};/* Pierce, 2026-09-13: 'the game takes like 12 seconds to load on a plain blue screen'. The veil now lifts the moment the
+    ground and the roads are drawn -- the town's shape -- and the buildings, trees and cars arrive onto it. */
+  Promise.race([groundReady,new Promise(r=>setTimeout(r,25000))]).then(()=>setTimeout(lift,150));}
  if(!loopStarted){loopStarted=true;renderer.setAnimationLoop(animate);}
  [world,foundationData,residential,poi,assetData,neighborhoods,signData,photoRegistration]=await Promise.all([get('./data/world.json'),get('./data/road-foundation.json'),get('./data/residential.json'),get('./data/places.json'),get('./data/street-assets.json'),get('./data/neighborhoods.json'),get('./data/traffic-signs.json'),get('./data/photo-facades.json')]);origin=world.origin;heightAt=gridHeight(foundationData.terrain);
  world.roads=world.roads.map(r=>{const keep=r.points.map(q=>inTown(q[0],q[1]));if(keep.every(Boolean))return r;const pts=r.points.filter((q,i)=>keep[i]);if(pts.length<2)return null;const dirs=r.directions?r.directions.filter((d,i)=>keep[i]&&keep[i+1]):r.directions;return {...r,points:pts,directions:dirs};}).filter(Boolean);
@@ -136,7 +139,7 @@ async function init(){
  // The ground's photograph streams in behind the first frame: a 2 m/px base of the whole town, then 25 cm tiles by distance from the car.
  const ortho=new OrthoGround({origin,renderer,lowMemory});window.__ortho=ortho;
  groundWorld=await buildGroundWorld(foundationData,roofTiles,origin,asphaltMaterial(),ortho.material);
- terrain=groundWorld.ground;pavement=groundWorld.road;terrainMeshes=[terrain,groundWorld.walk,groundWorld.curb];surfaceAt=groundWorld.field.height;heightAt=surfaceAt;scene.add(terrain,pavement,groundWorld.walk,groundWorld.curb);
+ terrain=groundWorld.ground;pavement=groundWorld.road;terrainMeshes=[terrain,groundWorld.walk,groundWorld.curb];surfaceAt=groundWorld.field.height;heightAt=surfaceAt;scene.add(terrain,pavement,groundWorld.walk,groundWorld.curb);resolveGround();
  addGeometry();for(const b of world.buildings)if(b.neighborhood&&b.neighborhood.roofSource==='lidar')b.neighborhood.roof=null;
  const ownedFacades=await addOwnedFacades(buildings,world,surfaceAt);
  places.homes={target:[110,0,0],offset:[90,65,100]};const photoHome=residential.find(r=>r.address.startsWith('1040 '));places.replicas={target:[photoHome.center[0],0,photoHome.center[1]],offset:[photoHome.front[0]*27,12,photoHome.front[1]*27]};
@@ -181,7 +184,7 @@ async function init(){
    if(!/[?&]softcars=1/.test(location.search))driving.state.network.setBlockers(pc.userData.slots);
    driving.turn.setObstacles((driving.turn.obstacleList||[]).concat(pc.userData.slots.map(c=>({x:c.x,z:c.z,r:1.25}))));}).catch(e=>console.warn('Parked cars unavailable',e));}).catch(e=>console.warn('Street furniture unavailable',e));evening=new EveningDrive(scene,surfaceAt);weather=new Weather({scene,hemi,sun});weather.bind(['weather','weatherDrive']);
  assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Signs, poles and hydrants · ${assetData.assets.length}`;
-window.__drive=driving;window.__controls=controls;window.__camera=camera; ambient=new AmbientLife(scene,driving.state.network,surfaceAt);driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;
+window.__drive=driving;window.__controls=controls;window.__camera=camera; ambient=new AmbientLife(scene,driving.state.network,surfaceAt);window.__ambient=ambient;driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;
  tour={get active(){return coastal.active||flight.active;},start(){flight.stop();coastal.start();},stop(){coastal.stop();flight.stop();},update(dt){coastal.update(dt);flight.update(dt);}};}
  canopyData=await get('./data/tree-survey.json');canopyGroup=treeSurvey(canopyData,surfaceAt);scene.add(canopyGroup);
  const canopyAreas=await get('./data/lidar-trees.json').catch(()=>get('./data/canopy-scenery.json'));sceneryTrees=await treeScenery(canopyData,surfaceAt,driving.state.network,canopyAreas);scene.add(sceneryTrees);$('treeSummary').textContent=sceneryTrees.userData.count.toLocaleString()+' trees, each one where it really stands.';
