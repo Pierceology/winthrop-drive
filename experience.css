@@ -695,3 +695,6 @@ body.opening header,body.opening .places,body.opening .camera,body.opening #live
 #liveChip .plane .acts button{min-height:0;margin:0;padding:5px 10px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:none;border:1px solid var(--edge);border-radius:var(--pill);box-shadow:none}
 #liveChip .plane .acts button:hover{background:var(--glass-lite)}
 body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
+
+/* The panel sizes to what is in it (Pierce, 09-14: "the empty space below the menu doesn't look good") */
+.places,body:not(.driving) .places{bottom:auto;max-height:calc(100vh - 88px - var(--sat) - 72px - var(--sab));overflow:auto}
