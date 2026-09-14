@@ -293,6 +293,7 @@ function turnWords(guide) {
 /* ---------- the module ---------- */
 
 function start(drive) {
+  if (window.__world && window.__world !== 'winthrop') return;   // the race starts are Winthrop's three mouths; other towns get theirs with the factory
   let errands = [];
   let run = null;                     // the errand in progress
   let panelOpen = false;

@@ -629,3 +629,6 @@ body.driving .driveactions #driveMode button{min-width:0}
 /* the veil: the sky's colour until the town is in, then gone. No card, no clouds. */
 #veil{position:fixed;inset:0;background:#a2bdc9;z-index:40;pointer-events:none;opacity:1;transition:opacity 1.4s ease}
 #veil.gone{opacity:0}
+
+/* a factory town has no Winthrop Center, Yirrell Beach or Deer Island */
+html.factory-world .destinations,html.factory-world #tourSwitch{display:none}

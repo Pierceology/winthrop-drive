@@ -4,14 +4,14 @@ import * as THREE from 'three';
 // here, and it draws itself: light runs out from Winthrop Center along the streets, so the town's shape appears the
 // way a map is inked, in about a second and a half. When the real ground is drawn underneath, the ink dissolves.
 const CENTER = [-1150, -1900];
-export function townSketch({scene, outline, heightAt = () => 0}) {
+export function townSketch({scene, outline, heightAt = () => 0, center = CENTER}) {
   const pos = [], born = [];
   // distance from the centre along the polyline itself, so light travels the roads rather than radiating
   let far = 1;
   for (const road of outline) {
     for (let i = 1; i < road.length; i++) {
       const a = road[i - 1], b = road[i];
-      const da = Math.hypot(a[0] - CENTER[0], a[1] - CENTER[1]), db = Math.hypot(b[0] - CENTER[0], b[1] - CENTER[1]);
+      const da = Math.hypot(a[0] - center[0], a[1] - center[1]), db = Math.hypot(b[0] - center[0], b[1] - center[1]);
       pos.push(a[0], 2.5, a[1], b[0], 2.5, b[1]); born.push(da, db); far = Math.max(far, da, db);
     }
   }

@@ -1,0 +1,23 @@
+{
+ "name": "lihue",
+ "bbox": [
+  21.965,
+  -159.385,
+  21.99,
+  -159.355
+ ],
+ "built": "2026-09-14 12:59",
+ "audit": {
+  "buildings": 1667,
+  "roadSegments": 789,
+  "namedRoads": 106,
+  "verifiedBuildingHeights": 751,
+  "coordinateSystem": "tmerc about 21.97750,-159.37000; z south",
+  "buildingSources": [
+   "OpenStreetMap",
+   "Microsoft GlobalMLBuildingFootprints"
+  ],
+  "source": "OpenStreetMap contributors, via Overpass",
+  "fetched": "2026-09-14"
+ }
+}
