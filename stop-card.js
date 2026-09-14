@@ -6,6 +6,14 @@
 const OUT=460;   // must match the transition in experience.css
 
 const wikiCache=new Map();
+/* Pierce, 2026-09-14: 'go on places too'. Restaurants have no Wikipedia article; Google Places does, paid on the
+   RumblyTummy key and cached there per stop so each place is bought once. Keyless from here; fail-silent. */
+const PLACE_API='https://www.rumblytummy.com/_functions/placeCard';
+async function placeCard(stop){
+ try{const r=await fetch(PLACE_API+'?name='+encodeURIComponent(stop.name)+'&lat='+stop.lat+'&lon='+stop.lon+(stop.address?'&address='+encodeURIComponent(stop.address):''));
+  if(!r.ok)return null;const j=await r.json();if(!j||!j.ok)return null;
+  return {photo:j.photo||null,line:j.line||'',title:j.name||stop.name};}catch(_){return null;}
+}
 const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
 async function wiki(stop){
  const key=stop.name+'@'+stop.lat.toFixed(4)+','+stop.lon.toFixed(4);
@@ -16,7 +24,7 @@ async function wiki(stop){
   const hits=((await r.json()).query||{}).geosearch||[];if(!hits.length)return null;
   const want=norm(stop.name);const words=want.split(' ').filter(w=>w.length>2);
   const scored=hits.map(h=>{const t=norm(h.title);const shared=words.filter(w=>t.includes(w)).length;return {h,score:shared*100-h.dist};}).sort((a,b)=>b.score-a.score);
-  const best=scored[0];if(!best||best.score<50)return null;   // the article has to share a word with the stop's name
+  const best=scored[0];if(!best||best.score<50)return placeCard(stop);   // no article sharing a word with the stop's name: ask Google through RumblyTummy
   const s=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(best.h.title.replace(/ /g,'_')));
   if(!s.ok)return null;const j=await s.json();
   const line=(j.extract||'').split(/(?<=\.)\s/)[0].slice(0,160);
