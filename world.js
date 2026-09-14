@@ -63,7 +63,7 @@ async function chips() {
   const w = document.createElement('button'); w.type = 'button'; w.textContent = 'Drive Winthrop'; w.onclick = () => { location.href = './'; }; box.append(w);
 }
 async function ready() { if (!('serviceWorker' in navigator)) throw new Error('This browser cannot hold a built town (no service worker).'); await navigator.serviceWorker.register('./sw.js'); await navigator.serviceWorker.ready; }
-function open(slug) { location.href = './?world=' + slug + '&drive=1'; }
+function open(slug) { location.href = './?world=' + slug; }   // land on the town with the choices -- rides, Drive here, Auto drive -- not straight into the car
 $('form').addEventListener('submit', async e => {
   e.preventDefault(); const q = $('city').value.trim(); if (!q) return;
   const go = $('go'); go.disabled = true;
@@ -81,7 +81,7 @@ $('form').addEventListener('submit', async e => {
     await new Promise(r => setTimeout(r, 1400));
     stNote.textContent = 'Please allow about a minute while I build your drive of ' + place.name + '.';
     const t1 = performance.now();
-    const result = await buildCity({name: place.name, lat: place.lat, lon: place.lon, country: place.country, slug}, p => { stNote.textContent = p.text; stBar.style.width = Math.round(p.k * 100) + '%'; });
+    const result = await buildCity({name: place.name, lat: place.lat, lon: place.lon, country: place.country, slug, big: place.big}, p => { stNote.textContent = p.text; stBar.style.width = Math.round(p.k * 100) + '%'; });
     const secs = Math.round((performance.now() - t1) / 1000);
     stNote.textContent = `Built: ${result.audit.roadSegments} streets, ${result.audit.buildings} buildings in ${secs}s. Opening…`;
     setTimeout(() => open(slug), 900);

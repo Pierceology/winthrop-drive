@@ -631,4 +631,4 @@ body.driving .driveactions #driveMode button{min-width:0}
 #veil.gone{opacity:0}
 
 /* a factory town has no Winthrop Center, Yirrell Beach or Deer Island */
-html.factory-world .destinations,html.factory-world #tourSwitch{display:none}
+html.factory-world .destinations,html.factory-world #tourSwitch,html.factory-world #tour{display:none}   /* and no Coastal flyover: that route is Winthrop's shore */

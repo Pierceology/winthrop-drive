@@ -60,7 +60,11 @@ const DATA=FACTORY?`./worlds/${WORLD}/`:'./data/';
 window.__world=WORLD;if(FACTORY)document.documentElement.classList.add('factory-world');
 const getOr=(path,fallback)=>get(path).catch(()=>fallback);
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-if(FACTORY)getOr(DATA+'town.json',null).then(t=>{if(!t)return;const name=(t.title||t.name||WORLD).replace(/\b\w/g,c=>c.toUpperCase());document.title=name+' | Drive '+name;const h=document.querySelector('.places h1');if(h)h.textContent='Explore '+name;const help=document.querySelector('.explore-help');if(help)help.textContent=t.tagline||('Every street in '+name+', from free open data.');const b=document.querySelector('.brand b');if(b)b.textContent=name;const bs=document.querySelector('.brand span');if(bs)bs.textContent='Drive '+name;});   /* set the moment the visitor moves the camera themselves */
+if(FACTORY)getOr(DATA+'town.json',null).then(t=>{if(!t)return;const name=(t.title||t.name||WORLD).replace(/\b\w/g,c=>c.toUpperCase());window.__townName=name;document.title=name+' | Drive '+name;
+ const set=(sel,text)=>{const el=document.querySelector(sel);if(el)el.textContent=text;};
+ set('.places h1','Explore '+name);set('.explore-help',t.tagline||('Every street in '+name+', from free open data.'));set('.brand b',name);set('.brand span','Drive '+name);set('#exploreTown','Explore '+name);set('#currentRoad',name);set('#about h2','Drive '+name+'.');
+ /* the About panel is written for Winthrop; a built town gets its own paragraph */
+ const about=document.querySelector('#about p, #aboutPanel p, .about p');if(about)about.textContent='Drive '+name+'. Every street, building and place from OpenStreetMap, the land from open elevation data'+(t.country==='US'?', the ground from USGS aerial photographs':'')+' — built on your device from a single name. Drag to move. Tap a street or a place and drive there. Pick a ride for a flyover or let the car drive you.';});   /* set the moment the visitor moves the camera themselves */
 function frameWhole(){
  if(!world||!world.roads||!world.roads.length)return;
  let minx=1e9,maxx=-1e9,minz=1e9,maxz=-1e9;

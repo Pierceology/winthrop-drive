@@ -15,7 +15,7 @@ const OVERPASS = ['https://maps.mail.ru/osm/tools/overpass/api/interpreter', 'ht
 const TERRARIUM = 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png';
 const NAIP = 'https://imagery.nationalmap.gov/arcgis/services/USGSNAIPPlus/ImageServer/WMSServer?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=USGSNAIPPlus&CRS=EPSG:4326&BBOX={s},{w},{n},{e}&WIDTH={px}&HEIGHT={px}&FORMAT=image/jpeg';
 const HIGHWAY = {motorway: [1, 1, 14], trunk: [1, 1, 12], primary: [2, 2, 11], secondary: [3, 3, 10], tertiary: [4, 4, 9], unclassified: [5, 5, 7.5], residential: [5, 5, 7.5], living_street: [6, 6, 6], service: [6, 6, 5], footway: [7, 7, 2], path: [7, 7, 2], pedestrian: [7, 7, 3], cycleway: [8, 8, 2.5], track: [6, 6, 4]};
-const HALF = 1200;   // metres from the centre to the edge: a 2.4 km square, the size a phone builds in about a minute
+const HALF_TOWN = 1200, HALF_CITY = 1600;   // metres from the centre to the edge: a town is a 2.4 km square, a city 3.2 km -- what a phone builds in a minute or two
 
 /* ---- a local frame: transverse Mercator about the centre, x east, z SOUTH (the game's convention) ---- */
 export function makeFrame(lat0, lon0) {
@@ -43,7 +43,7 @@ export async function geocode(q) {
   const pick = rows.find(x => /city|town|village|hamlet|municipality|suburb|borough|county|island/.test(x.type + ' ' + x.class)) || rows[0];
   if (!pick) throw new Error('no such place');
   const ad = pick.address || {};
-  return {name: ad.city || ad.town || ad.village || ad.hamlet || ad.municipality || pick.name || pick.display_name.split(',')[0], lat: +pick.lat, lon: +pick.lon, country: (ad.country_code || '').toUpperCase(), display: pick.display_name};
+  return {name: ad.city || ad.town || ad.village || ad.hamlet || ad.municipality || pick.name || pick.display_name.split(',')[0], lat: +pick.lat, lon: +pick.lon, country: (ad.country_code || '').toUpperCase(), display: pick.display_name, kind: pick.type, big: pick.type === 'city' || (+pick.importance || 0) > .6};
 }
 
 async function overpass(query, onNote) {
@@ -116,6 +116,36 @@ function parseOSM(d, frame, name) {
     assets: {source: 'OpenStreetMap contributors', date: stamp, complete: false, counts: {lamps: lamps.length, busStops: busStops.length, signals: signals.length}, lamps, busStops, signals, assets: hydrants}};
 }
 
+/* ---- rides: the same passes Winthrop has, from whatever the town has ---- */
+function makeTours(seed, frame, town) {
+  const cats = [
+    {id: 'food', name: 'Eat your way through ' + town, blurb: 'Every restaurant, cafe, bar and bakery in town.', test: t => /^(restaurant|cafe|fast_food|bar|pub|ice_cream|bakery)$/.test(t.amenity || ''), kind: 'food'},
+    {id: 'landmarks', name: 'Landmarks', blurb: 'The places people come to see: the historic, the museums, the views.', test: t => t.historic || /^(attraction|museum|viewpoint|artwork|gallery|zoo|aquarium)$/.test(t.tourism || ''), kind: 'landmark'},
+    {id: 'worship', name: 'Churches and temples', blurb: 'Every place of worship in town.', test: t => t.amenity === 'place_of_worship', kind: 'church'},
+    {id: 'parks', name: 'All the parks', blurb: 'Every park, playground and garden in town, in one loop.', test: t => /^(park|playground|garden|nature_reserve)$/.test(t.leisure || ''), kind: 'park'},
+    {id: 'beaches', name: 'Beach to beach', blurb: 'Every beach and marina on the water.', test: t => t.natural === 'beach' || t.leisure === 'marina' || t.leisure === 'beach_resort', kind: 'beach'},
+    {id: 'schools', name: 'Schools', blurb: 'Every school and library.', test: t => /^(school|library)$/.test(t.amenity || ''), kind: 'school'},
+    {id: 'nightlife', name: 'A night out', blurb: 'Theatres, cinemas and stadiums.', test: t => /^(theatre|cinema)$/.test(t.amenity || '') || t.leisure === 'stadium', kind: 'night'}
+  ];
+  const items = [];
+  for (const el of seed.elements || []) {
+    const t = el.tags || {}; if (!t.name) continue;
+    const lat = el.lat ?? el.center?.lat, lon = el.lon ?? el.center?.lon; if (lat == null) continue;
+    const [x, z] = frame.xz(lon, lat);
+    items.push({name: t.name, x, z, t, address: [t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' ') || null});
+  }
+  const tours = [];
+  for (const c of cats) {
+    const seen = new Set(); const stops = items.filter(i => c.test(i.t) && !seen.has(i.name) && seen.add(i.name));
+    if (stops.length < 3) continue;
+    // nearest-neighbour order from the middle of town, so the ride is one loop rather than a zigzag
+    const order = []; let cur = {x: 0, z: 0}; const left = stops.slice();
+    while (left.length && order.length < 18) { let bi = 0, bd = 1e12; left.forEach((s, i) => { const d = (s.x - cur.x) ** 2 + (s.z - cur.z) ** 2; if (d < bd) { bd = d; bi = i; } }); cur = left.splice(bi, 1)[0]; order.push(cur); }
+    tours.push({id: c.id, name: c.name, blurb: c.blurb, stops: order.map(s => ({name: s.name, x: Math.round(s.x * 10) / 10, z: Math.round(s.z * 10) / 10, kind: c.kind, address: s.address, photo: null}))});
+  }
+  return tours;
+}
+
 /* ---- terrain: Terrarium tiles decoded on a canvas ---- */
 async function terrain(s, w, n, e, frame, step = 8, z = 14) {
   const tile = (lat, lon) => { const x = (lon + 180) / 360 * 2 ** z; const y = (1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * 2 ** z; return [x, y]; };
@@ -173,8 +203,9 @@ async function naip(s, w, n, e, frame, onNote) {
 }
 
 /* ---- the whole build; writes into the Cache API under ./worlds/<slug>/ ---- */
-export async function buildCity({name, lat, lon, country, slug}, onProgress = () => {}) {
+export async function buildCity({name, lat, lon, country, slug, big = false}, onProgress = () => {}) {
   const frame = makeFrame(lat, lon);
+  const HALF = big ? HALF_CITY : HALF_TOWN;
   const dLat = HALF / 111320, dLon = HALF / (111320 * Math.cos(lat * Math.PI / 180));
   const s = lat - dLat, n = lat + dLat, w = lon - dLon, e = lon + dLon;
   const note = (t, k) => onProgress({text: t, k});
@@ -183,11 +214,15 @@ export async function buildCity({name, lat, lon, country, slug}, onProgress = ()
   const qWays = `[out:json][timeout:60];(way["highway"]${bb};way["building"]${bb};way["power"~"^(minor_)?line$"]${bb};);out body geom;`;
   const qNodes = `[out:json][timeout:60];(node["amenity"]${bb};node["shop"]${bb};node["tourism"]${bb};node["leisure"]${bb};node["highway"~"^(crossing|street_lamp|bus_stop|traffic_signals)$"]${bb};node["emergency"="fire_hydrant"]${bb};node["power"="pole"]${bb};);out body;`;
   const ways = await overpass(qWays, t => note(t, .08));           // one at a time: two races at once was six requests from one phone
-  note('asking OpenStreetMap for the places and the furniture…', .22);
+  note('asking OpenStreetMap for the shops, parks, signs and lights…', .22);
   const pts = await overpass(qNodes);
+  note('finding the restaurants, landmarks, churches, parks and beaches…', .27);
+  const qTours = `[out:json][timeout:60];(nwr["amenity"~"^(restaurant|cafe|fast_food|bar|pub|ice_cream|bakery|place_of_worship|school|library|theatre|cinema)$"]${bb};nwr["tourism"~"^(attraction|museum|viewpoint|artwork|gallery|zoo|aquarium)$"]${bb};nwr["historic"]${bb};nwr["leisure"~"^(park|playground|garden|nature_reserve|stadium|marina)$"]${bb};nwr["natural"="beach"]${bb};);out center tags;`;
+  let tourSeed = {elements: []}; try { tourSeed = await overpass(qTours); } catch (_) {}
   const osm = {elements: [...pts.elements, ...ways.elements]};
   note('laying out the streets…', .3);
   const parsed = parseOSM(osm, frame, name);
+  const tours = makeTours(tourSeed, frame, name);
   if (parsed.world.roads.length < 5) throw new Error('OpenStreetMap has almost no streets here');
   note('reading the land (elevation tiles)…', .4);
   const terr = await terrain(s, w, n, e, frame);
@@ -211,7 +246,8 @@ export async function buildCity({name, lat, lon, country, slug}, onProgress = ()
     put('road-surface.bin', surf.road, 'application/octet-stream'), put('walk-surface.bin', surf.walk, 'application/octet-stream'), put('curb-surface.bin', surf.curb, 'application/octet-stream'), put('ground-surface.bin', surf.ground, 'application/octet-stream'),
     put('naip/extent.json', JSON.stringify({source: 'USGS NAIP Plus WMS', tiles: tiles.map(t => ({file: t.file, bbox: t.bbox, bboxLocal: t.bboxLocal}))}), J),
     ...tiles.map(t => put('naip/' + t.file, t.blob, 'image/jpeg')),
-    put('town.json', JSON.stringify({name, slug, lat, lon, country, built: new Date().toISOString(), audit: parsed.world.audit, tagline: 'Every street in ' + name + ', from free open data. Built on this phone in a minute.'}), J)
+    put('tours.json', JSON.stringify({source: 'OpenStreetMap contributors, built in the browser', tours}), J),
+    put('town.json', JSON.stringify({name, slug, lat, lon, country, built: new Date().toISOString(), audit: parsed.world.audit, rides: tours.length, tagline: 'Every street in ' + name + ', from free open data. Built on this phone in a minute.'}), J)
   ]);
   note('done', 1);
   return {slug, audit: parsed.world.audit, tiles: tiles.length, terrainTiles: terr.tiles};
