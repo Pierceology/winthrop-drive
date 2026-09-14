@@ -21,10 +21,15 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
  // trusted that number sat 7 cm under the asphalt and showed only where the crown happened to dip -- the half-crosswalks.
  const ROAD_TOP=.12;
  const bars=[],placed=new Set();
+ // Pierce, 09-14 ("cross walks", two mid-block walks skewed off the street): a driveway or a parking aisle within 12 m used to
+ // win the node when its direction happened to agree. Now a segment must actually pass under the node (half its width plus
+ // 3 m), and a narrow or unnamed segment pays a penalty, so the walk stays on the street people cross.
+ let narrowPicks=0;
  const pickRoad=(c)=>{let best=null;for(const s of network.segments){if(s.length<4||s.width<3)continue;
-   const t=Math.max(0,Math.min(1,((c.x-s.a[0])*s.dx+(c.z-s.a[1])*s.dz)/s.length**2)),px=s.a[0]+t*s.dx,pz=s.a[1]+t*s.dz,d=Math.hypot(c.x-px,c.z-pz);if(d>12)continue;
-   const rx=s.dx/s.length,rz=s.dz/s.length,agree=Math.abs(rx*c.ux+rz*c.uz);const score=d-agree*4;if(!best||score<best.score)best={s,px,pz,rx,rz,d,score};}
-  return best;};
+   const t=Math.max(0,Math.min(1,((c.x-s.a[0])*s.dx+(c.z-s.a[1])*s.dz)/s.length**2)),px=s.a[0]+t*s.dx,pz=s.a[1]+t*s.dz,d=Math.hypot(c.x-px,c.z-pz);if(d>Math.max(5,s.width/2+3))continue;
+   const rx=s.dx/s.length,rz=s.dz/s.length,agree=Math.abs(rx*c.ux+rz*c.uz);const narrow=s.width<5.5,unnamed=!s.name||s.name==='UNNAMED ROAD';
+   const score=d-agree*4+(narrow?6:0)+(unnamed?3:0);if(!best||score<best.score)best={s,px,pz,rx,rz,d,score,narrow};}
+  if(best&&best.narrow)narrowPicks++;return best;};
  // Two nodes can describe one walk (a corner node and a node four metres up the arm): the second one within 4 m, running the same way, is the same paint.
  const paintWalk=(x,z,ux,uz,width,depth)=>{for(const w of placed)if(Math.hypot(w.x-x,w.z-z)<4&&Math.abs(w.ux*ux+w.uz*uz)>.9)return;placed.add({x,z,ux,uz});
   const W=Math.max(6,Math.min(16,width||9)),vx=-uz,vz=ux,n=Math.floor((W-1.2)/.9)+1,start=-(n-1)*.45;
@@ -38,7 +43,8 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
   const depth=c.style==='zebra'?3:2.4;
   const v=junctions&&junctions.nearestVertex(c.x,c.z,3.5,3);
   if(v){corners++;
-   for(const s of v.segs){const atA=Math.hypot(s.a[0]-v.x,s.a[1]-v.z)<1.5,far=atA?s.b:s.a;let dx=far[0]-v.x,dz=far[1]-v.z;const L=Math.hypot(dx,dz);if(L<8)continue;dx/=L;dz/=L;
+   for(const s of v.segs){if((s.width||0)<5.5&&(!s.name||s.name==='UNNAMED ROAD'))continue;   // a marked corner paints its streets, not its driveways
+    const atA=Math.hypot(s.a[0]-v.x,s.a[1]-v.z)<1.5,far=atA?s.b:s.a;let dx=far[0]-v.x,dz=far[1]-v.z;const L=Math.hypot(dx,dz);if(L<8)continue;dx/=L;dz/=L;
     const others=v.segs.filter(o=>o!==s).map(o=>o.width||9),line=Math.min(10,Math.max(3.5,Math.max(...others)/2+1.5));
     paintWalk(v.x+dx*line,v.z+dz*line,dx,dz,s.width,depth);}
    continue;}
@@ -46,7 +52,7 @@ export function streetFurniture({crossings,powerLines,furniture},network,heightA
   if(r.d>.5)snapped++;
   paintWalk(r.px,r.pz,r.rx,r.rz,r.s.width,depth);
  }
- group.userData.crossingPlacement={nodes:crossings.crossings.length,dropped,corners,snapped,walks:placed.size};
+ group.userData.crossingPlacement={nodes:crossings.crossings.length,dropped,corners,snapped,narrowPicks,walks:placed.size};
  if(bars.length){const paint=new THREE.Mesh(mergeGeometries(bars,false),new THREE.MeshLambertMaterial({color:'#e9e9df',polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));paint.receiveShadow=true;paint.name='crossings';group.add(paint);for(const g of bars)g.dispose();}
  // Power lines. Poles and wires come from the same file (power-lines.json: poles[], lines[] of pole indices), so a wire is
  // never drawn without the two poles it hangs from. 8.8 m pole, crossarm at 8.45 m turned across the line, three conductors
