@@ -250,7 +250,9 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):''))
     :((b.status==='STOPPED_AT'?'stopped, ':'')+(DIRECTION[b.direction]||'in service'));
    entry(id,'713 bus'+(b.label?' '+b.label:''),line,'bus');}
-  const planes=[...aircraft.entries()].sort((a,b)=>Math.hypot(a[1].x,a[1].z)-Math.hypot(b[1].x,b[1].z)).slice(0,5);
+  /* flying first, then rolling, then parked; nearest to Winthrop within each */
+  const rank=p=>(p.ground?(p.speed>15?1:2):0)*1e6+Math.hypot(p.x,p.z);
+  const planes=[...aircraft.entries()].sort((a,b)=>rank(a[1])-rank(b[1])).slice(0,5);
   for(const [icao,p] of planes){const ft=Math.max(0,Math.round(p.alt/0.3048/100)*100),mph=Math.round((p.speed||0)*2.237);const phase=p.ground?(mph>40?'rolling':'on the ground'):p.climb>1?'climbing':p.climb<-1?'descending':'level';
    const el=document.createElement('div');el.className='plane'+(following==='ac:'+icao||following==='in:'+icao?' on':'');
    const bb=document.createElement('b');bb.textContent=p.airline.text;const sp=document.createElement('span');sp.textContent=(p.ground?'':ft.toLocaleString()+' ft · ')+phase+' · '+mph+' mph';
