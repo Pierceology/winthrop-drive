@@ -151,7 +151,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
  const group=new THREE.Group();group.name='live';scene.add(group);
  const ground=(x,z)=>{const y=heightAt(x,z);return Number.isFinite(y)?y:0;};
  const now=()=>performance.now();
- const buses=new Map(),aircraft=new Map();let following=null;   // declared up here: tick() runs before the follow block below is reached
+ const buses=new Map(),aircraft=new Map();let following=null,snap=false;   // declared up here: tick() runs before the follow block below is reached
  const live={group,buses,aircraft,tide:null,counts:{buses:0,aircraft:0,polls:{buses:0,aircraft:0,tide:0}},errors:{buses:0,aircraft:0,tide:0},toLocal,toMassMainland};
 
  /* buses: each record eases from where it was drawn to the new fix over one poll interval */
@@ -168,7 +168,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
     const off=Math.min(2.2,(n.width||7)/4);x=n.x+(-dz)*off;z=n.z+dx*off;yaw=Math.atan2(-dz,dx);}}
    let b=buses.get(v.id);
    if(!b){b={mesh:makeBus(),x,z,yaw,from:{x,z,yaw},to:{x,z,yaw},t0:t,label:a.label,status:a.current_status,direction:a.direction_id};b.mesh.position.set(x,ground(x,z),z);b.mesh.rotation.y=yaw;group.add(b.mesh);buses.set(v.id,b);}
-   else{b.from={x:b.x,z:b.z,yaw:b.yaw};b.to={x,z,yaw:Number.isFinite(a.bearing)?yaw:b.yaw};b.t0=t;b.status=a.current_status;b.direction=a.direction_id;}
+   else{b.from=snap?{x,z,yaw}:{x:b.x,z:b.z,yaw:b.yaw};b.to={x,z,yaw:Number.isFinite(a.bearing)?yaw:b.yaw};b.t0=t;b.status=a.current_status;b.direction=a.direction_id;}
    b.miss=0;}
   for(const [id,b] of buses){if(seen.has(id))continue;if(++b.miss>=2){group.remove(b.mesh);buses.delete(id);}}
   live.counts.buses=buses.size;return buses.size;
@@ -185,13 +185,14 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    const fix={x:x+Math.sin(tr)*v*age,z:z-Math.cos(tr)*v*age,y:alt+vr*age,vx:Math.sin(tr)*v,vz:-Math.cos(tr)*v,vy:vr,yaw:yawFromBearing(Number.isFinite(track)?track:0),t0:t};
    seen.add(icao);let p=aircraft.get(icao);
    if(!p){const callsign=(cs||'').trim(),al=airlineOf(callsign);p={mesh:makePlane(callsign),callsign,airline:al,icao,...fix,ox:0,oz:0,oy:0};const tag=nameTag(al.text,al.color);tag.position.set(0,9,0);tag.visible=false;tag.name='tag';p.mesh.add(tag);p.mesh.userData.icao=icao;p.mesh.traverse(o=>{o.userData.icao=icao;});group.add(p.mesh);aircraft.set(icao,p);}
-   else{const cur=pos(p,t);p.ox=cur.x-fix.x;p.oz=cur.z-fix.z;p.oy=cur.y-fix.y;Object.assign(p,fix);}
+   else{const cur=pos(p,t);p.ox=snap?0:cur.x-fix.x;p.oz=snap?0:cur.z-fix.z;p.oy=snap?0:cur.y-fix.y;Object.assign(p,fix);}
    p.alt=alt;p.speed=v;p.climb=vr;p.ground=!!onGround;p.miss=0;}
   renderChip();
   for(const [id,p] of aircraft){if(seen.has(id))continue;if(++p.miss>=3){group.remove(p.mesh);aircraft.delete(id);}}
   live.counts.aircraft=aircraft.size;return aircraft.size;
  };
- function pos(p,t){const dt=(t-p.t0)/1000,k=Math.max(0,1-dt/3);return {x:p.x+p.vx*dt+p.ox*k,z:p.z+p.vz*dt+p.oz*k,y:Math.max(fieldY+2.6,p.y+p.vy*dt+p.oy*k)};}
+ /* never carry a fix forward more than 25 s: a hidden tab polls nothing */
+ function pos(p,t){const dt=Math.min(25,(t-p.t0)/1000),k=Math.max(0,1-dt/3);return {x:p.x+p.vx*dt+p.ox*k,z:p.z+p.vz*dt+p.oz*k,y:Math.max(fieldY+2.6,p.y+p.vy*dt+p.oy*k)};}
  /* tide */
  const waterBase=water?water.position.y:0;
  live.ingestTide=json=>{
@@ -231,10 +232,14 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
  /* pollers — fail-silent, back off on 429, skip while the tab is hidden */
  const timers=[];
  const air={locked:null};live.aircraftSource=null;
- function poll(name,ingest){let wait=I[name];const run=async()=>{if(stopped)return;
+ const runNow={};
+ function poll(name,ingest){let wait=I[name],pending=0;const run=async()=>{if(stopped)return;
    if(typeof document==='undefined'||!document.hidden){let j;if(name==='aircraft'){const r=await getAircraft(air);j=r&&r.json?r.json:r;live.aircraftSource=r&&r.source||null;}else j=await getJSON(FEEDS[name]);live.counts.polls[name]++;
     if(j&&!j.error){try{ingest(j);}catch(e){}wait=I[name];}else{live.errors[name]++;if(j&&j.error===429)wait=Math.min(wait*2,300000);}}
-   timers.push(setTimeout(run,wait));};run();}
+   clearTimeout(pending);pending=setTimeout(run,wait);timers.push(pending);};runNow[name]=run;run();}
+ /* back from another tab (Pierce, 09-14: "it all drags or animates the items to where they would be"): fetch every feed
+    now and snap to the fresh fixes instead of easing from stale ones */
+ if(typeof document!=='undefined')document.addEventListener('visibilitychange',()=>{if(document.hidden)return;snap=true;for(const k of Object.keys(runNow))runNow[k]();setTimeout(()=>{snap=false;},4000);});
  /* Follow a bus, and its next stop with the time (Pierce, 09-14: "show me the live busses so people can follow them and the time").
     Predictions come from the same MBTA API (keyless); the first prediction per vehicle, sorted by time, is its next stop. */
  const preds=new Map();live.predictions=preds;
