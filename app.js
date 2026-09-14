@@ -136,21 +136,23 @@ async function init(){
  scene=new THREE.Scene();window.__scene=scene;scene.background=new THREE.Color('#a2bdc9');scene.fog=new THREE.Fog('#a2bdc9',4500,18000);camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.15,45000);
  controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.07;controls.minDistance=5;controls.maxDistance=15500;controls.maxPolarAngle=Math.PI/2-.035;controls.autoRotateSpeed=.3;controls.zoomToCursor=true;controls.screenSpacePanning=false;controls.mouseButtons={LEFT:THREE.MOUSE.PAN,MIDDLE:THREE.MOUSE.DOLLY,RIGHT:THREE.MOUSE.ROTATE};controls.touches={ONE:THREE.TOUCH.PAN,TWO:THREE.TOUCH.DOLLY_ROTATE};
  water=makeWater();water.userData.previewColor=[.035,.16,.20];scene.add(water);
- hemi=new THREE.HemisphereLight(0xe6f1ff,0x515c56,2);scene.add(hemi);sun=new THREE.DirectionalLight(0xfff2da,1.6);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-180,right:180,top:180,bottom:-180,near:1,far:1600});sun.shadow.bias=-.00015;sun.shadow.normalBias=.4;scene.add(sun,sun.target);
+ if(OPENING){camera.layers.set(1);water.layers.enable(1);}   // the ink sketch alone until the town is fully here (Pierce, 09-14: "do that until the thing is fully loaded")
+ hemi=new THREE.HemisphereLight(0xe6f1ff,0x515c56,2);scene.add(hemi);sun=new THREE.DirectionalLight(0xfff2da,1.6);sun.castShadow=true;if(OPENING){hemi.layers.enable(1);sun.layers.enable(1);}sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-180,right:180,top:180,bottom:-180,near:1,far:1600});sun.shadow.bias=-.00015;sun.shadow.normalBias=.4;scene.add(sun,sun.target);
  /* No card, no clouds. Pierce, 2026-09-13: 'i dont want this page in my experience', then 'open at this
     magnification, no clouds'. The renderer runs from here with the camera already on the whole-town shot; a veil the
     colour of the sky covers the build and lifts when the town is in. frameWhole() corrects the shot once the roads
     are known, before the veil has lifted, so nobody sees the correction. */
  controls.target.set(...places.whole.target);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
- if(OPENING)import('./opening.js').then(m=>{camera.position.set(...m.startFrom(places.whole.target,places.whole.offset));window.__opening=m.openingTitle({camera,controls,target:places.whole.target,offset:places.whole.offset,ready:groundReady});}).catch(e=>console.warn('opening off',e));
+ if(OPENING)import('./opening.js').then(m=>{camera.position.set(...m.startFrom(places.whole.target,places.whole.offset));window.__opening=m.openingTitle({camera,controls,target:places.whole.target,offset:places.whole.offset,ready:townReady,onReveal:()=>{camera.layers.enableAll();if(sketch)sketch.dissolve();}});}).catch(e=>console.warn('opening off',e));
  {const veil=$('veil');if(veil)veil.remove();
   /* Pierce, 2026-09-13: 'it still takes 5 seconds to see anything ... make the outline fun so stuff happens
      immediately'. A 36 KB outline of every road is fetched ahead of the two-megabyte town and inks itself in over the
      water in the first second and a half; it dissolves once the real ground is drawn underneath. */
-  get(DATA+'outline.json').then(outline=>{if(!groundDrawn){sketch=townSketch({scene,outline,center:FACTORY?(()=>{const xs=outline.flat().map(p=>p[0]),zs=outline.flat().map(p=>p[1]);return[(Math.min(...xs)+Math.max(...xs))/2,(Math.min(...zs)+Math.max(...zs))/2];})():undefined});
+  get(DATA+'outline.json').then(outline=>{if(!groundDrawn||OPENING){sketch=townSketch({scene,outline,center:FACTORY?(()=>{const xs=outline.flat().map(p=>p[0]),zs=outline.flat().map(p=>p[1]);return[(Math.min(...xs)+Math.max(...xs))/2,(Math.min(...zs)+Math.max(...zs))/2];})():undefined});
     /* and the view itself moves: a slow orbit while the town is arriving, eased off once it is here */
+    if(OPENING&&sketch&&sketch.lines)sketch.lines.layers.set(1);
     if(!touched&&!OPENING){controls.autoRotate=true;controls.autoRotateSpeed=.35;}}}).catch(()=>{});
-  groundReady.then(()=>{groundDrawn=true;setTimeout(()=>{if(sketch)sketch.dissolve();},400);
+  groundReady.then(()=>{groundDrawn=true;if(!OPENING)setTimeout(()=>{if(sketch)sketch.dissolve();},400);
     /* the orbit runs down over three seconds rather than stopping dead */
     if(!OPENING){const t0=performance.now();const ease=()=>{const k=Math.min(1,(performance.now()-t0)/3000);controls.autoRotateSpeed=.35*(1-k);if(k<1&&!touched)requestAnimationFrame(ease);else controls.autoRotate=false;};ease();}});}
  if(!loopStarted){loopStarted=true;renderer.setAnimationLoop(animate);}

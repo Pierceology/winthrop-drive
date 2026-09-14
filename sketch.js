@@ -39,6 +39,7 @@ export function townSketch({scene, outline, heightAt = () => 0, center = CENTER}
   scene.add(lines);
   let t = 0, dissolving = false, dead = false;
   return {
+    lines,
     update(dt) {
       if (dead) return;
       t += dt;

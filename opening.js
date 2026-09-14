@@ -7,7 +7,7 @@ export function startFrom(target, offset) {   // where the dive begins: higher a
   return [target[0] + offset[0] * .22, offset[1] * 1.7, target[2] + offset[2] * .22];
 }
 
-export function openingTitle({camera, controls, target, offset, ready, copy = {}}) {
+export function openingTitle({camera, controls, target, offset, ready, copy = {}, onReveal = () => {}}) {
   const from = new THREE.Vector3(...startFrom(target, offset));
   const to = new THREE.Vector3(target[0] + offset[0], target[1] + offset[1], target[2] + offset[2]);
   camera.position.copy(from); controls.target.set(...target); controls.update();
@@ -20,14 +20,14 @@ export function openingTitle({camera, controls, target, offset, ready, copy = {}
   requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
   let done = false, started = false;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const finish = () => { if (done) return; done = true; camera.position.copy(to); controls.update(); el.classList.add('out'); document.body.classList.remove('opening'); setTimeout(() => el.remove(), 900); };
-  const fly = () => { if (started || done) return; started = true; if (reduced) { finish(); return; }
+  const finish = () => { if (done) return; done = true; try { onReveal(); } catch (_) {} camera.position.copy(to); controls.update(); el.classList.add('out'); document.body.classList.remove('opening'); setTimeout(() => el.remove(), 900); };
+  const fly = () => { if (started || done) return; started = true; try { onReveal(); } catch (_) {} if (reduced) { finish(); return; }
     const t0 = performance.now(), D = 2400; el.classList.add('fly');
     const step = () => { if (done) return; const k = Math.min(1, (performance.now() - t0) / D), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
       camera.position.lerpVectors(from, to, e); controls.update(); if (k < 1) requestAnimationFrame(step); else finish(); };
     step(); };
-  ready.then(() => { setTimeout(fly, 1300); setTimeout(finish, 1300 + 2400 + 400); });   // the timeout lands the camera even if the tab was hidden and frames never ran
-  const skip = () => { if (done) return; done = true; camera.position.copy(to); controls.update(); el.remove(); document.body.classList.remove('opening'); };
+  ready.then(() => { setTimeout(fly, 600); setTimeout(finish, 600 + 2400 + 400); });   // the timeout lands the camera even if the tab was hidden and frames never ran
+  const skip = () => { if (done) return; done = true; try { onReveal(); } catch (_) {} camera.position.copy(to); controls.update(); el.remove(); document.body.classList.remove('opening'); };
   setTimeout(() => { if (!done) finish(); }, 45000);   // nothing waits forever: after 45 s the town is shown whatever happened
   for (const ev of ['pointerdown', 'wheel', 'keydown']) addEventListener(ev, skip, {once: true, passive: true});
   return {skip, active: () => !done};
