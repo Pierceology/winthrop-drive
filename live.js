@@ -165,7 +165,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   if(following){const b=buses.get(following);
    if(!b||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
    else if(camera&&controls){let dx=b.to.x-b.from.x,dz=b.to.z-b.from.z;const L=Math.hypot(dx,dz);if(L>.5){b.dir=[dx/L,dz/L];}const d=b.dir||[0,1];
-    const y=ground(b.x,b.z);const gx=b.x-d[0]*46,gz=b.z-d[1]*46,gy=y+22;
+    const y=ground(b.x,b.z);const gx=b.x-d[0]*30,gz=b.z-d[1]*30,gy=y+12;
     camera.position.x+=(gx-camera.position.x)*.06;camera.position.y+=(gy-camera.position.y)*.06;camera.position.z+=(gz-camera.position.z)*.06;
     controls.target.x+=(b.x-controls.target.x)*.12;controls.target.y+=(y+2-controls.target.y)*.12;controls.target.z+=(b.z-controls.target.z)*.12;}}
   for(const b of buses.values()){const k=Math.min(1,(t-b.t0)/I.buses);b.x=b.from.x+(b.to.x-b.from.x)*k;b.z=b.from.z+(b.to.z-b.from.z)*k;b.yaw=lerpAngle(b.from.yaw,b.to.yaw,k);
