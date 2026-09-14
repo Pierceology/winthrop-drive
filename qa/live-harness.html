@@ -1,0 +1,35 @@
+<!doctype html><meta charset="utf-8"><title>live.js harness</title>
+<style>html,body{margin:0;height:100%;background:#0c1218;overflow:hidden}canvas{display:block}#hud{position:fixed;left:8px;top:8px;color:#fff;font:13px/1.4 system-ui;background:rgba(0,0,0,.55);padding:6px 9px;border-radius:6px;white-space:pre}</style>
+<script type="importmap">{"imports":{"three":"../vendor/three.module.js"}}</script>
+<div id="hud">booting…</div>
+<script type="module">
+/* Standalone scene for live.js: flat ground, a water plane, the three live layers.
+   ?mock=1 injects sample bus + aircraft records (so the models can be photographed when the 713 is not running),
+   ?view=bus|plane|wide aims the camera; window.__live and window.__frame are exposed for qa/live-shots.js. */
+import * as THREE from 'three';
+import {liveWinthrop,toLocal} from '../live.js';
+const q=new URLSearchParams(location.search),mock=q.get('mock')==='1',view=q.get('view')||'wide';
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x8fb3d9);scene.fog=new THREE.Fog(0x8fb3d9,2500,9000);
+const camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.5,20000);
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(2,devicePixelRatio));document.body.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xdfe9ff,0x3b4a3a,1.1));const sun=new THREE.DirectionalLight(0xfff1d6,1.6);sun.position.set(-600,900,400);scene.add(sun);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(9000,9000),new THREE.MeshStandardMaterial({color:0x5b6b52}));ground.rotation.x=-Math.PI/2;ground.position.y=2;scene.add(ground);
+const road=new THREE.Mesh(new THREE.PlaneGeometry(9000,9),new THREE.MeshStandardMaterial({color:0x2c2f33}));road.rotation.x=-Math.PI/2;road.position.set(0,2.05,-1000);scene.add(road);
+const water=new THREE.Mesh(new THREE.PlaneGeometry(9000,3000),new THREE.MeshStandardMaterial({color:0x1f4c5e,transparent:true,opacity:.85}));water.rotation.x=-Math.PI/2;water.position.set(0,-.15,1600);scene.add(water);
+const heightAt=(x,z)=>2;
+const live=liveWinthrop({scene,heightAt,water,intervals:mock?{buses:6e5,aircraft:6e5,tide:6e5}:{}});window.__live=live;
+if(mock){ /* two buses on the harness road near Winthrop Centre, two aircraft at Logan altitudes — records shaped exactly like the feeds */
+ const [lat,lon]=[42.3752,-70.9827];
+ live.ingestBuses({data:[{id:'y1',attributes:{latitude:lat,longitude:lon,bearing:90,current_status:'IN_TRANSIT_TO',label:'1921'}},{id:'y2',attributes:{latitude:lat+.0002,longitude:lon+.0004,bearing:250,current_status:'STOPPED_AT',label:'1922'}}]});
+ live.ingestAircraft({time:Date.now()/1000,states:[['abc123','JBU354  ','United States',Date.now()/1000,Date.now()/1000,lon+.002,lat+.001,420,false,95,240,-3,null,430,null,false,0],['def456','DAL303  ','United States',Date.now()/1000,Date.now()/1000,lon-.003,lat+.003,1650,false,150,60,6,null,1660,null,false,0]]});
+ live.ingestTide({data:[{t:'mock',v:'2.88'}]});
+}
+const [ax,az]=toLocal(42.3752,-70.9827);
+const aim={bus:()=>{const b=[...live.buses.values()].find(b=>!mock||b.mesh.position.x!==ax)||[...live.buses.values()][0];const t=b?b.mesh.position:{x:ax,y:heightAt(),z:az};camera.position.set(t.x-16,t.y+7,t.z+22);camera.lookAt(t.x,t.y+2,t.z);},
+ plane:()=>{const p=[...live.aircraft.values()][0];if(p){const m=p.mesh.position;camera.position.set(m.x-70,m.y+35,m.z+90);camera.lookAt(m);}else aim.wide();},
+ wide:()=>{camera.position.set(ax-400,600,az+900);camera.lookAt(ax,0,az);}};
+let frame=0;window.__frame=0;
+function loop(){requestAnimationFrame(loop);if(view!=='free')aim[view]?.();renderer.render(scene,camera);window.__frame=++frame;
+ if(frame%15===0){const t=live.tide;document.getElementById('hud').textContent=`buses ${live.buses.size}  aircraft ${live.aircraft.size}  tide ${t?t.level.toFixed(2)+' m MLLW → water y '+t.y.toFixed(2):'–'}\npolls b${live.counts.polls.buses} a${live.counts.polls.aircraft} t${live.counts.polls.tide}  errors b${live.errors.buses} a${live.errors.aircraft} t${live.errors.tide}`;}}
+loop();addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+</script>
