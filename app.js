@@ -19,6 +19,7 @@ import {parkedCars} from './parked-cars.js';
 import {inTown} from './town-limits.js';
 import {townSketch} from './sketch.js';
 let sketch=null,billboardGroup=null;
+const OPENING=!FACTORY&&!/[?&](ride|drive|building|world|fronts)=/.test(location.search);   // the title-and-dive opening: Winthrop's front door only, never a deep link
 document.body.classList.add('quiet');for(const ev of ['pointerdown','wheel','keydown'])addEventListener(ev,()=>document.body.classList.remove('quiet'),{once:true,passive:true});   // Pierce 09-14: "too much is happening at once on the pageload"
 const BILLBOARD_API='https://www.winthropbythesea.com/_functions/';
 /* Sponsor a billboard, from inside the game: a small form in About that files a request row. Pierce confirms the
@@ -141,16 +142,17 @@ async function init(){
     colour of the sky covers the build and lifts when the town is in. frameWhole() corrects the shot once the roads
     are known, before the veil has lifted, so nobody sees the correction. */
  controls.target.set(...places.whole.target);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
+ if(OPENING)import('./opening.js').then(m=>{camera.position.set(...m.startFrom(places.whole.target,places.whole.offset));window.__opening=m.openingTitle({camera,controls,target:places.whole.target,offset:places.whole.offset,ready:groundReady});}).catch(e=>console.warn('opening off',e));
  {const veil=$('veil');if(veil)veil.remove();
   /* Pierce, 2026-09-13: 'it still takes 5 seconds to see anything ... make the outline fun so stuff happens
      immediately'. A 36 KB outline of every road is fetched ahead of the two-megabyte town and inks itself in over the
      water in the first second and a half; it dissolves once the real ground is drawn underneath. */
   get(DATA+'outline.json').then(outline=>{if(!groundDrawn){sketch=townSketch({scene,outline,center:FACTORY?(()=>{const xs=outline.flat().map(p=>p[0]),zs=outline.flat().map(p=>p[1]);return[(Math.min(...xs)+Math.max(...xs))/2,(Math.min(...zs)+Math.max(...zs))/2];})():undefined});
     /* and the view itself moves: a slow orbit while the town is arriving, eased off once it is here */
-    if(!touched){controls.autoRotate=true;controls.autoRotateSpeed=.35;}}}).catch(()=>{});
+    if(!touched&&!OPENING){controls.autoRotate=true;controls.autoRotateSpeed=.35;}}}).catch(()=>{});
   groundReady.then(()=>{groundDrawn=true;setTimeout(()=>{if(sketch)sketch.dissolve();},400);
     /* the orbit runs down over three seconds rather than stopping dead */
-    const t0=performance.now();const ease=()=>{const k=Math.min(1,(performance.now()-t0)/3000);controls.autoRotateSpeed=.35*(1-k);if(k<1&&!touched)requestAnimationFrame(ease);else controls.autoRotate=false;};ease();});}
+    if(!OPENING){const t0=performance.now();const ease=()=>{const k=Math.min(1,(performance.now()-t0)/3000);controls.autoRotateSpeed=.35*(1-k);if(k<1&&!touched)requestAnimationFrame(ease);else controls.autoRotate=false;};ease();}});}
  if(!loopStarted){loopStarted=true;renderer.setAnimationLoop(animate);}
  [world,foundationData,residential,poi,assetData,neighborhoods,signData,photoRegistration]=await Promise.all([get(DATA+'world.json'),get(DATA+'road-foundation.json'),getOr(DATA+'residential.json',[]),get(DATA+'places.json'),get(DATA+'street-assets.json'),getOr(DATA+'neighborhoods.json',{buildings:{}}),getOr(DATA+'traffic-signs.json',{signs:[],placement:{}}),getOr(DATA+'photo-facades.json',{})]);origin=world.origin;heightAt=gridHeight(foundationData.terrain);if(FACTORY)origin=[0,0];
  if(!FACTORY)world.roads=world.roads.map(r=>{const keep=r.points.map(q=>inTown(q[0],q[1]));if(keep.every(Boolean))return r;const pts=r.points.filter((q,i)=>keep[i]);if(pts.length<2)return null;const dirs=r.directions?r.directions.filter((d,i)=>keep[i]&&keep[i+1]):r.directions;return {...r,points:pts,directions:dirs};}).filter(Boolean);

@@ -676,3 +676,16 @@ body.quiet:not(.driving) .camera{opacity:0;pointer-events:none}
 body.driving #liveChip,body.touring #liveChip{display:none}
 #liveChip .plane{border-left:3px solid var(--accent)}
 #liveChip .plane b::before{content:'✈ ';opacity:.8}
+
+/* The opening: title over the town from above, then the dive through the type (opening.js). */
+#opening{position:fixed;inset:0;z-index:8;display:flex;flex-direction:column;justify-content:center;padding:0 calc(var(--gutter) + var(--sar)) 0 max(calc(var(--gutter) + var(--sal)),7vw);pointer-events:none;opacity:0;transform:scale(.97);transform-origin:40% 52%;transition:opacity 1s ease,transform 1s ease;background:linear-gradient(90deg,rgba(6,10,14,.6),rgba(6,10,14,.15) 55%,rgba(6,10,14,0) 80%)}
+#opening.in{opacity:1;transform:scale(1)}
+#opening.fly{opacity:0;transform:scale(3);transition:opacity 1.5s ease-in .5s,transform 2.4s cubic-bezier(.55,0,.85,1)}
+#opening.out{opacity:0}
+#opening .eyebrow{margin:0 0 18px;font-size:12px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#e8d5ae}
+#opening h1{margin:0;max-width:13ch;font-family:var(--display);font-weight:700;font-size:clamp(42px,8.4vw,128px);line-height:.98;letter-spacing:-.02em;color:#fff;font-variation-settings:'opsz' 144;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+#opening h1 em{font-style:italic;font-weight:600;color:#e8d5ae}
+#opening .sub{margin:26px 0 0;max-width:44ch;font-size:clamp(15px,1.5vw,21px);line-height:1.5;color:rgba(255,255,255,.86);text-shadow:0 1px 12px rgba(0,0,0,.4)}
+header,.places{transition:opacity .7s ease}
+body.opening header,body.opening .places,body.opening .camera,body.opening #liveChip{opacity:0!important;pointer-events:none}
+@media (max-width:720px){#opening{padding:0 18px;justify-content:flex-end;padding-bottom:22vh}#opening h1{max-width:12ch}}
