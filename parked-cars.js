@@ -135,8 +135,8 @@ export async function parkedCars(network, heightAt, {assets = [], furniture = {}
     let template;
     performance.mark('stage:parked-model-'+m+'-load');
     try { template = await carKit.load(MODELS[m]); }
-    performance.mark('stage:parked-model-'+m+'-loaded');
     catch (e) { continue; }                                  /* a missing model costs its share, not the town */
+    performance.mark('stage:parked-model-'+m+'-loaded');                                  /* a missing model costs its share, not the town */
     template.updateMatrixWorld(true);
     const parts = [];
     template.traverse(o => {
