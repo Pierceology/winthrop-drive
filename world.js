@@ -63,7 +63,9 @@ async function chips() {
   const w = document.createElement('button'); w.type = 'button'; w.textContent = 'Drive Winthrop'; w.onclick = () => { location.href = './'; }; box.append(w);
 }
 async function ready() { if (!('serviceWorker' in navigator)) throw new Error('This browser cannot hold a built town (no service worker).'); await navigator.serviceWorker.register('./sw.js'); await navigator.serviceWorker.ready; }
-function open(slug) { location.href = './?world=' + slug; }   // land on the town with the choices -- rides, Drive here, Auto drive -- not straight into the car
+let ride = 'landmarks';
+$('rides').addEventListener('click', e => { const b = e.target.closest('button[data-ride]'); if (!b) return; ride = b.dataset.ride; for (const x of $('rides').querySelectorAll('button')) x.classList.toggle('on', x === b); });
+function open(slug) { location.href = './?world=' + slug + (ride ? '&ride=' + ride : ''); }   // land on the town; the chosen ride flies first, the rest stay in the list
 $('form').addEventListener('submit', async e => {
   e.preventDefault(); const q = $('city').value.trim(); if (!q) return;
   const go = $('go'); go.disabled = true;

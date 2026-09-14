@@ -17,6 +17,7 @@ input:focus{border-color:var(--accent)}
 button{font:inherit;font-weight:700;font-size:15px;padding:0 18px;border-radius:14px;border:0;background:var(--accent);color:#1b1408;min-height:48px;cursor:pointer}
 button:disabled{opacity:.55}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.rides{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px}.rides .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:4px}.rides button{background:rgba(255,255,255,.08);color:var(--ink);font-weight:600;font-size:13px;min-height:34px;padding:0 12px;border-radius:999px;border:1px solid transparent}.rides button.on{background:rgba(240,184,96,.18);border-color:var(--accent);color:#ffe2b0}
 .chips button{background:rgba(255,255,255,.1);color:var(--ink);font-weight:600;font-size:13px;min-height:36px;padding:0 12px;border-radius:999px}
 .status{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 40px));text-align:center;pointer-events:none;opacity:0;transition:opacity .4s}
 .status.on{opacity:1}
@@ -32,7 +33,8 @@ body.building .sheet{opacity:0;pointer-events:none;transition:opacity .4s}
 <div class="brand">Drive Anywhere<small>The city factory</small></div>
 <section class="sheet" id="sheet">
  <h1>Where do you want to drive?</h1>
- <p>Type a town. The globe turns to it, the streets and buildings are built from open map data on this phone in about a minute, and then you drive.</p>
+ <p>Type a town and pick the first ride. The globe turns to it, the town is built from open map data on this phone in about a minute, the ride flies over first — then drive it yourself, or let the car drive you. Every other ride stays in the list.</p>
+ <div class="rides" id="rides" role="radiogroup" aria-label="What kind of ride first"><span class="lab">First ride</span><button type="button" data-ride="landmarks" class="on">Landmarks</button><button type="button" data-ride="food">Eat</button><button type="button" data-ride="worship">Churches</button><button type="button" data-ride="parks">Parks</button><button type="button" data-ride="beaches">Beaches</button><button type="button" data-ride="">Just drive</button></div>
  <form id="form"><input id="city" type="search" placeholder="Winthrop, Lihue, Pittsfield, Reykjavík…" autocomplete="off" autocapitalize="words" enterkeyhint="go"><button id="go" type="submit">Build it</button></form>
  <div class="chips" id="chips"></div>
 </section>

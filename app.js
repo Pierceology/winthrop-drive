@@ -18,7 +18,7 @@ import {SignalSystem} from './signals.js';
 import {parkedCars} from './parked-cars.js';
 import {inTown} from './town-limits.js';
 import {townSketch} from './sketch.js';
-let sketch=null;
+let sketch=null,billboardGroup=null;
 /* Resolved when the last heavy load -- the parked cars, at the end of the furniture chain -- is in the scene. The
    arrival waits on it: measured in Chrome, the seconds after the loading card are a run of one-second stalls. */
 let resolveTown=null;const townReady=new Promise(r=>{resolveTown=r;});
@@ -62,7 +62,7 @@ const getOr=(path,fallback)=>get(path).catch(()=>fallback);
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 if(FACTORY)getOr(DATA+'town.json',null).then(t=>{if(!t)return;const name=(t.title||t.name||WORLD).replace(/\b\w/g,c=>c.toUpperCase());window.__townName=name;document.title=name+' | Drive '+name;
  const set=(sel,text)=>{const el=document.querySelector(sel);if(el)el.textContent=text;};
- set('.places h1','Explore '+name);set('.explore-help',t.tagline||('Every street in '+name+', from free open data.'));set('.brand b',name);set('.brand span','Drive '+name);set('#exploreTown','Explore '+name);set('#currentRoad',name);set('#about h2','Drive '+name+'.');
+ set('.places h1','Explore '+name);set('.explore-help',t.tagline||('Every street in '+name+', from free open data.'));set('.brand b',name);set('.brand span','Drive '+name);set('#exploreTown','Explore '+name);set('#currentRoad',name);set('#about h2','Drive '+name+'.');set('#sheetBar span','Explore '+name);
  /* the About panel is written for Winthrop; a built town gets its own paragraph */
  const about=document.querySelector('#about p, #aboutPanel p, .about p');if(about)about.textContent='Drive '+name+'. Every street, building and place from OpenStreetMap, the land from open elevation data'+(t.country==='US'?', the ground from USGS aerial photographs':'')+' — built on your device from a single name. Drag to move. Tap a street or a place and drive there. Pick a ride for a flyover or let the car drive you.';});   /* set the moment the visitor moves the camera themselves */
 function frameWhole(){
@@ -197,6 +197,10 @@ async function init(){
  signGroup=trafficSigns(signData,surfaceAt);scene.add(signGroup);
  getOr(DATA+'tours.json',{tours:[]}).then(({tours})=>{tourData=tours;const box=$('tourList'),sw=$('tourSwitch');if(!box)return;for(const t of tours){const row=document.createElement('article');row.className='tourcard';const lab=document.createElement('div');lab.className='tourmeta';lab.innerHTML='<b></b><small></small><em></em>';lab.querySelector('b').textContent=t.name;lab.querySelector('small').textContent=t.stops.length+' stops';lab.querySelector('em').textContent=t.blurb;const acts=document.createElement('div');acts.className='touracts';const fly=document.createElement('button');fly.className='fly';fly.textContent='Fly over';fly.onclick=()=>{if(driving.active)driving.exit();tour.stop();flight=null;auto=false;controls.autoRotate=false;tourFlight.start(t);};const drive=document.createElement('button');drive.className='drive primary';drive.textContent='Drive it';drive.onclick=()=>{tour.stop();driving.startTour(t);};acts.append(fly,drive);row.append(lab,acts);box.append(row);if(sw){const o=document.createElement('option');o.value=t.id;o.textContent=t.name;sw.append(o);}}
   if(sw)sw.onchange=e=>{const t=tours.find(t=>t.id===e.target.value);e.target.value='';if(!t)return;if(driving.active)driving.exit();tour.stop();tourFlight.start(t);};
+ /* Pierce, 2026-09-14: 'choose a city and what kind of tour ... a flyover, which we recommend first'. ?ride=<id> flies
+    that ride the moment the town is in, unless the visitor has already taken the view; the rest stay in the list. */
+ {const want=new URLSearchParams(location.search).get('ride');const t=want&&tours.find(t=>t.id===want);
+  if(t)townReady.then(()=>setTimeout(()=>{if(touched||driving.active||tour.active)return;tour.stop();tourFlight.start(t);},1200));}
   $('tourPrev').onclick=()=>tourFlight.prev();$('tourNext').onclick=()=>tourFlight.next();}).catch(()=>{});
  if(new URLSearchParams(location.search).get('fronts')==='1')get(DATA+'assessor-photos.json').then(photos=>{photoFronts=new PhotoFronts({scene,world,neighborhoods,photos,network:driving.state.network,anisotropy:Math.min(renderer.capabilities.getMaxAnisotropy(),8)});photoFronts.update(camera.position.x,camera.position.z);window.__fronts=photoFronts;}).catch(e=>console.warn('Photo fronts unavailable',e));
  roadsideGroup=roadside(assetData,driving.state.network,surfaceAt);scene.add(roadsideGroup);
@@ -210,6 +214,8 @@ async function init(){
   parkedCars(driving.state.network,surfaceAt,{assets:assetData.assets,furniture,crossings}).then(pc=>{scene.add(pc);parkedGroup=pc;window.__parked=pc;resolveTown();
    /* Pierce, 2026-09-14: 'it goes to it, it maps it, it plays it'. ?drive=1 puts you at the wheel on the road nearest
       the middle of town the moment the town is in. */
+   /* Billboards on the busiest streets of every town: the house reel until a slot is sold (billboards.js). */
+   Promise.all([import('./billboards.js'),getOr(DATA+'billboards.json',{rows:[]})]).then(([m,cfg])=>{billboardGroup=m.billboards({scene,network:driving.state.network,heightAt:surfaceAt,rows:cfg.rows||[],slots:cfg.slots||null,count:FACTORY?6:4,townName:window.__townName||'Winthrop'});window.__billboards=billboardGroup;}).catch(e=>console.warn('billboards off',e));
    if(/[?&]drive=1/.test(location.search)&&!driving.active){const b=world.bbox,near=driving.state.network.nearest((b[0]+b[2])/2,(b[1]+b[3])/2,true);if(near)driving.enter(near.x,near.z).catch(()=>{});}
    /* And they are solid. Placement runs first and asks contains() where the road is, so the blockers go in
       afterwards - otherwise the cars would park themselves out of existence one by one. */
