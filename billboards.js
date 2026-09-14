@@ -30,29 +30,52 @@ function plate(text, sub) {
 /* Pick the slots: the longest segments of the most important drivable roads, spread out so no two are within 220 m. */
 const FACE_IN = 28 * Math.PI / 180;   // how far the screen turns from 'straight back along the road' toward the road itself
 
-export function chooseSlots(network, count = 6) {
+/* Obstacle-aware placement (Pierce, 09-14: "billboards need better intentional visual placements"): a screen goes where a
+   driver can actually see it — not glued to a house, not behind a pole, not behind the trees that line the approach —
+   and only on a segment long enough that the car has a straight run at it. `obstacles` = {buildings:[{center,area}],
+   trees:[{x,z,radius}], poles:[{x,z}]}; any list may be empty (a generated town has no tree survey). */
+const CLEAR = {house: 9, pole: 6, tree: 4, approach: 90, minRun: 100};
+function clearView(x, z, dx, dz, o) {
+  for (const p of o.poles || []) if (Math.hypot(p.x - x, p.z - z) < CLEAR.pole) return false;
+  for (const b of o.buildings || []) { if (!b.center) continue; const r = Math.sqrt(b.area || 60) / 2 + CLEAR.house; if (Math.hypot(b.center[0] - x, b.center[1] - z) < r) return false; }
+  for (const t of (o.trees || [])) {
+    const r = (t.radius || 3) + CLEAR.tree, tx = t.x - x, tz = t.z - z;
+    if (Math.hypot(tx, tz) < r) return false;
+    /* the sight lane: from the screen back along the road for CLEAR.approach metres, one lane wide */
+    const along = -(tx * dx + tz * dz), across = Math.abs(tx * -dz - tz * dx);
+    if (along > 0 && along < CLEAR.approach && across < r) return false;
+  }
+  return true;
+}
+
+export function chooseSlots(network, count = 6, obstacles = {}) {
   /* a network segment carries width, length, speed and a name -- not the road class -- so 'busy' is read from those:
      the widest, fastest, longest named streets first */
   const score = s => s.width * 10 + Math.min(s.length, 300) / 10 + (s.speed || 0) + (s.name && s.name !== 'UNNAMED ROAD' ? 15 : 0);
   const segs = network.segments.filter(s => s.length > 60 && s.width >= 7).sort((a, b) => score(b) - score(a));
   const out = [];
-  for (const s of segs) {
+  const strict = Object.values(obstacles).some(l => l && l.length);
+  for (const pass of (strict ? [true, false] : [false])) {      // first the clear spots; only if the town cannot fill the count, the old rule
+   for (const s of segs) {
+    if (out.length >= count) break;
+    if (pass && s.length < CLEAR.minRun) continue;
     const mx = (s.a[0] + s.b[0]) / 2, mz = (s.a[1] + s.b[1]) / 2;
     if (out.some(o => Math.hypot(o.x - mx, o.z - mz) < 220)) continue;
     const dx = s.dx / s.length, dz = s.dz / s.length, nx = -dz, nz = dx;      // right-hand side of travel
     const off = s.width / 2 + 5;
+    if (pass && !clearView(mx + nx * off, mz + nz * off, dx, dz, obstacles)) continue;
     /* face the oncoming driver, not the far curb: the screen looks back along the road at the cars coming
        toward it, turned FACE_IN toward the road so it reads from the driver's lane (Pierce: "it must face the driver") */
     const fx = -dx * Math.cos(FACE_IN) - nx * Math.sin(FACE_IN), fz = -dz * Math.cos(FACE_IN) - nz * Math.sin(FACE_IN);
-    out.push({x: mx + nx * off, z: mz + nz * off, yaw: Math.atan2(fx, fz), road: s.name});
-    if (out.length >= count) break;
+    out.push({x: mx + nx * off, z: mz + nz * off, yaw: Math.atan2(fx, fz), road: s.name, clear: pass});
+   }
   }
   return out;
 }
 
-export function billboards({scene, network, heightAt, slots = null, rows = [], count = 6, townName = ''}) {
+export function billboards({scene, network, heightAt, slots = null, rows = [], count = 6, townName = '', obstacles = {}}) {
   const group = new THREE.Group(); group.name = 'billboards';
-  const places = slots || chooseSlots(network, count);
+  const places = slots || chooseSlots(network, count, obstacles);
   const house = videoTexture(HOUSE_VIDEO);
   const sold = new Map(rows.map((r, i) => [i, r]));
   const post = new THREE.MeshStandardMaterial({color: '#3a3f44', roughness: .7, metalness: .3});
@@ -76,7 +99,7 @@ export function billboards({scene, network, heightAt, slots = null, rows = [], c
     b.userData = {slot: i, road: p.road, link: row && row.link, sponsor: row && row.sponsor};
     group.add(b);
   });
-  group.userData.audit = {slots: places.length, sold: sold.size, roads: places.map(p => p.road)};
+  group.userData.audit = {slots: places.length, sold: sold.size, roads: places.map(p => p.road), clear: places.filter(p => p.clear).length};
   /* Sold rows from the site arrive after mount (GET /_functions/billboards?town=): swap that slot's screen and plate. */
   group.userData.apply = newRows => {
     let n = 0;

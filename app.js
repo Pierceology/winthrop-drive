@@ -231,7 +231,7 @@ async function init(){
    /* Pierce, 2026-09-14: 'it goes to it, it maps it, it plays it'. ?drive=1 puts you at the wheel on the road nearest
       the middle of town the moment the town is in. */
    /* Billboards on the busiest streets of every town: the house reel until a slot is sold (billboards.js). */
-   Promise.all([import('./billboards.js'),getOr(DATA+'billboards.json',{rows:[]})]).then(([m,cfg])=>{billboardGroup=m.billboards({scene,network:driving.state.network,heightAt:surfaceAt,rows:cfg.rows||[],slots:cfg.slots||null,count:FACTORY?6:4,townName:window.__townName||'Winthrop'});window.__billboards=billboardGroup;
+   Promise.all([import('./billboards.js'),getOr(DATA+'billboards.json',{rows:[]}),getOr(DATA+'lidar-trees.json',{placements:[]})]).then(([m,cfg,treeData])=>{billboardGroup=m.billboards({scene,network:driving.state.network,heightAt:surfaceAt,rows:cfg.rows||[],slots:cfg.slots||null,count:FACTORY?6:4,townName:window.__townName||'Winthrop',obstacles:{buildings:world.buildings||[],trees:treeData.placements||[],poles:(powerLines&&powerLines.poles)||[]}});window.__billboards=billboardGroup;
     /* the sold slots live in the Billboards collection on winthropbythesea.com; keyless, CORS open, fail-silent */
     fetch(BILLBOARD_API+'billboards?town='+encodeURIComponent(WORLD)).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.rows&&j.rows.length)billboardGroup.userData.apply(j.rows);}).catch(()=>{});
     sponsorForm(billboardGroup);}).catch(e=>console.warn('billboards off',e));
