@@ -59,6 +59,7 @@ const FACTORY=/^[a-z][a-z0-9-]{0,24}$/.test(WORLD)&&WORLD!=='winthrop';
 const DATA=FACTORY?`./worlds/${WORLD}/`:'./data/';
 window.__world=WORLD;if(FACTORY)document.documentElement.classList.add('factory-world');
 const getOr=(path,fallback)=>get(path).catch(()=>fallback);
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 if(FACTORY)getOr(DATA+'town.json',null).then(t=>{if(!t)return;const name=(t.title||t.name||WORLD).replace(/\b\w/g,c=>c.toUpperCase());document.title=name+' | Drive '+name;const h=document.querySelector('.places h1');if(h)h.textContent='Explore '+name;const help=document.querySelector('.explore-help');if(help)help.textContent=t.tagline||('Every street in '+name+', from free open data.');const b=document.querySelector('.brand b');if(b)b.textContent=name;const bs=document.querySelector('.brand span');if(bs)bs.textContent='Drive '+name;});   /* set the moment the visitor moves the camera themselves */
 function frameWhole(){
  if(!world||!world.roads||!world.roads.length)return;
@@ -203,6 +204,9 @@ async function init(){
  Promise.all([getOr(DATA+'crossings.json',{crossings:[]}),getOr(DATA+'power-lines.json',{poles:[],lines:[]}),getOr(DATA+'street-furniture.json',{lamps:[],busStops:[],signals:[]})]).then(([crossings,powerLines,furniture])=>{driving.turn.setObstacles([...(powerLines.poles||[]).map(p=>({x:p.x,z:p.z,r:.3})),...(furniture.lamps||[]).map(p=>({x:p.x,z:p.z,r:.22})),...(furniture.busStops||[]).map(p=>({x:p.x,z:p.z,r:.35})),...(furniture.signals||[]).map(p=>({x:p.x,z:p.z,r:.3})),...assetData.assets.map(a=>({x:a.x,z:a.z,r:a.kind==='hydrant'?.22:.28}))]);driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem,driving.cruise.junctions);scene.add(g);furnitureGroup=g;window.__furniture=g;
   /* Cars at the curb, from the same fetch: they need the furniture and the street assets to know what not to park on. */
   parkedCars(driving.state.network,surfaceAt,{assets:assetData.assets,furniture,crossings}).then(pc=>{scene.add(pc);parkedGroup=pc;window.__parked=pc;resolveTown();
+   /* Pierce, 2026-09-14: 'it goes to it, it maps it, it plays it'. ?drive=1 puts you at the wheel on the road nearest
+      the middle of town the moment the town is in. */
+   if(/[?&]drive=1/.test(location.search)&&!driving.active){const b=world.bbox,near=driving.state.network.nearest((b[0]+b[2])/2,(b[1]+b[3])/2,true);if(near)driving.enter(near.x,near.z).catch(()=>{});}
    /* And they are solid. Placement runs first and asks contains() where the road is, so the blockers go in
       afterwards - otherwise the cars would park themselves out of existence one by one. */
    /* Solid, and on. The one thing that stood in the way was the beach loop: with the cars solid the car

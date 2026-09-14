@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#06090f">
+<title>Drive Anywhere</title>
+<link rel="preload" href="assets/earth.jpg" as="image">
+<style>
+:root{color-scheme:dark;--ink:#f3f7fa;--muted:#9fb0bb;--accent:#f0b860;--glass:rgba(9,13,18,.62);--edge:rgba(255,255,255,.14);font-family:Inter,-apple-system,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#06090f;color:var(--ink);overflow:hidden}
+canvas#globe{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.brand{position:fixed;top:calc(16px + env(safe-area-inset-top));left:20px;font-family:Georgia,'Times New Roman',serif;letter-spacing:.14em;font-weight:700;font-size:15px;text-transform:uppercase}
+.brand small{display:block;font-family:Inter,Arial,sans-serif;font-weight:600;font-size:10px;letter-spacing:.26em;color:var(--accent);margin-top:2px}
+.sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(22px + env(safe-area-inset-bottom));width:min(560px,calc(100% - 28px));padding:16px 16px 14px;border-radius:22px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.sheet h1{margin:0 0 4px;font-family:Georgia,serif;font-weight:700;font-size:24px;letter-spacing:-.01em}
+.sheet p{margin:0 0 12px;font-size:13px;line-height:1.45;color:var(--muted);text-wrap:pretty}
+form{display:flex;gap:8px}
+input{flex:1;min-width:0;font:inherit;font-size:17px;padding:13px 15px;border-radius:14px;border:1px solid var(--edge);background:rgba(255,255,255,.07);color:var(--ink);outline:none}
+input:focus{border-color:var(--accent)}
+button{font:inherit;font-weight:700;font-size:15px;padding:0 18px;border-radius:14px;border:0;background:var(--accent);color:#1b1408;min-height:48px;cursor:pointer}
+button:disabled{opacity:.55}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips button{background:rgba(255,255,255,.1);color:var(--ink);font-weight:600;font-size:13px;min-height:36px;padding:0 12px;border-radius:999px}
+.status{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 40px));text-align:center;pointer-events:none;opacity:0;transition:opacity .4s}
+.status.on{opacity:1}
+.status h2{margin:0 0 8px;font-family:Georgia,serif;font-weight:700;font-size:clamp(24px,6vw,34px);letter-spacing:-.01em;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.status p{margin:0;font-size:14px;color:var(--ink);text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.bar{height:3px;margin:14px auto 0;width:220px;border-radius:2px;background:rgba(255,255,255,.18);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .6s}
+.hint{position:fixed;left:0;right:0;bottom:6px;text-align:center;font-size:10px;letter-spacing:.06em;color:var(--muted);pointer-events:none}
+body.building .sheet{opacity:0;pointer-events:none;transition:opacity .4s}
+.err{color:#ffb4a8}
+</style></head><body>
+<canvas id="globe"></canvas>
+<div class="brand">Drive Anywhere<small>The city factory</small></div>
+<section class="sheet" id="sheet">
+ <h1>Where do you want to drive?</h1>
+ <p>Type a town. The globe turns to it, the streets and buildings are built from open map data on this phone in about a minute, and then you drive.</p>
+ <form id="form"><input id="city" type="search" placeholder="Winthrop, Lihue, Pittsfield, Reykjavík…" autocomplete="off" autocapitalize="words" enterkeyhint="go"><button id="go" type="submit">Build it</button></form>
+ <div class="chips" id="chips"></div>
+</section>
+<div class="status" id="status"><h2 id="stName">Lihue</h2><p id="stNote">Turning the globe…</p><div class="bar"><i id="stBar"></i></div></div>
+<div class="hint">OpenStreetMap · Terrarium elevation · USGS NAIP · built in your browser</div>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+<script type="module" src="world.js"></script>
+</body></html>
