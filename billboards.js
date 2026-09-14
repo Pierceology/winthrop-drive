@@ -63,12 +63,26 @@ export function billboards({scene, network, heightAt, slots = null, rows = [], c
     const fr = new THREE.Mesh(new THREE.BoxGeometry(W + .5, H + .5, .35), frame); fr.position.set(0, POST + H / 2, 0); fr.castShadow = true; b.add(fr);
     const screen = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshBasicMaterial({map: tex.texture, toneMapped: false}));
     screen.position.set(0, POST + H / 2, .19); b.add(screen);
-    const pl = new THREE.Mesh(new THREE.PlaneGeometry(W * .8, .95), new THREE.MeshBasicMaterial({map: plate(row && row.sponsor ? row.sponsor : 'THIS BILLBOARD IS OPEN', row && row.sponsor ? (row.link || '') : 'Your video on it, on every drive through ' + (townName || 'town')), toneMapped: false}));
+    const pl = new THREE.Mesh(new THREE.PlaneGeometry(W * .8, .95), new THREE.MeshBasicMaterial({map: plate(row && row.sponsor ? row.sponsor : 'THIS BILLBOARD IS OPEN', row && row.sponsor ? (row.link || '') : 'Tap About to put your video here, on every drive through ' + (townName || 'town')), toneMapped: false}));
     pl.position.set(0, POST - .6, .19); b.add(pl);
     b.userData = {slot: i, road: p.road, link: row && row.link, sponsor: row && row.sponsor};
     group.add(b);
   });
   group.userData.audit = {slots: places.length, sold: sold.size, roads: places.map(p => p.road)};
+  /* Sold rows from the site arrive after mount (GET /_functions/billboards?town=): swap that slot's screen and plate. */
+  group.userData.apply = newRows => {
+    let n = 0;
+    for (const row of newRows || []) {
+      const b = group.children[row.slot]; if (!b || !row.video) continue;
+      const tex = cache.get(row.video) || (cache.set(row.video, videoTexture(row.video)), cache.get(row.video));
+      const screen = b.children[3], pl = b.children[4];
+      screen.material.map = tex.texture; screen.material.needsUpdate = true;
+      pl.material.map = plate(row.sponsor || 'SPONSORED', row.link || ''); pl.material.needsUpdate = true;
+      b.userData.link = row.link; b.userData.sponsor = row.sponsor; n++;
+    }
+    group.userData.audit.sold = n; return n;
+  };
+  group.userData.slotsOpen = () => group.children.map((b, i) => ({slot: i, road: b.userData.road, open: !b.userData.sponsor}));
   scene.add(group);
   return group;
 }

@@ -19,6 +19,20 @@ import {parkedCars} from './parked-cars.js';
 import {inTown} from './town-limits.js';
 import {townSketch} from './sketch.js';
 let sketch=null,billboardGroup=null;
+const BILLBOARD_API='https://www.winthropbythesea.com/_functions/';
+/* Sponsor a billboard, from inside the game: a small form in About that files a request row. Pierce confirms the
+   slot and the payment by hand until the Pricing Plans app is on the site; then the same form links to checkout. */
+function sponsorForm(group){
+ const about=document.getElementById('about');if(!about||document.getElementById('sponsorBox'))return;
+ const box=document.createElement('section');box.id='sponsorBox';box.innerHTML='<h3>Put your video on a billboard here</h3><p class="sponsorNote">Every town has a few screens on its busiest streets. Pick one, give us the video, and it plays for every driver. $49 a month.</p>'+
+  '<form id="sponsorForm"><select name="slot" aria-label="Which billboard"></select><input name="sponsor" placeholder="Business name" required maxlength="120"><input name="email" type="email" placeholder="Email" required><input name="video" type="url" placeholder="Video URL (mp4 or a Wix video link)"><input name="link" type="url" placeholder="Your website (optional)"><button type="submit" class="primary">Request this billboard</button><output id="sponsorSaid"></output></form>';
+ about.appendChild(box);
+ const sel=box.querySelector('select');for(const s of group.userData.slotsOpen()){const o=document.createElement('option');o.value=s.slot;o.textContent='Billboard '+(s.slot+1)+' · '+(s.road||'').replace(/\b\w+/g,w=>w[0]+w.slice(1).toLowerCase())+(s.open?'':' (taken)');o.disabled=!s.open;sel.append(o);}
+ box.querySelector('form').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,say=f.querySelector('#sponsorSaid');say.textContent='Sending…';
+  const body={town:WORLD,townName:window.__townName||'Winthrop',slot:+f.slot.value,sponsor:f.sponsor.value,email:f.email.value,video:f.video.value,link:f.link.value};
+  try{const r=await fetch(BILLBOARD_API+'billboardRequest',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();say.textContent=j&&j.ok?'Got it. We confirm the slot by email and it goes live once it is paid.':'Could not send: '+((j&&j.error)||r.status);}
+  catch(_){say.textContent='Could not reach the site. Email hello@winthropbythesea.com instead.';}});
+}
 /* Resolved when the last heavy load -- the parked cars, at the end of the furniture chain -- is in the scene. The
    arrival waits on it: measured in Chrome, the seconds after the loading card are a run of one-second stalls. */
 let resolveTown=null;const townReady=new Promise(r=>{resolveTown=r;});
@@ -215,7 +229,10 @@ async function init(){
    /* Pierce, 2026-09-14: 'it goes to it, it maps it, it plays it'. ?drive=1 puts you at the wheel on the road nearest
       the middle of town the moment the town is in. */
    /* Billboards on the busiest streets of every town: the house reel until a slot is sold (billboards.js). */
-   Promise.all([import('./billboards.js'),getOr(DATA+'billboards.json',{rows:[]})]).then(([m,cfg])=>{billboardGroup=m.billboards({scene,network:driving.state.network,heightAt:surfaceAt,rows:cfg.rows||[],slots:cfg.slots||null,count:FACTORY?6:4,townName:window.__townName||'Winthrop'});window.__billboards=billboardGroup;}).catch(e=>console.warn('billboards off',e));
+   Promise.all([import('./billboards.js'),getOr(DATA+'billboards.json',{rows:[]})]).then(([m,cfg])=>{billboardGroup=m.billboards({scene,network:driving.state.network,heightAt:surfaceAt,rows:cfg.rows||[],slots:cfg.slots||null,count:FACTORY?6:4,townName:window.__townName||'Winthrop'});window.__billboards=billboardGroup;
+    /* the sold slots live in the Billboards collection on winthropbythesea.com; keyless, CORS open, fail-silent */
+    fetch(BILLBOARD_API+'billboards?town='+encodeURIComponent(WORLD)).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.rows&&j.rows.length)billboardGroup.userData.apply(j.rows);}).catch(()=>{});
+    sponsorForm(billboardGroup);}).catch(e=>console.warn('billboards off',e));
    if(/[?&]drive=1/.test(location.search)&&!driving.active){const b=world.bbox,near=driving.state.network.nearest((b[0]+b[2])/2,(b[1]+b[3])/2,true);if(near)driving.enter(near.x,near.z).catch(()=>{});}
    /* And they are solid. Placement runs first and asks contains() where the road is, so the blockers go in
       afterwards - otherwise the cars would park themselves out of existence one by one. */

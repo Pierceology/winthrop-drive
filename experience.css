@@ -632,3 +632,6 @@ body.driving .driveactions #driveMode button{min-width:0}
 
 /* a factory town has no Winthrop Center, Yirrell Beach or Deer Island */
 html.factory-world .destinations,html.factory-world #tourSwitch,html.factory-world #tour{display:none}   /* and no Coastal flyover: that route is Winthrop's shore */
+
+/* the sponsor form inside About */
+#sponsorBox{margin-top:18px;padding-top:14px;border-top:1px solid var(--edge)}#sponsorBox h3{margin:0 0 4px;font-family:var(--display);font-weight:600;font-size:17px}#sponsorBox .sponsorNote{margin:0 0 10px;font-size:12.5px;color:var(--muted)}#sponsorForm{display:grid;gap:7px}#sponsorForm input,#sponsorForm select{font:inherit;font-size:14px;min-height:40px;padding:8px 12px;border-radius:var(--r-sm);border:1px solid var(--edge);background:var(--glass-lite);color:var(--ink)}#sponsorForm output{font-size:12.5px;color:var(--accent);min-height:1em}
