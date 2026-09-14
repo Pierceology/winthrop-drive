@@ -18,7 +18,7 @@ import {SignalSystem} from './signals.js';
 import {parkedCars} from './parked-cars.js';
 import {inTown} from './town-limits.js';
 import {townSketch} from './sketch.js';
-let sketch=null,billboardGroup=null;
+let sketch=null,billboardGroup=null,loganGroup=null;
 document.body.classList.add('quiet');for(const ev of ['pointerdown','wheel','keydown'])addEventListener(ev,()=>document.body.classList.remove('quiet'),{once:true,passive:true});   // Pierce 09-14: "too much is happening at once on the pageload"
 const BILLBOARD_API='https://www.winthropbythesea.com/_functions/';
 /* Sponsor a billboard, from inside the game: a small form in About that files a request row. Pierce confirms the
@@ -253,7 +253,8 @@ async function init(){
  performance.mark('stage:street-assets');assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Signs, poles and hydrants · ${assetData.assets.length}`;
 window.__drive=driving;window.__controls=controls;window.__camera=camera;
  /* Real life, Winthrop only: the 713 bus, aircraft on the Logan approach, the Boston tide (live.js; every feed fail-silent). */
- if(!FACTORY)import('./live.js').then(m=>{window.__live=m.liveWinthrop({scene,heightAt:surfaceAt,water,camera,controls,network:driving.state.network});}).catch(e=>console.warn('live layers off',e)); ambient=new AmbientLife(scene,driving.state.network,surfaceAt);window.__ambient=ambient;driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;
+ if(!FACTORY)townReady.then(()=>Promise.all([import('./logan.js'),getOr(DATA+'logan.json',null)]).then(([m,d])=>{if(d){loganGroup=m.logan({scene,data:d,y:water.position.y+1.6});window.__logan=loganGroup;}}).catch(e=>console.warn('Logan off',e)));   // Boston Logan across the harbor (Pierce, 09-14)
+ if(!FACTORY)import('./live.js').then(m=>{window.__live=m.liveWinthrop({scene,heightAt:surfaceAt,water,camera,controls,network:driving.state.network,fieldY:water.position.y+1.6});}).catch(e=>console.warn('live layers off',e)); ambient=new AmbientLife(scene,driving.state.network,surfaceAt);window.__ambient=ambient;driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__flight=flight;
  tour={get active(){return coastal.active||flight.active;},start(){flight.stop();coastal.start();},stop(){coastal.stop();flight.stop();},update(dt){coastal.update(dt);flight.update(dt);}};}
  performance.mark('stage:trees');try{canopyData=await get(DATA+'tree-survey.json');canopyGroup=treeSurvey(canopyData,surfaceAt);scene.add(canopyGroup);
  const canopyAreas=await get(DATA+'lidar-trees.json').catch(()=>get(DATA+'canopy-scenery.json'));sceneryTrees=await treeScenery(canopyData,surfaceAt,driving.state.network,canopyAreas);scene.add(sceneryTrees);$('treeSummary').textContent=sceneryTrees.userData.count.toLocaleString()+' trees, each one where it really stands.';}catch(e){console.warn('Trees unavailable for this world',e);}

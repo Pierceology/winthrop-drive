@@ -146,7 +146,7 @@ function nameTag(text,color){
 const lerpAngle=(a,b,t)=>{let d=(b-a+Math.PI)%(2*Math.PI);if(d<0)d+=2*Math.PI;return a+(d-Math.PI)*t;};
 
 /* ---------- the layers ---------- */
-export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,controls=null,network=null,intervals={}}={}){
+export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,controls=null,network=null,fieldY=1.5,intervals={}}={}){
  const I={buses:10000,predictions:30000,aircraft:20000,tide:360000,...intervals};
  const group=new THREE.Group();group.name='live';scene.add(group);
  const ground=(x,z)=>{const y=heightAt(x,z);return Number.isFinite(y)?y:0;};
@@ -179,19 +179,19 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   const rows=json&&Array.isArray(json.states)?json.states:[];const seen=new Set(),t=now();
   const feedTime=Number.isFinite(json?.time)?json.time:Date.now()/1000;
   for(const s of rows){const [icao,cs,,tpos,,lon,lat,baro,onGround,vel,track,vrate,,geo]=s;
-   if(onGround||!Number.isFinite(lat)||!Number.isFinite(lon))continue;
-   const alt=Number.isFinite(baro)?baro:(Number.isFinite(geo)?geo:0);const [x,z]=toLocal(lat,lon);
+   if(!Number.isFinite(lat)||!Number.isFinite(lon))continue;
+   const alt=onGround?0:(Number.isFinite(baro)?baro:(Number.isFinite(geo)?geo:0));const [x,z]=toLocal(lat,lon);
    const age=Math.max(0,feedTime-(tpos||feedTime));const v=Number.isFinite(vel)?vel:0,tr=(Number.isFinite(track)?track:0)*D,vr=Number.isFinite(vrate)?vrate:0;
    const fix={x:x+Math.sin(tr)*v*age,z:z-Math.cos(tr)*v*age,y:alt+vr*age,vx:Math.sin(tr)*v,vz:-Math.cos(tr)*v,vy:vr,yaw:yawFromBearing(Number.isFinite(track)?track:0),t0:t};
    seen.add(icao);let p=aircraft.get(icao);
-   if(!p){const callsign=(cs||'').trim(),al=airlineOf(callsign);p={mesh:makePlane(callsign),callsign,airline:al,...fix,ox:0,oz:0,oy:0};const tag=nameTag(al.text,al.color);tag.position.set(0,9,0);p.mesh.add(tag);group.add(p.mesh);aircraft.set(icao,p);}
+   if(!p){const callsign=(cs||'').trim(),al=airlineOf(callsign);p={mesh:makePlane(callsign),callsign,airline:al,icao,...fix,ox:0,oz:0,oy:0};const tag=nameTag(al.text,al.color);tag.position.set(0,9,0);tag.visible=false;tag.name='tag';p.mesh.add(tag);p.mesh.userData.icao=icao;p.mesh.traverse(o=>{o.userData.icao=icao;});group.add(p.mesh);aircraft.set(icao,p);}
    else{const cur=pos(p,t);p.ox=cur.x-fix.x;p.oz=cur.z-fix.z;p.oy=cur.y-fix.y;Object.assign(p,fix);}
-   p.alt=alt;p.speed=v;p.climb=vr;p.miss=0;}
+   p.alt=alt;p.speed=v;p.climb=vr;p.ground=!!onGround;p.miss=0;}
   renderChip();
   for(const [id,p] of aircraft){if(seen.has(id))continue;if(++p.miss>=3){group.remove(p.mesh);aircraft.delete(id);}}
   live.counts.aircraft=aircraft.size;return aircraft.size;
  };
- function pos(p,t){const dt=(t-p.t0)/1000,k=Math.max(0,1-dt/3);return {x:p.x+p.vx*dt+p.ox*k,z:p.z+p.vz*dt+p.oz*k,y:p.y+p.vy*dt+p.oy*k};}
+ function pos(p,t){const dt=(t-p.t0)/1000,k=Math.max(0,1-dt/3);return {x:p.x+p.vx*dt+p.ox*k,z:p.z+p.vz*dt+p.oz*k,y:Math.max(fieldY+2.6,p.y+p.vy*dt+p.oy*k)};}
  /* tide */
  const waterBase=water?water.position.y:0;
  live.ingestTide=json=>{
@@ -208,6 +208,10 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
     const gx=c.x-dx*140,gz=c.z-dz*140,gy=c.y+45;
     camera.position.x+=(gx-camera.position.x)*.08;camera.position.y+=(gy-camera.position.y)*.08;camera.position.z+=(gz-camera.position.z)*.08;
     controls.target.x+=(c.x-controls.target.x)*.15;controls.target.y+=(c.y-controls.target.y)*.15;controls.target.z+=(c.z-controls.target.z)*.15;}}
+  else if(following&&String(following).startsWith('in:')){const p=aircraft.get(following.slice(3));
+   if(!p||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){live.follow(null);}
+   else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz)||1;const dx=p.vx/sp,dz=p.vz/sp;
+    camera.position.set(c.x+dx*22,c.y+3.4,c.z+dz*22);camera.lookAt(c.x+dx*600,c.y+3.4+Math.max(-40,Math.min(40,p.vy*6)),c.z+dz*600);}}
   else if(following){const b=buses.get(following);
    if(!b||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
    else if(camera&&controls){let dx=b.to.x-b.from.x,dz=b.to.z-b.from.z;const L=Math.hypot(dx,dz);if(L>.5){b.dir=[dx/L,dz/L];}const d=b.dir||[0,1];
@@ -246,10 +250,23 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):''))
     :((b.status==='STOPPED_AT'?'stopped, ':'')+(DIRECTION[b.direction]||'in service'));
    entry(id,'713 bus'+(b.label?' '+b.label:''),line,'bus');}
-  const planes=[...aircraft.entries()].sort((a,b)=>Math.hypot(a[1].x,a[1].z)-Math.hypot(b[1].x,b[1].z)).slice(0,4);
-  for(const [icao,p] of planes){const ft=Math.round(p.alt/0.3048/100)*100,mph=Math.round((p.speed||0)*2.237);const phase=p.climb>1?'climbing':p.climb<-1?'descending':'level';
-   entry('ac:'+icao,p.airline.text,ft.toLocaleString()+' ft · '+phase+' · '+mph+' mph','plane');}}
- live.follow=id=>{following=id&&(buses.has(id)||(String(id).startsWith('ac:')&&aircraft.has(id.slice(3))))?id:null;if(following&&controls)controls.autoRotate=false;renderChip();return following;};
+  const planes=[...aircraft.entries()].sort((a,b)=>Math.hypot(a[1].x,a[1].z)-Math.hypot(b[1].x,b[1].z)).slice(0,5);
+  for(const [icao,p] of planes){const ft=Math.max(0,Math.round(p.alt/0.3048/100)*100),mph=Math.round((p.speed||0)*2.237);const phase=p.ground?(mph>40?'rolling':'on the ground'):p.climb>1?'climbing':p.climb<-1?'descending':'level';
+   const el=document.createElement('div');el.className='plane'+(following==='ac:'+icao||following==='in:'+icao?' on':'');
+   const bb=document.createElement('b');bb.textContent=p.airline.text;const sp=document.createElement('span');sp.textContent=(p.ground?'':ft.toLocaleString()+' ft · ')+phase+' · '+mph+' mph';
+   const acts=document.createElement('div');acts.className='acts';
+   for(const [key,label] of [['ac:'+icao,following==='ac:'+icao?'Following · stop':'Follow'],['in:'+icao,following==='in:'+icao?'Aboard · step off':'Ride along']]){const b=document.createElement('button');b.textContent=label;b.onclick=()=>live.follow(following===key?null:key);acts.append(b);}
+   el.append(bb,sp,acts);chip.append(el);}}
+ live.follow=id=>{const s=String(id||'');following=id&&(buses.has(id)||((s.startsWith('ac:')||s.startsWith('in:'))&&aircraft.has(s.slice(3))))?id:null;
+  if(controls){controls.autoRotate=false;controls.enabled=!(following&&String(following).startsWith('in:'));}
+  for(const p of aircraft.values()){const tag=p.mesh.getObjectByName('tag');if(tag)tag.visible=following==='ac:'+p.icao||following==='in:'+p.icao;p.mesh.visible=following!=='in:'+p.icao;}
+  if(typeof document!=='undefined')document.body.classList.toggle('aboard',!!(following&&String(following).startsWith('in:')));renderChip();return following;};
+ /* the name shows only on hover (Pierce, 09-14: "only info if I hover") */
+ const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();let hovered=null,lastHover=0;
+ if(typeof addEventListener==='function'&&camera)addEventListener('pointermove',e=>{const t=now();if(t-lastHover<80)return;lastHover=t;const cv=e.target;if(!cv||cv.tagName!=='CANVAS')return;
+  ndc.set((e.clientX/cv.clientWidth)*2-1,-(e.clientY/cv.clientHeight)*2+1);ray.setFromCamera(ndc,camera);ray.params.Line={threshold:2};
+  const hit=ray.intersectObjects([...aircraft.values()].map(p=>p.mesh),true).find(h=>h.object.userData.icao);const id=hit?hit.object.userData.icao:null;
+  if(id!==hovered){if(hovered){const q=aircraft.get(hovered);const tg=q&&q.mesh.getObjectByName('tag');if(tg&&following!=='ac:'+hovered)tg.visible=false;}hovered=id;if(id){const q=aircraft.get(id);const tg=q&&q.mesh.getObjectByName('tag');if(tg)tg.visible=true;}cv.style.cursor=id?'pointer':'';}},{passive:true});
  live.following=()=>following;
  if(typeof addEventListener==='function')addEventListener('pointerdown',e=>{if(following&&e.target&&e.target.tagName==='CANVAS'){following=null;renderChip();}},{passive:true});
  const chipTimer=setInterval(renderChip,15000);
