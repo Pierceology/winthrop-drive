@@ -26,8 +26,9 @@ export function openingTitle({camera, controls, target, offset, ready, copy = {}
     const step = () => { if (done) return; const k = Math.min(1, (performance.now() - t0) / D), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
       camera.position.lerpVectors(from, to, e); controls.update(); if (k < 1) requestAnimationFrame(step); else finish(); };
     step(); };
-  ready.then(() => setTimeout(fly, 1300));
+  ready.then(() => { setTimeout(fly, 1300); setTimeout(finish, 1300 + 2400 + 400); });   // the timeout lands the camera even if the tab was hidden and frames never ran
   const skip = () => { if (done) return; done = true; camera.position.copy(to); controls.update(); el.remove(); document.body.classList.remove('opening'); };
+  setTimeout(() => { if (!done) finish(); }, 45000);   // nothing waits forever: after 45 s the town is shown whatever happened
   for (const ev of ['pointerdown', 'wheel', 'keydown']) addEventListener(ev, skip, {once: true, passive: true});
   return {skip, active: () => !done};
 }

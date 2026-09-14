@@ -141,7 +141,7 @@ function nameTag(text,color){
  g.fillStyle='rgba(12,17,22,.82)';g.beginPath();g.roundRect(2,2,c.width-4,c.height-4,24);g.fill();g.fillStyle=color;g.fillRect(2,2,14,c.height-4);
  g.fillStyle='#fff';g.font='700 46px system-ui,Helvetica,Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(text,c.width/2+6,c.height/2+2);
  const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;
- const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,depthTest:false,transparent:true,sizeAttenuation:false}));s.scale.set(.19,.036,1);s.renderOrder=20;return s;
+ const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,depthTest:false,transparent:true,sizeAttenuation:false}));s.scale.set(.07,.013,1);s.renderOrder=20;return s;
 }
 const lerpAngle=(a,b,t)=>{let d=(b-a+Math.PI)%(2*Math.PI);if(d<0)d+=2*Math.PI;return a+(d-Math.PI)*t;};
 
