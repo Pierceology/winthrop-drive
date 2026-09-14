@@ -826,6 +826,9 @@ function start(drive) {
       return;
     }
     const penalties = penaltySeconds(r);
+    /* every figure on the card is a whole second before any of them is added or subtracted, so 4:03 + 36 s is 4:39
+       and par minus the time is the number shown (Pierce, 09-14: "times don't match for races") */
+    r.elapsed = Math.round(r.elapsed); r.par = Math.round(r.par);
     const official = r.elapsed + penalties;
     const stars = official <= r.par ? 3 : official <= r.par * 1.25 ? 2 : 1;
     const best = readBest();
