@@ -19,7 +19,6 @@ import {parkedCars} from './parked-cars.js';
 import {inTown} from './town-limits.js';
 import {townSketch} from './sketch.js';
 let sketch=null,billboardGroup=null;
-const OPENING=!FACTORY&&!/[?&](ride|drive|building|world|fronts)=/.test(location.search);   // the title-and-dive opening: Winthrop's front door only, never a deep link
 document.body.classList.add('quiet');for(const ev of ['pointerdown','wheel','keydown'])addEventListener(ev,()=>document.body.classList.remove('quiet'),{once:true,passive:true});   // Pierce 09-14: "too much is happening at once on the pageload"
 const BILLBOARD_API='https://www.winthropbythesea.com/_functions/';
 /* Sponsor a billboard, from inside the game: a small form in About that files a request row. Pierce confirms the
@@ -72,6 +71,7 @@ let framedFor=0,touched=false,loopStarted=false;
    US, a NAIP ground photo -- and none of the Winthrop-only files, which are optional below. */
 const WORLD=(new URLSearchParams(location.search).get('world')||'winthrop').toLowerCase();
 const FACTORY=/^[a-z][a-z0-9-]{0,24}$/.test(WORLD)&&WORLD!=='winthrop';
+const OPENING=!FACTORY&&!/[?&](ride|drive|building|world|fronts)=/.test(location.search);   // the title-and-dive opening: Winthrop's front door only, never a deep link
 const DATA=FACTORY?`./worlds/${WORLD}/`:'./data/';
 window.__world=WORLD;if(FACTORY)document.documentElement.classList.add('factory-world');
 if(FACTORY)import('./globe-back.js').then(m=>m.globeBack({})).catch(()=>{});
