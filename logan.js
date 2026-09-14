@@ -43,17 +43,21 @@ function grow(ring, m) { const cx = ring.reduce((s, p) => s + p[0], 0) / ring.le
 export function logan({scene, data, y = 1.5}) {
   const group = new THREE.Group(); group.name = 'logan'; group.userData.audit = {};
   const add = (geos, mat, order = 0) => { if (!geos.length) return; const g = mergeGeometries(geos, false); geos.forEach(x => x.dispose()); const m = new THREE.Mesh(g, mat); m.renderOrder = order; m.receiveShadow = true; group.add(m); };
-  /* the ground: the USGS aerial photo in tiles (assets/logan/extent.json); the grass hull only if the photo is missing
-     (Pierce, 09-14: "can the airport look any better?") */
+  /* the ground: the aerial photo clipped to the airport's own boundary, so no water and no East Boston
+     (Pierce, 09-14: "the water is gross... remove all water and buildings and leave major airport and runways") */
   const loader = new THREE.TextureLoader();
   fetch('./assets/logan/extent.json').then(r => r.ok ? r.json() : null).then(ext => {
-    if (!ext || !ext.tiles || !ext.tiles.length) throw 0;
-    for (const t of ext.tiles) { const [ax, az, bx, bz] = t.bboxLocal; const g = new THREE.PlaneGeometry(bx - ax, bz - az); g.rotateX(-Math.PI / 2); g.translate((ax + bx) / 2, y + .02, (az + bz) / 2);
-      const tex = loader.load('./assets/logan/' + t.file); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
-      const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({map: tex})); m.renderOrder = 1; m.receiveShadow = true; group.add(m); }
+    if (!ext || !ext.mosaic || !data.boundary) throw 0;
+    const [x0, z0, x1, z1] = ext.bboxLocal;
+    const shape = new THREE.Shape(data.boundary.map(p => new THREE.Vector2(p[0], -p[1])));
+    const g = new THREE.ShapeGeometry(shape); g.rotateX(-Math.PI / 2); g.translate(0, y + .02, 0);
+    const pos = g.attributes.position, uv = new Float32Array(pos.count * 2);
+    for (let i = 0; i < pos.count; i++) { uv[i * 2] = (pos.getX(i) - x0) / (x1 - x0); uv[i * 2 + 1] = 1 - (pos.getZ(i) - z0) / (z1 - z0); }
+    g.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+    const tex = loader.load('./assets/logan/' + ext.mosaic); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+    const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({map: tex})); m.renderOrder = 1; m.receiveShadow = true; group.add(m);
     group.userData.audit.ground = ext.source;
-  }).catch(() => { const fieldPts = []; for (const r of data.runways) fieldPts.push(...r.points); for (const t of data.taxiways) fieldPts.push(...t.points); for (const a of data.aprons) fieldPts.push(...a.ring);
-    const field = []; polygon(grow(hull(fieldPts), 120), y, field); add(field, M.field, 1); });
+  }).catch(() => {});
   /* aprons, taxiways, runways, in that order so the runway paints on top */
   const aprons = []; for (const a of data.aprons) polygon(a.ring, y + .05, aprons); add(aprons, M.apron, 2);
   const taxi = [], yellow = []; for (const t of data.taxiways) { strip(t.points, t.width || 23, y + .08, taxi); strip(t.points, .5, y + .13, yellow); } add(taxi, M.taxiway, 3); add(yellow, M.yellow, 4);
@@ -71,7 +75,7 @@ export function logan({scene, data, y = 1.5}) {
     for (let s = 0; s < stripes; s++) { const off = -(W - 6) / 2 + gap / 2 + s * gap; mark(6, 45, off, 1.8); mark(total - 45, total - 6, off, 1.8); }
   }
   add(rw, M.runway, 5); add(white, M.white, 6);
-  const roads = []; for (const r of data.roads) strip(r.points, r.width || 10, y + .06, roads); add(roads, M.road, 2);
+  const roads = []; for (const r of (data.roads || [])) strip(r.points, r.width || 10, y + .06, roads); add(roads, M.road, 2);
   /* buildings by kind */
   const kinds = {building: [], terminal: [], hangar: []};
   for (const b of data.buildings) polygon(b.ring, y + .1, kinds[b.kind] || kinds.building, Math.max(3, b.height || 8));
