@@ -10,7 +10,7 @@ const M = {
   runway: new THREE.MeshLambertMaterial({color: '#3b3d40'}),
   taxiway: new THREE.MeshLambertMaterial({color: '#5d6063'}),
   apron: new THREE.MeshLambertMaterial({color: '#8b8f92'}),
-  road: new THREE.MeshLambertMaterial({color: '#4f5356'}),
+  road: new THREE.MeshLambertMaterial({color: '#4f5356', transparent: true, opacity: .55}),
   white: new THREE.MeshBasicMaterial({color: '#e8e8e2'}),
   yellow: new THREE.MeshBasicMaterial({color: '#e2c14a'}),
   building: new THREE.MeshLambertMaterial({color: '#b9bcbf'}),
@@ -41,11 +41,19 @@ function hull(points) {   // Andrew's monotone chain, for the grass field under 
 function grow(ring, m) { const cx = ring.reduce((s, p) => s + p[0], 0) / ring.length, cz = ring.reduce((s, p) => s + p[1], 0) / ring.length; return ring.map(p => { const dx = p[0] - cx, dz = p[1] - cz, L = Math.hypot(dx, dz) || 1; return [p[0] + dx / L * m, p[1] + dz / L * m]; }); }
 
 export function logan({scene, data, y = 1.5}) {
-  const group = new THREE.Group(); group.name = 'logan';
+  const group = new THREE.Group(); group.name = 'logan'; group.userData.audit = {};
   const add = (geos, mat, order = 0) => { if (!geos.length) return; const g = mergeGeometries(geos, false); geos.forEach(x => x.dispose()); const m = new THREE.Mesh(g, mat); m.renderOrder = order; m.receiveShadow = true; group.add(m); };
-  /* the field: grass under the whole airfield */
-  const fieldPts = []; for (const r of data.runways) fieldPts.push(...r.points); for (const t of data.taxiways) fieldPts.push(...t.points); for (const a of data.aprons) fieldPts.push(...a.ring);
-  const field = []; polygon(grow(hull(fieldPts), 120), y, field); add(field, M.field, 1);
+  /* the ground: the USGS aerial photo in tiles (assets/logan/extent.json); the grass hull only if the photo is missing
+     (Pierce, 09-14: "can the airport look any better?") */
+  const loader = new THREE.TextureLoader();
+  fetch('./assets/logan/extent.json').then(r => r.ok ? r.json() : null).then(ext => {
+    if (!ext || !ext.tiles || !ext.tiles.length) throw 0;
+    for (const t of ext.tiles) { const [ax, az, bx, bz] = t.bboxLocal; const g = new THREE.PlaneGeometry(bx - ax, bz - az); g.rotateX(-Math.PI / 2); g.translate((ax + bx) / 2, y + .02, (az + bz) / 2);
+      const tex = loader.load('./assets/logan/' + t.file); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+      const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({map: tex})); m.renderOrder = 1; m.receiveShadow = true; group.add(m); }
+    group.userData.audit.ground = ext.source;
+  }).catch(() => { const fieldPts = []; for (const r of data.runways) fieldPts.push(...r.points); for (const t of data.taxiways) fieldPts.push(...t.points); for (const a of data.aprons) fieldPts.push(...a.ring);
+    const field = []; polygon(grow(hull(fieldPts), 120), y, field); add(field, M.field, 1); });
   /* aprons, taxiways, runways, in that order so the runway paints on top */
   const aprons = []; for (const a of data.aprons) polygon(a.ring, y + .05, aprons); add(aprons, M.apron, 2);
   const taxi = [], yellow = []; for (const t of data.taxiways) { strip(t.points, t.width || 23, y + .08, taxi); strip(t.points, .5, y + .13, yellow); } add(taxi, M.taxiway, 3); add(yellow, M.yellow, 4);
@@ -68,6 +76,6 @@ export function logan({scene, data, y = 1.5}) {
   const kinds = {building: [], terminal: [], hangar: []};
   for (const b of data.buildings) polygon(b.ring, y + .1, kinds[b.kind] || kinds.building, Math.max(3, b.height || 8));
   for (const k of Object.keys(kinds)) { const m = new THREE.Mesh(mergeGeometries(kinds[k], false), M[k]); m.castShadow = k !== 'building'; m.receiveShadow = true; kinds[k].forEach(g => g.dispose()); group.add(m); }
-  group.userData.audit = {runways: data.runways.length, taxiways: data.taxiways.length, aprons: data.aprons.length, buildings: data.buildings.length, roads: data.roads.length, field: data.field, source: data.source};
+  group.userData.audit = Object.assign(group.userData.audit || {}, {runways: data.runways.length, taxiways: data.taxiways.length, aprons: data.aprons.length, buildings: data.buildings.length, roads: data.roads.length, field: data.field, source: data.source});
   scene.add(group); return group;
 }
