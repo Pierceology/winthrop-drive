@@ -17,10 +17,12 @@ import {streetFurniture} from './street-furniture.js';
 import {SignalSystem} from './signals.js';
 import {parkedCars} from './parked-cars.js';
 import {inTown} from './town-limits.js';
+import {townSketch} from './sketch.js';
+let sketch=null;
 /* Resolved when the last heavy load -- the parked cars, at the end of the furniture chain -- is in the scene. The
    arrival waits on it: measured in Chrome, the seconds after the loading card are a run of one-second stalls. */
 let resolveTown=null;const townReady=new Promise(r=>{resolveTown=r;});
-let resolveGround=null;const groundReady=new Promise(r=>{resolveGround=r;});
+let resolveGround=null;const groundReady=new Promise(r=>{resolveGround=r;});let groundDrawn=false;
 import {Weather} from './weather.js';
 import {TourFlight} from './tour-flight.js';
 import {EveningDrive} from './evening.js';
@@ -100,7 +102,7 @@ function addGeometry(){
 }
 async function init(){
  if(new URLSearchParams(location.search).get('render')==='software'){const {SoftwareRenderer}=await import('./inspection-renderer.js');renderer=new SoftwareRenderer(document.createElement('canvas'));const badge=document.createElement('div');badge.textContent='Geometry preview · lighting and vegetation simplified';badge.style.cssText='position:fixed;left:12px;bottom:32px;z-index:30;background:#102a35;color:white;padding:8px;font:12px system-ui';document.body.append(badge);}else renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;$('viewport').append(renderer.domElement);
- scene=new THREE.Scene();scene.background=new THREE.Color('#a2bdc9');scene.fog=new THREE.Fog('#a2bdc9',4500,18000);camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.15,45000);
+ scene=new THREE.Scene();window.__scene=scene;scene.background=new THREE.Color('#a2bdc9');scene.fog=new THREE.Fog('#a2bdc9',4500,18000);camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.15,45000);
  controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.07;controls.minDistance=5;controls.maxDistance=15500;controls.maxPolarAngle=Math.PI/2-.035;controls.autoRotateSpeed=.3;controls.zoomToCursor=true;controls.screenSpacePanning=false;controls.mouseButtons={LEFT:THREE.MOUSE.PAN,MIDDLE:THREE.MOUSE.DOLLY,RIGHT:THREE.MOUSE.ROTATE};controls.touches={ONE:THREE.TOUCH.PAN,TWO:THREE.TOUCH.DOLLY_ROTATE};
  water=makeWater();water.userData.previewColor=[.035,.16,.20];scene.add(water);
  hemi=new THREE.HemisphereLight(0xe6f1ff,0x515c56,2);scene.add(hemi);sun=new THREE.DirectionalLight(0xfff2da,1.6);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-180,right:180,top:180,bottom:-180,near:1,far:1600});sun.shadow.bias=-.00015;sun.shadow.normalBias=.4;scene.add(sun,sun.target);
@@ -109,9 +111,12 @@ async function init(){
     colour of the sky covers the build and lifts when the town is in. frameWhole() corrects the shot once the roads
     are known, before the veil has lifted, so nobody sees the correction. */
  controls.target.set(...places.whole.target);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
- {const veil=$('veil');const lift=()=>{if(veil){veil.classList.add('gone');setTimeout(()=>veil.remove(),1600);}};/* Pierce, 2026-09-13: 'the game takes like 12 seconds to load on a plain blue screen'. The veil now lifts the moment the
-    ground and the roads are drawn -- the town's shape -- and the buildings, trees and cars arrive onto it. */
-  Promise.race([groundReady,new Promise(r=>setTimeout(r,25000))]).then(()=>setTimeout(lift,150));}
+ {const veil=$('veil');if(veil)veil.remove();
+  /* Pierce, 2026-09-13: 'it still takes 5 seconds to see anything ... make the outline fun so stuff happens
+     immediately'. A 36 KB outline of every road is fetched ahead of the two-megabyte town and inks itself in over the
+     water in the first second and a half; it dissolves once the real ground is drawn underneath. */
+  get('./data/outline.json').then(outline=>{if(!groundDrawn)sketch=townSketch({scene,outline});}).catch(()=>{});
+  groundReady.then(()=>{groundDrawn=true;setTimeout(()=>{if(sketch)sketch.dissolve();},400);});}
  if(!loopStarted){loopStarted=true;renderer.setAnimationLoop(animate);}
  [world,foundationData,residential,poi,assetData,neighborhoods,signData,photoRegistration]=await Promise.all([get('./data/world.json'),get('./data/road-foundation.json'),get('./data/residential.json'),get('./data/places.json'),get('./data/street-assets.json'),get('./data/neighborhoods.json'),get('./data/traffic-signs.json'),get('./data/photo-facades.json')]);origin=world.origin;heightAt=gridHeight(foundationData.terrain);
  world.roads=world.roads.map(r=>{const keep=r.points.map(q=>inTown(q[0],q[1]));if(keep.every(Boolean))return r;const pts=r.points.filter((q,i)=>keep[i]);if(pts.length<2)return null;const dirs=r.directions?r.directions.filter((d,i)=>keep[i]&&keep[i+1]):r.directions;return {...r,points:pts,directions:dirs};}).filter(Boolean);
@@ -266,7 +271,7 @@ function bind(){
      after that it is theirs and re-framing it would be the rudest thing this file could do. */
   if(!touched&&framedFor&&Math.abs(framedFor-(innerWidth+innerHeight))>60&&!driving.active){frameWhole();goPlace('whole');}});
 }
-function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):.016;lastTime=time;
+function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):.016;lastTime=time;if(sketch&&sketch.alive)sketch.update(dt);
  if(flight){const t=Math.min(1,(time-flight.start)/1600),ease=t*t*(3-2*t);camera.position.lerpVectors(flight.from,flight.to,ease);controls.target.lerpVectors(flight.fromTarget,flight.target,ease);if(t===1)flight=null;}
  controls.target.x=THREE.MathUtils.clamp(controls.target.x,-3500,3500);controls.target.z=THREE.MathUtils.clamp(controls.target.z,-3900,3900);if(tour?.active)tour.update(dt);else if(driving?.active){ambient?.constrainPlayer(driving.state);driving.update(dt,time);}else controls.update(dt);
  ambient?.update(driving?.paused?0:dt,controls.target,driving,$('life').checked);water.material.uniforms.time.value=time/1000;water.material.uniforms.sunDirection.value.copy(sunOffset).normalize();if(frame%6===0)labels?.update(camera,controls.target,$('labels').checked&&!tour?.active);
