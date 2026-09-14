@@ -20,16 +20,19 @@ export function townSketch({scene, outline, heightAt = () => 0}) {
   g.setAttribute('born', new THREE.Float32BufferAttribute(born, 1));
   const material = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-    uniforms: {reach: {value: 0}, fade: {value: 1}, far: {value: far}},
+    uniforms: {reach: {value: 0}, pulse: {value: -1e4}, fade: {value: 1}, far: {value: far}},
     vertexShader: `attribute float born; varying float vBorn; void main(){ vBorn = born; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
-    fragmentShader: `uniform float reach, fade; varying float vBorn;
-      void main(){ float front = reach - vBorn;                                  // metres the light is past this point
+    fragmentShader: `uniform float reach, pulse, fade; varying float vBorn;
+      void main(){ float front = reach - vBorn;                                  // metres the first light is past this point
         float lit = smoothstep(0.0, 90.0, front);                                // the front arrives, then the line stays
         float head = smoothstep(-160.0, 0.0, front) * (1.0 - smoothstep(0.0, 220.0, front));   // a bright head on the travelling front
         /* smoothstep with its edges reversed is undefined in GLSL; on Pierce's GPU the first cut lit the whole town
            and then UN-inked it outward. Edges ascend now, so it draws the same way everywhere. */
-        vec3 ink = mix(vec3(0.62, 0.85, 0.95), vec3(1.0), head);
-        gl_FragColor = vec4(ink, (0.55 * lit + 0.9 * head) * fade); }`
+        // After the first pass, waves of light keep running out along the streets, so the map never sits still.
+        float pf = pulse - vBorn;
+        float wave = smoothstep(-140.0, 0.0, pf) * (1.0 - smoothstep(0.0, 380.0, pf));
+        vec3 ink = mix(vec3(0.62, 0.85, 0.95), vec3(1.0), max(head, wave * 0.8));
+        gl_FragColor = vec4(ink, (0.42 * lit + 0.9 * head + 0.55 * wave * lit) * fade); }`
   });
   const lines = new THREE.LineSegments(g, material);
   lines.name = 'townSketch'; lines.frustumCulled = false; lines.renderOrder = 8;
@@ -40,6 +43,9 @@ export function townSketch({scene, outline, heightAt = () => 0}) {
       if (dead) return;
       t += dt;
       material.uniforms.reach.value = Math.min(far + 300, t * (far / 1.5));     // the whole town inked in 1.5 s
+      // Pierce, 2026-09-13: 'constant movement and creation so the user doesn't have several seconds of nothing
+      // happening'. Once the first pass is done, a new wave leaves the centre every 1.6 s and runs to the edge.
+      if (t > 1.2) { const w = (t - 1.2) % 1.6; material.uniforms.pulse.value = w * ((far + 400) / 1.6); }
       if (dissolving) { material.uniforms.fade.value = Math.max(0, material.uniforms.fade.value - dt / 1.1); if (material.uniforms.fade.value <= 0) { dead = true; scene.remove(lines); g.dispose(); material.dispose(); } }
     },
     dissolve() { dissolving = true; },

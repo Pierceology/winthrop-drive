@@ -115,8 +115,12 @@ async function init(){
   /* Pierce, 2026-09-13: 'it still takes 5 seconds to see anything ... make the outline fun so stuff happens
      immediately'. A 36 KB outline of every road is fetched ahead of the two-megabyte town and inks itself in over the
      water in the first second and a half; it dissolves once the real ground is drawn underneath. */
-  get('./data/outline.json').then(outline=>{if(!groundDrawn)sketch=townSketch({scene,outline});}).catch(()=>{});
-  groundReady.then(()=>{groundDrawn=true;setTimeout(()=>{if(sketch)sketch.dissolve();},400);});}
+  get('./data/outline.json').then(outline=>{if(!groundDrawn){sketch=townSketch({scene,outline});
+    /* and the view itself moves: a slow orbit while the town is arriving, eased off once it is here */
+    if(!touched){controls.autoRotate=true;controls.autoRotateSpeed=.35;}}}).catch(()=>{});
+  groundReady.then(()=>{groundDrawn=true;setTimeout(()=>{if(sketch)sketch.dissolve();},400);
+    /* the orbit runs down over three seconds rather than stopping dead */
+    const t0=performance.now();const ease=()=>{const k=Math.min(1,(performance.now()-t0)/3000);controls.autoRotateSpeed=.35*(1-k);if(k<1&&!touched)requestAnimationFrame(ease);else controls.autoRotate=false;};ease();});}
  if(!loopStarted){loopStarted=true;renderer.setAnimationLoop(animate);}
  [world,foundationData,residential,poi,assetData,neighborhoods,signData,photoRegistration]=await Promise.all([get('./data/world.json'),get('./data/road-foundation.json'),get('./data/residential.json'),get('./data/places.json'),get('./data/street-assets.json'),get('./data/neighborhoods.json'),get('./data/traffic-signs.json'),get('./data/photo-facades.json')]);origin=world.origin;heightAt=gridHeight(foundationData.terrain);
  world.roads=world.roads.map(r=>{const keep=r.points.map(q=>inTown(q[0],q[1]));if(keep.every(Boolean))return r;const pts=r.points.filter((q,i)=>keep[i]);if(pts.length<2)return null;const dirs=r.directions?r.directions.filter((d,i)=>keep[i]&&keep[i+1]):r.directions;return {...r,points:pts,directions:dirs};}).filter(Boolean);
@@ -158,7 +162,7 @@ async function init(){
     This also fixes Reset view, which goes to the same place. */
  frameWhole();
  controls.target.set(...places.whole.target);controls.target.y=surfaceAt(controls.target.x,controls.target.z);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
- controls.addEventListener('start',()=>{touched=true;});
+ controls.addEventListener('start',()=>{touched=true;controls.autoRotate=false;});
  const names=[...new Set(world.roads.map(r=>r.name))].filter(n=>n!=='Unnamed road').sort();for(const name of [...names,...poi.places.map(p=>p.name)]){const o=document.createElement('option');o.value=name;$('roadnames').append(o)}
  $('counts').textContent=`${world.audit.buildings.toLocaleString()} building outlines · ${world.audit.roadSegments} road segments`;
  driving=new Driving({scene,camera,controls,world,heightAt:surfaceAt,collisionMeshes:buildingMeshes,onEnter:()=>{checklist?.open(false);if(coverageMap)coverageMap.outlines.visible=false;tour?.stop();$('spotActions').hidden=true;flight=null;auto=false;buildings.visible=true;pavement.visible=true;roadGroup.visible=false;$('inspector').hidden=true;$('notice').textContent=`${photoCatalog.length} photographed homes · other exteriors estimated`;},onExit:()=>{if(coverageMap)coverageMap.outlines.visible=$('coverageLayer').checked;$('notice').textContent=`${photoCatalog.length} homes with photographic surfaces · other exteriors estimated`;}});
