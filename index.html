@@ -14,4 +14,12 @@
 <dialog id="about"><button id="closeabout" aria-label="Close">×</button><h2>Drive Winthrop.</h2><p>The whole peninsula, Yirrell Beach to Deer Island, built from public map data and aerial imagery so you can wander it. Drag to move. Tap a street or a place and drive there. It is a work in progress: more of the town gets its real look every week.</p><dl><dt>Made by</dt><dd>Winthrop by the Sea. Say hello at winthropbythesea.com.</dd><dt>Credit</dt><dd>Place names, parks and playing fields © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a>. Aerial imagery: MassGIS.</dd></dl><span id="photoCoverage" hidden></span></dialog>
 
 
-<script type="module" src="hud.js"></script><script type="module" src="app.js"></script><script type="module" src="phone.js"></script><script type="module" src="games.js"></script></body></html>
+<script type="module" src="hud.js"></script><script type="module">
+/* Fresh files on every new version (Pierce, 09-14: "are you pushing these changes bc I'm not seeing them"): GitHub Pages
+   and the Wix frame hold each file for ten minutes. version.json is fetched uncached; when its stamp changes, every file
+   is refetched past the cache and the page reloads itself once, so a load never mixes old and new code. */
+(async()=>{let fresh=false;try{const r=await fetch('./version.json',{cache:'no-store'});if(r.ok){const v=await r.json();const seen=localStorage.getItem('wd-version');
+  if(seen!==v.v&&sessionStorage.getItem('wd-reloaded')!==v.v){await Promise.all([...v.files,'./'].map(f=>fetch(f,{cache:'reload'}).catch(()=>0)));localStorage.setItem('wd-version',v.v);sessionStorage.setItem('wd-reloaded',v.v);location.reload();return;}
+  localStorage.setItem('wd-version',v.v);}}catch(e){}
+ import('./app.js');})();
+</script><script type="module" src="phone.js"></script><script type="module" src="games.js"></script></body></html>
