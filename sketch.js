@@ -23,8 +23,11 @@ export function townSketch({scene, outline, heightAt = () => 0}) {
     uniforms: {reach: {value: 0}, fade: {value: 1}, far: {value: far}},
     vertexShader: `attribute float born; varying float vBorn; void main(){ vBorn = born; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
     fragmentShader: `uniform float reach, fade; varying float vBorn;
-      void main(){ float lit = smoothstep(vBorn + 90.0, vBorn, reach);            // the front arrives, then the line stays
-        float head = smoothstep(vBorn + 160.0, vBorn, reach) * (1.0 - smoothstep(vBorn, vBorn - 220.0, reach));   // a bright head on the travelling front
+      void main(){ float front = reach - vBorn;                                  // metres the light is past this point
+        float lit = smoothstep(0.0, 90.0, front);                                // the front arrives, then the line stays
+        float head = smoothstep(-160.0, 0.0, front) * (1.0 - smoothstep(0.0, 220.0, front));   // a bright head on the travelling front
+        /* smoothstep with its edges reversed is undefined in GLSL; on Pierce's GPU the first cut lit the whole town
+           and then UN-inked it outward. Edges ascend now, so it draws the same way everywhere. */
         vec3 ink = mix(vec3(0.62, 0.85, 0.95), vec3(1.0), head);
         gl_FragColor = vec4(ink, (0.55 * lit + 0.9 * head) * fade); }`
   });
