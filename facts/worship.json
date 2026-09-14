@@ -1,0 +1,91 @@
+{
+  "category": "worship",
+  "town": "Winthrop, MA",
+  "checkedAt": "2026-09-14",
+  "items": [
+    {
+      "name": "St. John the Evangelist Church (St. Michael the Archangel Parish)",
+      "category": "worship",
+      "denomination": "Roman Catholic (Archdiocese of Boston)",
+      "address": "320 Winthrop Street, Winthrop, MA 02152",
+      "lat": 42.3795419,
+      "lon": -70.982827,
+      "summary": "Winthrop's active Catholic parish church, seat of St. Michael the Archangel Parish (formed Feb 2021 from St. John the Evangelist and Holy Rosary); its lower level is now called Holy Rosary Chapel.",
+      "website": "https://stmichaelwinthrop.org/",
+      "phone": "617-846-7400",
+      "serviceTimes": "Saturday vigil 4pm; Sunday 8am, 10am, 12 noon, 5pm (St. John the Evangelist Church) and 11am (Holy Rosary Chapel); daily Mass Mon-Sat 9am (Holy Rosary Chapel)",
+      "sources": [
+        "https://stmichaelwinthrop.org/",
+        "https://www.openstreetmap.org/node/358278543",
+        "https://winthroptranscript.com/2020/12/10/st-john-the-evangelist-holy-rosary-to-merge/"
+      ]
+    },
+    {
+      "name": "First Church of Winthrop, United Methodist",
+      "category": "worship",
+      "denomination": "United Methodist",
+      "address": "217 Winthrop Street, Winthrop, MA 02152",
+      "lat": 42.3767044,
+      "lon": -70.9836326,
+      "summary": "Active United Methodist congregation on Metcalf Square whose building also hosts a community thrift shop listed in the town newsletter.",
+      "website": "https://www.firstchurchwinthrop.org/",
+      "phone": "617-846-0708",
+      "serviceTimes": "Sunday 11:00am in the Sanctuary (September-June); Sunday 10:00am in the Chapel (July-August)",
+      "sources": [
+        "https://www.firstchurchwinthrop.org/",
+        "https://www.openstreetmap.org/way/29892160",
+        "https://www.winthropma.gov/Search/Results?searchPhrase=church"
+      ]
+    },
+    {
+      "name": "St. John's Episcopal Church",
+      "category": "worship",
+      "denomination": "Episcopal (Diocese of Massachusetts)",
+      "address": "222 Bowdoin Street, Winthrop, MA 02152",
+      "lat": 42.3755179,
+      "lon": -70.981047,
+      "summary": "Active Episcopal parish at the corner of Bowdoin and Buchanan Streets, home of the Winthrop Community Food Pantry.",
+      "website": "https://www.stjohnsepiscopalwinthropma.org/",
+      "phone": "617-846-2363",
+      "serviceTimes": "Sunday 11:00am (choral eucharist); Saturday 4:30pm",
+      "sources": [
+        "https://www.stjohnsepiscopalwinthropma.org/",
+        "https://www.diomass.org/parish/winthrop/st-johns-church"
+      ]
+    },
+    {
+      "name": "Temple Tifereth Israel",
+      "category": "worship",
+      "denomination": "Jewish (unaffiliated, Conservative tradition)",
+      "address": "93 Veterans Road, Winthrop, MA 02152",
+      "lat": 42.3785607,
+      "lon": -70.9754104,
+      "summary": "Winthrop's synagogue, in its Veterans Road building since the 1960s after starting on Shirley Street in 1916, still holding Shabbat services and a Hebrew school.",
+      "website": null,
+      "phone": "617-846-1390",
+      "serviceTimes": null,
+      "sources": [
+        "https://www.openstreetmap.org/way/981257968",
+        "https://www.jewishboston.com/organization/temple-tifereth-israel-of-winthrop/",
+        "https://jewishjournal.org/2019/07/11/mighty-at-its-peak-winthrops-jewish-community-continues-to-survive/"
+      ]
+    },
+    {
+      "name": "Restoration Church - Winthrop (formerly Harbor City Church)",
+      "category": "worship",
+      "denomination": "Evangelical / Baptist (Baptist Churches of New England network)",
+      "address": "49 Adams Street, Winthrop, MA 02152",
+      "lat": 42.3738428,
+      "lon": -70.98773,
+      "summary": "Church-planted congregation in Winthrop Center that joined the multi-site Restoration Church family in 2026 and meets in the second-floor worship center at 49 Adams Street.",
+      "website": "https://www.findrestoration.org/",
+      "phone": null,
+      "serviceTimes": "Sunday 10:00am",
+      "sources": [
+        "https://www.findrestoration.org/",
+        "https://www.bcne.net/pray/harbor-city-church-winthrop-ma",
+        "https://www.churchfinder.com/churches/ma/winthrop/harbor-city-church"
+      ]
+    }
+  ]
+}

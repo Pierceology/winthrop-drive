@@ -1,0 +1,524 @@
+{
+  "category": "parks",
+  "town": "Winthrop, MA",
+  "checkedAt": "2026-09-14",
+  "items": [
+    {
+      "name": "Belle Isle Marsh Reservation",
+      "category": "parks",
+      "subtype": "nature reserve / salt marsh",
+      "address": "Winthrop side of Belle Isle Inlet (main entrance 1399 Bennington St, East Boston)",
+      "lat": 42.38422,
+      "lon": -70.98681,
+      "summary": "DCR-run reservation protecting the last large salt marsh in the Boston area; its Winthrop portion lies along the inlet west of Kennedy Drive and is a designated Area of Critical Environmental Concern.",
+      "features": [
+        "salt marsh",
+        "walking trails",
+        "bird watching"
+      ],
+      "website": "https://www.mass.gov/locations/belle-isle-marsh-reservation",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-225%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/relation/3359434",
+        "https://en.wikipedia.org/wiki/Belle_Isle_Marsh_Reservation",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Belle Isle Marsh Marine Ecology Park",
+      "category": "parks",
+      "subtype": "conservation land / marsh-edge park",
+      "address": "Winthrop side of Belle Isle Marsh, Winthrop, MA 02152",
+      "lat": 42.3853,
+      "lon": -70.98819,
+      "summary": "Town-owned conservation land on the Winthrop edge of Belle Isle Marsh, managed by the Conservation Commission; OpenStreetMap labels the marsh-edge paths and pavilion area the Marine Ecology Park.",
+      "features": [
+        "marsh-edge paths"
+      ],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-78%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/765255907",
+        "https://en.wikipedia.org/wiki/Belle_Isle_Marsh_Reservation"
+      ]
+    },
+    {
+      "name": "Winthrop Golf Club",
+      "category": "parks",
+      "subtype": "golf course",
+      "address": "453 Main Street, Winthrop, MA 02152",
+      "lat": 42.37705,
+      "lon": -70.9766,
+      "summary": "Private nine-hole, par-35 course on about 50 acres of town-owned land leased to the club, abutting the Lewis Lake tidal inlet.",
+      "features": [
+        "9-hole golf course"
+      ],
+      "website": "http://winthropgolf.com/",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-80%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29691964",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF",
+        "https://en.wikipedia.org/wiki/Winthrop,_Massachusetts"
+      ]
+    },
+    {
+      "name": "Ingleside Park",
+      "category": "parks",
+      "subtype": "park / athletic complex",
+      "address": "8 Walden Street, Winthrop, MA 02152",
+      "lat": 42.37793,
+      "lon": -70.98842,
+      "summary": "Winthrop's largest town park at about ten acres, bookable through Parks & Recreation for its softball field, multi-use field, gazebo, hockey area and pickleball courts.",
+      "features": [
+        "softball field",
+        "multi-use field (soccer/football/lacrosse)",
+        "gazebo",
+        "street hockey area",
+        "pickleball courts",
+        "playground",
+        "tennis courts",
+        "basketball court",
+        "skate area"
+      ],
+      "website": "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=10096",
+      "sources": [
+        "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=10096",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-219%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29688940",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "McKenna Courts",
+      "category": "parks",
+      "subtype": "basketball courts",
+      "address": "Walden Street, Winthrop, MA 02152",
+      "lat": 42.37763,
+      "lon": -70.98668,
+      "summary": "Lighted basketball courts with bleachers on the Walden Street side of Ingleside Park, listed as a bookable facility by Parks & Recreation; coordinates are the OpenStreetMap basketball pitch inside the park.",
+      "features": [
+        "basketball courts",
+        "lights",
+        "bleachers"
+      ],
+      "website": "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=12687",
+      "sources": [
+        "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=12687",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF",
+        "https://www.openstreetmap.org/way/570122606"
+      ]
+    },
+    {
+      "name": "Cellucci Field",
+      "category": "parks",
+      "subtype": "athletic fields",
+      "address": "Kennedy Drive, Winthrop, MA 02152",
+      "lat": 42.38652,
+      "lon": -70.98122,
+      "summary": "Town athletic fields at the former Fort Banks, bookable for a large soccer field, a small soccer field and a softball field.",
+      "features": [
+        "large soccer field",
+        "small soccer field",
+        "softball field"
+      ],
+      "website": "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=10098",
+      "sources": [
+        "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=10098",
+        "https://www.openstreetmap.org/way/605951208",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-207%27&outFields=*&f=json",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Fort Banks Playground",
+      "category": "parks",
+      "subtype": "playground / recreation area",
+      "address": "Fort Banks, Winthrop, MA 02152",
+      "lat": 42.38545,
+      "lon": -70.98031,
+      "summary": "Roughly ten-acre multi-use recreation area at the Fort Banks school site with playgrounds, tot lots and fields; OpenStreetMap names the play structure the Marianna L. Fabiano Playground.",
+      "features": [
+        "playground",
+        "tot lots",
+        "fields",
+        "tennis courts",
+        "basketball court"
+      ],
+      "website": "https://www.winthropma.gov/227/Parks-Recreation",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-207%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/249836127",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Coughlin Park",
+      "category": "parks",
+      "subtype": "park / playground / ballfields",
+      "address": "Bayview Avenue, Winthrop, MA 02152",
+      "lat": 42.36281,
+      "lon": -70.97374,
+      "summary": "Nearly ten-acre park, fully renovated and handicap accessible, with ballfields, courts and a playground.",
+      "features": [
+        "baseball field",
+        "basketball court",
+        "tennis court",
+        "field hockey field",
+        "playground"
+      ],
+      "website": "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=11679",
+      "sources": [
+        "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=11679",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-92%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29692302",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Norman F. Daw Playground",
+      "category": "parks",
+      "subtype": "playground",
+      "address": "Veterans Road, Winthrop, MA 02152",
+      "lat": 42.37392,
+      "lon": -70.97295,
+      "summary": "Small neighborhood playground beside Lewis Lake on Veterans Road, listed by Parks & Recreation as Daw Playground.",
+      "features": [
+        "playground"
+      ],
+      "website": "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=12684",
+      "sources": [
+        "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=12684",
+        "https://www.openstreetmap.org/way/29688573",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Lewis Lake Park",
+      "category": "parks",
+      "subtype": "park / tidal pond",
+      "address": "Winthrop, MA 02152",
+      "lat": 42.37352,
+      "lon": -70.97484,
+      "summary": "Eight-acre tidal inlet and the surrounding open space next to the golf course, the only body of water inside the town's open-space inventory.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-82%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/1075424339",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Pico Park",
+      "category": "parks",
+      "subtype": "park / playground",
+      "address": "Pico Park, Winthrop, MA 02152",
+      "lat": 42.36972,
+      "lon": -70.98331,
+      "summary": "Neighborhood playground and green paired with the small Pico Beach.",
+      "features": [
+        "playground",
+        "tennis court"
+      ],
+      "website": "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=12682",
+      "sources": [
+        "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=12682",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-85%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29693950",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Pond Street Park",
+      "category": "parks",
+      "subtype": "park / playground",
+      "address": "Corner of Highland Street and Pond Avenue, Winthrop, MA 02152",
+      "lat": 42.38854,
+      "lon": -70.97041,
+      "summary": "Neighborhood park with a basketball court, playground and tennis courts.",
+      "features": [
+        "basketball court",
+        "playground",
+        "tennis courts"
+      ],
+      "website": "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=12681",
+      "sources": [
+        "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=12681",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-206%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29694278",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Crest Avenue Park",
+      "category": "parks",
+      "subtype": "park / playground",
+      "address": "Crest Avenue, Winthrop, MA 02152",
+      "lat": 42.3861,
+      "lon": -70.9747,
+      "summary": "Small renovated playground and park on Crest Avenue.",
+      "features": [
+        "playground"
+      ],
+      "website": "https://www.winthropma.gov/227/Parks-Recreation",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-204%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29687859",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Fort Heath Park",
+      "category": "parks",
+      "subtype": "passive park / scenic overlook",
+      "address": "Fort Heath, Winthrop, MA 02152",
+      "lat": 42.38944,
+      "lon": -70.96927,
+      "summary": "Passive park on the bluff of the former Fort Heath with views over the Atlantic and Revere Beach.",
+      "features": [
+        "scenic overlook"
+      ],
+      "website": "https://www.winthropma.gov/227/Parks-Recreation",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-76%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29693929",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF",
+        "https://en.wikipedia.org/wiki/Winthrop,_Massachusetts"
+      ]
+    },
+    {
+      "name": "Massa Playground",
+      "category": "parks",
+      "subtype": "playground",
+      "address": "Winthrop, MA 02152",
+      "lat": 42.36965,
+      "lon": -70.96988,
+      "summary": "Small neighborhood playground and tot lot with a basketball court.",
+      "features": [
+        "playground",
+        "tot lot",
+        "basketball court"
+      ],
+      "website": "https://www.winthropma.gov/227/Parks-Recreation",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-201%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29695235",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Metcalf Square",
+      "category": "parks",
+      "subtype": "town green",
+      "address": "Opposite Town Hall, 1 Metcalf Square, Winthrop, MA 02152",
+      "lat": 42.37694,
+      "lon": -70.98415,
+      "summary": "The small town common across from Town Hall, also called Winthrop Common, renovated as part of the town-center streetscape.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-216%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29688701",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Harold E. French Square",
+      "category": "parks",
+      "subtype": "pocket park",
+      "address": "Winthrop Center, Winthrop, MA 02152",
+      "lat": 42.37477,
+      "lon": -70.98655,
+      "summary": "Small revitalized park in the center of the business district.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-214%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29688903",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Bicentennial Park",
+      "category": "parks",
+      "subtype": "pocket park",
+      "address": "Winthrop, MA 02152",
+      "lat": 42.37655,
+      "lon": -70.98661,
+      "summary": "Small town-owned recreation parcel in Winthrop Center listed in the state open-space layer.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-217%27&outFields=*&f=json"
+      ]
+    },
+    {
+      "name": "Thornton Park",
+      "category": "parks",
+      "subtype": "green space",
+      "address": "Winthrop, MA 02152",
+      "lat": 42.37326,
+      "lon": -70.9797,
+      "summary": "Large green space listed by the town as passive open space.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-212%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/133328283",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Brook Field",
+      "category": "parks",
+      "subtype": "passive park",
+      "address": "Adjacent to Ingleside Park, Winthrop, MA 02152",
+      "lat": 42.37655,
+      "lon": -70.99091,
+      "summary": "About an acre of passive open space along an enclosed drainage channel next to Ingleside Park.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-220%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29694281",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Public Landing",
+      "category": "parks",
+      "subtype": "waterfront park / boat landing",
+      "address": "Winthrop, MA 02152",
+      "lat": 42.3672,
+      "lon": -70.97143,
+      "summary": "Publicly owned boat landing on the harbor with benches and a scenic view.",
+      "features": [
+        "boat landing",
+        "benches"
+      ],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-86%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/29692387",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Fishermen's Bend",
+      "category": "parks",
+      "subtype": "conservation land / marsh",
+      "address": "Winthrop, MA 02152",
+      "lat": 42.37082,
+      "lon": -70.98287,
+      "summary": "Seven and a half acres of marsh and shore acquired by the town through tax title and held by the Conservation Commission.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://www.openstreetmap.org/way/1343800140",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Veterans Field",
+      "category": "parks",
+      "subtype": "athletic fields",
+      "address": "Adjacent to Winthrop High School, Winthrop, MA 02152",
+      "lat": 42.38085,
+      "lon": -70.97839,
+      "summary": "Multi-use school playfield of about eight acres beside the high school with ballfields and a running track.",
+      "features": [
+        "baseball fields",
+        "running track",
+        "multi-use field"
+      ],
+      "website": "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=10091",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-208%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/relation/17407928",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF",
+        "https://winthropma.myrec.com/info/facilities/details.aspx?FacilityID=10091"
+      ]
+    },
+    {
+      "name": "Miller Field",
+      "category": "parks",
+      "subtype": "football field",
+      "address": "Winthrop High School grounds, Winthrop, MA 02152",
+      "lat": 42.37984,
+      "lon": -70.97708,
+      "summary": "Four-acre football and soccer field on the school department's grounds.",
+      "features": [
+        "football field",
+        "soccer field"
+      ],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-210%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/580002271",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Winthrop Tennis Courts",
+      "category": "parks",
+      "subtype": "tennis courts",
+      "address": "Winthrop High School grounds, Winthrop, MA 02152",
+      "lat": 42.37943,
+      "lon": -70.97945,
+      "summary": "Four public tennis courts at the high school, maintained by Parks & Recreation.",
+      "features": [
+        "tennis courts"
+      ],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-228%27&outFields=*&f=json",
+        "https://www.openstreetmap.org/way/1267687069",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "Summit Avenue Park",
+      "category": "parks",
+      "subtype": "green strip",
+      "address": "Summit Avenue, Winthrop, MA 02152",
+      "lat": 42.38406,
+      "lon": -70.97541,
+      "summary": "Planted center strip along Summit Avenue that the town counts as open space.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-203%27&outFields=*&f=json",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    },
+    {
+      "name": "World War II Memorial Park",
+      "category": "parks",
+      "subtype": "memorial park",
+      "address": "Winthrop, MA 02152",
+      "lat": 42.38647,
+      "lon": -70.97556,
+      "summary": "Small historic memorial park maintained by Parks & Recreation, recorded in the state open-space layer.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-229%27&outFields=*&f=json"
+      ]
+    },
+    {
+      "name": "Snake Island",
+      "category": "parks",
+      "subtype": "conservation island",
+      "address": "Boston Harbor off Winthrop, MA 02152",
+      "lat": 42.36566,
+      "lon": -70.97982,
+      "summary": "Four-acre island in the inner harbor held by the Conservation Commission as a salt-marsh bird habitat; the town plan lists no public access.",
+      "features": [],
+      "website": null,
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0/query?where=OS_ID%3D%27346-89%27&outFields=*&f=json",
+        "https://www.winthropma.gov/DocumentCenter/View/442/Open-Space-Plan---Final-PDF"
+      ]
+    }
+  ]
+}

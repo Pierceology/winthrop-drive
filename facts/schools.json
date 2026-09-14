@@ -1,0 +1,101 @@
+{
+  "category": "schools",
+  "town": "Winthrop, MA",
+  "checkedAt": "2026-09-14",
+  "items": [
+    {
+      "name": "William P. Gorman Fort Banks Elementary School",
+      "category": "schools",
+      "subtype": "public",
+      "grades": "PK-2",
+      "address": "101 Kennedy Drive, Winthrop, MA 02152",
+      "lat": 42.38525,
+      "lon": -70.97984,
+      "summary": "Winthrop's early-grades public school on the old Fort Banks grounds, taking the district's preschoolers through second grade (486 students, 2025-26).",
+      "website": "https://gfb.winthrop.k12.ma.us",
+      "phone": "617-846-5509",
+      "sources": [
+        "https://profiles.doe.mass.edu/profiles/general.aspx?topNavID=1&leftNavId=100&orgcode=03460015&orgtypecode=6",
+        "https://gfb.winthrop.k12.ma.us",
+        "https://www.winthrop.k12.ma.us",
+        "https://nominatim.openstreetmap.org/search?q=101+Kennedy+Drive,+Winthrop,+MA+02152",
+        "https://en.wikipedia.org/wiki/Winthrop,_Massachusetts"
+      ]
+    },
+    {
+      "name": "Arthur T. Cummings Elementary School",
+      "category": "schools",
+      "subtype": "public",
+      "grades": "3-5",
+      "address": "40 Hermon Street, Winthrop, MA 02152",
+      "lat": 42.3774,
+      "lon": -70.9855,
+      "summary": "The town's upper-elementary public school, grades three through five, on Hermon Street a block off Winthrop Centre (466 students, 2025-26).",
+      "website": "https://atc.winthrop.k12.ma.us",
+      "phone": "617-846-5543",
+      "sources": [
+        "https://profiles.doe.mass.edu/profiles/general.aspx?topNavID=1&leftNavId=100&orgcode=03460020&orgtypecode=6",
+        "https://atc.winthrop.k12.ma.us",
+        "https://www.winthrop.k12.ma.us",
+        "https://www.openstreetmap.org/way/591083350",
+        "https://nominatim.openstreetmap.org/search?q=40+Hermon+Street,+Winthrop,+MA+02152"
+      ]
+    },
+    {
+      "name": "Winthrop Middle School",
+      "category": "schools",
+      "subtype": "public",
+      "grades": "6-8",
+      "address": "60 Payson Street, Winthrop, MA 02152",
+      "lat": 42.38137,
+      "lon": -70.97963,
+      "summary": "Grades six to eight in the shared middle/high school building on the Main Street campus, entered from Payson Street (455 students, 2025-26).",
+      "website": "https://wms.winthrop.k12.ma.us",
+      "phone": "617-846-5507",
+      "sources": [
+        "https://profiles.doe.mass.edu/profiles/general.aspx?topNavID=1&leftNavId=100&orgcode=03460305&orgtypecode=6",
+        "https://wms.winthrop.k12.ma.us",
+        "https://www.winthrop.k12.ma.us",
+        "https://www.openstreetmap.org/relation/14073612",
+        "https://nominatim.openstreetmap.org/search?q=60+Payson+Street,+Winthrop,+MA+02152"
+      ]
+    },
+    {
+      "name": "Winthrop High School",
+      "category": "schools",
+      "subtype": "public",
+      "grades": "9-12",
+      "address": "400 Main Street, Winthrop, MA 02152",
+      "lat": 42.38064,
+      "lon": -70.97898,
+      "summary": "Winthrop's only public high school, grades nine to twelve, in the middle/high school complex at 400 Main Street (553 students, 2025-26).",
+      "website": "https://whs.winthrop.k12.ma.us",
+      "phone": "617-846-5505",
+      "sources": [
+        "https://profiles.doe.mass.edu/profiles/general.aspx?topNavID=1&leftNavId=100&orgcode=03460505&orgtypecode=6",
+        "https://whs.winthrop.k12.ma.us",
+        "https://www.winthrop.k12.ma.us",
+        "https://www.openstreetmap.org/relation/14073612",
+        "https://nominatim.openstreetmap.org/search?q=400+Main+Street,+Winthrop,+MA",
+        "https://en.wikipedia.org/wiki/Winthrop,_Massachusetts"
+      ]
+    },
+    {
+      "name": "Winthrop Public Library & Museum",
+      "category": "schools",
+      "subtype": "library",
+      "grades": "all ages",
+      "address": "2 Metcalf Square, Winthrop, MA 02152",
+      "lat": 42.37757,
+      "lon": -70.98407,
+      "summary": "The town's public library since 1899, with a local-history museum, on Metcalf Square beside Town Hall in Winthrop Centre.",
+      "website": "https://winthroppubliclibrary.org/",
+      "phone": "617-846-1703",
+      "sources": [
+        "https://winthroppubliclibrary.org/",
+        "https://www.openstreetmap.org/node/367779339",
+        "https://nominatim.openstreetmap.org/search?q=Winthrop+Public+Library"
+      ]
+    }
+  ]
+}

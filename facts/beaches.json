@@ -1,0 +1,246 @@
+{
+  "category": "beaches",
+  "town": "Winthrop, MA",
+  "checkedAt": "2026-09-14",
+  "items": [
+    {
+      "name": "Winthrop Beach (DCR Winthrop Shore Reservation)",
+      "category": "beaches",
+      "managedBy": "Massachusetts DCR (Department of Conservation and Recreation)",
+      "address": "Winthrop Shore Drive, Winthrop, MA 02152",
+      "lat": 42.37719,
+      "lon": -70.97049,
+      "summary": "The town's main ocean beach: about a mile of sand and pebble shore along Winthrop Shore Drive, state-owned since 1900, open dawn to dusk with restrooms, a beach wheelchair, and the five offshore breakwaters locals call the Five Sisters.",
+      "parking": "Free parking along the beach (DCR); MBTA Blue Line to Orient Heights then bus 712/713.",
+      "website": "https://www.mass.gov/locations/winthrop-shore-reservation",
+      "sources": [
+        "https://www.mass.gov/locations/winthrop-shore-reservation",
+        "https://www.winthropma.gov/185/Beaches",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://en.wikipedia.org/wiki/Winthrop_Beach",
+        "https://www.openstreetmap.org/way/29692795"
+      ],
+      "seasonal": "DCR: no dogs on the beach April 1 to Sept. 15. Wikipedia: lifeguards on duty late June to early September.",
+      "phone": "(781) 485-2803"
+    },
+    {
+      "name": "Short Beach (DCR Winthrop Shore Reservation)",
+      "category": "beaches",
+      "managedBy": "Massachusetts DCR (Department of Conservation and Recreation)",
+      "address": "Revere Street at the Winthrop/Revere line, Winthrop, MA 02152",
+      "lat": 42.39228,
+      "lon": -70.98074,
+      "summary": "A sandy DCR beach on the isthmus between Winthrop and Revere, listed by the town as part of the Winthrop Shore Reservation.",
+      "parking": "Street parking (CZM Coast Guide, checked 2000).",
+      "website": "https://www.mass.gov/locations/winthrop-shore-reservation",
+      "sources": [
+        "https://www.winthropma.gov/185/Beaches",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/Marine_Beaches/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://www.openstreetmap.org/way/29688450",
+        "https://www.openstreetmap.org/way/86295288"
+      ]
+    },
+    {
+      "name": "Yirrell Beach",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "Shirley Street, Winthrop, MA 02152",
+      "lat": 42.36365,
+      "lon": -70.96993,
+      "summary": "The town-managed ocean beach on Shirley Street in Point Shirley, about 3,660 feet of sand behind a concrete seawall with a walkway and benches, an ADA ramp at the north end, and a buoyed swim area the Harbormaster enforces.",
+      "parking": "Street parking (CZM). Town-wide: a resident permit is required on all town streets and municipal lots 1-5 AM; a 2020 resident-only pilot covered the Point Shirley streets south of the beach.",
+      "website": "https://www.winthropma.gov/facilities/facility/details/yirrellbeach-35",
+      "sources": [
+        "https://www.winthropma.gov/185/Beaches",
+        "https://www.winthropma.gov/facilities/facility/details/yirrellbeach-35",
+        "https://www.winthropma.gov/DocumentCenter/View/1660",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/Marine_Beaches/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://en.wikipedia.org/wiki/Yirrell_Beach",
+        "https://www.winthropma.gov/254/Resident-Parking-Program",
+        "https://www.winthropma.gov/DocumentCenter/View/794",
+        "https://www.openstreetmap.org/way/86295404"
+      ],
+      "seasonal": "Town plan: raking and lifeguard stands during the swimming season, typically before Memorial Day through the end of August; shorebird nesting closures April 1 to August 31. Wikipedia: Sandcastle Festival in June."
+    },
+    {
+      "name": "Point Shirley Beach",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "Shirley Street south of Yirrell Beach, Point Shirley, Winthrop, MA 02152",
+      "lat": 42.3615,
+      "lon": -70.9702,
+      "summary": "The sandy southern continuation of Yirrell Beach along Point Shirley, a separate 5-acre town parcel reached from the Yirrell Beach walkway.",
+      "parking": "Resident-sticker parking (CZM); no separate lot.",
+      "website": "https://www.winthropma.gov/185/Beaches",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://en.wikipedia.org/wiki/Yirrell_Beach",
+        "https://www.openstreetmap.org/relation/11192375"
+      ],
+      "note": "Parcel runs lat 42.3565-42.3615; the point given is on the parcel inside the bbox, north of its centroid (42.35895,-70.96952)."
+    },
+    {
+      "name": "Donovan's Beach",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "Pleasant Street at Brookfield Road, Winthrop, MA 02152",
+      "lat": 42.37708,
+      "lon": -70.99225,
+      "summary": "A small town-owned sand-and-pebble beach on the harbor side at Pleasant Street and Brookfield Road, one of the quieter neighborhood beaches.",
+      "parking": "No parking (CZM Coast Guide).",
+      "website": "https://www.winthropma.gov/185/Beaches",
+      "sources": [
+        "https://www.winthropma.gov/185/Beaches",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/Marine_Beaches/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://en.wikipedia.org/wiki/Winthrop,_Massachusetts",
+        "https://www.openstreetmap.org/way/1055143959"
+      ]
+    },
+    {
+      "name": "Pico Beach",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "End of Pico Avenue, Winthrop, MA 02152",
+      "lat": 42.36942,
+      "lon": -70.98362,
+      "summary": "A pebble beach on the harbor side at the foot of Pico Avenue, backed by Pico Park's benches, playground and tennis courts.",
+      "parking": "Street parking (CZM Coast Guide).",
+      "website": "https://www.winthropma.gov/185/Beaches",
+      "sources": [
+        "https://www.winthropma.gov/185/Beaches",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/Marine_Beaches/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://en.wikipedia.org/wiki/Winthrop,_Massachusetts",
+        "https://www.openstreetmap.org/relation/14094745"
+      ]
+    },
+    {
+      "name": "Halford Beach",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "Corner of Nahant and Sewall, Winthrop, MA 02152",
+      "lat": 42.38932,
+      "lon": -70.97581,
+      "summary": "A rocky neighborhood beach on the ocean side at the corner of Nahant and Sewall, north of Winthrop Beach.",
+      "parking": "Street parking (CZM Coast Guide).",
+      "website": "https://www.winthropma.gov/185/Beaches",
+      "sources": [
+        "https://www.winthropma.gov/185/Beaches",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/Marine_Beaches/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://en.wikipedia.org/wiki/Winthrop,_Massachusetts"
+      ]
+    },
+    {
+      "name": "Grandview Beach",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "Grandview Avenue, Point Shirley, Winthrop, MA 02152",
+      "lat": 42.36051,
+      "lon": -70.97522,
+      "summary": "A public bathing beach on the harbor side of Point Shirley along Grandview Avenue, tracked by the state's marine-beach water-quality program.",
+      "parking": "Not stated by any source; the surrounding Point Shirley streets fall under the town's resident-permit rules.",
+      "website": "https://www.winthropma.gov/185/Beaches",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/Marine_Beaches/MapServer/0",
+        "https://www.openstreetmap.org/way/8616764"
+      ]
+    },
+    {
+      "name": "Woodside Park beach",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "End of Woodside, Cottage Park, Winthrop, MA 02152",
+      "lat": 42.36931,
+      "lon": -70.98597,
+      "summary": "A small sand-and-pebble beach at the foot of Woodside in the Cottage Park neighborhood, on the harbor side.",
+      "parking": "Resident parking only (CZM Coast Guide).",
+      "website": "https://www.winthropma.gov/185/Beaches",
+      "sources": [
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://www.openstreetmap.org/way/765265721"
+      ]
+    },
+    {
+      "name": "Coughlin Park shore",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "End of Bay View Avenue, Point Shirley, Winthrop, MA 02152",
+      "lat": 42.36259,
+      "lon": -70.97406,
+      "summary": "A 10-acre town park on the harbor side of Point Shirley under the Logan flight path, with benches, picnic tables, playground and sports fields and a shoreline the town has studied for bank restoration.",
+      "parking": "Free parking at the end of Bay View Avenue (CZM); the angle parking beside the park was exempt from the 2020 resident pilot except for the town-wide 1-5 AM permit rule.",
+      "website": "https://www.winthropma.gov/185/Beaches",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://www.winthropma.gov/DocumentCenter/View/794",
+        "https://www.winthropma.gov/361/czm-coughlin-grants",
+        "https://www.openstreetmap.org/way/29692302"
+      ]
+    },
+    {
+      "name": "Lewis Lake Park",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop",
+      "address": "River Road, Winthrop, MA 02152",
+      "lat": 42.37377,
+      "lon": -70.9744,
+      "summary": "A 14-acre town park around Lewis Lake, a tidal pond and river behind Winthrop Beach, with benches and a playground.",
+      "parking": "Street parking (CZM Coast Guide).",
+      "website": "https://www.winthropma.gov/185/Beaches",
+      "sources": [
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://www.openstreetmap.org/way/1075424339",
+        "https://nominatim.openstreetmap.org/reverse?lat=42.37377&lon=-70.9744&format=jsonv2"
+      ]
+    },
+    {
+      "name": "Winthrop Public Landing (town boat ramp)",
+      "category": "beaches",
+      "managedBy": "Town of Winthrop (a state/DCR boat-launch facility managed by the town)",
+      "address": "Winthrop Boat Ramp, Shirley Street, Winthrop, MA 02152",
+      "lat": 42.36707,
+      "lon": -70.97169,
+      "summary": "The public boat ramp and town pier on the harbor, with benches and shore access, run by the Harbormaster.",
+      "parking": "Parking lot: $10 recreational / $100 commercial ramp fee for trailers (not a parking fee); cars without trailers park on the perimeter; DCR 18-hour limit; $10 visitor pass for Veterans Road.",
+      "website": "https://www.winthropma.gov/187/Parking-Rules-at-the-Public-Landing",
+      "sources": [
+        "https://www.winthropma.gov/187/Parking-Rules-at-the-Public-Landing",
+        "https://arcgisserver.digital.mass.gov/arcgisserver/rest/services/AGOL/openspace/MapServer/0",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://www.openstreetmap.org/way/29692387"
+      ]
+    },
+    {
+      "name": "Deer Island trail shore",
+      "category": "beaches",
+      "managedBy": "MWRA (Massachusetts Water Resources Authority); within the Boston Harbor Islands National Park Area",
+      "address": "190 Tafts Avenue, Winthrop, MA 02152",
+      "lat": 42.35571,
+      "lon": -70.96751,
+      "summary": "Five miles of public walkways around the treatment-plant peninsula south of Point Shirley, including a 2.6-mile paved accessible perimeter path, a fishing pier and ten overlooks, open sunrise to sunset year-round.",
+      "parking": "Free parking at the head of the island by the entrance; MWRA asks visitors not to park in the Winthrop neighborhoods.",
+      "website": "https://www.mwra.com/your-sewer-system/sewer-treatment-facilities/deer-island-wastewater-treatment-plant/deer-island",
+      "sources": [
+        "https://www.mwra.com/your-sewer-system/sewer-treatment-facilities/deer-island-wastewater-treatment-plant/deer-island",
+        "https://www.mass.gov/doc/winthrop-east-boston-coast-guide-site-descriptions/download",
+        "https://en.wikipedia.org/wiki/Deer_Island_(Massachusetts)",
+        "https://www.openstreetmap.org/way/135422592",
+        "https://www.openstreetmap.org/relation/3795320"
+      ],
+      "seasonal": "Open year-round sunrise to sunset (MWRA). Dogs on leash; no alcohol, camping, open flames or motorized vehicles.",
+      "note": "The public parking lot is at lat 42.3557, just south of the requested bbox (42.36); nothing on Deer Island's public access lies north of 42.36. Coordinates are real, not clipped."
+    }
+  ]
+}

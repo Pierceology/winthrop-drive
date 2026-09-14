@@ -1,0 +1,619 @@
+{
+  "category": "history",
+  "town": "Winthrop, MA",
+  "checkedAt": "2026-09-14",
+  "items": [
+    {
+      "name": "Deane Winthrop House",
+      "category": "history",
+      "subtype": "historic house",
+      "address": "34 Shirley Street, Winthrop, MA 02152",
+      "lat": 42.3825,
+      "lon": -70.97806,
+      "summary": "First-period farmhouse of Deane Winthrop, youngest son of Governor John Winthrop; tree-ring dating puts the oldest part at 1675, with a 1696 addition. Owned since 1903 by the Winthrop Improvement and Historical Association and shown by appointment; listed on the National Register in 1990.",
+      "year": 1675,
+      "website": "https://wihaonline.org/",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Deane_Winthrop_House",
+        "https://en.wikipedia.org/wiki/National_Register_of_Historic_Places_listings_in_Suffolk_County,_Massachusetts",
+        "https://wihaonline.org/",
+        "https://nominatim.openstreetmap.org/search?format=json&q=34+Shirley+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Fort Banks Mortar Battery",
+      "category": "history",
+      "subtype": "fort",
+      "address": "Kennedy Drive, Winthrop, MA 02152",
+      "lat": 42.384306,
+      "lon": -70.980278,
+      "summary": "Endicott-era coast artillery emplacement begun in 1891 and finished in 1896, the first 12-inch mortar batteries completed in the United States, guarding the northern approach to Boston Harbor. The mortar pits survive amid later housing and were listed on the National Register in 2007.",
+      "year": 1891,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Fort_Banks_(Massachusetts)",
+        "https://en.wikipedia.org/wiki/National_Register_of_Historic_Places_listings_in_Suffolk_County,_Massachusetts",
+        "https://mhc-macris.net/details?mhcid=WTH.912",
+        "https://winthropmemorials.org/macris/"
+      ]
+    },
+    {
+      "name": "Fort Heath Park (Small Park) and Fort Heath marker",
+      "category": "history",
+      "subtype": "fort site",
+      "address": "Grovers Avenue at Winthrop Shore Drive, Winthrop Highlands, MA 02152",
+      "lat": 42.38944,
+      "lon": -70.96927,
+      "summary": "Town park on the headland where Fort Heath stood: a 1898-1901 coast artillery post with three 12-inch disappearing guns, later a Coast Guard radio station and a Cold War radar site. The military works were replaced by apartments, but the park keeps a commemorative wall and a historical marker.",
+      "year": 1900,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Fort_Heath",
+        "https://www.openstreetmap.org/way/29693929",
+        "https://nominatim.openstreetmap.org/search?format=json&q=Fort+Heath+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Grovers Cliff",
+      "category": "history",
+      "subtype": "landmark",
+      "address": "Winthrop Highlands headland, north end of Winthrop Beach, Winthrop, MA 02152",
+      "lat": 42.39038,
+      "lon": -70.96894,
+      "summary": "Shoreline escarpment forming the Highlands headland, site of an 1847 coastal survey station and of the Grover's Cliff Military Reservation that became Fort Heath. Open views over Broad Sound from the park at its top.",
+      "year": 1847,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Grovers_Cliff",
+        "https://nominatim.openstreetmap.org/search?format=json&q=Grovers+Cliff+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Winthrop Center / Metcalf Square Historic District",
+      "category": "history",
+      "subtype": "historic district",
+      "address": "Metcalf Square at Pauline, Hermon and Winthrop Streets, Winthrop, MA 02152",
+      "lat": 42.377003,
+      "lon": -70.98445,
+      "summary": "The town's civic heart, over a hundred buildings mostly from 1880 to 1940 around the square where the library, town hall and former post office stand. Columbia Square was renamed for Corporal Richard Metcalf, killed in World War I, and the district joined the National Register in 2010.",
+      "year": 2010,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Winthrop_Center/Metcalf_Square_Historic_District",
+        "https://en.wikipedia.org/wiki/National_Register_of_Historic_Places_listings_in_Suffolk_County,_Massachusetts",
+        "https://mhc-macris.net/details?mhcid=WTH.N",
+        "https://winthropmemorials.org/macris/"
+      ]
+    },
+    {
+      "name": "Frost Public Library (Winthrop Public Library & Museum)",
+      "category": "history",
+      "subtype": "library",
+      "address": "2 Metcalf Square, Winthrop, MA 02152",
+      "lat": 42.37757,
+      "lon": -70.98407,
+      "summary": "Yellow-brick Renaissance Revival library of 1898-99 by architect Willard M. Bacon, Winthrop's first purpose-built library, joined to a 1972 addition. It houses the town museum and a tablet recalling the Gibbons Elm, a 276-year-old tree felled in 1912.",
+      "year": 1899,
+      "website": "https://winthroppubliclibrary.org/",
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.132",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/node/367779339",
+        "https://www.openstreetmap.org/node/367781133",
+        "https://winthroppubliclibrary.org/about-the-library/",
+        "https://winthropmemorials.org/civic/pages/edward-gibbons-elm.html"
+      ]
+    },
+    {
+      "name": "Winthrop Town Hall",
+      "category": "history",
+      "subtype": "civic building",
+      "address": "1 Metcalf Square, Winthrop, MA 02152",
+      "lat": 42.37763,
+      "lon": -70.9846,
+      "summary": "The 1928 town hall beside the Frost Library, a contributing building of the Metcalf Square Historic District and home to the Winthrop Historical Commission.",
+      "year": 1928,
+      "website": "https://www.winthropma.gov/",
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.131",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29710074",
+        "https://nominatim.openstreetmap.org/search?format=json&q=Winthrop+Town+Hall+Winthrop+MA",
+        "https://www.winthropma.gov/455/Historical-Commission"
+      ]
+    },
+    {
+      "name": "Former U.S. Post Office, Winthrop Main Branch (now Police Headquarters)",
+      "category": "history",
+      "subtype": "civic building",
+      "address": "3 Metcalf Square, Winthrop, MA 02152",
+      "lat": 42.37676,
+      "lon": -70.98448,
+      "summary": "The 1932 federal post office on the square, inventoried by the Massachusetts Historical Commission; the building now serves as the Winthrop Police Department.",
+      "year": 1932,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.133",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/node/257493822"
+      ]
+    },
+    {
+      "name": "Winthrop Civil War Memorial",
+      "category": "history",
+      "subtype": "monument",
+      "address": "Metcalf Square (Town Hall Square), Hermon Street side, Winthrop, MA 02152",
+      "lat": 42.37736,
+      "lon": -70.98427,
+      "summary": "Statue dedicated on Memorial Day 1907 by sculptor and selectman Edward J. Clarke, honoring the 72 men the small town sent to the Civil War. It was moved from the library lawn when the street was widened.",
+      "year": 1907,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.900",
+        "https://winthropmemorials.org/macris/",
+        "https://winthropmemorials.org/wars-forts/pages/civil-war.html",
+        "https://www.openstreetmap.org/way/1120657628"
+      ]
+    },
+    {
+      "name": "Winthrop World War I Veterans' Memorial",
+      "category": "history",
+      "subtype": "monument",
+      "address": "Metcalf Square, library grounds, Winthrop, MA 02152",
+      "lat": 42.37736,
+      "lon": -70.98427,
+      "summary": "Unveiled by Gold Star Mothers on May 30, 1927 before a crowd of about ten thousand, honoring the roughly 1,100 residents who served in the First World War.",
+      "year": 1927,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.902",
+        "https://winthropmemorials.org/macris/",
+        "https://winthropmemorials.org/wars-forts/pages/world-war-i.html",
+        "https://www.openstreetmap.org/way/1120657628"
+      ]
+    },
+    {
+      "name": "Winthrop Spanish-American War Veterans' Memorial",
+      "category": "history",
+      "subtype": "monument",
+      "address": "Metcalf Square, Winthrop, MA 02152",
+      "lat": 42.37736,
+      "lon": -70.98427,
+      "summary": "Memorial object of about 1930 in Metcalf Square honoring Winthrop's Spanish-American War veterans, one of four war memorials grouped around the square.",
+      "year": 1930,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.901",
+        "https://winthropmemorials.org/macris/",
+        "https://winthropmemorials.org/wars-forts/pages/spanish-american-war.html",
+        "https://www.openstreetmap.org/way/1120657628"
+      ]
+    },
+    {
+      "name": "Winthrop World War II, Korea, Vietnam and Gulf War Memorial",
+      "category": "history",
+      "subtype": "monument",
+      "address": "Metcalf Square, Winthrop, MA 02152",
+      "lat": 42.37736,
+      "lon": -70.98427,
+      "summary": "Granite memorial dedicated September 19, 1965 in the middle of the square, an eagle-topped pillar naming Winthrop's World War II dead flanked by slabs for the Korean, Vietnam and Gulf wars; 67 names in all.",
+      "year": 1965,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.918",
+        "https://winthropmemorials.org/macris/",
+        "https://winthropmemorials.org/wars-forts/pages/war-memorial.html",
+        "https://theclio.com/entry/49385",
+        "https://www.openstreetmap.org/way/1120657628"
+      ]
+    },
+    {
+      "name": "Cottage Hill Water Tower",
+      "category": "history",
+      "subtype": "landmark",
+      "address": "82 Faun Bar Avenue, Winthrop, MA 02152",
+      "lat": 42.36787,
+      "lon": -70.96771,
+      "summary": "Riveted steel standpipe of 1909 holding a million gallons on the town's highest hill, fed by gravity from Spot Pond. A landmark visible from the whole peninsula; Winthrop Beach ends at the foot of Water Tower Hill.",
+      "year": 1909,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.903",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29892766",
+        "https://nominatim.openstreetmap.org/search?format=json&q=Winthrop+Water+Tower+Winthrop+MA",
+        "https://en.wikipedia.org/wiki/Winthrop_Beach"
+      ]
+    },
+    {
+      "name": "Edward B. Newton School",
+      "category": "history",
+      "subtype": "historic school",
+      "address": "131 Pauline Street, Winthrop, MA 02152",
+      "lat": 42.3768,
+      "lon": -70.9863,
+      "summary": "H-shaped brick Tudor Revival school of 1908 by William M. Bacon, named for a 17-year school committee member who paid for its clock. Listed on the National Register in 1997.",
+      "year": 1908,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Edward_B._Newton_School",
+        "https://en.wikipedia.org/wiki/National_Register_of_Historic_Places_listings_in_Suffolk_County,_Massachusetts",
+        "https://mhc-macris.net/details?mhcid=WTH.146",
+        "https://www.openstreetmap.org/way/29851134"
+      ]
+    },
+    {
+      "name": "Highland School (Arthur W. Dalrymple School)",
+      "category": "history",
+      "subtype": "historic school",
+      "address": "36 Grovers Avenue, Winthrop, MA 02152",
+      "lat": 42.385034,
+      "lon": -70.972947,
+      "summary": "Georgian Revival brick school built 1920-21 on the site of the Leighton summer resort, replacing a school lost to fire in 1920. Later renamed for a teacher who became superintendent; National Register 2014.",
+      "year": 1921,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Highland_School_(Winthrop,_Massachusetts)",
+        "https://en.wikipedia.org/wiki/National_Register_of_Historic_Places_listings_in_Suffolk_County,_Massachusetts",
+        "https://mhc-macris.net/details?mhcid=WTH.74",
+        "https://nominatim.openstreetmap.org/search?format=json&q=36+Grovers+Avenue+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Winthrop Shore Drive and Winthrop Shore Reservation",
+      "category": "history",
+      "subtype": "historic parkway",
+      "address": "Winthrop Shore Drive, Winthrop, MA 02152",
+      "lat": 42.369722,
+      "lon": -70.968056,
+      "summary": "Mile-long ocean parkway laid out by Charles Eliot for the Metropolitan Parks Commission, land taken in 1899 and largely built by the early 1900s; the Green Bars railings mark the Crest Avenue end. National Register 2004.",
+      "year": 1899,
+      "website": "https://www.mass.gov/locations/winthrop-shore-reservation",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Winthrop_Shore_Drive",
+        "https://en.wikipedia.org/wiki/National_Register_of_Historic_Places_listings_in_Suffolk_County,_Massachusetts",
+        "https://mhc-macris.net/details?mhcid=WTH.909",
+        "https://mhc-macris.net/details?mhcid=WTH.M",
+        "https://winthropmemorials.org/macris/"
+      ]
+    },
+    {
+      "name": "The Five Sisters breakwaters",
+      "category": "history",
+      "subtype": "landmark",
+      "address": "Offshore of Winthrop Beach, Winthrop Shore Drive, Winthrop, MA 02152",
+      "lat": 42.37536,
+      "lon": -70.96585,
+      "summary": "Five rock breakwaters standing off Winthrop Beach to blunt storm swells before they reach the seawall and the houses behind it; a fixture of the beach view.",
+      "sources": [
+        "https://www.openstreetmap.org/relation/11207533",
+        "https://en.wikipedia.org/wiki/Winthrop_Beach"
+      ]
+    },
+    {
+      "name": "Winthrop Cemetery",
+      "category": "history",
+      "subtype": "cemetery",
+      "address": "Bowdoin Street at Winthrop Street, Winthrop, MA 02152",
+      "lat": 42.377,
+      "lon": -70.98141,
+      "summary": "Town burying ground dating from about 1835, adjoining the historic district. It holds the town's World War II, Korean War and Vietnam War memorials among older family plots.",
+      "year": 1835,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.800",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/relation/14081229",
+        "https://nominatim.openstreetmap.org/search?format=json&q=Winthrop+Cemetery+Winthrop+MA",
+        "https://winthropmemorials.org/wars-forts/"
+      ]
+    },
+    {
+      "name": "Belle Isle Marsh Reservation",
+      "category": "history",
+      "subtype": "nature reserve",
+      "address": "1399 Bennington Street, East Boston (Winthrop side off Main Street), MA",
+      "lat": 42.388,
+      "lon": -70.9896,
+      "summary": "The last large salt marsh in Boston, about 350 acres of tidal wetland on the Winthrop, Revere and East Boston lines, run by the state since the 1980s. The Winthrop shore of the marsh is reached from Main Street near the Belle Isle Marine Ecology Park.",
+      "website": "https://www.mass.gov/locations/belle-isle-marsh-reservation",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Belle_Isle_Marsh_Reservation",
+        "https://www.openstreetmap.org/relation/3359434",
+        "https://www.openstreetmap.org/way/765255907"
+      ]
+    },
+    {
+      "name": "Point Shirley and the Historical Commission marker at Yirrell Beach",
+      "category": "history",
+      "subtype": "historic area",
+      "address": "Shirley Street at Yirrell Beach, Point Shirley, Winthrop, MA 02152",
+      "lat": 42.363,
+      "lon": -70.9702,
+      "summary": "The peninsula's southern tip, named in 1753 for Governor William Shirley, who set up a fishing station there; later a salt works, the Revere family copper works and the famous Taft's Hotel. A 1997 town marker at Yirrell Beach tells the story.",
+      "year": 1753,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Yirrell_Beach",
+        "https://en.wikipedia.org/wiki/Winthrop,_Massachusetts",
+        "https://winthropmemorials.org/civic/pages/point-shirley.html",
+        "https://winthropmemorials.org/civic/pages/winthrop-historical-commission-markers.html",
+        "https://www.openstreetmap.org/way/86295404"
+      ]
+    },
+    {
+      "name": "Winthrop Yacht Club",
+      "category": "history",
+      "subtype": "clubhouse",
+      "address": "649 Shirley Street, Winthrop, MA 02152",
+      "lat": 42.36843,
+      "lon": -70.97193,
+      "summary": "Waterfront clubhouse of 1904 on Crystal Cove, inventoried by the Massachusetts Historical Commission as a surviving example of the town's turn-of-the-century yachting culture.",
+      "year": 1904,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.194",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29710559",
+        "https://nominatim.openstreetmap.org/search?format=json&q=649+Shirley+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Cottage Park Yacht Club",
+      "category": "history",
+      "subtype": "clubhouse",
+      "address": "Orlando Avenue, Cottage Park, Winthrop, MA 02152",
+      "lat": 42.36847,
+      "lon": -70.98701,
+      "summary": "Private yacht club on the harbor side of the peninsula in the Cottage Park neighborhood, itself an inventoried historic area of summer cottages.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Cottage_Park_Yacht_Club",
+        "https://www.openstreetmap.org/way/1075258224",
+        "https://mhc-macris.net/details?mhcid=WTH.G",
+        "https://winthropmemorials.org/macris/"
+      ]
+    },
+    {
+      "name": "Winthrop Center Fire Station",
+      "category": "history",
+      "subtype": "civic building",
+      "address": "32 Pauline Street, Winthrop, MA 02152",
+      "lat": 42.37648,
+      "lon": -70.98529,
+      "summary": "The 1898 central fire station a block from Metcalf Square, still standing on Pauline Street and recorded in the state historic inventory.",
+      "year": 1898,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.147",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29530132",
+        "https://nominatim.openstreetmap.org/search?format=json&q=32+Pauline+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Winthrop Beach Fire Station",
+      "category": "history",
+      "subtype": "civic building",
+      "address": "422 Shirley Street, Winthrop, MA 02152",
+      "lat": 42.37413,
+      "lon": -70.9719,
+      "summary": "Neighborhood fire station of about 1900 on Shirley Street serving the beach side of town, recorded in the state historic inventory.",
+      "year": 1900,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.190",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29596651",
+        "https://nominatim.openstreetmap.org/search?format=json&q=422+Shirley+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "St. John the Evangelist Roman Catholic Church",
+      "category": "history",
+      "subtype": "church",
+      "address": "223 Lincoln Street, Winthrop, MA 02152",
+      "lat": 42.37954,
+      "lon": -70.98283,
+      "summary": "The town's Catholic parish church of 1912 at Lincoln and Winthrop Streets, on the edge of the historic district.",
+      "year": 1912,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.259",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/node/358278543",
+        "https://nominatim.openstreetmap.org/search?format=json&q=St.+John+the+Evangelist+Church+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "First Church of Winthrop, United Methodist",
+      "category": "history",
+      "subtype": "church",
+      "address": "217 Winthrop Street, Winthrop, MA 02152",
+      "lat": 42.3767,
+      "lon": -70.98363,
+      "summary": "Large white steepled church of 1930 facing the historic district on Winthrop Street; the congregation is the town's oldest Methodist body.",
+      "year": 1930,
+      "website": "http://www.firstchurchwinthrop.org/",
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.250",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29892160"
+      ]
+    },
+    {
+      "name": "Winthrop First Baptist Church",
+      "category": "history",
+      "subtype": "church",
+      "address": "60 Hermon Street, Winthrop, MA 02152",
+      "lat": 42.37829,
+      "lon": -70.98603,
+      "summary": "Church of about 1872, among the oldest religious buildings left in town, a short walk north of Metcalf Square.",
+      "year": 1872,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.83",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29851098",
+        "https://nominatim.openstreetmap.org/search?format=json&q=60+Hermon+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "St. John's Episcopal Church",
+      "category": "history",
+      "subtype": "church",
+      "address": "222 Bowdoin Street, Winthrop, MA 02152",
+      "lat": 42.37552,
+      "lon": -70.98105,
+      "summary": "Episcopal church of 1889 on Bowdoin Street beside Winthrop Cemetery, from the decade the railroad turned the farms into a commuter town.",
+      "year": 1889,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.18",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29667524",
+        "https://nominatim.openstreetmap.org/search?format=json&q=222+Bowdoin+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Tewksbury Memorial Union Congregational Church",
+      "category": "history",
+      "subtype": "church",
+      "address": "26 Tewksbury Street, Winthrop, MA 02152",
+      "lat": 42.37119,
+      "lon": -70.96945,
+      "summary": "Union Congregational church of 1889 near the beach, named for the Tewksbury family whose farm covered much of the peninsula in the 1800s.",
+      "year": 1889,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.208",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29596953",
+        "https://nominatim.openstreetmap.org/search?format=json&q=26+Tewksbury+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Winthrop Masonic Hall",
+      "category": "history",
+      "subtype": "hall",
+      "address": "198 Winthrop Street, Winthrop, MA 02152",
+      "lat": 42.37603,
+      "lon": -70.98397,
+      "summary": "Masonic lodge building of 1892 in the commercial row along Winthrop Street just south of Metcalf Square.",
+      "year": 1892,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.248",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29959094",
+        "https://nominatim.openstreetmap.org/search?format=json&q=198+Winthrop+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Wadsworth Building",
+      "category": "history",
+      "subtype": "commercial block",
+      "address": "214-224 Winthrop Street, Winthrop, MA 02152",
+      "lat": 42.37654,
+      "lon": -70.98423,
+      "summary": "Storefront block of about 1890 that anchors the Winthrop Street side of the square, a contributing building of the historic district.",
+      "year": 1890,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.249",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29596456",
+        "https://nominatim.openstreetmap.org/search?format=json&q=214+Winthrop+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Gem Theatre",
+      "category": "history",
+      "subtype": "theater",
+      "address": "64 Putnam Street, Winthrop, MA 02152",
+      "lat": 42.37492,
+      "lon": -70.98552,
+      "summary": "Small neighborhood movie house of 1914 on Putnam Street, recorded in the state historic inventory.",
+      "year": 1914,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.171",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29892247",
+        "https://nominatim.openstreetmap.org/search?format=json&q=64+Putnam+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Thornton Park Station (Narrow Gauge)",
+      "category": "history",
+      "subtype": "railroad station",
+      "address": "17 Thornton Park, Winthrop, MA 02152",
+      "lat": 42.37273,
+      "lon": -70.97913,
+      "summary": "Surviving station building of about 1880 from the Boston, Revere Beach and Lynn narrow-gauge loop that circled Winthrop from 1877 until 1940; the Gibbons Elm once stood nearby.",
+      "year": 1880,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.299",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29851304",
+        "https://en.wikipedia.org/wiki/Boston,_Revere_Beach_and_Lynn_Railroad",
+        "https://nominatim.openstreetmap.org/search?format=json&q=17+Thornton+Park+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Winthrop Elks Lodge No. 1078",
+      "category": "history",
+      "subtype": "hall",
+      "address": "191 Washington Avenue, Winthrop, MA 02152",
+      "lat": 42.37188,
+      "lon": -70.97385,
+      "summary": "Elks lodge hall of 1914 on Washington Avenue in the Thornton Park area, still in use by the lodge.",
+      "year": 1914,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.237",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29530489",
+        "https://nominatim.openstreetmap.org/search?format=json&q=191+Washington+Avenue+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Dr. Samuel Ingalls Mansion",
+      "category": "history",
+      "subtype": "historic house",
+      "address": "51 Ingleside Avenue, Winthrop, MA 02152",
+      "lat": 42.37777,
+      "lon": -70.99048,
+      "summary": "Mid-1860s mansion beside Ingleside Park, one of the few pre-railroad houses on the peninsula and the seat of the Ingalls family who gave the park its name.",
+      "year": 1865,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.99",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/29851120",
+        "https://nominatim.openstreetmap.org/search?format=json&q=51+Ingleside+Avenue+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Winthrop Junior High School building",
+      "category": "history",
+      "subtype": "historic school",
+      "address": "40 Hermon Street, Winthrop, MA 02152",
+      "lat": 42.3774,
+      "lon": -70.9855,
+      "summary": "The 1925 junior high school on Hermon Street just west of the square, a contributing school building in the state inventory.",
+      "year": 1925,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.82",
+        "https://winthropmemorials.org/macris/",
+        "https://www.openstreetmap.org/way/214142145",
+        "https://nominatim.openstreetmap.org/search?format=json&q=40+Hermon+Street+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "The Winthrop Arms",
+      "category": "history",
+      "subtype": "historic hotel",
+      "address": "130 Grovers Avenue, Winthrop, MA 02152",
+      "lat": 42.38683,
+      "lon": -70.97182,
+      "summary": "Clapboard hotel opened in 1916 a few steps from the Highlands shore, still run as a hotel and restaurant with its original lobby tile and woodwork.",
+      "year": 1916,
+      "website": "https://winthroparms.com/",
+      "sources": [
+        "https://www.openstreetmap.org/node/13051134701",
+        "https://www.cbsnews.com/boston/news/it-happens-here-the-winthrop-arms-wbz-tv/",
+        "https://nominatim.openstreetmap.org/search?format=json&q=130+Grovers+Avenue+Winthrop+MA"
+      ]
+    },
+    {
+      "name": "Lewis Lake Park",
+      "category": "history",
+      "subtype": "park",
+      "address": "Lewis Lake, off Pleasant Street and Sea Foam Avenue, Winthrop, MA 02152",
+      "lat": 42.37397,
+      "lon": -70.97452,
+      "summary": "Park of about 1925 around Lewis Lake, the small pond half a mile southeast of the town center, listed as a historic area by the Massachusetts Historical Commission.",
+      "year": 1925,
+      "sources": [
+        "https://mhc-macris.net/details?mhcid=WTH.905",
+        "https://winthropmemorials.org/macris/",
+        "https://en.wikipedia.org/wiki/Lewis_Lake_(Massachusetts)",
+        "https://nominatim.openstreetmap.org/search?format=json&q=Lewis+Lake+Winthrop+MA"
+      ]
+    }
+  ]
+}
