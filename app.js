@@ -138,6 +138,10 @@ async function init(){
  try{const inv=await get(DATA+'road-inventory.json');let speeds=0,dirs=0,lanes=0;world.roads.forEach((r,i)=>{const rec=inv.roads[r.id!==null&&r.id!==undefined?String(r.id):'x'+i];if(!rec||!rec.matched)return;const posted=rec.speedLimit||rec.speedReg||rec.opDirSpeed;if(posted&&r.speed!==posted){r.speed=posted;speeds++;}if(!r.lanes&&rec.lanes){r.lanes=rec.lanes;lanes++;}r.inventory=rec;
   r.directions=r.directions||[];for(let k=0;k<r.points.length-1;k++){if((r.directions[k]===null||r.directions[k]===undefined)&&rec.oneway&&rec.oneway[k]!==null&&rec.oneway[k]!==undefined){r.directions[k]=rec.oneway[k];r.directionSources=r.directionSources||[];r.directionSources[k]=inv.source;dirs++;}}});window.__roadInventory={speeds,dirs,lanes,roads:Object.keys(inv.roads).length};}catch(e){console.warn('road inventory unavailable',e);}
  $('loadmessage').textContent=`Aligning terrain, roads and ${world.buildings.length.toLocaleString()} building outlines…`;
+ /* Measured heights (data/building-heights.json: Microsoft's ML footprints, 4,769 of Winthrop's 5,633; a factory town
+    carries height on the building itself). Used only where neither LiDAR nor the assessor gave a wall height. */
+ {const measured=await getOr(DATA+'building-heights.json',null);let n=0;if(measured&&measured.buildings)for(const b of world.buildings){const m=measured.buildings[String(b.id)];if(m&&m.height>0&&!(b.height>0)){b.height=m.height;n++;}}
+  world.audit.measuredHeights=n+world.buildings.filter(b=>b.height>0).length-n;}
  additionalRegistration=await getOr(DATA+'additional-photo-facades.json',{});
  const loader=new THREE.TextureLoader();
  const photoEntries=[...Object.keys(photoRegistration).map(n=>({key:n,image:'assets/houses/'+n+'.jpg',center:residential.find(r=>r.address===n+' SHIRLEY ST').center})),...Object.entries(additionalRegistration).map(([key,r])=>({key,image:r.image,center:residential.find(s=>s.id===key).center}))];

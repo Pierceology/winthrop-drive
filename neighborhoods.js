@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 export const neighborhoodLight={value:0};
 export function neighborhoodGeometry(shape,b,record){
- const h=record?.wall||8;
+ const h=record?.wall||(b&&b.height>0?Math.min(60,b.height):0)||8;   // LiDAR/assessor wall first, then a measured footprint height, then the old 8 m guess
  let g=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false,steps:1});g.rotateX(-Math.PI/2);
  if(record?.roof.length){
   // Remove flat top, retaining footprint walls and bottom.
