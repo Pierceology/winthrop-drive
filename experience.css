@@ -649,3 +649,18 @@ html.factory-world .destinations,html.factory-world #tourSwitch,html.factory-wor
 @media (prefers-reduced-motion:reduce){.gb-earth i{animation:none}}
 @media (max-width:700px){#globeBack .gb-text{display:none}#globeBack{padding:4px;margin-left:4px}}
 body.driving #globeBack{display:none}
+
+/* Quiet opening (Pierce, 2026-09-14: "too much is happening at once on the pageload with all the options"):
+   rides are one line each until tapped; camera buttons appear after the first touch; Auto drive and the flyover share a quiet row. */
+#tourList .tourcard{padding:10px 14px}
+#tourList .tourmeta{cursor:pointer}
+#tourList .tourcard:not(.open) .tourmeta{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+#tourList .tourcard:not(.open) .tourmeta b{font-size:17px}
+#tourList .tourcard:not(.open) .tourmeta em,#tourList .tourcard:not(.open) .touracts{display:none}
+#tourList .tourcard.open{padding:14px 14px 12px;border-color:rgba(240,184,96,.55)}
+.explore-actions{grid-template-columns:1fr 1fr}
+.explore-actions #drive{grid-column:1/-1}
+.explore-actions #goDrive{border:0;background:none;box-shadow:none;color:var(--accent);min-height:40px;padding:6px;font-size:13px}
+.explore-actions #goDrive:hover{background:var(--glass-lite)}
+body.quiet:not(.driving) .camera{opacity:0;pointer-events:none}
+.camera{transition:opacity .5s}
