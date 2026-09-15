@@ -186,9 +186,10 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    const alt=onGround?0:(Number.isFinite(baro)?baro:(Number.isFinite(geo)?geo:0));const [x,z]=toLocal(lat,lon);
    /* Only planes in the air whose track crosses Winthrop (Pierce, 09-15: 'only keep planes in the air that are going over
       Winthrop for a bit either way'): under 2,300 m, within 9 km, and the line along the track passes within 2.2 km of town */
-   if(onGround||alt>2300)continue;
-   {const dd=Math.hypot(x,z);if(dd>9000)continue;const v=Number.isFinite(vel)?vel:0,tr0=(Number.isFinite(track)?track:0)*D,ux=Math.sin(tr0),uz=-Math.cos(tr0);
-    const cross=Math.abs(x*uz-z*ux);if(v>20&&cross>2200&&dd>2500)continue;}
+   if(onGround||alt>3200)continue;
+   {const dd=Math.hypot(x,z);if(dd>12000)continue;const v=Number.isFinite(vel)?vel:0,tr0=(Number.isFinite(track)?track:0)*D,ux=Math.sin(tr0),uz=-Math.cos(tr0);
+    const cross=Math.abs(x*uz-z*ux);const toward=(-x*ux-z*uz)>0;   // heading our way?
+    if(dd>4000&&!(cross<4500&&toward))continue;}   // near town: always; farther: only if its line comes within 4.5 km and it is coming this way (Pierce, 09-15: 'now I see no planes')
    const age=Math.max(0,feedTime-(tpos||feedTime));const v=Number.isFinite(vel)?vel:0,tr=(Number.isFinite(track)?track:0)*D,vr=Number.isFinite(vrate)?vrate:0;
    const fix={x:x+Math.sin(tr)*v*age,z:z-Math.cos(tr)*v*age,y:alt+vr*age,vx:Math.sin(tr)*v,vz:-Math.cos(tr)*v,vy:vr,yaw:yawFromBearing(Number.isFinite(track)?track:0),t0:t};
    seen.add(icao);let p=aircraft.get(icao);
