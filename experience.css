@@ -712,3 +712,15 @@ body.driving #liveChip,body.touring #liveChip,body.opening #liveChip{display:non
 body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
 @media (max-width:720px){#liveChip{top:calc(60px + var(--sat));right:10px}#liveChip .grphead small{display:none}}
 #liveChip .row.off{opacity:.6}
+/* Phones (Pierce, 09-15): no house-review panel for visitors; every button compact; nothing wide. */
+@media (max-width:720px){
+  #inspector{display:none!important}
+  header>button,header>#fullscreen,header>#info,header>#driveCurrent{min-height:36px;padding:7px 13px;font-size:13px}
+  #spotActions{padding:12px 14px}
+  #spotActions strong{font-size:22px}
+  #spotActions>div{display:flex;gap:6px}
+  #spotActions>div button{flex:1;min-height:38px;padding:7px 8px;font-size:12.5px;white-space:nowrap}
+  .camera,body:not(.driving) .camera{gap:0;padding:2px}
+  .camera button{min-height:34px;padding:6px 10px;font-size:12px}
+  #liveChip .grphead{padding:6px 12px 6px 9px}#liveChip .grphead .ic{font-size:16px}#liveChip .grphead b{font-size:13px}
+}
