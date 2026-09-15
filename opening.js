@@ -16,7 +16,12 @@ export function openingTitle({camera, controls, target, offset, ready, copy = {}
   const eyebrow = document.createElement('p'); eyebrow.className = 'eyebrow'; eyebrow.textContent = copy.eyebrow || 'Drive Winthrop';
   const h1 = document.createElement('h1'); h1.append(copy.lead || 'The whole town, '); const em = document.createElement('em'); em.textContent = copy.italic || 'Yirrell Beach to Deer Island.'; h1.append(em);
   const sub = document.createElement('p'); sub.className = 'sub'; sub.textContent = copy.sub || 'Every street and every stop. The bus and the planes, live.';
-  el.append(eyebrow, h1, sub); document.body.appendChild(el);
+  const prog = document.createElement('div'); prog.className = 'progress'; const bar = document.createElement('i'); const lab = document.createElement('span'); lab.textContent = 'Reading the town'; prog.append(bar, lab);
+  el.append(eyebrow, h1, sub, prog); document.body.appendChild(el);
+  /* the bar follows the load's own stage marks (app.js performance.mark('stage:…')) — a real measure, not a timer */
+  const STAGES = [['roads-inventory', 6, 'Reading the roads'], ['heights', 12, 'Measuring the houses'], ['lidar-roofs', 20, 'Shaping the roofs'], ['ground-world', 32, 'Laying the ground'], ['owned-facades', 44, 'Hanging the photo fronts'], ['signs', 48, 'Posting the signs'], ['trees', 58, 'Planting the trees'], ['play-surfaces', 66, 'Lining the fields'], ['furniture-build', 76, 'Setting lamps and crossings'], ['parked-model-0-load', 84, 'Parking the cars'], ['parked-mounted', 100, 'Ready']];
+  let pct = 0; const setPct = (v, text) => { if (v <= pct) return; pct = v; bar.style.width = v + '%'; if (text) lab.textContent = text; };
+  try { const po = new PerformanceObserver(list => { for (const e of list.getEntries()) { const st = STAGES.find(s => 'stage:' + s[0] === e.name); if (st) setPct(st[1], st[2]); } }); po.observe({type: 'mark', buffered: true}); } catch (_) {}
   const veil = document.createElement('div'); veil.id = 'veil'; document.body.appendChild(veil);   // a dark wash over the ink; fades as the town is revealed
   requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
   let done = false, started = false;

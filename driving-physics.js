@@ -28,6 +28,8 @@ export class RoadNetwork {
 export class DrivingState {
  constructor(network){this.network=network;this.performance={top:325/3.6,launch:8.8,power:260};this.x=0;this.z=0;this.yaw=0;this.speed=0;this.steer=0;this.distance=0;this.blocked=false;this.road=null;this.recoveryTime=0;this.recoveryCount=0;this.lastSafe=null;}
  spawn(x,z,preferred=null){const chosen=preferred&&this.network.segments.includes(preferred)?preferred:null;const t0=chosen?Math.max(0,Math.min(1,((x-chosen.a[0])*chosen.dx+(z-chosen.a[1])*chosen.dz)/chosen.length**2)):0;const s=chosen?{...chosen,t:t0}:this.network.nearest(x,z,true);if(!s)throw Error('No road found');const t=Math.max(2.6/s.length,Math.min(1-2.6/s.length,s.t));this.x=s.a[0]+t*s.dx;this.z=s.a[1]+t*s.dz;this.yaw=Math.atan2(-s.dx,-s.dz)+(s.direction===-1?Math.PI:0);
+  /* on a two-way road, face the way that leads into town (Pierce, 09-14: "if I click edge of a map, I'm facing the edge instead of into town") */
+  if(s.direction!==1&&s.direction!==-1&&this.network.centre){const [cx,cz]=this.network.centre,tx=cx-this.x,tz=cz-this.z;if(Math.hypot(tx,tz)>120&&(s.dx*tx+s.dz*tz)<0)this.yaw+=Math.PI;}
   /* Never start the car facing a wall or the end of the road. A two-way segment runs whichever way
      the source data happened to draw it, so taking its heading blind meant a coin flip, and at the end
      of a street that coin flip pointed off the tarmac. A one-way has only one legal answer and keeps it;

@@ -251,7 +251,9 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   renderChip();return preds.size;};
  const chip=typeof document!=='undefined'?document.createElement('div'):null;if(chip){chip.id='liveChip';chip.hidden=true;document.body.appendChild(chip);}
  const DIRECTION={0:'toward Winthrop Beach',1:'toward Orient Heights'};
- function renderChip(){if(!chip)return;if(!buses.size&&!aircraft.size){chip.hidden=true;return;}chip.hidden=false;chip.textContent='';
+ let chipOpen=false;
+ function renderChip(){if(!chip)return;if(!buses.size&&!aircraft.size){chip.hidden=true;return;}chip.hidden=false;chip.textContent='';chip.classList.toggle('open',chipOpen);
+  const tg=document.createElement('button');tg.id='liveToggle';tg.textContent='Live · '+buses.size+(buses.size===1?' bus':' buses')+' · '+aircraft.size+(aircraft.size===1?' plane':' planes')+(chipOpen?' ▴':' ▾');tg.onclick=()=>{chipOpen=!chipOpen;renderChip();};chip.append(tg);
   const entry=(id,title,line,cls)=>{const el=document.createElement('button');el.className=cls+(following===id?' on':'');
    const bb=document.createElement('b');bb.textContent=title;const sp=document.createElement('span');sp.textContent=line;const em=document.createElement('em');em.textContent=following===id?'Following · tap to stop':'Follow';
    el.append(bb,sp,em);el.onclick=()=>live.follow(following===id?null:id);chip.append(el);};

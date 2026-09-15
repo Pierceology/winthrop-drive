@@ -8,7 +8,7 @@ const OUT=460;   // must match the transition in experience.css
 const wikiCache=new Map();
 /* Pierce, 2026-09-14: 'go on places too'. Restaurants have no Wikipedia article; Google Places does, paid on the
    RumblyTummy key and cached there per stop so each place is bought once. Keyless from here; fail-silent. */
-const PLACE_API='https://www.rumblytummy.com/_functions/placeCard';
+const PLACE_API='https://www.winthropbythesea.com/_functions/placeCard';   // the key lives in Winthrop by the Sea's Secrets Manager (09-14)
 async function placeCard(stop){
  try{const r=await fetch(PLACE_API+'?name='+encodeURIComponent(stop.name)+'&lat='+stop.lat+'&lon='+stop.lon+(stop.address?'&address='+encodeURIComponent(stop.address):''));
   if(!r.ok)return null;const j=await r.json();if(!j||!j.ok)return null;

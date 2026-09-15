@@ -698,3 +698,16 @@ body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
 
 /* The panel sizes to what is in it (Pierce, 09-14: "the empty space below the menu doesn't look good") */
 .places,body:not(.driving) .places{bottom:auto;max-height:calc(100vh - 88px - var(--sat) - 72px - var(--sab));overflow:auto}
+
+/* loading bar under the title (opening.js) */
+#opening .progress{margin:34px 0 0;max-width:420px}
+#opening .progress i{display:block;height:3px;width:0;background:#e8d5ae;border-radius:2px;transition:width .6s ease}
+#opening .progress span{display:block;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(232,213,174,.85)}
+/* the live chip folds to one line on a phone (Pierce, 09-14: "the controls for all the buses and planes fill the screen") */
+#liveToggle{display:none}
+@media (max-width:720px){
+  #liveChip{top:calc(64px + var(--sat));right:12px;max-width:calc(100vw - 24px);gap:4px}
+  #liveToggle{display:block;width:100%;margin:0;min-height:0;padding:8px 12px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:rgba(12,17,22,.8);border:1px solid var(--edge);border-radius:var(--pill);box-shadow:none;text-align:left}
+  #liveChip:not(.open)>:not(#liveToggle){display:none}
+  #liveChip .bus,#liveChip .plane{padding:8px 10px}
+}
