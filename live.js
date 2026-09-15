@@ -184,8 +184,11 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   for(const s of rows){const [icao,cs,,tpos,,lon,lat,baro,onGround,vel,track,vrate,,geo]=s;
    if(!Number.isFinite(lat)||!Number.isFinite(lon))continue;
    const alt=onGround?0:(Number.isFinite(baro)?baro:(Number.isFinite(geo)?geo:0));const [x,z]=toLocal(lat,lon);
-   /* Logan's traffic only: within 11 km of the field and under 2,300 m (7,500 ft) — the approaches and departures that cross Winthrop; cruisers overhead are dropped (Pierce, 09-15) */
-   if(!onGround&&(alt>2300||Math.hypot(x-LOGAN[0],z-LOGAN[1])>11000))continue;
+   /* Only planes in the air whose track crosses Winthrop (Pierce, 09-15: 'only keep planes in the air that are going over
+      Winthrop for a bit either way'): under 2,300 m, within 9 km, and the line along the track passes within 2.2 km of town */
+   if(onGround||alt>2300)continue;
+   {const dd=Math.hypot(x,z);if(dd>9000)continue;const v=Number.isFinite(vel)?vel:0,tr0=(Number.isFinite(track)?track:0)*D,ux=Math.sin(tr0),uz=-Math.cos(tr0);
+    const cross=Math.abs(x*uz-z*ux);if(v>20&&cross>2200&&dd>2500)continue;}
    const age=Math.max(0,feedTime-(tpos||feedTime));const v=Number.isFinite(vel)?vel:0,tr=(Number.isFinite(track)?track:0)*D,vr=Number.isFinite(vrate)?vrate:0;
    const fix={x:x+Math.sin(tr)*v*age,z:z-Math.cos(tr)*v*age,y:alt+vr*age,vx:Math.sin(tr)*v,vz:-Math.cos(tr)*v,vy:vr,yaw:yawFromBearing(Number.isFinite(track)?track:0),t0:t};
    seen.add(icao);let p=aircraft.get(icao);
@@ -211,10 +214,9 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   if(following&&typeof document!=='undefined'&&(document.body.classList.contains('touring')||document.body.classList.contains('driving')||(window.__tourFlight&&window.__tourFlight.active))){live.follow(null);}   // a ride, a flyover or the wheel takes the camera back (Pierce, 09-15: flyovers 'over water')
   if(following&&String(following).startsWith('ac:')){const p=aircraft.get(following.slice(3));
    if(!p||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
-   else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz);const dx=sp>1?p.vx/sp:Math.cos(p.yaw),dz=sp>1?p.vz/sp:-Math.sin(p.yaw);
-    const gx=c.x-dx*140,gz=c.z-dz*140,gy=c.y+45;
-    camera.position.x+=(gx-camera.position.x)*.08;camera.position.y+=(gy-camera.position.y)*.08;camera.position.z+=(gz-camera.position.z)*.08;
-    controls.target.x+=(c.x-controls.target.x)*.15;controls.target.y+=(c.y-controls.target.y)*.15;controls.target.z+=(c.z-controls.target.z)*.15;}}
+   else if(camera&&controls){const c=pos(p,t);
+    if(!p.followed){const sp=Math.hypot(p.vx,p.vz);const dx=sp>1?p.vx/sp:Math.cos(p.yaw),dz=sp>1?p.vz/sp:-Math.sin(p.yaw);camera.position.set(c.x-dx*140,c.y+45,c.z-dz*140);controls.target.set(c.x,c.y,c.z);p.followed=true;}
+    else{const mx=c.x-controls.target.x,my=c.y-controls.target.y,mz=c.z-controls.target.z;camera.position.x+=mx;camera.position.y+=my;camera.position.z+=mz;controls.target.set(c.x,c.y,c.z);}}}   // the camera rides along; your drag around it stays
   else if(following&&String(following).startsWith('in:')){const p=aircraft.get(following.slice(3));
    if(!p||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){live.follow(null);}
    else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz);const dx=sp>1?p.vx/sp:Math.cos(p.yaw),dz=sp>1?p.vz/sp:-Math.sin(p.yaw);   // parked: the nose, not a zero velocity
@@ -225,9 +227,9 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   else if(following){const b=buses.get(following);
    if(!b||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
    else if(camera&&controls){const d=[Math.cos(b.yaw),-Math.sin(b.yaw)];   // the nose (road-aligned, bearing-signed) — motion between two fixes jitters and flipped the camera (Pierce, 09-15: "sometimes I still go backwards")
-    const y=ground(b.x,b.z);const gx=b.x-d[0]*30,gz=b.z-d[1]*30,gy=y+12;
-    camera.position.x+=(gx-camera.position.x)*.06;camera.position.y+=(gy-camera.position.y)*.06;camera.position.z+=(gz-camera.position.z)*.06;
-    controls.target.x+=(b.x-controls.target.x)*.12;controls.target.y+=(y+2-controls.target.y)*.12;controls.target.z+=(b.z-controls.target.z)*.12;}}
+    const y=ground(b.x,b.z);
+    if(!b.followed){camera.position.set(b.x-d[0]*30,y+12,b.z-d[1]*30);controls.target.set(b.x,y+2,b.z);b.followed=true;}
+    else{const mx=b.x-controls.target.x,my=(y+2)-controls.target.y,mz=b.z-controls.target.z;camera.position.x+=mx;camera.position.y+=my;camera.position.z+=mz;controls.target.set(b.x,y+2,b.z);}}}
   for(const b of buses.values()){const k=Math.min(1,(t-b.t0)/I.buses);b.x=b.from.x+(b.to.x-b.from.x)*k;b.z=b.from.z+(b.to.z-b.from.z)*k;b.yaw=lerpAngle(b.from.yaw,b.to.yaw,k);
    b.mesh.position.set(b.x,ground(b.x,b.z),b.z);b.mesh.rotation.y=b.yaw;}
   for(const p of aircraft.values()){const c=pos(p,t);p.mesh.position.set(c.x,c.y,c.z);p.mesh.rotation.y=p.yaw;
@@ -301,7 +303,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
     const acts=document.createElement('div');acts.className='acts';
     for(const [key,label] of [['ac:'+icao,following==='ac:'+icao?'Following · stop':'Follow'],['in:'+icao,following==='in:'+icao?'Aboard · step off':'Ride along']]){const b=document.createElement('button');b.textContent=label;b.onclick=()=>live.follow(following===key?null:key);acts.append(b);}
     el.append(bb,sp,acts);body.append(el);}});}
- live.follow=id=>{const s=String(id||'');if(id&&buses.has(id)&&buses.get(id).off)id=null;if(following&&String(following).startsWith('in:')&&controls){const q=aircraft.get(following.slice(3));if(q){const c=pos(q,now());controls.target.set(c.x,c.y,c.z);camera.position.set(c.x-60,c.y+30,c.z+60);}}following=id&&(buses.has(id)||((s.startsWith('ac:')||s.startsWith('in:'))&&aircraft.has(s.slice(3))))?id:null;
+ live.follow=id=>{const s=String(id||'');if(id&&buses.has(id)&&buses.get(id).off)id=null;for(const p of aircraft.values())p.followed=false;for(const b of buses.values())b.followed=false;if(following&&String(following).startsWith('in:')&&controls){const q=aircraft.get(following.slice(3));if(q){const c=pos(q,now());controls.target.set(c.x,c.y,c.z);camera.position.set(c.x-60,c.y+30,c.z+60);}}following=id&&(buses.has(id)||((s.startsWith('ac:')||s.startsWith('in:'))&&aircraft.has(s.slice(3))))?id:null;
   if(controls){controls.autoRotate=false;controls.enabled=!(following&&String(following).startsWith('in:'));}
   for(const p of aircraft.values()){const tag=p.mesh.getObjectByName('tag');if(tag)tag.visible=following==='ac:'+p.icao||following==='in:'+p.icao;p.mesh.visible=following!=='in:'+p.icao;}
   if(typeof document!=='undefined')document.body.classList.toggle('aboard',!!(following&&String(following).startsWith('in:')));renderChip();return following;};
@@ -310,7 +312,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   addEventListener('pointerup',e=>{if(!down)return;const moved=Math.hypot(e.clientX-down[0],e.clientY-down[1]);down=null;if(moved>8)return;const cv=e.target;if(!cv||cv.tagName!=='CANVAS')return;
    ndc.set((e.clientX/cv.clientWidth)*2-1,-(e.clientY/cv.clientHeight)*2+1);ray.setFromCamera(ndc,camera);
    const meshes=[...[...aircraft.values()].map(p=>p.mesh),...[...buses.values()].filter(b=>!b.off).map(b=>b.mesh)];
-   const hit=ray.intersectObjects(meshes,true)[0];if(!hit)return;let o=hit.object;while(o&&!o.userData.icao&&!o.userData.busId)o=o.parent;if(!o)return;
+   const hit=ray.intersectObjects(meshes,true)[0];if(!hit){if(following)live.follow(null);return;}let o=hit.object;while(o&&!o.userData.icao&&!o.userData.busId)o=o.parent;if(!o)return;
    if(o.userData.icao){openGroup='plane';live.follow('ac:'+o.userData.icao);}else{openGroup='bus';live.follow(o.userData.busId);}},{passive:true});}
  /* the name shows only on hover (Pierce, 09-14: "only info if I hover") */
  const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();let hovered=null,lastHover=0;
@@ -319,7 +321,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   const hit=ray.intersectObjects([...aircraft.values()].map(p=>p.mesh),true).find(h=>h.object.userData.icao);const id=hit?hit.object.userData.icao:null;
   if(id!==hovered){if(hovered){const q=aircraft.get(hovered);const tg=q&&q.mesh.getObjectByName('tag');if(tg&&following!=='ac:'+hovered)tg.visible=false;}hovered=id;if(id){const q=aircraft.get(id);const tg=q&&q.mesh.getObjectByName('tag');if(tg)tg.visible=true;}cv.style.cursor=id?'pointer':'';}},{passive:true});
  live.following=()=>following;
- if(typeof addEventListener==='function')addEventListener('pointerdown',e=>{if(following&&e.target&&e.target.tagName==='CANVAS'){following=null;renderChip();}},{passive:true});
+ /* a drag orbits around what you follow; only a plain tap on empty map lets go (handled in the tap-to-follow block below) */
  const chipTimer=setInterval(renderChip,15000);
  poll('buses',j=>{live.ingestBuses(j);renderChip();});poll('predictions',live.ingestPredictions);poll('aircraft',live.ingestAircraft);poll('tide',live.ingestTide);
 

@@ -19,6 +19,7 @@ import {parkedCars} from './parked-cars.js';
 import {inTown} from './town-limits.js';
 import {townSketch} from './sketch.js';
 let sketch=null,billboardGroup=null,loganGroup=null;
+addEventListener('DOMContentLoaded',()=>{const ab=document.getElementById('about');const cr=document.getElementById('credits');if(ab&&cr&&!document.getElementById('aboutCredits')){const b=document.createElement('button');b.id='aboutCredits';b.className='aboutCredits';b.type='button';b.textContent='Credits & data sources';b.onclick=()=>cr.click();ab.appendChild(b);}});
 document.body.classList.add('quiet');for(const ev of ['pointerdown','wheel','keydown'])addEventListener(ev,()=>document.body.classList.remove('quiet'),{once:true,passive:true});   // Pierce 09-14: "too much is happening at once on the pageload"
 const BILLBOARD_API='https://www.winthropbythesea.com/_functions/';
 /* Sponsor a billboard, from inside the game: a small form in About that files a request row. Pierce confirms the
@@ -36,7 +37,7 @@ function sponsorForm(group){
 }
 /* Resolved when the last heavy load -- the parked cars, at the end of the furniture chain -- is in the scene. The
    arrival waits on it: measured in Chrome, the seconds after the loading card are a run of one-second stalls. */
-let resolveTown=null;const townReady=new Promise(r=>{resolveTown=r;});
+let resolveTown=null;const townReady=new Promise(r=>{resolveTown=r;});let resolveOpening=null;const openingReady=new Promise(r=>{resolveOpening=r;});townReady.then(()=>resolveOpening());
 let resolveGround=null;const groundReady=new Promise(r=>{resolveGround=r;});let groundDrawn=false;
 import {Weather} from './weather.js';
 import {TourFlight} from './tour-flight.js';
@@ -143,7 +144,7 @@ async function init(){
     colour of the sky covers the build and lifts when the town is in. frameWhole() corrects the shot once the roads
     are known, before the veil has lifted, so nobody sees the correction. */
  controls.target.set(...places.whole.target);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
- if(OPENING)import('./opening.js').then(m=>{camera.position.set(...m.startFrom(places.whole.target,places.whole.offset));window.__dissolveSketch=()=>{if(sketch)sketch.dissolve();};window.__opening=m.openingTitle({camera,controls,target:places.whole.target,offset:places.whole.offset,ready:townReady,onReveal:()=>{camera.layers.enableAll();try{renderer.compile(scene,camera);}catch(_){}}});}).catch(e=>console.warn('opening off',e));
+ if(OPENING)import('./opening.js').then(m=>{camera.position.set(...m.startFrom(places.whole.target,places.whole.offset));window.__dissolveSketch=()=>{if(sketch)sketch.dissolve();};window.__opening=m.openingTitle({camera,controls,target:places.whole.target,offset:places.whole.offset,ready:openingReady,onReveal:()=>{camera.layers.enableAll();try{renderer.compile(scene,camera);}catch(_){}},warm:()=>{try{const seen=window.__warmSeen||(window.__warmSeen=new WeakSet());scene.traverse(o=>{const ms=o.material?(Array.isArray(o.material)?o.material:[o.material]):[];for(const m of ms)for(const k of ['map','normalMap','roughnessMap','alphaMap','emissiveMap','aoMap']){const t=m[k];if(t&&t.image&&!seen.has(t)){seen.add(t);renderer.initTexture(t);}}});renderer.compile(scene,camera);}catch(_){}}});}).catch(e=>console.warn('opening off',e));
  {const veil=$('veil');if(veil)veil.remove();
   /* Pierce, 2026-09-13: 'it still takes 5 seconds to see anything ... make the outline fun so stuff happens
      immediately'. A 36 KB outline of every road is fetched ahead of the two-megabyte town and inks itself in over the
@@ -227,7 +228,7 @@ async function init(){
  // The designed ground: the town's real courts, ball fields, parks, pools, beaches and golf holes, laid over the photograph.
  window.__groundField=groundWorld.field;
  get(DATA+'surfaces.json').then(async data=>{const onLand=(x,z)=>groundWorld.field.ground.sample(x,z)!==null,onRoad=(x,z)=>groundWorld.field.road.sample(x,z)!==null;
-  performance.mark('stage:play-surfaces');playGround=await playSurfaces(data,surfaceAt,onLand,onRoad,(x,z)=>driving.state.network.obstructed(x,z),lowMemory);
+  performance.mark('stage:play-surfaces');resolveOpening();   // roads, ground, buildings and trees are in: that is Ready (Pierce, 09-15: 'the ready signal not actually meaning anything')playGround=await playSurfaces(data,surfaceAt,onLand,onRoad,(x,z)=>driving.state.network.obstructed(x,z),lowMemory);
   scene.add(playGround);window.__surfaces=playGround.userData.audit;}).catch(e=>console.warn('Ground surfaces unavailable',e));
  performance.mark('stage:furniture');Promise.all([getOr(DATA+'crossings.json',{crossings:[]}),getOr(DATA+'power-lines.json',{poles:[],lines:[]}),getOr(DATA+'street-furniture.json',{lamps:[],busStops:[],signals:[]})]).then(([crossings,powerLines,furniture])=>{performance.mark('stage:furniture-build');driving.turn.setObstacles([...(powerLines.poles||[]).map(p=>({x:p.x,z:p.z,r:.3})),...(furniture.lamps||[]).map(p=>({x:p.x,z:p.z,r:.22})),...(furniture.busStops||[]).map(p=>({x:p.x,z:p.z,r:.35})),...(furniture.signals||[]).map(p=>({x:p.x,z:p.z,r:.3})),...assetData.assets.map(a=>({x:a.x,z:a.z,r:a.kind==='hydrant'?.22:.28}))]);driving.cruise.signals=furniture.signals||[];signalSystem=new SignalSystem(furniture.signals||[],driving.state.network);driving.cruise.lights=signalSystem;if(ambient)ambient.lights=signalSystem;const g=streetFurniture({crossings,powerLines,furniture},driving.state.network,surfaceAt,signalSystem,driving.cruise.junctions);scene.add(g);furnitureGroup=g;window.__furniture=g;
   /* Cars at the curb, from the same fetch: they need the furniture and the street assets to know what not to park on. */
@@ -253,7 +254,7 @@ async function init(){
  performance.mark('stage:street-assets');assetGroup=streetAssets(assetData,surfaceAt);scene.add(assetGroup);$('assetLabel').textContent=`Signs, poles and hydrants · ${assetData.assets.length}`;
 window.__drive=driving;window.__controls=controls;window.__camera=camera;
  /* Real life, Winthrop only: the 713 bus, aircraft on the Logan approach, the Boston tide (live.js; every feed fail-silent). */
- if(!FACTORY)townReady.then(()=>Promise.all([import('./logan.js'),getOr(DATA+'logan.json',null)]).then(([m,d])=>{if(d){loganGroup=m.logan({scene,data:d,y:water.position.y+1.6});window.__logan=loganGroup;}}).catch(e=>console.warn('Logan off',e)));   // Boston Logan across the harbor (Pierce, 09-14)
+ /* Logan is no longer drawn (Pierce, 09-15: 'lose the airport entirely'); logan.js and data/logan.json stay in the repo */
  if(!FACTORY)import('./live.js').then(m=>{window.__live=m.liveWinthrop({scene,heightAt:surfaceAt,water,camera,controls,network:driving.state.network,fieldY:water.position.y+1.6});}).catch(e=>console.warn('live layers off',e)); ambient=new AmbientLife(scene,driving.state.network,surfaceAt);window.__ambient=ambient;driving.cruise.traffic=ambient;driving.cruise.stops=ambient.stops=assetData.assets.filter(a=>a.kind==='stop');{const coastal=new CoastalTour(camera,controls,surfaceAt,()=>{$('tour').textContent='Coastal flyover';}),flight=new TourFlight(camera,controls,surfaceAt,()=>{});tourFlight=flight;window.__tourFlight=tourFlight;window.__flight=flight;
  tour={get active(){return coastal.active||flight.active;},start(){flight.stop();coastal.start();},stop(){coastal.stop();flight.stop();},update(dt){coastal.update(dt);flight.update(dt);}};}
  performance.mark('stage:trees');try{canopyData=await get(DATA+'tree-survey.json');canopyGroup=treeSurvey(canopyData,surfaceAt);scene.add(canopyGroup);

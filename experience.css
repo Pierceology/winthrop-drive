@@ -753,3 +753,9 @@ body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
   #liveChip .strip button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
   #liveChip .strip .idx{font-size:10px;color:var(--muted);flex:none}
 }
+
+/* Pierce, 09-15: the hint line is useless and the 'i' belongs in About. No cursor while driving or flying. */
+footer .help,footer #credits{display:none!important}
+body.driving canvas,body.touring canvas,body.driving,body.touring{cursor:none}
+body.driving #drivehud,body.driving footer,body.driving .camera,body.touring #tourOverlay{cursor:auto}
+#about .aboutCredits{margin-top:14px;background:none;border:0;box-shadow:none;padding:0;min-height:0;color:var(--accent);font-size:13px;text-decoration:underline;cursor:pointer}
