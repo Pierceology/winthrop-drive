@@ -684,7 +684,7 @@ body.opening header,body.opening .places,body.opening .camera,body.opening #live
 body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
 
 /* The panel sizes to what is in it (Pierce, 09-14: "the empty space below the menu doesn't look good") */
-.places,body:not(.driving) .places{bottom:auto;max-height:calc(100vh - 88px - var(--sat) - 72px - var(--sab));overflow:auto}
+@media (min-width:721px){.places,body:not(.driving) .places{bottom:auto;max-height:calc(100vh - 88px - var(--sat) - 72px - var(--sab));overflow:auto}}
 
 /* loading bar under the title (opening.js) */
 #opening .progress{margin:34px 0 0;max-width:420px}
@@ -739,4 +739,17 @@ body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
   #liveChip .row em{grid-area:acts;font-size:10px}
   #liveChip .row .acts{grid-area:acts;margin:0;flex-direction:column;gap:4px}
   #liveChip .row .acts button{padding:4px 8px;font-size:9.5px}
+}
+
+/* Phones: one at a time. The open group is a single strip: ‹ name · status › with icon buttons (Pierce, 09-15: "one at a time... icons as buttons... way smaller"). */
+@media (max-width:720px){
+  #liveChip .grp.open .rows{max-height:none;overflow:visible;padding:0}
+  #liveChip .strip{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 8px;border-radius:var(--pill);border:1px solid var(--edge);background:rgba(12,17,22,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink)}
+  #liveChip .strip .who{flex:1;min-width:0;display:grid;gap:1px}
+  #liveChip .strip .who b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #liveChip .strip .who span{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #liveChip .strip button{min-height:0;margin:0;padding:0;width:34px;height:34px;border-radius:50%;border:1px solid var(--edge);background:none;color:var(--ink);font-size:16px;line-height:34px;text-align:center;box-shadow:none;flex:none}
+  #liveChip .strip button.nav{width:28px;border:0;font-size:22px;color:var(--muted)}
+  #liveChip .strip button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  #liveChip .strip .idx{font-size:10px;color:var(--muted);flex:none}
 }

@@ -252,13 +252,33 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    if(!preds.has(veh.id))preds.set(veh.id,{stop:stop?stop.attributes.name:'',headsign:trip?trip.attributes.headsign:'',when});}
   renderChip();return preds.size;};
  const chip=typeof document!=='undefined'?document.createElement('div'):null;if(chip){chip.id='liveChip';chip.hidden=true;document.body.appendChild(chip);}
- let openGroup=null;   // 'bus' | 'plane' | null  (Pierce, 09-15: "a floating icon of a bus... tap it and it accordions out")
+ let openGroup=null;const stripIdx={bus:0,plane:0};
+ /* one at a time on a phone: a strip with ‹ › and icon buttons */
+ function fillStrip(key,body){
+  const list=key==='bus'?[...buses.entries()].map(([id,b])=>({id,kind:'bus',b})):[...aircraft.entries()].sort((a,b)=>((a[1].ground?(a[1].speed>15?1:2):0)*1e6+Math.hypot(a[1].x,a[1].z))-((b[1].ground?(b[1].speed>15?1:2):0)*1e6+Math.hypot(b[1].x,b[1].z))).map(([icao,p])=>({id:icao,kind:'plane',p}));
+  if(!list.length)return;const n=list.length;let i=((stripIdx[key]%n)+n)%n;
+  /* if something is being followed in this group, show it */
+  const fi=list.findIndex(it=>it.kind==='bus'?following===it.id:(following==='ac:'+it.id||following==='in:'+it.id));if(fi>=0)i=fi;stripIdx[key]=i;
+  const it=list[i];const s=document.createElement('div');s.className='strip';
+  const nav=(t,d)=>{const b=document.createElement('button');b.className='nav';b.textContent=t;b.setAttribute('aria-label',d>0?'next':'previous');b.onclick=e=>{e.stopPropagation();stripIdx[key]=i+d;if(following&&(it.kind==='bus'?following===it.id:String(following).endsWith(it.id)))live.follow(null);renderChip();};return b;};
+  const who=document.createElement('div');who.className='who';const bb=document.createElement('b'),sp=document.createElement('span');
+  if(it.kind==='bus'){const b=it.b;let p=preds.get(it.id);if(p&&p.when&&new Date(p.when).getTime()<Date.now()-45000)p=null;const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
+   bb.textContent='713 bus '+(b.label||'');sp.textContent=b.off?'outside Winthrop':(p?(p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):'')):((b.status==='STOPPED_AT'?'stopped · ':'')+(DIRECTION[b.direction]||'in service')));}
+  else{const p=it.p;const ft=Math.max(0,Math.round(p.alt/0.3048/100)*100),mph=Math.round((p.speed||0)*2.237);const phase=p.ground?(mph>40?'rolling':'on the ground'):p.climb>1?'climbing':p.climb<-1?'descending':'level';
+   bb.textContent=p.airline.text;sp.textContent=(p.ground?'':ft.toLocaleString()+' ft · ')+phase+' · '+mph+' mph';}
+  who.append(bb,sp);
+  const icon=(glyph,label,key2,on)=>{const b=document.createElement('button');b.textContent=glyph;b.setAttribute('aria-label',label);b.title=label;if(on)b.classList.add('on');b.onclick=e=>{e.stopPropagation();live.follow(following===key2?null:key2);};return b;};
+  s.append(nav('‹',-1),who);
+  if(it.kind==='bus'){if(!it.b.off)s.append(icon('👁','Follow this bus',it.id,following===it.id));}
+  else{s.append(icon('👁','Follow',"ac:"+it.id,following==='ac:'+it.id),icon('🎥','Ride along',"in:"+it.id,following==='in:'+it.id));}
+  const idx=document.createElement('span');idx.className='idx';idx.textContent=(i+1)+'/'+n;s.append(idx,nav('›',1));body.append(s);}   // 'bus' | 'plane' | null  (Pierce, 09-15: "a floating icon of a bus... tap it and it accordions out")
  const DIRECTION={0:'toward Winthrop Beach',1:'toward Orient Heights'};
  function renderChip(){if(!chip)return;if(!buses.size&&!aircraft.size){chip.hidden=true;return;}chip.hidden=false;chip.textContent='';
   const group=(key,icon,count,label,fill)=>{const g=document.createElement('div');g.className='grp '+key+(openGroup===key?' open':'');
    const head=document.createElement('button');head.className='grphead';head.setAttribute('aria-expanded',String(openGroup===key));head.innerHTML='<span class="ic">'+icon+'</span><b>'+count+'</b><small>'+label+'</small>';
    head.onclick=()=>{openGroup=openGroup===key?null:key;renderChip();};g.append(head);
-   if(openGroup===key){const body=document.createElement('div');body.className='rows';fill(body);g.append(body);}chip.append(g);};
+   if(openGroup===key){const body=document.createElement('div');body.className='rows';if(phone())fillStrip(key,body);else fill(body);g.append(body);}chip.append(g);};
+  const phone=()=>typeof matchMedia==='function'&&matchMedia('(max-width:720px)').matches;
   const row=(id,title,line,cls)=>{const el=document.createElement('button');el.className='row '+cls+(following===id?' on':'');
    const bb=document.createElement('b');bb.textContent=title;const sp=document.createElement('span');sp.textContent=line;const em=document.createElement('em');em.textContent=following===id?'Following · tap to stop':'Follow';
    el.append(bb,sp,em);el.onclick=()=>live.follow(following===id?null:id);return el;};
