@@ -113,11 +113,11 @@
   body.driving.minimal-hud .speedometer { top: 56px; bottom: auto; }
 
   /* put-away controls (phone.js) */
-  #sheetToggle { display: flex; justify-content: space-between; align-items: center; width: 100%; min-height: 40px; padding: 8px 4px; margin: 0 0 6px; background: none; border: 0; font-size: 15px; font-weight: 600; color: inherit; }
-  #sheetToggle b { font-size: 14px; opacity: .8; }
+  #sheetBar { display: flex; justify-content: space-between; align-items: center; width: 100%; min-height: 40px; padding: 8px 4px; margin: 0 0 6px; background: none; border: 0; font-size: 15px; font-weight: 600; color: inherit; }
+  #sheetBar b { font-size: 14px; opacity: .8; }
   aside.places.collapsed, body:not(.driving) aside.places.collapsed { max-height: calc(58px + env(safe-area-inset-bottom)) !important; overflow: hidden !important; padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
-  aside.places.collapsed #sheetToggle { margin-bottom: 0; }
-  aside.places.collapsed > *:not(#sheetToggle) { visibility: hidden; }
+  aside.places.collapsed #sheetBar { margin-bottom: 0; }
+  aside.places.collapsed > *:not(#sheetBar) { visibility: hidden; }
   .camera { transition: bottom .25s; }
   body:has(aside.places.collapsed) .camera { bottom: calc(68px + env(safe-area-inset-bottom)) !important; }
   #roadWarning .closeWarn { display: inline-flex; align-items: center; justify-content: center; position: absolute; top: 2px; right: 2px; width: 40px; height: 40px; padding: 0; min-height: 0; border: 0; background: none; font-size: 24px; line-height: 1; color: #fff; }
