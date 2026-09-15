@@ -169,7 +169,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
     if(bv&&bv[0]*dx+bv[1]*dz<0){dx=-dx;dz=-dz;}
     const lane=Math.min(2.2,(n.width||7)/4);x=n.x+(-dz)*lane;z=n.z+dx*lane;yaw=Math.atan2(-dz,dx);}}
    let b=buses.get(v.id);
-   if(!b){b={mesh:makeBus(),x,z,yaw,from:{x,z,yaw},to:{x,z,yaw},t0:t,label:a.label,status:a.current_status,direction:a.direction_id};b.mesh.position.set(x,ground(x,z),z);b.mesh.rotation.y=yaw;group.add(b.mesh);buses.set(v.id,b);}
+   if(!b){b={mesh:makeBus(),x,z,yaw,from:{x,z,yaw},to:{x,z,yaw},t0:t,label:a.label,status:a.current_status,direction:a.direction_id};b.mesh.userData.busId=v.id;b.mesh.position.set(x,ground(x,z),z);b.mesh.rotation.y=yaw;group.add(b.mesh);buses.set(v.id,b);}
    else{b.from=snap?{x,z,yaw}:{x:b.x,z:b.z,yaw:b.yaw};b.to={x,z,yaw:Number.isFinite(a.bearing)?yaw:b.yaw};b.t0=t;b.status=a.current_status;b.direction=a.direction_id;}
    b.off=off;b.mesh.visible=!off;if(off&&following===v.id)live.follow(null);b.miss=0;}
   for(const [id,b] of buses){if(seen.has(id))continue;if(++b.miss>=2){group.remove(b.mesh);buses.delete(id);}}
@@ -281,6 +281,13 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   if(controls){controls.autoRotate=false;controls.enabled=!(following&&String(following).startsWith('in:'));}
   for(const p of aircraft.values()){const tag=p.mesh.getObjectByName('tag');if(tag)tag.visible=following==='ac:'+p.icao||following==='in:'+p.icao;p.mesh.visible=following!=='in:'+p.icao;}
   if(typeof document!=='undefined')document.body.classList.toggle('aboard',!!(following&&String(following).startsWith('in:')));renderChip();return following;};
+ /* tap the plane or bus itself to follow it (a tap, not a drag: under 8 px of movement) */
+ if(typeof addEventListener==='function'&&camera){let down=null;addEventListener('pointerdown',e=>{if(e.target&&e.target.tagName==='CANVAS')down=[e.clientX,e.clientY];else down=null;},{passive:true});
+  addEventListener('pointerup',e=>{if(!down)return;const moved=Math.hypot(e.clientX-down[0],e.clientY-down[1]);down=null;if(moved>8)return;const cv=e.target;if(!cv||cv.tagName!=='CANVAS')return;
+   ndc.set((e.clientX/cv.clientWidth)*2-1,-(e.clientY/cv.clientHeight)*2+1);ray.setFromCamera(ndc,camera);
+   const meshes=[...[...aircraft.values()].map(p=>p.mesh),...[...buses.values()].filter(b=>!b.off).map(b=>b.mesh)];
+   const hit=ray.intersectObjects(meshes,true)[0];if(!hit)return;let o=hit.object;while(o&&!o.userData.icao&&!o.userData.busId)o=o.parent;if(!o)return;
+   if(o.userData.icao){openGroup='plane';live.follow('ac:'+o.userData.icao);}else{openGroup='bus';live.follow(o.userData.busId);}},{passive:true});}
  /* the name shows only on hover (Pierce, 09-14: "only info if I hover") */
  const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();let hovered=null,lastHover=0;
  if(typeof addEventListener==='function'&&camera)addEventListener('pointermove',e=>{const t=now();if(t-lastHover<80)return;lastHover=t;const cv=e.target;if(!cv||cv.tagName!=='CANVAS')return;
