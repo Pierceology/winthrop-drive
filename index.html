@@ -18,6 +18,7 @@
 /* Fresh files on every new version (Pierce, 09-14: "are you pushing these changes bc I'm not seeing them"): GitHub Pages
    and the Wix frame hold each file for ten minutes. version.json is fetched uncached; when its stamp changes, every file
    is refetched past the cache and the page reloads itself once, so a load never mixes old and new code. */
+if(!/[?&](ride|drive|building|world|fronts)=/.test(location.search))document.body.classList.add('opening');   // the title and the ink from the first paint; no ghost of the panel (Pierce, 09-15)
 (async()=>{let fresh=false;try{const r=await fetch('./version.json',{cache:'no-store'});if(r.ok){const v=await r.json();const seen=localStorage.getItem('wd-version');
   if(seen!==v.v&&sessionStorage.getItem('wd-reloaded')!==v.v){await Promise.all([...v.files,'./'].map(f=>fetch(f,{cache:'reload'}).catch(()=>0)));localStorage.setItem('wd-version',v.v);sessionStorage.setItem('wd-reloaded',v.v);location.reload();return;}
   localStorage.setItem('wd-version',v.v);}}catch(e){}

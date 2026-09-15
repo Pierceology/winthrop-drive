@@ -62,6 +62,7 @@ function fromAdsbLol(j){
 /* Tide mapping: NOAA reports metres above MLLW. Mean tide at Boston is ~1.5 m MLLW and the game's water
    plane already sits at mean tide, so water.y = (water.y at mount) + (level - MEAN_TIDE_MLLW). */
 export const MEAN_TIDE_MLLW=1.5;
+const LOGAN=[-2650,-450];   // the airfield centre in the game frame
 
 async function getJSON(url,ms=12000){
  try{const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);
@@ -183,6 +184,8 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
   for(const s of rows){const [icao,cs,,tpos,,lon,lat,baro,onGround,vel,track,vrate,,geo]=s;
    if(!Number.isFinite(lat)||!Number.isFinite(lon))continue;
    const alt=onGround?0:(Number.isFinite(baro)?baro:(Number.isFinite(geo)?geo:0));const [x,z]=toLocal(lat,lon);
+   /* Logan's traffic only: within 11 km of the field and under 2,300 m (7,500 ft) — the approaches and departures that cross Winthrop; cruisers overhead are dropped (Pierce, 09-15) */
+   if(!onGround&&(alt>2300||Math.hypot(x-LOGAN[0],z-LOGAN[1])>11000))continue;
    const age=Math.max(0,feedTime-(tpos||feedTime));const v=Number.isFinite(vel)?vel:0,tr=(Number.isFinite(track)?track:0)*D,vr=Number.isFinite(vrate)?vrate:0;
    const fix={x:x+Math.sin(tr)*v*age,z:z-Math.cos(tr)*v*age,y:alt+vr*age,vx:Math.sin(tr)*v,vz:-Math.cos(tr)*v,vy:vr,yaw:yawFromBearing(Number.isFinite(track)?track:0),t0:t};
    seen.add(icao);let p=aircraft.get(icao);

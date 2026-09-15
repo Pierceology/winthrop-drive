@@ -143,7 +143,7 @@ async function init(){
     colour of the sky covers the build and lifts when the town is in. frameWhole() corrects the shot once the roads
     are known, before the veil has lifted, so nobody sees the correction. */
  controls.target.set(...places.whole.target);camera.position.copy(controls.target).add(new THREE.Vector3(...places.whole.offset));controls.update();
- if(OPENING)import('./opening.js').then(m=>{camera.position.set(...m.startFrom(places.whole.target,places.whole.offset));window.__opening=m.openingTitle({camera,controls,target:places.whole.target,offset:places.whole.offset,ready:townReady,onReveal:()=>{camera.layers.enableAll();if(sketch)sketch.dissolve();}});}).catch(e=>console.warn('opening off',e));
+ if(OPENING)import('./opening.js').then(m=>{camera.position.set(...m.startFrom(places.whole.target,places.whole.offset));window.__dissolveSketch=()=>{if(sketch)sketch.dissolve();};window.__opening=m.openingTitle({camera,controls,target:places.whole.target,offset:places.whole.offset,ready:townReady,onReveal:()=>{camera.layers.enableAll();try{renderer.compile(scene,camera);}catch(_){}}});}).catch(e=>console.warn('opening off',e));
  {const veil=$('veil');if(veil)veil.remove();
   /* Pierce, 2026-09-13: 'it still takes 5 seconds to see anything ... make the outline fun so stuff happens
      immediately'. A 36 KB outline of every road is fetched ahead of the two-megabyte town and inks itself in over the

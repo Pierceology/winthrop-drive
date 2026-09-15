@@ -676,8 +676,8 @@ body.quiet:not(.driving) .camera{opacity:0;pointer-events:none}
 #opening h1{margin:0;max-width:13ch;font-family:var(--display);font-weight:700;font-size:clamp(42px,8.4vw,128px);line-height:.98;letter-spacing:-.02em;color:#fff;font-variation-settings:'opsz' 144;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.35)}
 #opening h1 em{font-style:italic;font-weight:600;color:#e8d5ae}
 #opening .sub{margin:26px 0 0;max-width:44ch;font-size:clamp(15px,1.5vw,21px);line-height:1.5;color:rgba(255,255,255,.86);text-shadow:0 1px 12px rgba(0,0,0,.4)}
+body.opening header,body.opening .places,body.opening .camera,body.opening #liveChip{opacity:0!important;pointer-events:none;transition:none}
 header,.places{transition:opacity .7s ease}
-body.opening header,body.opening .places,body.opening .camera,body.opening #liveChip{opacity:0!important;pointer-events:none}
 @media (max-width:720px){#opening{padding:0 18px;justify-content:flex-end;padding-bottom:22vh}#opening h1{max-width:12ch}}
 #veil{position:fixed;inset:0;z-index:7;pointer-events:none;background:rgba(6,10,14,.42);opacity:1;transition:opacity 1.4s ease}
 #veil.gone{opacity:0}

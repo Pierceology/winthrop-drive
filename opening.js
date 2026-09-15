@@ -26,17 +26,21 @@ export function openingTitle({camera, controls, target, offset, ready, copy = {}
   requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
   let done = false, started = false;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const finish = () => { if (done) return; done = true; try { onReveal(); } catch (_) {} camera.position.copy(to); controls.update(); el.classList.add('out'); veil.classList.add('gone'); document.body.classList.remove('opening'); setTimeout(() => { el.remove(); veil.remove(); }, 1600); };
-  const fly = () => { if (started || done) return; started = true; try { onReveal(); } catch (_) {} if (reduced) { finish(); return; }
-    const t0 = performance.now(), D = 2400; el.classList.add('fly'); veil.classList.add('gone');
+  const finish = () => { if (done) return; done = true; try { onReveal(); } catch (_) {} if (window.__dissolveSketch) window.__dissolveSketch(); camera.position.copy(to); controls.update(); el.classList.add('out'); veil.classList.add('gone'); document.body.classList.remove('opening'); setTimeout(() => { el.remove(); veil.remove(); }, 1600); };
+  const fly = () => { if (started || done) return; started = true; if (reduced) { finish(); return; }
+    const t0 = performance.now(), D = 2400; el.classList.add('fly'); veil.classList.add('gone'); if (window.__dissolveSketch) window.__dissolveSketch();
     const step = () => { if (done) return; const k = Math.min(1, (performance.now() - t0) / D), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
       camera.position.lerpVectors(from, to, e); controls.update();
       /* the type flies on the camera's own curve, so the two never drift apart */
       el.style.transform = 'scale(' + (1 + e * 2.2) + ')'; el.style.opacity = String(Math.max(0, 1 - Math.pow(e, 1.4) * 1.25));
       if (k < 1) requestAnimationFrame(step); else finish(); };
     step(); };
-  ready.then(() => { setTimeout(fly, 600); setTimeout(finish, 600 + 2400 + 400); });   // the timeout lands the camera even if the tab was hidden and frames never ran
-  const skip = () => { if (done) return; done = true; try { onReveal(); } catch (_) {} camera.position.copy(to); controls.update(); el.remove(); veil.classList.add('gone'); setTimeout(() => veil.remove(), 1600); document.body.classList.remove('opening'); };
+  ready.then(() => {
+    try { onReveal(); } catch (_) {}                       // town on, under the veil: shaders compile and textures upload here, not mid-dive
+    requestAnimationFrame(() => requestAnimationFrame(() => { setTimeout(fly, 500); }));   // two painted frames, then the dive
+    setTimeout(finish, 4500);                                // and nothing waits on frames: the camera lands regardless
+  });   // the timeout lands the camera even if the tab was hidden and frames never ran
+  const skip = () => { if (done) return; done = true; try { onReveal(); } catch (_) {} if (window.__dissolveSketch) window.__dissolveSketch(); camera.position.copy(to); controls.update(); el.remove(); veil.classList.add('gone'); setTimeout(() => veil.remove(), 1600); document.body.classList.remove('opening'); };
   setTimeout(() => { if (!done) finish(); }, 45000);   // nothing waits forever: after 45 s the town is shown whatever happened
   for (const ev of ['pointerdown', 'wheel', 'keydown']) addEventListener(ev, skip, {once: true, passive: true});
   return {skip, active: () => !done};
