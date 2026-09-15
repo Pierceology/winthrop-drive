@@ -338,7 +338,7 @@ function bind(){
      after that it is theirs and re-framing it would be the rudest thing this file could do. */
   if(!touched&&framedFor&&Math.abs(framedFor-(innerWidth+innerHeight))>60&&!driving.active){frameWhole();goPlace('whole');}});
 }
-function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):.016;lastTime=time;if(sketch&&sketch.alive)sketch.update(dt);
+function animate(time){const dt=lastTime?Math.min((time-lastTime)/1000,.1):.016;lastTime=time;if(playGround){const far=camera.position.y>700;if(playGround.visible===far)playGround.visible=!far;}   // fields and courts only up close: from high up they z-fight the ground and read as dark rectangles (Pierce, 09-15: 'weird glitch')if(sketch&&sketch.alive)sketch.update(dt);
  if(flight){const t=Math.min(1,(time-flight.start)/1600),ease=t*t*(3-2*t);camera.position.lerpVectors(flight.from,flight.to,ease);controls.target.lerpVectors(flight.fromTarget,flight.target,ease);if(t===1)flight=null;}
  controls.target.x=THREE.MathUtils.clamp(controls.target.x,-3500,3500);controls.target.z=THREE.MathUtils.clamp(controls.target.z,-3900,3900);if(tour?.active)tour.update(dt);else if(driving?.active){ambient?.constrainPlayer(driving.state);driving.update(dt,time);}else controls.update(dt);
  ambient?.update(driving?.paused?0:dt,controls.target,driving,$('life').checked);water.material.uniforms.time.value=time/1000;water.material.uniforms.sunDirection.value.copy(sunOffset).normalize();if(frame%6===0)labels?.update(camera,controls.target,$('labels').checked&&!tour?.active);
