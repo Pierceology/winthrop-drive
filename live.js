@@ -205,6 +205,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
  /* per-frame easing; runs on its own rAF so mounting needs no hook in the game loop */
  let raf=0,stopped=false;
  function tick(){if(stopped)return;raf=requestAnimationFrame(tick);const t=now();
+  if(following&&typeof document!=='undefined'&&(document.body.classList.contains('touring')||document.body.classList.contains('driving')||(window.__tourFlight&&window.__tourFlight.active))){live.follow(null);}   // a ride, a flyover or the wheel takes the camera back (Pierce, 09-15: flyovers 'over water')
   if(following&&String(following).startsWith('ac:')){const p=aircraft.get(following.slice(3));
    if(!p||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
    else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz);const dx=sp>1?p.vx/sp:Math.cos(p.yaw),dz=sp>1?p.vz/sp:-Math.sin(p.yaw);
