@@ -666,16 +666,6 @@ body.driving #globeBack{display:none}
 body.quiet:not(.driving) .camera{opacity:0;pointer-events:none}
 .camera{transition:opacity .5s}
 
-/* Live bus chip: the 713, its next stop and time, and a Follow button (top right, under the header). */
-#liveChip{position:fixed;right:calc(var(--gutter) + var(--sar));top:calc(88px + var(--sat));z-index:6;display:grid;gap:6px;max-width:min(300px,calc(100vw - 32px))}
-#liveChip .bus,#liveChip .plane{display:grid;gap:2px;text-align:left;width:100%;margin:0;min-height:0;padding:10px 14px;border-radius:var(--r-sm);border:1px solid var(--edge);background:rgba(12,17,22,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink);box-shadow:none}
-#liveChip .bus b,#liveChip .plane b{font-size:13px}
-#liveChip .bus span,#liveChip .plane span{font-size:12px;line-height:1.35;color:var(--muted)}
-#liveChip .bus em,#liveChip .plane em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-#liveChip .bus.on,#liveChip .plane.on{border-color:rgba(240,184,96,.6)}
-body.driving #liveChip,body.touring #liveChip{display:none}
-#liveChip .plane{border-left:3px solid var(--accent)}
-#liveChip .plane b::before{content:'✈ ';opacity:.8}
 
 /* The opening: title over the town from above, then the dive through the type (opening.js). */
 #opening{position:fixed;inset:0;z-index:8;display:flex;flex-direction:column;justify-content:center;padding:0 calc(var(--gutter) + var(--sar)) 0 max(calc(var(--gutter) + var(--sal)),7vw);pointer-events:none;opacity:0;transform:scale(.97);transform-origin:40% 52%;transition:opacity 1s ease,transform 1s ease;background:linear-gradient(90deg,rgba(6,10,14,.6),rgba(6,10,14,.15) 55%,rgba(6,10,14,0) 80%)}
@@ -691,9 +681,6 @@ body.opening header,body.opening .places,body.opening .camera,body.opening #live
 @media (max-width:720px){#opening{padding:0 18px;justify-content:flex-end;padding-bottom:22vh}#opening h1{max-width:12ch}}
 #veil{position:fixed;inset:0;z-index:7;pointer-events:none;background:rgba(6,10,14,.42);opacity:1;transition:opacity 1.4s ease}
 #veil.gone{opacity:0}
-#liveChip .plane .acts{display:flex;gap:6px;margin-top:4px}
-#liveChip .plane .acts button{min-height:0;margin:0;padding:5px 10px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:none;border:1px solid var(--edge);border-radius:var(--pill);box-shadow:none}
-#liveChip .plane .acts button:hover{background:var(--glass-lite)}
 body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
 
 /* The panel sizes to what is in it (Pierce, 09-14: "the empty space below the menu doesn't look good") */
@@ -703,11 +690,24 @@ body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
 #opening .progress{margin:34px 0 0;max-width:420px}
 #opening .progress i{display:block;height:3px;width:0;background:#e8d5ae;border-radius:2px;transition:width .6s ease}
 #opening .progress span{display:block;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(232,213,174,.85)}
-/* the live chip folds to one line on a phone (Pierce, 09-14: "the controls for all the buses and planes fill the screen") */
-#liveToggle{display:none}
-@media (max-width:720px){
-  #liveChip{top:calc(64px + var(--sat));right:12px;max-width:calc(100vw - 24px);gap:4px}
-  #liveToggle{display:block;width:100%;margin:0;min-height:0;padding:8px 12px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:rgba(12,17,22,.8);border:1px solid var(--edge);border-radius:var(--pill);box-shadow:none;text-align:left}
-  #liveChip:not(.open)>:not(#liveToggle){display:none}
-  #liveChip .bus,#liveChip .plane{padding:8px 10px}
-}
+
+/* Live: two floating icons at the top right (bus, plane); tap one and its list accordions out. Same on every screen. */
+#liveChip{position:fixed;right:calc(var(--gutter) + var(--sar));top:calc(88px + var(--sat));z-index:6;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:min(320px,calc(100vw - 24px))}
+#liveChip .grp{display:flex;flex-direction:column;align-items:flex-end;gap:6px;max-width:100%}
+#liveChip .grphead{display:flex;align-items:center;gap:8px;margin:0;min-height:0;padding:8px 14px 8px 10px;border-radius:var(--pill);border:1px solid var(--edge);background:rgba(12,17,22,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink);box-shadow:0 4px 18px rgba(0,0,0,.25)}
+#liveChip .grphead .ic{font-size:18px;line-height:1}
+#liveChip .grphead b{font-size:14px}
+#liveChip .grphead small{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+#liveChip .grp.open .grphead{border-color:rgba(240,184,96,.6)}
+#liveChip .rows{display:grid;gap:6px;width:min(300px,calc(100vw - 24px))}
+#liveChip .row{display:grid;gap:2px;text-align:left;width:100%;margin:0;min-height:0;padding:9px 12px;border-radius:var(--r-sm);border:1px solid var(--edge);background:rgba(12,17,22,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--ink);box-shadow:none}
+#liveChip .row b{font-size:13px}
+#liveChip .row span{font-size:12px;line-height:1.35;color:var(--muted)}
+#liveChip .row em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+#liveChip .row.on{border-color:rgba(240,184,96,.6)}
+#liveChip .row .acts{display:flex;gap:6px;margin-top:4px}
+#liveChip .row .acts button{min-height:0;margin:0;padding:5px 10px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:none;border:1px solid var(--edge);border-radius:var(--pill);box-shadow:none}
+#liveChip .row .acts button:hover{background:var(--glass-lite)}
+body.driving #liveChip,body.touring #liveChip,body.opening #liveChip{display:none}
+body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
+@media (max-width:720px){#liveChip{top:calc(60px + var(--sat));right:10px}#liveChip .grphead small{display:none}}

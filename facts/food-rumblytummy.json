@@ -1,0 +1,831 @@
+{
+"source": "rumblytummy.com/_functions/rumblytummyPlaces (Google Places via RT), 2026-09-14",
+"centre": [
+42.3757,
+-70.983
+],
+"radius": 2500,
+"winthrop": [
+{
+"name": "Express Burritos Mexican Grill",
+"geometry": {
+"location": {
+"lat": 42.3763079,
+"lng": -70.9836313
+}
+},
+"types": [
+"mexican_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJwTu7Z8tv44kRkugT8uVscDc",
+"typeLabel": "Mexican Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=3994812604342331538&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Cimino's Cafe",
+"geometry": {
+"location": {
+"lat": 42.376591399999995,
+"lng": -70.9841647
+}
+},
+"types": [
+"cafe",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJsVAeX8tv44kRhs4mv7HM75o",
+"typeLabel": "Cafe",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=11164367065063018118&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Thai Taki",
+"geometry": {
+"location": {
+"lat": 42.375235599999996,
+"lng": -70.98536899999999
+}
+},
+"types": [
+"thai_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJ5xaviTNv44kRfzXCBSsX1ZI",
+"typeLabel": "Thai Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=10580388373124494719&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Mexico En Tu Casa Restaurant & Catering",
+"geometry": {
+"location": {
+"lat": 42.374968599999995,
+"lng": -70.9859972
+}
+},
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJOwcmiGRv44kRgFs8J0zUUIo",
+"typeLabel": "Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=9966699398911777664&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Blue Sky Tavern",
+"geometry": {
+"location": {
+"lat": 42.3746943,
+"lng": -70.98585940000001
+}
+},
+"types": [
+"american_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJvT_X9Sdv44kRvnwmPqgL_3M",
+"typeLabel": "American Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=8358412250648050878&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Nick's Place Winthrop",
+"geometry": {
+"location": {
+"lat": 42.376175,
+"lng": -70.986188
+}
+},
+"types": [
+"restaurant",
+"seafood_restaurant",
+"pizza_restaurant",
+"sandwich_shop",
+"meal_takeaway",
+"salad_shop",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJAQQHqs1v44kRdWleFid1TNM",
+"typeLabel": "Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=15225673250972264821&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Hong Kong Dragon",
+"geometry": {
+"location": {
+"lat": 42.374297,
+"lng": -70.98619599999999
+}
+},
+"types": [
+"chinese_restaurant",
+"meal_delivery",
+"food_delivery",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJkyU3Ocxv44kRkzFfLa8-2O8",
+"typeLabel": "Chinese Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=17282632492135690643&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Beraka Juice",
+"geometry": {
+"location": {
+"lat": 42.374855,
+"lng": -70.9867285
+}
+},
+"types": [
+"juice_shop",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJIcP2gadv44kRCfN-Inx_e2k",
+"typeLabel": "Juice Shop",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=7600808967249261321&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Winthrop Center Cafe inc",
+"geometry": {
+"location": {
+"lat": 42.3750526,
+"lng": -70.986829
+}
+},
+"types": [
+"cafe",
+"breakfast_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJq-LATsxv44kRJKH-flH0BTc",
+"typeLabel": "Cafe",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=3964843677829734692&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Blackstrap BBQ",
+"geometry": {
+"location": {
+"lat": 42.374607399999995,
+"lng": -70.9870123
+}
+},
+"types": [
+"barbecue_restaurant",
+"catering_service",
+"food_delivery",
+"restaurant",
+"food",
+"service",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJ6anxSMxv44kRs27PljlCRiI",
+"typeLabel": "Barbecue Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=2469734260770041523&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Fritanga Los Nicas",
+"geometry": {
+"location": {
+"lat": 42.380083,
+"lng": -70.9805837
+}
+},
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJZ_gATQBv44kR6Jl2OIDi9uk",
+"typeLabel": "Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=16858911295439018472&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Happy Garden",
+"geometry": {
+"location": {
+"lat": 42.382247799999995,
+"lng": -70.980244
+}
+},
+"types": [
+"chinese_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJC7cOuhpu44kRFAW42CFxQRA",
+"typeLabel": "Chinese Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=1171341768276837652&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Winthrop House of Pizza",
+"geometry": {
+"location": {
+"lat": 42.3825242,
+"lng": -70.9808669
+}
+},
+"types": [
+"pizza_restaurant",
+"meal_delivery",
+"food_delivery",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJV67CezZu44kRLUR_6ZmqHUM",
+"typeLabel": "Pizza Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=4836209152889930797&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Cafe Valenciano Restaurant",
+"geometry": {
+"location": {
+"lat": 42.3756306,
+"lng": -70.9710917
+}
+},
+"types": [
+"italian_restaurant",
+"european_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJdwEEykxu44kROlLwuCC0xUc",
+"typeLabel": "Italian Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=5171737799739593274&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "D'Parma Restaurant",
+"geometry": {
+"location": {
+"lat": 42.3729228,
+"lng": -70.97151389999999
+}
+},
+"types": [
+"italian_restaurant",
+"european_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJl2c0nLNv44kRE3ba86B1-gg",
+"typeLabel": "Italian Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=646958830627485203&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Odyssey Grill & Pizza",
+"geometry": {
+"location": {
+"lat": 42.3822136,
+"lng": -70.9919836
+}
+},
+"types": [
+"restaurant",
+"catering_service",
+"mediterranean_restaurant",
+"pizza_restaurant",
+"meal_delivery",
+"food_delivery",
+"meal_takeaway",
+"food",
+"service",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJ5UkQvy1u44kR3fd--9L3oo0",
+"typeLabel": "Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=10205992191109560285&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Sambalos Tapas & Bar",
+"geometry": {
+"location": {
+"lat": 42.3721805,
+"lng": -70.9708637
+}
+},
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJsXdDdOhv44kRD-YzCYMXtGg",
+"typeLabel": "Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=7544681127314974223&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Bellino's Trattoria",
+"geometry": {
+"location": {
+"lat": 42.372035100000005,
+"lng": -70.9708325
+}
+},
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJq6oaq8xv44kROJapzQRqNXQ",
+"typeLabel": "Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=8373715651028162104&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Adriana's Cafe",
+"geometry": {
+"location": {
+"lat": 42.382194399999996,
+"lng": -70.99280279999999
+}
+},
+"types": [
+"cafe",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJUSX8f9Jx44kRSmWNvBtmmP4",
+"typeLabel": "Cafe",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=18345525351407248714&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Belle Isle Seafood",
+"geometry": {
+"location": {
+"lat": 42.382247,
+"lng": -70.993607
+}
+},
+"types": [
+"seafood_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJWw6wbixu44kRfTdifwsBD_Y",
+"typeLabel": "Seafood Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=17730391406874343293&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Osaka Lucky Garden",
+"geometry": {
+"location": {
+"lat": 42.3717222,
+"lng": -70.9701334
+}
+},
+"types": [
+"sushi_restaurant",
+"japanese_restaurant",
+"chinese_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJe4_nt7Nv44kRLOwg2b-leJ8",
+"typeLabel": "Sushi Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=11491116692635970604&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Jac's Cafe",
+"geometry": {
+"location": {
+"lat": 42.3858722,
+"lng": -70.9752828
+}
+},
+"types": [
+"cafe",
+"breakfast_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJ1c9eLEZu44kRQLGgipB6IP8",
+"typeLabel": "Cafe",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=18383828440146030912&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "La Esquina Del Sabor",
+"geometry": {
+"location": {
+"lat": 42.3861494,
+"lng": -70.9755887
+}
+},
+"types": [
+"restaurant",
+"colombian_restaurant",
+"breakfast_restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJe1izIgBv44kRzoOUrDpI4ZM",
+"typeLabel": "Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=10655877610176021454&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Cinco de Mayo Contemporary Mexican Kitchen",
+"geometry": {
+"location": {
+"lat": 42.386298599999996,
+"lng": -70.9759005
+}
+},
+"types": [
+"mexican_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJYfijAgBv44kReO6i7fNb2TA",
+"typeLabel": "Mexican Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=3519945686988811896&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Doc's Pot Pies",
+"geometry": {
+"location": {
+"lat": 42.3868241,
+"lng": -70.9717922
+}
+},
+"types": [
+"american_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJmxEc0EVu44kR-DMf1Z_GVWk",
+"typeLabel": "American Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=7590191136780530680&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Domino's Pizza",
+"geometry": {
+"location": {
+"lat": 42.3846018,
+"lng": -71.0002854
+}
+},
+"types": [
+"pizza_delivery",
+"pizza_restaurant",
+"meal_delivery",
+"food_delivery",
+"meal_takeaway",
+"chicken_wings_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJ3W9MOypu44kRU9l6lvHmAmc",
+"typeLabel": "Pizza Delivery",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=7422749061146138963&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Little Asia",
+"geometry": {
+"location": {
+"lat": 42.3863455,
+"lng": -71.00704320000001
+}
+},
+"types": [
+"chinese_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJM7jPptZx44kR9cpOPK68I7M",
+"typeLabel": "Chinese Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=12908368413496101621&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Sunny Cafe",
+"geometry": {
+"location": {
+"lat": 42.3868456,
+"lng": -71.0068383
+}
+},
+"types": [
+"restaurant",
+"brunch_restaurant",
+"asian_restaurant",
+"sushi_restaurant",
+"cafe",
+"japanese_restaurant",
+"meal_takeaway",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJv2OAnNJx44kRXPfVjGQJMXI",
+"typeLabel": "Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=8228368321646819164&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "New Saigon",
+"geometry": {
+"location": {
+"lat": 42.3863014,
+"lng": -71.0073745
+}
+},
+"types": [
+"vietnamese_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJUzFhHdRx44kRtLOwVoF9rq4",
+"typeLabel": "Vietnamese Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=12587136003005789108&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Taquer\u00eda Jal\u00edsco Orient Heights",
+"geometry": {
+"location": {
+"lat": 42.3869462,
+"lng": -71.0071975
+}
+},
+"types": [
+"mexican_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJhXWZQgBx44kRRkJLBHJP4mw",
+"typeLabel": "Mexican Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=7845920851949732422&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Crush Pizza",
+"geometry": {
+"location": {
+"lat": 42.386564,
+"lng": -71.007639
+}
+},
+"types": [
+"pizza_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJAaceYQBx44kRoS8GRmRsYU8",
+"typeLabel": "Pizza Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=5719972179664580513&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Subway",
+"geometry": {
+"location": {
+"lat": 42.386306499999996,
+"lng": -71.0093271
+}
+},
+"types": [
+"sandwich_shop",
+"fast_food_restaurant",
+"catering_service",
+"food_delivery",
+"meal_takeaway",
+"restaurant",
+"food",
+"service",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJM7_d7tNx44kRP9emna50Cnk",
+"typeLabel": "Sandwich Shop",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=8721911921674475327&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Luna's Italian & Latin Cuisine Restaurant",
+"geometry": {
+"location": {
+"lat": 42.3865534,
+"lng": -71.00920049999999
+}
+},
+"types": [
+"italian_restaurant",
+"latin_american_restaurant",
+"european_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJSzc24tNx44kRXgew-ies8xA",
+"typeLabel": "Italian Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=1221509211657078622&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+},
+{
+"name": "Burger King",
+"geometry": {
+"location": {
+"lat": 42.3862283,
+"lng": -71.009692
+}
+},
+"types": [
+"fast_food_restaurant",
+"family_restaurant",
+"breakfast_restaurant",
+"shipping_service",
+"restaurant",
+"food",
+"service",
+"point_of_interest",
+"establishment"
+],
+"place_id": "ChIJ5S136dNx44kRZB_MEDAVly8",
+"typeLabel": "Fast Food Restaurant",
+"blurb": "",
+"mapsUri": "https://maps.google.com/?cid=3429232937450348388&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"formattedAddress": "",
+"hoursText": "",
+"openNow": null
+}
+]
+}

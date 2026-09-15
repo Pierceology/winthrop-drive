@@ -1,0 +1,698 @@
+{
+"category": "food",
+"town": "Winthrop, MA",
+"checkedAt": "2026-09-14",
+"source": "Google Places (New) nearby search through rumblytummy.com, 11 centres \u00d7 700 m",
+"items": [
+{
+"name": "Adriana's Cafe",
+"category": "food",
+"subtype": "Cafe",
+"address": "",
+"lat": 42.382194399999996,
+"lon": -70.99280279999999,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJUSX8f9Jx44kRSmWNvBtmmP4",
+"types": [
+"cafe",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=18345525351407248714&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=18345525351407248714&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Belle Isle Seafood",
+"category": "food",
+"subtype": "Seafood Restaurant",
+"address": "",
+"lat": 42.382247,
+"lon": -70.993607,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJWw6wbixu44kRfTdifwsBD_Y",
+"types": [
+"seafood_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=17730391406874343293&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=17730391406874343293&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Bellino's Trattoria",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.372035100000005,
+"lon": -70.9708325,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJq6oaq8xv44kROJapzQRqNXQ",
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=8373715651028162104&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=8373715651028162104&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Beraka Juice",
+"category": "food",
+"subtype": "Juice Shop",
+"address": "",
+"lat": 42.374855,
+"lon": -70.9867285,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJIcP2gadv44kRCfN-Inx_e2k",
+"types": [
+"juice_shop",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=7600808967249261321&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=7600808967249261321&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Blackstrap BBQ",
+"category": "food",
+"subtype": "Barbecue Restaurant",
+"address": "",
+"lat": 42.374607399999995,
+"lon": -70.9870123,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJ6anxSMxv44kRs27PljlCRiI",
+"types": [
+"barbecue_restaurant",
+"catering_service",
+"food_delivery",
+"service",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=2469734260770041523&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=2469734260770041523&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Blue Sky Tavern",
+"category": "food",
+"subtype": "American Restaurant",
+"address": "",
+"lat": 42.3746943,
+"lon": -70.98585940000001,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJvT_X9Sdv44kRvnwmPqgL_3M",
+"types": [
+"american_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=8358412250648050878&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=8358412250648050878&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Bourbon and Breeze",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.370648900000006,
+"lon": -70.9705851,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJ5x9cWdpv44kRxFyQAhkosxQ",
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=1491579989472074948&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=1491579989472074948&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Bridges Nepali Cuisine",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.385832099999995,
+"lon": -70.97510079999999,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJ39JZKUZu44kRGvc02H4bzDQ",
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=3804446016828405530&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=3804446016828405530&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Cafe Valenciano Restaurant",
+"category": "food",
+"subtype": "Italian Restaurant",
+"address": "",
+"lat": 42.3756306,
+"lon": -70.9710917,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJdwEEykxu44kROlLwuCC0xUc",
+"types": [
+"italian_restaurant",
+"european_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=5171737799739593274&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=5171737799739593274&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Cimino's Cafe",
+"category": "food",
+"subtype": "Cafe",
+"address": "",
+"lat": 42.376591399999995,
+"lon": -70.9841647,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJsVAeX8tv44kRhs4mv7HM75o",
+"types": [
+"cafe",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=11164367065063018118&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=11164367065063018118&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Cinco de Mayo Contemporary Mexican Kitchen",
+"category": "food",
+"subtype": "Mexican Restaurant",
+"address": "",
+"lat": 42.386298599999996,
+"lon": -70.9759005,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJYfijAgBv44kReO6i7fNb2TA",
+"types": [
+"mexican_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=3519945686988811896&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=3519945686988811896&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "D'Parma Restaurant",
+"category": "food",
+"subtype": "Italian Restaurant",
+"address": "",
+"lat": 42.3729228,
+"lon": -70.97151389999999,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJl2c0nLNv44kRE3ba86B1-gg",
+"types": [
+"italian_restaurant",
+"european_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=646958830627485203&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=646958830627485203&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Express Burritos Mexican Grill",
+"category": "food",
+"subtype": "Mexican Restaurant",
+"address": "",
+"lat": 42.3763079,
+"lon": -70.9836313,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJwTu7Z8tv44kRkugT8uVscDc",
+"types": [
+"mexican_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=3994812604342331538&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=3994812604342331538&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Fritanga Los Nicas",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.380083,
+"lon": -70.9805837,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJZ_gATQBv44kR6Jl2OIDi9uk",
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=16858911295439018472&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=16858911295439018472&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Happy Garden",
+"category": "food",
+"subtype": "Chinese Restaurant",
+"address": "",
+"lat": 42.382247799999995,
+"lon": -70.980244,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJC7cOuhpu44kRFAW42CFxQRA",
+"types": [
+"chinese_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=1171341768276837652&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=1171341768276837652&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Hong Kong Dragon",
+"category": "food",
+"subtype": "Chinese Restaurant",
+"address": "",
+"lat": 42.374297,
+"lon": -70.98619599999999,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJkyU3Ocxv44kRkzFfLa8-2O8",
+"types": [
+"chinese_restaurant",
+"meal_delivery",
+"food_delivery",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=17282632492135690643&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=17282632492135690643&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Jac's Cafe",
+"category": "food",
+"subtype": "Cafe",
+"address": "",
+"lat": 42.3858722,
+"lon": -70.9752828,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJ1c9eLEZu44kRQLGgipB6IP8",
+"types": [
+"cafe",
+"breakfast_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=18383828440146030912&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=18383828440146030912&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "La Esquina Del Sabor",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.3861494,
+"lon": -70.9755887,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJe1izIgBv44kRzoOUrDpI4ZM",
+"types": [
+"restaurant",
+"colombian_restaurant",
+"breakfast_restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=10655877610176021454&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=10655877610176021454&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Mexico En Tu Casa Restaurant & Catering",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.374968599999995,
+"lon": -70.9859972,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJOwcmiGRv44kRgFs8J0zUUIo",
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=9966699398911777664&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=9966699398911777664&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Nick's Place Winthrop",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.376175,
+"lon": -70.986188,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJAQQHqs1v44kRdWleFid1TNM",
+"types": [
+"restaurant",
+"salad_shop",
+"seafood_restaurant",
+"sandwich_shop",
+"pizza_restaurant",
+"meal_takeaway",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=15225673250972264821&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=15225673250972264821&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Odyssey Grill & Pizza",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.3822136,
+"lon": -70.9919836,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJ5UkQvy1u44kR3fd--9L3oo0",
+"types": [
+"restaurant",
+"catering_service",
+"mediterranean_restaurant",
+"pizza_restaurant",
+"meal_delivery",
+"food_delivery",
+"meal_takeaway",
+"food",
+"point_of_interest",
+"service",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=10205992191109560285&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=10205992191109560285&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Osaka Lucky Garden",
+"category": "food",
+"subtype": "Sushi Restaurant",
+"address": "",
+"lat": 42.3717222,
+"lon": -70.9701334,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJe4_nt7Nv44kRLOwg2b-leJ8",
+"types": [
+"sushi_restaurant",
+"chinese_restaurant",
+"japanese_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=11491116692635970604&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=11491116692635970604&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Sambalos Tapas & Bar",
+"category": "food",
+"subtype": "Restaurant",
+"address": "",
+"lat": 42.3721805,
+"lon": -70.9708637,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJsXdDdOhv44kRD-YzCYMXtGg",
+"types": [
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=7544681127314974223&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=7544681127314974223&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Selva Coffee House",
+"category": "food",
+"subtype": "Cafe",
+"address": "",
+"lat": 42.3715762,
+"lon": -70.9701563,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJv5yIY7tv44kRFvteBdOsp34",
+"types": [
+"cafe",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=9126453192217787158&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=9126453192217787158&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Thai Taki",
+"category": "food",
+"subtype": "Thai Restaurant",
+"address": "",
+"lat": 42.375235599999996,
+"lon": -70.98536899999999,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJ5xaviTNv44kRfzXCBSsX1ZI",
+"types": [
+"thai_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=10580388373124494719&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=10580388373124494719&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Winthrop Center Cafe inc",
+"category": "food",
+"subtype": "Cafe",
+"address": "",
+"lat": 42.3750526,
+"lon": -70.986829,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJq-LATsxv44kRJKH-flH0BTc",
+"types": [
+"cafe",
+"breakfast_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=3964843677829734692&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=3964843677829734692&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+},
+{
+"name": "Winthrop House of Pizza",
+"category": "food",
+"subtype": "Pizza Restaurant",
+"address": "",
+"lat": 42.3825242,
+"lon": -70.9808669,
+"summary": "",
+"website": "",
+"phone": "",
+"hours": "",
+"placeId": "ChIJV67CezZu44kRLUR_6ZmqHUM",
+"types": [
+"pizza_restaurant",
+"meal_delivery",
+"food_delivery",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"mapsUri": "https://maps.google.com/?cid=4836209152889930797&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
+"sources": [
+"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
+"https://maps.google.com/?cid=4836209152889930797&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+]
+}
+]
+}

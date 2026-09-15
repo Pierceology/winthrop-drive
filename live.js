@@ -205,7 +205,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
  function tick(){if(stopped)return;raf=requestAnimationFrame(tick);const t=now();
   if(following&&String(following).startsWith('ac:')){const p=aircraft.get(following.slice(3));
    if(!p||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
-   else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz)||1;const dx=p.vx/sp,dz=p.vz/sp;
+   else if(camera&&controls){const c=pos(p,t);const sp=Math.hypot(p.vx,p.vz);const dx=sp>1?p.vx/sp:Math.cos(p.yaw),dz=sp>1?p.vz/sp:-Math.sin(p.yaw);
     const gx=c.x-dx*140,gz=c.z-dz*140,gy=c.y+45;
     camera.position.x+=(gx-camera.position.x)*.08;camera.position.y+=(gy-camera.position.y)*.08;camera.position.z+=(gz-camera.position.z)*.08;
     controls.target.x+=(c.x-controls.target.x)*.15;controls.target.y+=(c.y-controls.target.y)*.15;controls.target.z+=(c.z-controls.target.z)*.15;}}
@@ -218,7 +218,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
     camera.position.set(c.x+dx*22,c.y+3.4,c.z+dz*22);camera.lookAt(c.x+dx*600,ly,c.z+dz*600);}}
   else if(following){const b=buses.get(following);
    if(!b||(typeof document!=='undefined'&&document.body.classList.contains('driving'))){following=null;renderChip();}
-   else if(camera&&controls){let dx=b.to.x-b.from.x,dz=b.to.z-b.from.z;const L=Math.hypot(dx,dz);if(L>.5){b.dir=[dx/L,dz/L];}const d=b.dir||[Math.cos(b.yaw),-Math.sin(b.yaw)];   // a stopped bus: look along its nose (the road), never a default compass point
+   else if(camera&&controls){const d=[Math.cos(b.yaw),-Math.sin(b.yaw)];   // the nose (road-aligned, bearing-signed) — motion between two fixes jitters and flipped the camera (Pierce, 09-15: "sometimes I still go backwards")
     const y=ground(b.x,b.z);const gx=b.x-d[0]*30,gz=b.z-d[1]*30,gy=y+12;
     camera.position.x+=(gx-camera.position.x)*.06;camera.position.y+=(gy-camera.position.y)*.06;camera.position.z+=(gz-camera.position.z)*.06;
     controls.target.x+=(b.x-controls.target.x)*.12;controls.target.y+=(y+2-controls.target.y)*.12;controls.target.z+=(b.z-controls.target.z)*.12;}}
@@ -250,26 +250,30 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    if(!preds.has(veh.id))preds.set(veh.id,{stop:stop?stop.attributes.name:'',headsign:trip?trip.attributes.headsign:'',when});}
   renderChip();return preds.size;};
  const chip=typeof document!=='undefined'?document.createElement('div'):null;if(chip){chip.id='liveChip';chip.hidden=true;document.body.appendChild(chip);}
+ let openGroup=null;   // 'bus' | 'plane' | null  (Pierce, 09-15: "a floating icon of a bus... tap it and it accordions out")
  const DIRECTION={0:'toward Winthrop Beach',1:'toward Orient Heights'};
- let chipOpen=false;
- function renderChip(){if(!chip)return;if(!buses.size&&!aircraft.size){chip.hidden=true;return;}chip.hidden=false;chip.textContent='';chip.classList.toggle('open',chipOpen);
-  const tg=document.createElement('button');tg.id='liveToggle';tg.textContent='Live · '+buses.size+(buses.size===1?' bus':' buses')+' · '+aircraft.size+(aircraft.size===1?' plane':' planes')+(chipOpen?' ▴':' ▾');tg.onclick=()=>{chipOpen=!chipOpen;renderChip();};chip.append(tg);
-  const entry=(id,title,line,cls)=>{const el=document.createElement('button');el.className=cls+(following===id?' on':'');
+ function renderChip(){if(!chip)return;if(!buses.size&&!aircraft.size){chip.hidden=true;return;}chip.hidden=false;chip.textContent='';
+  const group=(key,icon,count,label,fill)=>{const g=document.createElement('div');g.className='grp '+key+(openGroup===key?' open':'');
+   const head=document.createElement('button');head.className='grphead';head.setAttribute('aria-expanded',String(openGroup===key));head.innerHTML='<span class="ic">'+icon+'</span><b>'+count+'</b><small>'+label+'</small>';
+   head.onclick=()=>{openGroup=openGroup===key?null:key;renderChip();};g.append(head);
+   if(openGroup===key){const body=document.createElement('div');body.className='rows';fill(body);g.append(body);}chip.append(g);};
+  const row=(id,title,line,cls)=>{const el=document.createElement('button');el.className='row '+cls+(following===id?' on':'');
    const bb=document.createElement('b');bb.textContent=title;const sp=document.createElement('span');sp.textContent=line;const em=document.createElement('em');em.textContent=following===id?'Following · tap to stop':'Follow';
-   el.append(bb,sp,em);el.onclick=()=>live.follow(following===id?null:id);chip.append(el);};
-  for(const [id,b] of buses){let p=preds.get(id);if(p&&p.when&&new Date(p.when).getTime()<Date.now()-45000)p=null;const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
-   const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):''))
-    :((b.status==='STOPPED_AT'?'stopped, ':'')+(DIRECTION[b.direction]||'in service'));
-   entry(id,'713 bus'+(b.label?' '+b.label:''),line,'bus');}
-  /* flying first, then rolling, then parked; nearest to Winthrop within each */
+   el.append(bb,sp,em);el.onclick=()=>live.follow(following===id?null:id);return el;};
+  if(buses.size)group('bus','🚌',buses.size,buses.size===1?'bus':'buses',body=>{
+   for(const [id,b] of buses){let p=preds.get(id);if(p&&p.when&&new Date(p.when).getTime()<Date.now()-45000)p=null;const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
+    const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):''))
+     :((b.status==='STOPPED_AT'?'stopped, ':'')+(DIRECTION[b.direction]||'in service'));
+    body.append(row(id,'713 bus'+(b.label?' '+b.label:''),line,'bus'));}});
   const rank=p=>(p.ground?(p.speed>15?1:2):0)*1e6+Math.hypot(p.x,p.z);
-  const planes=[...aircraft.entries()].sort((a,b)=>rank(a[1])-rank(b[1])).slice(0,5);
-  for(const [icao,p] of planes){const ft=Math.max(0,Math.round(p.alt/0.3048/100)*100),mph=Math.round((p.speed||0)*2.237);const phase=p.ground?(mph>40?'rolling':'on the ground'):p.climb>1?'climbing':p.climb<-1?'descending':'level';
-   const el=document.createElement('div');el.className='plane'+(following==='ac:'+icao||following==='in:'+icao?' on':'');
-   const bb=document.createElement('b');bb.textContent=p.airline.text;const sp=document.createElement('span');sp.textContent=(p.ground?'':ft.toLocaleString()+' ft · ')+phase+' · '+mph+' mph';
-   const acts=document.createElement('div');acts.className='acts';
-   for(const [key,label] of [['ac:'+icao,following==='ac:'+icao?'Following · stop':'Follow'],['in:'+icao,following==='in:'+icao?'Aboard · step off':'Ride along']]){const b=document.createElement('button');b.textContent=label;b.onclick=()=>live.follow(following===key?null:key);acts.append(b);}
-   el.append(bb,sp,acts);chip.append(el);}}
+  const planes=[...aircraft.entries()].sort((a,b)=>rank(a[1])-rank(b[1]));
+  if(planes.length)group('plane','✈',planes.length,planes.length===1?'plane':'planes',body=>{
+   for(const [icao,p] of planes.slice(0,8)){const ft=Math.max(0,Math.round(p.alt/0.3048/100)*100),mph=Math.round((p.speed||0)*2.237);const phase=p.ground?(mph>40?'rolling':'on the ground'):p.climb>1?'climbing':p.climb<-1?'descending':'level';
+    const el=document.createElement('div');el.className='row plane'+(following==='ac:'+icao||following==='in:'+icao?' on':'');
+    const bb=document.createElement('b');bb.textContent=p.airline.text;const sp=document.createElement('span');sp.textContent=(p.ground?'':ft.toLocaleString()+' ft · ')+phase+' · '+mph+' mph';
+    const acts=document.createElement('div');acts.className='acts';
+    for(const [key,label] of [['ac:'+icao,following==='ac:'+icao?'Following · stop':'Follow'],['in:'+icao,following==='in:'+icao?'Aboard · step off':'Ride along']]){const b=document.createElement('button');b.textContent=label;b.onclick=()=>live.follow(following===key?null:key);acts.append(b);}
+    el.append(bb,sp,acts);body.append(el);}});}
  live.follow=id=>{const s=String(id||'');if(following&&String(following).startsWith('in:')&&controls){const q=aircraft.get(following.slice(3));if(q){const c=pos(q,now());controls.target.set(c.x,c.y,c.z);camera.position.set(c.x-60,c.y+30,c.z+60);}}following=id&&(buses.has(id)||((s.startsWith('ac:')||s.startsWith('in:'))&&aircraft.has(s.slice(3))))?id:null;
   if(controls){controls.autoRotate=false;controls.enabled=!(following&&String(following).startsWith('in:'));}
   for(const p of aircraft.values()){const tag=p.mesh.getObjectByName('tag');if(tag)tag.visible=following==='ac:'+p.icao||following==='in:'+p.icao;p.mesh.visible=following!=='in:'+p.icao;}
