@@ -45,7 +45,7 @@ export class OrthoGround{
     float sd=(nF.r-.5)*.22+(nM.b-.5)*.10+(nC.g-.5)*.08;vec3 sandCol=c*(1.+sd);
     float cc=(nF.g-.5)*.10+(nM.r-.5)*.05;vec3 concreteCol=c*(1.+cc);
     vec3 detailed=grassCol*grass+asphaltCol*asphalt+sandCol*sand+concreteCol*concrete;landColor=mix(landColor,detailed,s);}}\n`;
-   s.fragmentShader=decl+s.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>\n${body}\ndiffuseColor.rgb*=landColor;`);
+   s.fragmentShader=decl+s.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>\n${body}\ndiffuseColor.rgb*=landColor;\n/* Pierce, 09-15: 'make it truly beautiful' — a gentle grade on the aerial: +18% saturation, a touch of contrast, greens lifted */\nfloat orthoLum=dot(diffuseColor.rgb,vec3(.299,.587,.114));diffuseColor.rgb=mix(vec3(orthoLum),diffuseColor.rgb,1.18);diffuseColor.rgb=(diffuseColor.rgb-.5)*1.06+.5;diffuseColor.g*=1.03;diffuseColor.rgb=clamp(diffuseColor.rgb,0.,1.);`);
    self.shader=s;
   };
   m.customProgramCacheKey=()=>'ortho-ground-'+this.levels.map(l=>l.win).join('-');
