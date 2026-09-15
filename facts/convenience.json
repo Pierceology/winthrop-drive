@@ -1,7 +1,228 @@
 {
 "category": "convenience",
 "town": "Winthrop, MA",
-"checkedAt": "2026-09-14",
-"source": "Google Places text search through rumblytummy.com/_functions/googlePlacesProxy",
-"items": []
+"checkedAt": "2026-09-15",
+"source": "Google Places text search through winthropbythesea.com placeSearch, 9 queries at 1.2 and 2.5 km",
+"items": [
+{
+"name": "Classic Smoke & Vape",
+"category": "convenience",
+"subtype": "Store",
+"address": "973 Bennington St, Boston, MA 02128, USA",
+"lat": 42.386232199999995,
+"lon": -71.00760559999999,
+"summary": "",
+"website": "https://www.facebook.com/pg/Classiceb/posts/?ref=page_internal",
+"phone": "(617) 418-7781",
+"rating": 4.2,
+"ratings": 55,
+"hours": [
+"Monday: 9:15\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Tuesday: 9:15\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Wednesday: 9:15\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Thursday: 9:15\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Friday: 9:15\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Saturday: 9:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Sunday: 10:00\u202fAM\u2009\u2013\u20099:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJy9Es4IZx44kRMFqaMJ5gjdc",
+"types": [
+"building_materials_store",
+"store",
+"service",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJy9Es4IZx44kRMFqaMJ5gjdc"
+]
+},
+{
+"name": "Gulf Gas Station",
+"category": "convenience",
+"subtype": "Convenience Store",
+"address": "2 Shirley St, Winthrop, MA 02152, USA",
+"lat": 42.3828873,
+"lon": -70.979479,
+"summary": "",
+"website": "https://www.haffners.com/gas-stations/winthrop-ma",
+"phone": "(617) 539-0188",
+"rating": 4,
+"ratings": 60,
+"hours": [
+"Monday: 5:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Tuesday: 5:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Wednesday: 5:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Thursday: 5:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Friday: 5:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Saturday: 5:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Sunday: 5:00\u202fAM\u2009\u2013\u200911:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ0QEoPjZu44kRQEyDgYrlnTo",
+"types": [
+"convenience_store",
+"food_store",
+"store",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ0QEoPjZu44kRQEyDgYrlnTo"
+]
+},
+{
+"name": "Lucky Convenience Mart",
+"category": "convenience",
+"subtype": "Convenience Store",
+"address": "1 Pauline St, Winthrop, MA 02152, USA",
+"lat": 42.3770793,
+"lon": -70.9846706,
+"summary": "",
+"website": "",
+"phone": "(617) 207-9693",
+"rating": 4.3,
+"ratings": 27,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Saturday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Sunday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJE9OEp8xv44kRd-f9SfRVGug",
+"types": [
+"convenience_store",
+"food_store",
+"store",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJE9OEp8xv44kRd-f9SfRVGug"
+]
+},
+{
+"name": "Shirley True Value Hardware",
+"category": "convenience",
+"subtype": "Hardware Store",
+"address": "472 Shirley St, Winthrop, MA 02152, USA",
+"lat": 42.3728285,
+"lon": -70.9710727,
+"summary": "",
+"website": "https://truevalue.com/?tvstore=16435&utm_source=gbp&utm_medium=organic",
+"phone": "(617) 846-2050",
+"rating": 4.8,
+"ratings": 71,
+"hours": [
+"Monday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Tuesday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Wednesday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Thursday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Friday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Saturday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ68jinrNv44kR2nAI3T63rvs",
+"types": [
+"hardware_store",
+"home_improvement_store",
+"home_goods_store",
+"building_materials_store",
+"supplier",
+"store",
+"locksmith",
+"manufacturer",
+"service",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ68jinrNv44kR2nAI3T63rvs"
+]
+},
+{
+"name": "T & T Convenience Store",
+"category": "convenience",
+"subtype": "Convenience Store",
+"address": "8 Michaels Mall, Winthrop, MA 02152, USA",
+"lat": 42.375465399999996,
+"lon": -70.9857075,
+"summary": "",
+"website": "",
+"phone": "(617) 846-8582",
+"rating": 3.9,
+"ratings": 7,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Sunday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJCb5yXcxv44kR91Y1JDEMd9o",
+"types": [
+"convenience_store",
+"food_store",
+"store",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJCb5yXcxv44kR91Y1JDEMd9o"
+]
+},
+{
+"name": "Top Quality Barbershop",
+"category": "convenience",
+"subtype": "Barber shop",
+"address": "50 Crest Ave, Winthrop, MA 02152, USA",
+"lat": 42.3856806,
+"lon": -70.9745323,
+"summary": "",
+"website": "http://styleseat.com/edwinromero",
+"phone": "(617) 207-1516",
+"rating": 4.7,
+"ratings": 119,
+"hours": [
+"Monday: 10:30\u202fAM\u2009\u2013\u20096:15\u202fPM",
+"Tuesday: 9:30\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Wednesday: 9:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Thursday: 9:30\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Friday: 9:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Saturday: 9:00\u202fAM\u2009\u2013\u20096:45\u202fPM",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJP1hNcDZu44kRMHlZyv518SU",
+"types": [
+"barber_shop",
+"hair_care",
+"health",
+"service",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJP1hNcDZu44kRMHlZyv518SU"
+]
+}
+]
 }

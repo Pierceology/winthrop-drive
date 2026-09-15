@@ -1,20 +1,31 @@
 {
 "category": "food",
 "town": "Winthrop, MA",
-"checkedAt": "2026-09-14",
-"source": "Google Places (New) nearby search through rumblytummy.com, 11 centres \u00d7 700 m",
+"checkedAt": "2026-09-15",
+"source": "Google Places text search through winthropbythesea.com placeSearch, 28 queries at 1.2 and 2.5 km",
 "items": [
 {
 "name": "Adriana's Cafe",
 "category": "food",
 "subtype": "Cafe",
-"address": "",
+"address": "19 Main St, Winthrop, MA 02152, USA",
 "lat": 42.382194399999996,
 "lon": -70.99280279999999,
-"summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"summary": "Cozy, rustic-industrial\u2013style cafe with waterfront views offering coffee, bagels, pastries & more.",
+"website": "http://adrianacafe.com/",
+"phone": "(617) 846-0473",
+"rating": 4.5,
+"ratings": 410,
+"hours": [
+"Monday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Tuesday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Wednesday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Thursday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Friday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Saturday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Sunday: 8:00\u202fAM\u2009\u2013\u20092:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJUSX8f9Jx44kRSmWNvBtmmP4",
 "types": [
 "cafe",
@@ -23,23 +34,33 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=18345525351407248714&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=18345525351407248714&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJUSX8f9Jx44kRSmWNvBtmmP4"
 ]
 },
 {
 "name": "Belle Isle Seafood",
 "category": "food",
 "subtype": "Seafood Restaurant",
-"address": "",
+"address": "1 Main St, Winthrop, MA 02152, USA",
 "lat": 42.382247,
 "lon": -70.993607,
-"summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"summary": "Local seafood, including chowder & lobster rolls, in a spare, industrial space with inlet views.",
+"website": "https://www.belleisleseafood.net/",
+"phone": "(617) 567-1619",
+"rating": 4.4,
+"ratings": 2828,
+"hours": [
+"Monday: 11:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Tuesday: 11:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Wednesday: 11:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Thursday: 11:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Friday: 11:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Saturday: 11:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Sunday: 11:00\u202fAM\u2009\u2013\u20097:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJWw6wbixu44kRfTdifwsBD_Y",
 "types": [
 "seafood_restaurant",
@@ -48,23 +69,33 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=17730391406874343293&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=17730391406874343293&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJWw6wbixu44kRfTdifwsBD_Y"
 ]
 },
 {
 "name": "Bellino's Trattoria",
 "category": "food",
 "subtype": "Restaurant",
-"address": "",
+"address": "503 Shirley St, Winthrop, MA 02152, USA",
 "lat": 42.372035100000005,
 "lon": -70.9708325,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "https://www.bellinosrestaurants.com/",
+"phone": "(617) 207-3511",
+"rating": 4.6,
+"ratings": 112,
+"hours": [
+"Monday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Tuesday: Closed",
+"Wednesday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Thursday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Friday: 4:00\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 2:00\u2009\u2013\u200910:00\u202fPM",
+"Sunday: 11:00\u202fAM\u2009\u2013\u20099:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJq6oaq8xv44kROJapzQRqNXQ",
 "types": [
 "restaurant",
@@ -72,75 +103,33 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=8373715651028162104&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=8373715651028162104&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
-]
-},
-{
-"name": "Beraka Juice",
-"category": "food",
-"subtype": "Juice Shop",
-"address": "",
-"lat": 42.374855,
-"lon": -70.9867285,
-"summary": "",
-"website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJIcP2gadv44kRCfN-Inx_e2k",
-"types": [
-"juice_shop",
-"food",
-"point_of_interest",
-"establishment"
-],
-"mapsUri": "https://maps.google.com/?cid=7600808967249261321&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
-"sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=7600808967249261321&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
-]
-},
-{
-"name": "Blackstrap BBQ",
-"category": "food",
-"subtype": "Barbecue Restaurant",
-"address": "",
-"lat": 42.374607399999995,
-"lon": -70.9870123,
-"summary": "",
-"website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJ6anxSMxv44kRs27PljlCRiI",
-"types": [
-"barbecue_restaurant",
-"catering_service",
-"food_delivery",
-"service",
-"restaurant",
-"food",
-"point_of_interest",
-"establishment"
-],
-"mapsUri": "https://maps.google.com/?cid=2469734260770041523&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
-"sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=2469734260770041523&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJq6oaq8xv44kROJapzQRqNXQ"
 ]
 },
 {
 "name": "Blue Sky Tavern",
 "category": "food",
 "subtype": "American Restaurant",
-"address": "",
+"address": "59 Putnam St, Winthrop, MA 02152, USA",
 "lat": 42.3746943,
 "lon": -70.98585940000001,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "https://blueskywinthrop.com/",
+"phone": "(617) 207-1015",
+"rating": 4.7,
+"ratings": 121,
+"hours": [
+"Monday: 2:00\u202fPM\u2009\u2013\u200912:30\u202fAM",
+"Tuesday: 2:00\u202fPM\u2009\u2013\u200912:30\u202fAM",
+"Wednesday: 4:00\u202fPM\u2009\u2013\u20091:00\u202fAM",
+"Thursday: 4:00\u202fPM\u2009\u2013\u20091:00\u202fAM",
+"Friday: 4:00\u202fPM\u2009\u2013\u20091:00\u202fAM",
+"Saturday: 4:00\u202fPM\u2009\u2013\u20091:00\u202fAM",
+"Sunday: 4:00\u2009\u2013\u200910:30\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJvT_X9Sdv44kRvnwmPqgL_3M",
 "types": [
 "american_restaurant",
@@ -149,23 +138,33 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=8358412250648050878&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=8358412250648050878&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJvT_X9Sdv44kRvnwmPqgL_3M"
 ]
 },
 {
 "name": "Bourbon and Breeze",
 "category": "food",
 "subtype": "Restaurant",
-"address": "",
+"address": "561 Shirley St, Winthrop, MA 02152, USA",
 "lat": 42.370648900000006,
 "lon": -70.9705851,
 "summary": "",
-"website": "",
+"website": "https://www.instagram.com/bourbonandbreezeboston?igsh=NjdhZzVpZWdnZnh0",
 "phone": "",
-"hours": "",
+"rating": 4.6,
+"ratings": 16,
+"hours": [
+"Monday: 4:00\u2009\u2013\u20098:45\u202fPM",
+"Tuesday: Closed",
+"Wednesday: 4:00\u2009\u2013\u20098:45\u202fPM",
+"Thursday: 4:00\u2009\u2013\u20098:45\u202fPM",
+"Friday: 4:00\u2009\u2013\u20098:45\u202fPM",
+"Saturday: 12:30\u2009\u2013\u20098:30\u202fPM",
+"Sunday: 12:00\u2009\u2013\u20096:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJ5x9cWdpv44kRxFyQAhkosxQ",
 "types": [
 "restaurant",
@@ -173,47 +172,72 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=1491579989472074948&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=1491579989472074948&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ5x9cWdpv44kRxFyQAhkosxQ"
 ]
 },
 {
-"name": "Bridges Nepali Cuisine",
+"name": "Cafe Delite",
 "category": "food",
-"subtype": "Restaurant",
-"address": "",
-"lat": 42.385832099999995,
-"lon": -70.97510079999999,
+"subtype": "Coffee Shop",
+"address": "82 Jefferson St, Winthrop, MA 02152, USA",
+"lat": 42.3749574,
+"lon": -70.9865445,
 "summary": "",
 "website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJ39JZKUZu44kRGvc02H4bzDQ",
+"phone": "(617) 539-1535",
+"rating": 4.3,
+"ratings": 88,
+"hours": [
+"Monday: 6:30\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Tuesday: 6:30\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Wednesday: 6:30\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Thursday: 6:30\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Friday: 6:30\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Saturday: 7:00\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Sunday: 7:00\u202fAM\u2009\u2013\u20092:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJc99KQsxv44kRLGrxyQ-iPcg",
 "types": [
+"coffee_shop",
+"brunch_restaurant",
+"cafe",
+"food_store",
+"store",
 "restaurant",
 "food",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=3804446016828405530&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=3804446016828405530&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJc99KQsxv44kRLGrxyQ-iPcg"
 ]
 },
 {
 "name": "Cafe Valenciano Restaurant",
 "category": "food",
 "subtype": "Italian Restaurant",
-"address": "",
+"address": "115 Winthrop Shore Dr, Winthrop, MA 02152, USA",
 "lat": 42.3756306,
 "lon": -70.9710917,
-"summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"summary": "Cozy BYOB spot near the shore, with an extensive menu of Italian classics for dine-in or takeout.",
+"website": "https://cafevalenciano.com/",
+"phone": "(617) 539-9990",
+"rating": 4.6,
+"ratings": 394,
+"hours": [
+"Monday: Closed",
+"Tuesday: 11:00\u202fAM\u2009\u2013\u20098:30\u202fPM",
+"Wednesday: 11:00\u202fAM\u2009\u2013\u20098:30\u202fPM",
+"Thursday: 11:00\u202fAM\u2009\u2013\u20098:30\u202fPM",
+"Friday: 11:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Saturday: 11:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Sunday: 11:00\u202fAM\u2009\u2013\u20098:30\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJdwEEykxu44kROlLwuCC0xUc",
 "types": [
 "italian_restaurant",
@@ -223,23 +247,33 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=5171737799739593274&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=5171737799739593274&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJdwEEykxu44kROlLwuCC0xUc"
 ]
 },
 {
 "name": "Cimino's Cafe",
 "category": "food",
 "subtype": "Cafe",
-"address": "",
+"address": "224 Winthrop St, Winthrop, MA 02152, USA",
 "lat": 42.376591399999995,
 "lon": -70.9841647,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "http://www.meatmarketcatering.com/index.php",
+"phone": "(617) 846-6303",
+"rating": 4.4,
+"ratings": 5,
+"hours": [
+"Monday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Tuesday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Wednesday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Thursday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Friday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Saturday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJsVAeX8tv44kRhs4mv7HM75o",
 "types": [
 "cafe",
@@ -247,48 +281,103 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=11164367065063018118&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=11164367065063018118&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJsVAeX8tv44kRhs4mv7HM75o"
 ]
 },
 {
-"name": "Cinco de Mayo Contemporary Mexican Kitchen",
+"name": "Crest Ave Wine & Spirits",
 "category": "food",
-"subtype": "Mexican Restaurant",
-"address": "",
-"lat": 42.386298599999996,
-"lon": -70.9759005,
+"subtype": "Liquor Store",
+"address": "29 Crest Ave, Winthrop, MA 02152, USA",
+"lat": 42.386040099999995,
+"lon": -70.9754378,
 "summary": "",
 "website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJYfijAgBv44kReO6i7fNb2TA",
+"phone": "(617) 207-3340",
+"rating": 4.2,
+"ratings": 30,
+"hours": [
+"Monday: 10:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+"Tuesday: 10:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+"Wednesday: 10:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+"Thursday: 10:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+"Friday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Sunday: 12:00\u2009\u2013\u20097:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ1c9eLEZu44kRBmX-25o52zo",
 "types": [
-"mexican_restaurant",
-"restaurant",
+"liquor_store",
+"point_of_interest",
+"store",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ1c9eLEZu44kRBmX-25o52zo"
+]
+},
+{
+"name": "D&T Market",
+"category": "food",
+"subtype": "Convenience Store",
+"address": "291 Shirley St, Winthrop, MA 02152, USA",
+"lat": 42.3770593,
+"lon": -70.97454069999999,
+"summary": "",
+"website": "",
+"phone": "(617) 207-9314",
+"rating": 4.7,
+"ratings": 15,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Saturday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Sunday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJC5PR9eNv44kRU7TcmqB_wcs",
+"types": [
+"convenience_store",
+"food_store",
+"store",
 "food",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=3519945686988811896&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=3519945686988811896&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJC5PR9eNv44kRU7TcmqB_wcs"
 ]
 },
 {
 "name": "D'Parma Restaurant",
 "category": "food",
 "subtype": "Italian Restaurant",
-"address": "",
+"address": "467 Shirley St, Winthrop, MA 02152, USA",
 "lat": 42.3729228,
 "lon": -70.97151389999999,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "http://www.dparmarestaurant.com/?y_source=1_MTg0Mjg5MTQtNzE1LWxvY2F0aW9uLndlYnNpdGU%3D",
+"phone": "(617) 846-5867",
+"rating": 4.4,
+"ratings": 709,
+"hours": [
+"Monday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Tuesday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Wednesday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Thursday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Friday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Sunday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJl2c0nLNv44kRE3ba86B1-gg",
 "types": [
 "italian_restaurant",
@@ -298,48 +387,25 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=646958830627485203&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=646958830627485203&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
-]
-},
-{
-"name": "Express Burritos Mexican Grill",
-"category": "food",
-"subtype": "Mexican Restaurant",
-"address": "",
-"lat": 42.3763079,
-"lon": -70.9836313,
-"summary": "",
-"website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJwTu7Z8tv44kRkugT8uVscDc",
-"types": [
-"mexican_restaurant",
-"restaurant",
-"food",
-"point_of_interest",
-"establishment"
-],
-"mapsUri": "https://maps.google.com/?cid=3994812604342331538&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
-"sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=3994812604342331538&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJl2c0nLNv44kRE3ba86B1-gg"
 ]
 },
 {
 "name": "Fritanga Los Nicas",
 "category": "food",
 "subtype": "Restaurant",
-"address": "",
+"address": "2210 S Main St, Winthrop, MA 02152, USA",
 "lat": 42.380083,
 "lon": -70.9805837,
 "summary": "",
 "website": "",
 "phone": "",
-"hours": "",
+"rating": 5,
+"ratings": 1,
+"hours": [],
+"status": "OPERATIONAL",
 "placeId": "ChIJZ_gATQBv44kR6Jl2OIDi9uk",
 "types": [
 "restaurant",
@@ -347,75 +413,192 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=16858911295439018472&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=16858911295439018472&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJZ_gATQBv44kR6Jl2OIDi9uk"
 ]
 },
 {
-"name": "Happy Garden",
+"name": "Hi-Tide",
 "category": "food",
-"subtype": "Chinese Restaurant",
-"address": "",
-"lat": 42.382247799999995,
-"lon": -70.980244,
+"subtype": "Restaurant",
+"address": "480 Shirley St, Winthrop, MA 02152, USA",
+"lat": 42.3726298,
+"lon": -70.970844,
 "summary": "",
 "website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJC7cOuhpu44kRFAW42CFxQRA",
+"phone": "(617) 846-7792",
+"rating": 4.4,
+"ratings": 389,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Saturday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Sunday: 6:00\u202fAM\u2009\u2013\u20091:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJm76wmLNv44kRnaHkzxZsT3c",
 "types": [
-"chinese_restaurant",
+"restaurant",
+"coffee_shop",
+"brunch_restaurant",
+"sandwich_shop",
+"cafe",
+"food_store",
+"food",
+"point_of_interest",
+"store",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJm76wmLNv44kRnaHkzxZsT3c"
+]
+},
+{
+"name": "Highland Convenient Mart",
+"category": "food",
+"subtype": "Convenience Store",
+"address": "37 Crest Ave A, Winthrop, MA 02152, USA",
+"lat": 42.385731199999995,
+"lon": -70.9750431,
+"summary": "",
+"website": "",
+"phone": "(617) 846-7172",
+"rating": 4.8,
+"ratings": 5,
+"hours": [
+"Monday: 7:30\u202fAM\u2009\u2013\u20097:30\u202fPM",
+"Tuesday: 7:30\u202fAM\u2009\u2013\u20097:30\u202fPM",
+"Wednesday: 7:30\u202fAM\u2009\u2013\u20097:30\u202fPM",
+"Thursday: 7:30\u202fAM\u2009\u2013\u20097:30\u202fPM",
+"Friday: 7:30\u202fAM\u2009\u2013\u20097:30\u202fPM",
+"Saturday: 7:30\u202fAM\u2009\u2013\u20097:30\u202fPM",
+"Sunday: 7:30\u202fAM\u2009\u2013\u20093:30\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJURgaKUZu44kRQ7Av8paipeE",
+"types": [
+"convenience_store",
+"food_store",
+"store",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJURgaKUZu44kRQ7Av8paipeE"
+]
+},
+{
+"name": "Honey Dew Donuts",
+"category": "food",
+"subtype": "Donut Shop",
+"address": "2 Shirley St, Winthrop, MA 02152, USA",
+"lat": 42.382895,
+"lon": -70.9791527,
+"summary": "Informal chain serving up coffee drinks, donuts, pastries & breakfast sandwiches.",
+"website": "http://www.honeydewdonuts.com/",
+"phone": "(617) 539-9090",
+"rating": 4.2,
+"ratings": 99,
+"hours": [
+"Monday: 5:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Tuesday: 5:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Wednesday: 5:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Thursday: 5:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Friday: 5:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Saturday: 5:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Sunday: 5:00\u202fAM\u2009\u2013\u20096:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJcyrQPDZu44kR4BBgDib5grs",
+"types": [
+"donut_shop",
+"fast_food_restaurant",
+"coffee_shop",
+"dessert_shop",
+"cafe",
+"confectionery",
+"bakery",
+"food_store",
+"store",
 "restaurant",
 "food",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=1171341768276837652&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=1171341768276837652&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJcyrQPDZu44kR4BBgDib5grs"
 ]
 },
 {
-"name": "Hong Kong Dragon",
+"name": "Italian Bake Shop Caff\u00e9",
 "category": "food",
-"subtype": "Chinese Restaurant",
-"address": "",
-"lat": 42.374297,
-"lon": -70.98619599999999,
+"subtype": "Pastry Shop",
+"address": "44 Woodside Ave, Winthrop, MA 02152, USA",
+"lat": 42.3749076,
+"lon": -70.986762,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJkyU3Ocxv44kRkzFfLa8-2O8",
+"website": "https://www.italianbakeshopcafe.com/",
+"phone": "(857) 349-6082",
+"rating": 4.8,
+"ratings": 48,
+"hours": [
+"Monday: 7:00\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Tuesday: Closed",
+"Wednesday: 7:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Thursday: 7:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Friday: 7:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Saturday: 7:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Sunday: 9:00\u202fAM\u2009\u2013\u20096:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJe0JHlmVv44kR2WFlGOR5kXM",
 "types": [
-"chinese_restaurant",
-"meal_delivery",
-"food_delivery",
-"restaurant",
+"pastry_shop",
+"dessert_shop",
+"cafe",
+"confectionery",
+"bakery",
+"food_store",
+"store",
 "food",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=17282632492135690643&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=17282632492135690643&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJe0JHlmVv44kR2WFlGOR5kXM"
 ]
 },
 {
 "name": "Jac's Cafe",
 "category": "food",
 "subtype": "Cafe",
-"address": "",
+"address": "29 Crest Ave, Winthrop, MA 02152, USA",
 "lat": 42.3858722,
 "lon": -70.9752828,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "https://www.facebook.com/Jacs-Caf%C3%A9-316898029596/",
+"phone": "(617) 846-7496",
+"rating": 4.7,
+"ratings": 391,
+"hours": [
+"Monday: 6:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Tuesday: 6:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Wednesday: 6:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Thursday: 6:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Friday: 6:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Saturday: 7:00\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Sunday: 7:00\u202fAM\u2009\u2013\u200912:30\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJ1c9eLEZu44kRQLGgipB6IP8",
 "types": [
 "cafe",
@@ -425,49 +608,253 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=18383828440146030912&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=18383828440146030912&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ1c9eLEZu44kRQLGgipB6IP8"
 ]
 },
 {
 "name": "La Esquina Del Sabor",
 "category": "food",
 "subtype": "Restaurant",
-"address": "",
+"address": "19 Crest Ave, Winthrop, MA 02152, USA",
 "lat": 42.3861494,
 "lon": -70.9755887,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "http://www.laesquinadelsabor.co/",
+"phone": "(617) 420-2089",
+"rating": 4.3,
+"ratings": 196,
+"hours": [
+"Monday: 9:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Tuesday: 9:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Wednesday: 9:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Thursday: 9:00\u202fAM\u2009\u2013\u20091:00\u202fAM",
+"Friday: 9:00\u202fAM\u2009\u2013\u20091:00\u202fAM",
+"Saturday: 9:00\u202fAM\u2009\u2013\u20091:00\u202fAM",
+"Sunday: 9:00\u202fAM\u2009\u2013\u200911:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJe1izIgBv44kRzoOUrDpI4ZM",
 "types": [
 "restaurant",
-"colombian_restaurant",
 "breakfast_restaurant",
+"colombian_restaurant",
 "food",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=10655877610176021454&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=10655877610176021454&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJe1izIgBv44kRzoOUrDpI4ZM"
+]
+},
+{
+"name": "La Siesta Restaurante",
+"category": "food",
+"subtype": "Mexican Restaurant",
+"address": "70 Woodside Ave, Winthrop, MA 02152, USA",
+"lat": 42.3742256,
+"lon": -70.9861085,
+"summary": "Colorful eatery offering Mexican fare, from tacos to seafood plates, plus occasional mariachi bands.",
+"website": "http://www.lasiestarestaurante.com/",
+"phone": "(617) 846-2300",
+"rating": 4.6,
+"ratings": 525,
+"hours": [
+"Monday: 4:30\u2009\u2013\u20099:30\u202fPM",
+"Tuesday: 4:30\u2009\u2013\u20099:30\u202fPM",
+"Wednesday: 4:30\u2009\u2013\u20099:30\u202fPM",
+"Thursday: 4:30\u2009\u2013\u20099:30\u202fPM",
+"Friday: 11:30\u202fAM\u2009\u2013\u200910:30\u202fPM",
+"Saturday: 11:30\u202fAM\u2009\u2013\u200910:30\u202fPM",
+"Sunday: 11:30\u202fAM\u2009\u2013\u20099:30\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJpz2zPsxv44kRIGqTddaVDkA",
+"types": [
+"mexican_restaurant",
+"latin_american_restaurant",
+"family_restaurant",
+"vegetarian_restaurant",
+"bar",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJpz2zPsxv44kRIGqTddaVDkA"
+]
+},
+{
+"name": "Lucky Convenience Mart",
+"category": "food",
+"subtype": "Convenience Store",
+"address": "1 Pauline St, Winthrop, MA 02152, USA",
+"lat": 42.3770793,
+"lon": -70.9846706,
+"summary": "",
+"website": "",
+"phone": "(617) 207-9693",
+"rating": 4.3,
+"ratings": 27,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Saturday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Sunday: 6:00\u202fAM\u2009\u2013\u200911:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJE9OEp8xv44kRd-f9SfRVGug",
+"types": [
+"convenience_store",
+"food_store",
+"food",
+"point_of_interest",
+"store",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJE9OEp8xv44kRd-f9SfRVGug"
+]
+},
+{
+"name": "Luna's Italian & Latin Cuisine Restaurant",
+"category": "food",
+"subtype": "Italian Restaurant",
+"address": "945 Saratoga St, Boston, MA 02128, USA",
+"lat": 42.3865534,
+"lon": -71.00920049999999,
+"summary": "Breakfast-through-dinner hangout with coffee bar & kitchen offering Italian & Latin cuisine.",
+"website": "http://lunasboston.com/",
+"phone": "(617) 418-5321",
+"rating": 4.4,
+"ratings": 589,
+"hours": [
+"Monday: 9:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Tuesday: 9:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Wednesday: 9:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Thursday: 9:00\u202fAM\u2009\u2013\u200912:00\u202fAM",
+"Friday: 9:00\u202fAM\u2009\u2013\u200912:00\u202fAM",
+"Saturday: 9:00\u202fAM\u2009\u2013\u200912:00\u202fAM",
+"Sunday: 9:00\u202fAM\u2009\u2013\u200911:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJSzc24tNx44kRXgew-ies8xA",
+"types": [
+"italian_restaurant",
+"latin_american_restaurant",
+"european_restaurant",
+"restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJSzc24tNx44kRXgew-ies8xA"
+]
+},
+{
+"name": "Magee's Corner Liquors",
+"category": "food",
+"subtype": "Liquor Store",
+"address": "401 Winthrop St, Winthrop, MA 02152, USA",
+"lat": 42.3813605,
+"lon": -70.9820434,
+"summary": "",
+"website": "",
+"phone": "(617) 846-3750",
+"rating": 4.2,
+"ratings": 22,
+"hours": [
+"Monday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Tuesday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Wednesday: 10:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Thursday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Friday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Saturday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Sunday: 12:00\u2009\u2013\u20096:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJAy9VJTRu44kRjkmX7VeZbTQ",
+"types": [
+"liquor_store",
+"point_of_interest",
+"store",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJAy9VJTRu44kRjkmX7VeZbTQ"
+]
+},
+{
+"name": "Meat Market",
+"category": "food",
+"subtype": "Butcher Shop",
+"address": "224 Winthrop St, Winthrop, MA 02152, USA",
+"lat": 42.376591399999995,
+"lon": -70.9841647,
+"summary": "Family-owned butcher shop offers takeaway meats & poultry, plus a cafe serving Italian comfort eats.",
+"website": "http://www.meatmarketcatering.com/",
+"phone": "(617) 846-6303",
+"rating": 4.7,
+"ratings": 86,
+"hours": [
+"Monday: 9:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Tuesday: 9:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Wednesday: 9:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Thursday: 9:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Friday: 9:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+"Saturday: 8:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJsWgcX8tv44kRjLk7hg27B7k",
+"types": [
+"butcher_shop",
+"food_store",
+"store",
+"food",
+"manufacturer",
+"service",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJsWgcX8tv44kRjLk7hg27B7k"
 ]
 },
 {
 "name": "Mexico En Tu Casa Restaurant & Catering",
 "category": "food",
 "subtype": "Restaurant",
-"address": "",
+"address": "71 Jefferson St, Winthrop, MA 02152, USA",
 "lat": 42.374968599999995,
 "lon": -70.9859972,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "https://order.toasttab.com/online/mexico-en-tu-casa-71-jefferson-street",
+"phone": "(857) 349-6068",
+"rating": 5,
+"ratings": 122,
+"hours": [
+"Monday: 11:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Tuesday: 11:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Wednesday: 11:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Thursday: 11:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Friday: 10:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Saturday: 10:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Sunday: 10:00\u202fAM\u2009\u2013\u20099:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJOwcmiGRv44kRgFs8J0zUUIo",
 "types": [
 "restaurant",
@@ -475,110 +862,194 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=9966699398911777664&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=9966699398911777664&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJOwcmiGRv44kRgFs8J0zUUIo"
 ]
 },
 {
 "name": "Nick's Place Winthrop",
 "category": "food",
 "subtype": "Restaurant",
-"address": "",
+"address": "70 Pauline St, Winthrop, MA 02152, USA",
 "lat": 42.376175,
 "lon": -70.986188,
-"summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"summary": "Outpost of a local American eatery with a comfy setting & varied offerings, from subs to seafood.",
+"website": "https://nicksplaceonline.com/locations/winthrop-massachusetts/",
+"phone": "(617) 846-9800",
+"rating": 4.4,
+"ratings": 1479,
+"hours": [
+"Monday: 8:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Tuesday: 8:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Wednesday: 8:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Thursday: 8:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Friday: 8:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 8:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Sunday: 9:00\u202fAM\u2009\u2013\u200910:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJAQQHqs1v44kRdWleFid1TNM",
 "types": [
 "restaurant",
-"salad_shop",
-"seafood_restaurant",
-"sandwich_shop",
 "pizza_restaurant",
+"salad_shop",
+"sandwich_shop",
+"seafood_restaurant",
 "meal_takeaway",
 "food",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=15225673250972264821&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=15225673250972264821&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJAQQHqs1v44kRdWleFid1TNM"
 ]
 },
 {
 "name": "Odyssey Grill & Pizza",
 "category": "food",
 "subtype": "Restaurant",
-"address": "",
+"address": "63 Main St, Winthrop, MA 02152, USA",
 "lat": 42.3822136,
 "lon": -70.9919836,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "http://www.odyssey-grill.com/",
+"phone": "(617) 846-7200",
+"rating": 4.4,
+"ratings": 218,
+"hours": [
+"Monday: 10:30\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Tuesday: 10:30\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Wednesday: 10:30\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Thursday: 10:30\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Friday: 10:30\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Saturday: 10:30\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJ5UkQvy1u44kR3fd--9L3oo0",
 "types": [
 "restaurant",
-"catering_service",
-"mediterranean_restaurant",
 "pizza_restaurant",
+"mediterranean_restaurant",
+"meal_takeaway",
+"catering_service",
 "meal_delivery",
 "food_delivery",
-"meal_takeaway",
+"service",
 "food",
 "point_of_interest",
-"service",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=10205992191109560285&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=10205992191109560285&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ5UkQvy1u44kR3fd--9L3oo0"
 ]
 },
 {
-"name": "Osaka Lucky Garden",
+"name": "Pizza Center",
 "category": "food",
-"subtype": "Sushi Restaurant",
-"address": "",
-"lat": 42.3717222,
-"lon": -70.9701334,
+"subtype": "Pizza Restaurant",
+"address": "15 Walden St, Winthrop, MA 02152, USA",
+"lat": 42.3797714,
+"lon": -70.9870285,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJe4_nt7Nv44kRLOwg2b-leJ8",
+"website": "http://www.pizzacenterwinthrop1.com/",
+"phone": "(617) 846-9158",
+"rating": 4.3,
+"ratings": 106,
+"hours": [
+"Monday: 3:30\u2009\u2013\u20099:00\u202fPM",
+"Tuesday: 3:30\u2009\u2013\u20099:00\u202fPM",
+"Wednesday: 12:30\u2009\u2013\u20099:00\u202fPM",
+"Thursday: 12:30\u2009\u2013\u20099:00\u202fPM",
+"Friday: 12:30\u2009\u2013\u20099:00\u202fPM",
+"Saturday: 12:30\u2009\u2013\u20099:00\u202fPM",
+"Sunday: 12:30\u2009\u2013\u20099:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ6anxSMxv44kRq18JSjcsw0U",
 "types": [
-"sushi_restaurant",
-"chinese_restaurant",
-"japanese_restaurant",
+"pizza_restaurant",
+"ice_cream_shop",
+"italian_restaurant",
+"dessert_shop",
+"pizza_delivery",
+"meal_delivery",
+"food_delivery",
+"confectionery",
+"food_store",
+"european_restaurant",
+"store",
 "restaurant",
 "food",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=11491116692635970604&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=11491116692635970604&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ6anxSMxv44kRq18JSjcsw0U"
+]
+},
+{
+"name": "Quick Food",
+"category": "food",
+"subtype": "Convenience Store",
+"address": "490 Shirley St, Winthrop, MA 02152, USA",
+"lat": 42.3724962,
+"lon": -70.9707738,
+"summary": "",
+"website": "",
+"phone": "(617) 207-1786",
+"rating": 3.8,
+"ratings": 37,
+"hours": [
+"Monday: 6:30\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Tuesday: 6:30\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Wednesday: 6:30\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Thursday: 6:30\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Friday: 6:30\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 6:30\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Sunday: 6:30\u202fAM\u2009\u2013\u200910:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ033porNv44kRfUv7vgzRBG8",
+"types": [
+"convenience_store",
+"food_store",
+"store",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ033porNv44kRfUv7vgzRBG8"
 ]
 },
 {
 "name": "Sambalos Tapas & Bar",
 "category": "food",
 "subtype": "Restaurant",
-"address": "",
+"address": "495 Shirley St, Winthrop, MA 02152, USA",
 "lat": 42.3721805,
 "lon": -70.9708637,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "https://www.sambalos.com/",
+"phone": "(857) 349-6054",
+"rating": 4.8,
+"ratings": 89,
+"hours": [
+"Monday: Closed",
+"Tuesday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Wednesday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Thursday: 12:00\u2009\u2013\u200910:00\u202fPM",
+"Friday: 12:00\u2009\u2013\u200911:00\u202fPM",
+"Saturday: 12:00\u2009\u2013\u200911:00\u202fPM",
+"Sunday: 12:00\u2009\u2013\u20099:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJsXdDdOhv44kRD-YzCYMXtGg",
 "types": [
 "restaurant",
@@ -586,23 +1057,33 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=7544681127314974223&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=7544681127314974223&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJsXdDdOhv44kRD-YzCYMXtGg"
 ]
 },
 {
 "name": "Selva Coffee House",
 "category": "food",
 "subtype": "Cafe",
-"address": "",
+"address": "530 Shirley St, Winthrop, MA 02152, USA",
 "lat": 42.3715762,
 "lon": -70.9701563,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "http://selva-coffeehouse.com/",
+"phone": "(617) 207-3786",
+"rating": 4.7,
+"ratings": 172,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Saturday: 7:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJv5yIY7tv44kRFvteBdOsp34",
 "types": [
 "cafe",
@@ -610,48 +1091,253 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=9126453192217787158&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=9126453192217787158&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJv5yIY7tv44kRFvteBdOsp34"
 ]
 },
 {
-"name": "Thai Taki",
+"name": "Swetts Liquors",
 "category": "food",
-"subtype": "Thai Restaurant",
-"address": "",
-"lat": 42.375235599999996,
-"lon": -70.98536899999999,
+"subtype": "Liquor Store",
+"address": "3 Somerset Ave, Winthrop, MA 02152, USA",
+"lat": 42.374924,
+"lon": -70.98710129999999,
 "summary": "",
 "website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJ5xaviTNv44kRfzXCBSsX1ZI",
+"phone": "(617) 846-0005",
+"rating": 4.4,
+"ratings": 49,
+"hours": [
+"Monday: 9:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Tuesday: 9:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Wednesday: 9:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Thursday: 9:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Friday: 9:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Saturday: 9:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Sunday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJLbwDTMxv44kRBV-8Y842E_c",
 "types": [
-"thai_restaurant",
-"restaurant",
+"liquor_store",
+"bar",
+"point_of_interest",
+"store",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJLbwDTMxv44kRBV-8Y842E_c"
+]
+},
+{
+"name": "T & T Convenience Store",
+"category": "food",
+"subtype": "Convenience Store",
+"address": "8 Michaels Mall, Winthrop, MA 02152, USA",
+"lat": 42.375465399999996,
+"lon": -70.9857075,
+"summary": "",
+"website": "",
+"phone": "(617) 846-8582",
+"rating": 3.9,
+"ratings": 7,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Sunday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJCb5yXcxv44kR91Y1JDEMd9o",
+"types": [
+"convenience_store",
+"food_store",
+"store",
 "food",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=10580388373124494719&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=10580388373124494719&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJCb5yXcxv44kR91Y1JDEMd9o"
+]
+},
+{
+"name": "The Half Cookie Bakehouse and Espresso Bar",
+"category": "food",
+"subtype": "Bakery",
+"address": "2 Michaels Mall, Winthrop, MA 02152, USA",
+"lat": 42.375501299999996,
+"lon": -70.9855252,
+"summary": "",
+"website": "https://www.thehalfcookie.com/",
+"phone": "",
+"rating": 4.9,
+"ratings": 42,
+"hours": [
+"Monday: 8:00\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Tuesday: 8:00\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Wednesday: 8:00\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Thursday: 8:00\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Friday: 8:00\u202fAM\u2009\u2013\u20094:00\u202fPM",
+"Saturday: 8:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Sunday: 10:00\u202fAM\u2009\u2013\u20092:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ40V4Botv44kRDBfjQUzkYVA",
+"types": [
+"bakery",
+"food_store",
+"food",
+"point_of_interest",
+"store",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ40V4Botv44kRDBfjQUzkYVA"
+]
+},
+{
+"name": "Thompson's Towne Liquor Mart",
+"category": "food",
+"subtype": "Liquor Store",
+"address": "253 Washington Ave, Winthrop, MA 02152, USA",
+"lat": 42.3724339,
+"lon": -70.9716913,
+"summary": "",
+"website": "",
+"phone": "(617) 846-9298",
+"rating": 4.5,
+"ratings": 66,
+"hours": [
+"Monday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Tuesday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Wednesday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Thursday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Friday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Saturday: 10:00\u202fAM\u2009\u2013\u200911:00\u202fPM",
+"Sunday: 12:00\u2009\u2013\u200911:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ_3WomrNv44kRlL71AKbqmG4",
+"types": [
+"liquor_store",
+"food",
+"point_of_interest",
+"store",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ_3WomrNv44kRlL71AKbqmG4"
+]
+},
+{
+"name": "Vuolo's",
+"category": "food",
+"subtype": "Restaurant",
+"address": "140 Lincoln St, Winthrop, MA 02152, USA",
+"lat": 42.3797806,
+"lon": -70.9869018,
+"summary": "",
+"website": "https://www.vuoloswinthrop.com/",
+"phone": "(781) 322-4068",
+"rating": 4.9,
+"ratings": 232,
+"hours": [
+"Monday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Tuesday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Wednesday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Thursday: 4:00\u2009\u2013\u20099:00\u202fPM",
+"Friday: 3:00\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 3:00\u2009\u2013\u200910:00\u202fPM",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJYV8SeXdv44kRlUrbXCi1SEc",
+"types": [
+"restaurant",
+"cocktail_bar",
+"wine_bar",
+"seafood_restaurant",
+"bar",
+"meal_takeaway",
+"italian_restaurant",
+"european_restaurant",
+"american_restaurant",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJYV8SeXdv44kRlUrbXCi1SEc"
+]
+},
+{
+"name": "Winthrop Book Depot & Cafe",
+"category": "food",
+"subtype": "Book Store",
+"address": "11 Somerset Ave, Winthrop, MA 02152, USA",
+"lat": 42.374978299999995,
+"lon": -70.98739669999999,
+"summary": "",
+"website": "https://www.instagram.com/book_depot_/?hl=en",
+"phone": "(617) 846-3099",
+"rating": 4.9,
+"ratings": 77,
+"hours": [
+"Monday: 6:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Tuesday: 6:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Wednesday: 6:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Thursday: 6:30\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Friday: 6:30\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Saturday: 7:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ2UrMTMxv44kR4qJ8bppHq5U",
+"types": [
+"book_store",
+"cafe",
+"store",
+"food",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ2UrMTMxv44kR4qJ8bppHq5U"
 ]
 },
 {
 "name": "Winthrop Center Cafe inc",
 "category": "food",
 "subtype": "Cafe",
-"address": "",
+"address": "36 Woodside Ave, Winthrop, MA 02152, USA",
 "lat": 42.3750526,
 "lon": -70.986829,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
+"website": "http://centercafewinthrop.com/",
+"phone": "(617) 846-6411",
+"rating": 4.3,
+"ratings": 257,
+"hours": [
+"Monday: Closed",
+"Tuesday: 7:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Wednesday: 7:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Thursday: 7:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Friday: 7:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Saturday: 7:00\u202fAM\u2009\u2013\u20092:00\u202fPM",
+"Sunday: 7:00\u202fAM\u2009\u2013\u20092:00\u202fPM"
+],
+"status": "OPERATIONAL",
 "placeId": "ChIJq-LATsxv44kRJKH-flH0BTc",
 "types": [
 "cafe",
@@ -661,37 +1347,69 @@
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=3964843677829734692&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=3964843677829734692&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJq-LATsxv44kRJKH-flH0BTc"
 ]
 },
 {
-"name": "Winthrop House of Pizza",
+"name": "Winthrop Community Food Pantry",
 "category": "food",
-"subtype": "Pizza Restaurant",
-"address": "",
-"lat": 42.3825242,
-"lon": -70.9808669,
+"subtype": "Association / Organization",
+"address": "St. John's Episcopal Parish House, 222 Bowdoin St, Winthrop, MA 02152, USA",
+"lat": 42.3755156,
+"lon": -70.9810614,
 "summary": "",
-"website": "",
-"phone": "",
-"hours": "",
-"placeId": "ChIJV67CezZu44kRLUR_6ZmqHUM",
+"website": "https://www.winthroppantry.com/",
+"phone": "(617) 846-6884",
+"rating": 5,
+"ratings": 4,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJAyJx-8pv44kRGlBgXJde5YY",
 "types": [
-"pizza_restaurant",
-"meal_delivery",
-"food_delivery",
-"restaurant",
-"food",
+"association_or_organization",
+"service",
 "point_of_interest",
 "establishment"
 ],
-"mapsUri": "https://maps.google.com/?cid=4836209152889930797&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
 "sources": [
-"https://www.rumblytummy.com/_functions/rumblytummyPlaces (Google Places nearby, 2026-09-14)",
-"https://maps.google.com/?cid=4836209152889930797&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA"
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJAyJx-8pv44kRGlBgXJde5YY"
+]
+},
+{
+"name": "WINTHROP FARMERS MARKET",
+"category": "food",
+"subtype": "Farmers' Market",
+"address": "Brookfield Rd, Winthrop, MA 02152, USA",
+"lat": 42.3772252,
+"lon": -70.9890652,
+"summary": "",
+"website": "http://www.winthropfarmersmarket.com/",
+"phone": "(617) 846-1852",
+"rating": 5,
+"ratings": 6,
+"hours": [
+"Monday: Closed",
+"Tuesday: Closed",
+"Wednesday: Closed",
+"Thursday: Closed",
+"Friday: Closed",
+"Saturday: Closed",
+"Sunday: 7:00\u202fAM\u2009\u2013\u20091:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJU3LUTsxv44kRjwcaeeLsbvQ",
+"types": [
+"farmers_market",
+"market",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJU3LUTsxv44kRjwcaeeLsbvQ"
 ]
 }
 ]

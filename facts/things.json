@@ -1,7 +1,486 @@
 {
 "category": "things",
 "town": "Winthrop, MA",
-"checkedAt": "2026-09-14",
-"source": "Google Places text search through rumblytummy.com/_functions/googlePlacesProxy",
-"items": []
+"checkedAt": "2026-09-15",
+"source": "Google Places text search through winthropbythesea.com placeSearch, 28 queries at 1.2 and 2.5 km",
+"items": [
+{
+"name": "Belle Isle Marsh Marine Ecology Park",
+"category": "things",
+"subtype": "Park",
+"address": "24 Russell St, Winthrop, MA 02152, USA",
+"lat": 42.384100800000006,
+"lon": -70.9872117,
+"summary": "",
+"website": "https://www.winthropma.gov/324/Belle-Isle-Marsh-and-Marine-Ecology-Park",
+"phone": "(617) 846-1852",
+"rating": 4.6,
+"ratings": 8,
+"hours": [
+"Monday: 8:00\u202fAM\u2009\u2013\u20094:30\u202fPM",
+"Tuesday: 8:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Wednesday: 8:00\u202fAM\u2009\u2013\u20094:30\u202fPM",
+"Thursday: 8:00\u202fAM\u2009\u2013\u20097:00\u202fPM",
+"Friday: Closed",
+"Saturday: Closed",
+"Sunday: Closed"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJvwoUtW5v44kRAXsdhJEBo0U",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJvwoUtW5v44kRAXsdhJEBo0U"
+]
+},
+{
+"name": "Coughlin Park",
+"category": "things",
+"subtype": "Park",
+"address": "31 Bay View Ave, Winthrop, MA 02152, USA",
+"lat": 42.3623786,
+"lon": -70.97379169999999,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 4.6,
+"ratings": 305,
+"hours": [
+"Monday: Open 24 hours",
+"Tuesday: Open 24 hours",
+"Wednesday: Open 24 hours",
+"Thursday: Open 24 hours",
+"Friday: Open 24 hours",
+"Saturday: Open 24 hours",
+"Sunday: Open 24 hours"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJsxqIarlv44kRxhbU-0zjrWU",
+"types": [
+"park",
+"tourist_attraction",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJsxqIarlv44kRxhbU-0zjrWU"
+]
+},
+{
+"name": "Deer Island",
+"category": "things",
+"subtype": "Park",
+"address": "165 Tafts Ave, Winthrop, MA 02152, USA",
+"lat": 42.3555985,
+"lon": -70.9676009,
+"summary": "This historic park offers miles of trails, picnicking & tours of its wastewater treatment plant.",
+"website": "https://www.mwra.com/03sewer/html/sewdi_access.htm",
+"phone": "",
+"rating": 4.8,
+"ratings": 1007,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJCTuD5Zdv44kRSES_0fr-wA8",
+"types": [
+"park",
+"tourist_attraction",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJCTuD5Zdv44kRSES_0fr-wA8"
+]
+},
+{
+"name": "Deer Island Celtic Cross",
+"category": "things",
+"subtype": "Park",
+"address": "922P+Q5, 165 Tafts Ave, Winthrop, MA 02152, USA",
+"lat": 42.3519375,
+"lon": -70.9645625,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 4.9,
+"ratings": 37,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJyw7GyCdv44kR_A00_zLRptU",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJyw7GyCdv44kR_A00_zLRptU"
+]
+},
+{
+"name": "Fort Heath Park",
+"category": "things",
+"subtype": "Park",
+"address": "Small Park, Winthrop, MA 02152, USA",
+"lat": 42.3895122,
+"lon": -70.9693867,
+"summary": "",
+"website": "http://winthropmemorials.org/wars-forts/pages/fort-heath.html",
+"phone": "",
+"rating": 4.7,
+"ratings": 72,
+"hours": [
+"Monday: Open 24 hours",
+"Tuesday: Open 24 hours",
+"Wednesday: Open 24 hours",
+"Thursday: Open 24 hours",
+"Friday: Open 24 hours",
+"Saturday: Open 24 hours",
+"Sunday: Open 24 hours"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJv0gEf0Nu44kRkla5GNg9xIE",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJv0gEf0Nu44kRkla5GNg9xIE"
+]
+},
+{
+"name": "Harold French Square",
+"category": "things",
+"subtype": "Park",
+"address": "Winthrop, MA 02152, USA",
+"lat": 42.3746587,
+"lon": -70.9864896,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": null,
+"ratings": 0,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJq6paRsxv44kREtPKzDwDECk",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJq6paRsxv44kREtPKzDwDECk"
+]
+},
+{
+"name": "Ingleside Park",
+"category": "things",
+"subtype": "Park",
+"address": "125 Brookfield Rd, Winthrop, MA 02152, USA",
+"lat": 42.3779525,
+"lon": -70.9877434,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 5,
+"ratings": 1,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJVVVVKc1v44kRSZ2z7HcgM_Y",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJVVVVKc1v44kRSZ2z7HcgM_Y"
+]
+},
+{
+"name": "John Joseph Kilmartin Pathway",
+"category": "things",
+"subtype": "Nature Preserve",
+"address": "Winthrop, MA 02152, USA",
+"lat": 42.389951,
+"lon": -70.98122289999999,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 4.6,
+"ratings": 25,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Saturday: 6:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+"Sunday: 6:00\u202fAM\u2009\u2013\u20098:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJ7WUn_cxv44kRWph34z7rm8k",
+"types": [
+"nature_preserve",
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ7WUn_cxv44kRWph34z7rm8k"
+]
+},
+{
+"name": "Lewis Lake",
+"category": "things",
+"subtype": "Nature Preserve",
+"address": "206 Washington Ave, Winthrop, MA 02152, USA",
+"lat": 42.3730866,
+"lon": -70.97346940000001,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": null,
+"ratings": 0,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJx0uVawBv44kRUIK3VB4UNrg",
+"types": [
+"nature_preserve",
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJx0uVawBv44kRUIK3VB4UNrg"
+]
+},
+{
+"name": "Mary Kelley Pavilion",
+"category": "things",
+"subtype": "Park",
+"address": "Belle Isle Marsh Marine Ecology Park, 24 Russell St, Winthrop, MA 02152, USA",
+"lat": 42.3843472,
+"lon": -70.9873897,
+"summary": "",
+"website": "https://winthropmemorials.org/civic/pages/mary-kelley-pavilion.html",
+"phone": "",
+"rating": 4.3,
+"ratings": 7,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJb8VoS69v44kRjYsbgtavDK4",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJb8VoS69v44kRjYsbgtavDK4"
+]
+},
+{
+"name": "Massa Playground",
+"category": "things",
+"subtype": "Park",
+"address": "Winthrop, MA 02152, USA",
+"lat": 42.369608500000005,
+"lon": -70.96981889999999,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 4.2,
+"ratings": 58,
+"hours": [
+"Monday: 8:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Tuesday: 8:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Wednesday: 8:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Thursday: 8:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Friday: 8:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Saturday: 8:00\u202fAM\u2009\u2013\u20099:00\u202fPM",
+"Sunday: 8:00\u202fAM\u2009\u2013\u20099:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJDxwed7Fv44kRqrHupvkaGec",
+"types": [
+"park",
+"tourist_attraction",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJDxwed7Fv44kRqrHupvkaGec"
+]
+},
+{
+"name": "Metcalf Square",
+"category": "things",
+"subtype": "Park",
+"address": "Winthrop, MA 02152, USA",
+"lat": 42.3772922,
+"lon": -70.9842687,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 4.1,
+"ratings": 10,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJ26pDVstv44kRL8--1sVCc2Q",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ26pDVstv44kRL8--1sVCc2Q"
+]
+},
+{
+"name": "The Five Sisters",
+"category": "things",
+"subtype": "Tourist Attraction",
+"address": "74-60 Winthrop Shore Dr, Winthrop, MA 02152, USA",
+"lat": 42.3751779,
+"lon": -70.9657443,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 4.6,
+"ratings": 7,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJ04hPLSRv44kRwzBRvuR6JLI",
+"types": [
+"tourist_attraction",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ04hPLSRv44kRwzBRvuR6JLI"
+]
+},
+{
+"name": "The Kinder Garden",
+"category": "things",
+"subtype": "Park",
+"address": "413 Shirley St, Winthrop, MA 02152, USA",
+"lat": 42.37393970000001,
+"lon": -70.9727556,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 5,
+"ratings": 1,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJc9dNewBv44kR_F5Ui6xhLuM",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJc9dNewBv44kR_F5Ui6xhLuM"
+]
+},
+{
+"name": "Thorton Park",
+"category": "things",
+"subtype": "Park",
+"address": "51 Thornton Park, Winthrop, MA 02152, USA",
+"lat": 42.3732276,
+"lon": -70.9796635,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": null,
+"ratings": 0,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJ__-_FMpv44kRZcpEYe8MPX8",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJ__-_FMpv44kRZcpEYe8MPX8"
+]
+},
+{
+"name": "Winthrop greenway",
+"category": "things",
+"subtype": "Park",
+"address": "82 Jefferson St, Winthrop, MA 02152, USA",
+"lat": 42.3747122,
+"lon": -70.9860267,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": null,
+"ratings": 0,
+"hours": [
+"Monday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Tuesday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Wednesday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Thursday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Friday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Saturday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+"Sunday: 6:00\u202fAM\u2009\u2013\u200910:00\u202fPM"
+],
+"status": "OPERATIONAL",
+"placeId": "ChIJT5doJjVu44kRbM6_XFXlWgI",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJT5doJjVu44kRbM6_XFXlWgI"
+]
+},
+{
+"name": "Woodside Park",
+"category": "things",
+"subtype": "Park",
+"address": "Winthrop, MA 02152, USA",
+"lat": 42.3689681,
+"lon": -70.98964730000002,
+"summary": "",
+"website": "",
+"phone": "",
+"rating": 1,
+"ratings": 1,
+"hours": [],
+"status": "OPERATIONAL",
+"placeId": "ChIJAQCQV8Vv44kRTCoSFnb-x_A",
+"types": [
+"park",
+"point_of_interest",
+"establishment"
+],
+"sources": [
+"https://www.winthropbythesea.com/_functions/placeSearch (Google Places, 2026-09-15)",
+"https://www.google.com/maps/place/?q=place_id:ChIJAQCQV8Vv44kRTCoSFnb-x_A"
+]
+}
+]
 }
