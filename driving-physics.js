@@ -23,7 +23,8 @@ export class RoadNetwork {
    for(const b of list){const dx=b.x-x,dz=b.z-z;if(dx*dx+dz*dz<b.r*b.r)return true;}}
   return false;}
  obstructed(x,z){const inside=ring=>{let hit=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>z)!==(b[1]>z)&&x<(b[0]-a[0])*(z-a[1])/(b[1]-a[1])+a[0])hit=!hit}return hit};return (this.obstacles.get(Math.floor(x/60)+","+Math.floor(z/60))||[]).some(r=>inside(r[0])&&!r.slice(1).some(inside));}
- contains(x,z,margin=.9){if(this.obstructed(x,z)||this.blocked(x,z))return false;const list=this.cells.get(Math.floor(x/60)+','+Math.floor(z/60))||[];for(const s of list){const t=Math.max(0,Math.min(1,((x-s.a[0])*s.dx+(z-s.a[1])*s.dz)/s.length**2)),dx=x-s.a[0]-t*s.dx,dz=z-s.a[1]-t*s.dz;if(Math.hypot(dx,dz)<=Math.max(.6,s.width/2-margin))return true}return false;}
+ /* a footprint drawn across a road is a map error, not a wall: on asphalt, only a parked car blocks (Pierce, 09-15: 'an invisible force') */
+ contains(x,z,margin=.9){if(this.blocked(x,z))return false;const list=this.cells.get(Math.floor(x/60)+','+Math.floor(z/60))||[];for(const s of list){const t=Math.max(0,Math.min(1,((x-s.a[0])*s.dx+(z-s.a[1])*s.dz)/s.length**2)),dx=x-s.a[0]-t*s.dx,dz=z-s.a[1]-t*s.dz;if(Math.hypot(dx,dz)<=Math.max(.6,s.width/2-margin))return true}return false;}
 }
 export class DrivingState {
  constructor(network){this.network=network;this.performance={top:325/3.6,launch:8.8,power:260};this.x=0;this.z=0;this.yaw=0;this.speed=0;this.steer=0;this.distance=0;this.blocked=false;this.road=null;this.recoveryTime=0;this.recoveryCount=0;this.lastSafe=null;}
