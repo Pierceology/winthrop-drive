@@ -18,6 +18,7 @@ import {SignalSystem} from './signals.js';
 import {parkedCars} from './parked-cars.js';
 import {inTown} from './town-limits.js';
 import {townSketch} from './sketch.js';
+const HITS_API='https://www.winthropbythesea.com/_functions/hit';try{const SITE=location.pathname.split('/').filter(Boolean)[0]||'game';fetch(HITS_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({site:SITE,town:(new URLSearchParams(location.search).get('world')||'winthrop'),kind:'load',ref:document.referrer.slice(0,200),w:innerWidth,h:innerHeight,mobile:innerWidth<720,view:location.search.slice(0,40)}),keepalive:true}).catch(()=>{});}catch(_){}   // keyless page counter (Pierce, 09-15)
 let sketch=null,billboardGroup=null,loganGroup=null;
 (()=>{const ab=document.getElementById('about');const cr=document.getElementById('credits');if(ab&&cr&&!document.getElementById('aboutCredits')){const b=document.createElement('button');b.id='aboutCredits';b.className='aboutCredits';b.type='button';b.textContent='Credits & data sources';b.onclick=()=>cr.click();ab.appendChild(b);}})();
 document.body.classList.add('quiet');for(const ev of ['pointerdown','wheel','keydown'])addEventListener(ev,()=>document.body.classList.remove('quiet'),{once:true,passive:true});   // Pierce 09-14: "too much is happening at once on the pageload"
