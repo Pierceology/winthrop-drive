@@ -711,3 +711,4 @@ body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
 body.driving #liveChip,body.touring #liveChip,body.opening #liveChip{display:none}
 body.aboard .places,body.aboard .camera{opacity:0;pointer-events:none}
 @media (max-width:720px){#liveChip{top:calc(60px + var(--sat));right:10px}#liveChip .grphead small{display:none}}
+#liveChip .row.off{opacity:.6}

@@ -162,14 +162,16 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    /* Snap to the road (Pierce, 09-14: "bus is on sidewalks"): the MBTA fix is 5–10 m off, so the raw point lands on the curb.
       Put the bus on the nearest centerline, in the right-hand lane of its direction of travel, pointing along the road. */
    const prev=buses.get(v.id);
-   if(network&&network.nearest){const n=network.nearest(x,z,true);if(n&&n.distance<30){
+   let off=false;
+   if(network&&network.nearest){const n=network.nearest(x,z,true);off=!n||n.distance>150;   // beyond the mapped roads (Orient Heights, the airport road): off the map
+    if(n&&n.distance<30){
     let dx=n.dx/n.length,dz=n.dz/n.length;const bv=Number.isFinite(a.bearing)?[Math.sin(a.bearing*D),-Math.cos(a.bearing*D)]:(prev?[Math.cos(prev.yaw),-Math.sin(prev.yaw)]:null);
     if(bv&&bv[0]*dx+bv[1]*dz<0){dx=-dx;dz=-dz;}
-    const off=Math.min(2.2,(n.width||7)/4);x=n.x+(-dz)*off;z=n.z+dx*off;yaw=Math.atan2(-dz,dx);}}
+    const lane=Math.min(2.2,(n.width||7)/4);x=n.x+(-dz)*lane;z=n.z+dx*lane;yaw=Math.atan2(-dz,dx);}}
    let b=buses.get(v.id);
    if(!b){b={mesh:makeBus(),x,z,yaw,from:{x,z,yaw},to:{x,z,yaw},t0:t,label:a.label,status:a.current_status,direction:a.direction_id};b.mesh.position.set(x,ground(x,z),z);b.mesh.rotation.y=yaw;group.add(b.mesh);buses.set(v.id,b);}
    else{b.from=snap?{x,z,yaw}:{x:b.x,z:b.z,yaw:b.yaw};b.to={x,z,yaw:Number.isFinite(a.bearing)?yaw:b.yaw};b.t0=t;b.status=a.current_status;b.direction=a.direction_id;}
-   b.miss=0;}
+   b.off=off;b.mesh.visible=!off;if(off&&following===v.id)live.follow(null);b.miss=0;}
   for(const [id,b] of buses){if(seen.has(id))continue;if(++b.miss>=2){group.remove(b.mesh);buses.delete(id);}}
   live.counts.buses=buses.size;return buses.size;
  };
@@ -264,6 +266,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
    for(const [id,b] of buses){let p=preds.get(id);if(p&&p.when&&new Date(p.when).getTime()<Date.now()-45000)p=null;const when=p&&p.when?new Date(p.when):null;const mins=when?Math.max(0,Math.round((when-Date.now())/60000)):null;
     const line=p?('to '+p.headsign+' · '+p.stop+(when?' · '+when.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})+(mins!==null?' ('+(mins===0?'now':mins+' min')+')':''):''))
      :((b.status==='STOPPED_AT'?'stopped, ':'')+(DIRECTION[b.direction]||'in service'));
+    if(b.off){const el=document.createElement('div');el.className='row bus off';const bb=document.createElement('b');bb.textContent='713 bus'+(b.label?' '+b.label:'');const sp=document.createElement('span');sp.textContent='outside Winthrop · '+(DIRECTION[b.direction]||'in service');el.append(bb,sp);body.append(el);continue;}
     body.append(row(id,'713 bus'+(b.label?' '+b.label:''),line,'bus'));}});
   const rank=p=>(p.ground?(p.speed>15?1:2):0)*1e6+Math.hypot(p.x,p.z);
   const planes=[...aircraft.entries()].sort((a,b)=>rank(a[1])-rank(b[1]));
@@ -274,7 +277,7 @@ export function liveWinthrop({scene,heightAt=()=>0,water=null,camera=null,contro
     const acts=document.createElement('div');acts.className='acts';
     for(const [key,label] of [['ac:'+icao,following==='ac:'+icao?'Following · stop':'Follow'],['in:'+icao,following==='in:'+icao?'Aboard · step off':'Ride along']]){const b=document.createElement('button');b.textContent=label;b.onclick=()=>live.follow(following===key?null:key);acts.append(b);}
     el.append(bb,sp,acts);body.append(el);}});}
- live.follow=id=>{const s=String(id||'');if(following&&String(following).startsWith('in:')&&controls){const q=aircraft.get(following.slice(3));if(q){const c=pos(q,now());controls.target.set(c.x,c.y,c.z);camera.position.set(c.x-60,c.y+30,c.z+60);}}following=id&&(buses.has(id)||((s.startsWith('ac:')||s.startsWith('in:'))&&aircraft.has(s.slice(3))))?id:null;
+ live.follow=id=>{const s=String(id||'');if(id&&buses.has(id)&&buses.get(id).off)id=null;if(following&&String(following).startsWith('in:')&&controls){const q=aircraft.get(following.slice(3));if(q){const c=pos(q,now());controls.target.set(c.x,c.y,c.z);camera.position.set(c.x-60,c.y+30,c.z+60);}}following=id&&(buses.has(id)||((s.startsWith('ac:')||s.startsWith('in:'))&&aircraft.has(s.slice(3))))?id:null;
   if(controls){controls.autoRotate=false;controls.enabled=!(following&&String(following).startsWith('in:'));}
   for(const p of aircraft.values()){const tag=p.mesh.getObjectByName('tag');if(tag)tag.visible=following==='ac:'+p.icao||following==='in:'+p.icao;p.mesh.visible=following!=='in:'+p.icao;}
   if(typeof document!=='undefined')document.body.classList.toggle('aboard',!!(following&&String(following).startsWith('in:')));renderChip();return following;};
